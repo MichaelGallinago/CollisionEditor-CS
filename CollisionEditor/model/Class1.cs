@@ -15,11 +15,9 @@ namespace CollisionEditor.model
 
         public Anglemap(string fileName)
         {
-            if (!File.Exists(fileName))
-                throw new FileNotFoundException();
 
             BinaryReader reader = new BinaryReader(File.Open(fileName, FileMode.Open));
-            values = reader.ReadBytes(int.MaxValue).ToList();
+            values = reader.ReadBytes((int)reader.BaseStream.Length).ToList();
         }
     }
 
