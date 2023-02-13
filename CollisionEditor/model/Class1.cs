@@ -21,6 +21,15 @@ namespace CollisionEditor.model
             BinaryReader reader = new BinaryReader(File.Open(fileName, FileMode.Open));
             values = reader.ReadBytes(int.MaxValue).ToList();
         }
+
+        public void Save(string fileName)
+        {
+            if (File.Exists(fileName))
+                File.Delete(fileName);
+
+            BinaryWriter writer = new BinaryWriter(File.Open(fileName, FileMode.CreateNew));
+            writer.Write(values.ToArray());
+        }
     }
 
     class TileStrip
