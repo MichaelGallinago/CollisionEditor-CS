@@ -48,6 +48,12 @@
                 <MenuItem Header="Help is not exist" />
             </MenuItem>
         </Menu>
-        
+
+        <Button Grid.Column="1" Content="Я ХОЧУ МУЛЬТИК!" HorizontalAlignment="Left" Margin="10,330,0,0" Grid.Row="2" VerticalAlignment="Top" Click="Button_Click"/>
+        <Image Grid.Column="1" HorizontalAlignment="Left" Height="142" Margin="63,76,0,0" Grid.Row="2" VerticalAlignment="Top" Width="138" Name ="ImageOfTile"/>
+
+
+
+
     </Grid>
 </Window>
