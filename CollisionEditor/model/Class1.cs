@@ -4,11 +4,17 @@ using System.DrawingCore;
 using System.DrawingCore.Imaging;
 using System.IO;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace CollisionEditor.model
 {
+    struct Vector2
+    {
+        int X, Y;
+    }
+
     class Anglemap
     {
         public List<byte> Values { get; set; }
@@ -58,19 +64,29 @@ namespace CollisionEditor.model
             }
         }
 
-        public void Save(string path, int rowCount, int tileWidth = 16, int tileHeight = 16,
-            int separateX = 0, int separateY = 0, int offsetX = 0, int offsetY = 0)
+        public void Save(string path, int rowCount, Vector<int> separation = , Vector<int> offset = 0, int offsetY = 0)
         {
             if (File.Exists(path))
                 File.Delete(path);
+            Vector<int> vec = new Vector<int>();
+            vec[0]
 
-            int width  = offsetX + rowCount * (TileWidth + separateX) - separateX;
-            int height = offsetX + rowCount * (TileWidth + separateX) - separateX;
+            int columnCount = ;
+            int width  = offsetX + rowCount    * (TileWidth + separateX) - separateX;
+            int height = offsetY + columnCount * (TileHeight + separateY) - separateX;
             Bitmap image = new Bitmap(width, height);
 
-            foreach (Bitmap bitmap in bitmaps)
+            using (Graphics graphics = Graphics.FromImage(image))
             {
+                foreach (Bitmap bitmap in bitmaps)
+                {
 
+                }
+                graphics.DrawImage(
+                    image,
+                    new Rectangle(0, 0, TileWidth, TileHeight),
+                    new Rectangle(0, 0, TileWidth, TileHeight),
+                    GraphicsUnit.Pixel);
             }
 
             image.Save(path, ImageFormat.Png);
