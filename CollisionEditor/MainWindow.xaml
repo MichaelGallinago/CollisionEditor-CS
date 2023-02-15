@@ -49,8 +49,8 @@
             </MenuItem>
         </Menu>
 
-        
-        <Image Grid.Column="1" HorizontalAlignment="Left" Height="142" Margin="63,76,0,0" Grid.Row="2" VerticalAlignment="Top" Width="138" Name ="ImageOfTile"/>
+
+        <Image Grid.Column="1" HorizontalAlignment="Left" Height="64" RenderOptions.BitmapScalingMode="NearestNeighbor" Margin="63,76,0,0" Grid.Row="2" VerticalAlignment="Top" Width="64" Name ="ImageOfTile" Stretch="UniformToFill"/>
 
 
 

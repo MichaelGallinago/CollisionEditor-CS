@@ -18,10 +18,8 @@ namespace CollisionEditor
                 new Rectangle(0, 0, bitmap.Width, bitmap.Height),
                 ImageLockMode.ReadOnly, bitmap.PixelFormat);
 
-            var bitmapSource = BitmapSource.Create(
-                bitmapData.Width, bitmapData.Height,
-                bitmap.HorizontalResolution, bitmap.VerticalResolution,
-                PixelFormats.Gray8, null,
+            var bitmapSource = BitmapSource.Create(bitmapData.Width, bitmapData.Height,0.1, 0.1,
+                PixelFormats.Bgra32, null,
                 bitmapData.Scan0, bitmapData.Stride * bitmapData.Height, bitmapData.Stride);
 
             bitmap.UnlockBits(bitmapData);
