@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.DrawingCore;
+using System.Drawing;
 using System.DrawingCore.Imaging;
 using System.IO;
 using System.Linq;
@@ -64,32 +64,32 @@ namespace CollisionEditor.model
             }
         }
 
-        public void Save(string path, int rowCount, Vector<int> separation = , Vector<int> offset = 0, int offsetY = 0)
-        {
-            if (File.Exists(path))
-                File.Delete(path);
-            Vector<int> vec = new Vector<int>();
-            vec[0]
+        //public void Save(string path, int rowCount, Vector<int> separation = , Vector<int> offset = 0, int offsetY = 0)
+        //{
+        //    if (File.Exists(path))
+        //        File.Delete(path);
+        //    Vector<int> vec = new Vector<int>();
+        //    vec[0]
 
-            int columnCount = ;
-            int width  = offsetX + rowCount    * (TileWidth + separateX) - separateX;
-            int height = offsetY + columnCount * (TileHeight + separateY) - separateX;
-            Bitmap image = new Bitmap(width, height);
+        //    int columnCount = ;
+        //    int width  = offsetX + rowCount    * (TileWidth + separateX) - separateX;
+        //    int height = offsetY + columnCount * (TileHeight + separateY) - separateX;
+        //    Bitmap image = new Bitmap(width, height);
 
-            using (Graphics graphics = Graphics.FromImage(image))
-            {
-                foreach (Bitmap bitmap in bitmaps)
-                {
+        //    using (Graphics graphics = Graphics.FromImage(image))
+        //    {
+        //        foreach (Bitmap bitmap in bitmaps)
+        //        {
 
-                }
-                graphics.DrawImage(
-                    image,
-                    new Rectangle(0, 0, TileWidth, TileHeight),
-                    new Rectangle(0, 0, TileWidth, TileHeight),
-                    GraphicsUnit.Pixel);
-            }
+        //        }
+        //        graphics.DrawImage(
+        //            image,
+        //            new Rectangle(0, 0, TileWidth, TileHeight),
+        //            new Rectangle(0, 0, TileWidth, TileHeight),
+        //            GraphicsUnit.Pixel);
+        //    }
 
-            image.Save(path, ImageFormat.Png);
-        }
+        //    image.Save(path, ImageFormat.Png);
+        //}
     }
 }

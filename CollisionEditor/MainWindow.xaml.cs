@@ -30,21 +30,16 @@ namespace CollisionEditor
             System.Windows.Forms.MessageBox.Show(string.Join(" ",anglemap.Values));
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void MenuOpenTileStripClick(object sender, RoutedEventArgs e)
         {
-            int width = 128;
-            int height = width;
-            int stride = width / 8;
-            byte[] pixels = new byte[height * stride];
-
-            // Try creating a new image with a custom palette.
-            List<System.Windows.Media.Color> colors = new List<System.Windows.Media.Color>();
-            colors.Add(System.Windows.Media.Colors.Red);
-            colors.Add(System.Windows.Media.Colors.Blue);
-            colors.Add(System.Windows.Media.Colors.Green);
-            BitmapPalette myPalette = new BitmapPalette(colors);
-
-            ImageOfTile.Source = BitmapSource.Create(width,height,96,96,PixelFormats.Indexed1,myPalette,pixels,stride);
+            System.Windows.Forms.OpenFileDialog openFileDialog = new System.Windows.Forms.OpenFileDialog();
+            string filePath = string.Empty;
+            if (openFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                filePath = openFileDialog.FileName;
+            }
+            TileStrip tileStrip = new TileStrip(filePath);
+            ImageOfTile.Source = Convertor.Convert(tileStrip.bitmaps[5]);
         }
     }
 }
