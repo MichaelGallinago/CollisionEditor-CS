@@ -50,8 +50,8 @@
         </Menu>
 
 
-        <Image Grid.Column="1" HorizontalAlignment="Left" Height="64" RenderOptions.BitmapScalingMode="NearestNeighbor" Margin="63,76,0,0" Grid.Row="2" VerticalAlignment="Top" Width="64" Name ="ImageOfTile" Stretch="UniformToFill"/>
-
+        <Image Grid.Column="1" HorizontalAlignment="Left" Height="128" RenderOptions.BitmapScalingMode="NearestNeighbor" Margin="57,74,0,0" Grid.Row="2" VerticalAlignment="Top" Width="128" Name ="ImageOfTile" Stretch="UniformToFill" RenderTransformOrigin="0.498,0.503"/>
+        <Image Source="C:\Users\xps\source\repos\CollisionEditor-CS\Сетка.png" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="1" Grid.Row="2" Margin="57,74,0,0" Height="128" Width="128"/>
 
 
 
