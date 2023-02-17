@@ -40,15 +40,6 @@ namespace CollisionEditor.model
             BinaryWriter writer = new BinaryWriter(File.Open(path, FileMode.CreateNew));
             writer.Write(Values.ToArray());
         }
-
-        public void Save(string fileName)
-        {
-            if (File.Exists(fileName))
-                File.Delete(fileName);
-
-            BinaryWriter writer = new BinaryWriter(File.Open(fileName, FileMode.CreateNew));
-            writer.Write(values.ToArray());
-        }
     }
 
     class TileStrip
