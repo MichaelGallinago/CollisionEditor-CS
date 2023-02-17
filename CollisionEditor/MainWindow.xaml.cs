@@ -1,17 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.Win32;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
+using System.Windows.Forms;
+using CollisionEditor.model;
+using static CollisionEditor.MainWindow;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using System.Collections.Generic;
+using System.Windows.Media;
 
 namespace CollisionEditor
 {
@@ -23,6 +17,29 @@ namespace CollisionEditor
         public MainWindow()
         {
             
+        }
+        private void MenuOpenAngleMapClick(object sender, RoutedEventArgs e)
+        {
+            System.Windows.Forms.OpenFileDialog openFileDialog = new System.Windows.Forms.OpenFileDialog();
+            string filePath = string.Empty;
+            if (openFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                filePath = openFileDialog.FileName;  
+            }
+            Anglemap anglemap = new Anglemap(filePath);
+            System.Windows.Forms.MessageBox.Show(string.Join(" ",anglemap.Values));
+        }
+
+        private void MenuOpenTileStripClick(object sender, RoutedEventArgs e)
+        {
+            System.Windows.Forms.OpenFileDialog openFileDialog = new System.Windows.Forms.OpenFileDialog();
+            string filePath = string.Empty;
+            if (openFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                filePath = openFileDialog.FileName;
+            }
+            TileStrip tileStrip = new TileStrip(filePath);
+            ImageOfTile.Source = Convertor.Convert(tileStrip.bitmaps[5]);
         }
     }
 }
