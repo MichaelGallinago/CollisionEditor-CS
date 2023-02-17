@@ -49,8 +49,8 @@ namespace CollisionEditor.model
 
         public List<Bitmap> bitmaps { get; set; }
 
-        public TileStrip(string path, int tileWidth = 16, int tileHeight = 16, 
-            int separateX = 0, int separateY = 0, int offsetX = 0, int offsetY = 0)
+        public TileStrip(string path, int tileWidth = 16, int tileHeight = 16,
+            Vector2<int> separate = new Vector2<int>(), Vector2<int> offset = new Vector2<int>())
         {
             TileWidth  = tileWidth;
             TileHeight = tileHeight;
@@ -58,14 +58,14 @@ namespace CollisionEditor.model
             bitmaps = new List<Bitmap>();
             Bitmap bitmap = new Bitmap(path);
 
-            int rowCount    = (bitmap.Width  - offsetX) / tileWidth;
-            int columnCount = (bitmap.Height - offsetY) / tileHeight;
+            int rowCount    = (bitmap.Width  - offset.X) / tileWidth;
+            int columnCount = (bitmap.Height - offset.Y) / tileHeight;
             for (int y = 0; y < columnCount; y++)
             {
                 for (int x = 0; x < rowCount; x++)
                 {
-                    Rectangle tile = new Rectangle(x * (tileWidth + separateX) + offsetX, 
-                        y * (tileHeight + separateY) + offsetY, TileWidth, TileHeight);
+                    Rectangle tile = new Rectangle(x * (tileWidth + separate.X) + offset.X, 
+                        y * (tileHeight + separate.Y) + offset.Y, TileWidth, TileHeight);
                     bitmaps.Add(bitmap.Clone(tile, bitmap.PixelFormat));
                 }
             }
