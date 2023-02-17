@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.DrawingCore.Imaging;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Numerics;
@@ -10,9 +10,16 @@ using System.Threading.Tasks;
 
 namespace CollisionEditor.model
 {
-    struct Vector2
+    public struct Vector2<T>
     {
-        int X, Y;
+        public T X { get; set; }
+        public T Y { get; set; }
+
+        public Vector2(T x, T y)
+        {
+            X = x;
+            Y = y;
+        }
     }
 
     class Anglemap
@@ -64,32 +71,36 @@ namespace CollisionEditor.model
             }
         }
 
-        //public void Save(string path, int rowCount, Vector<int> separation = , Vector<int> offset = 0, int offsetY = 0)
-        //{
-        //    if (File.Exists(path))
-        //        File.Delete(path);
-        //    Vector<int> vec = new Vector<int>();
-        //    vec[0]
+        public void Save(string path, int rowCount, Vector2<int> separation = new Vector2<int>(), Vector2<int> offset = new Vector2<int>())
+        {
+            if (File.Exists(path))
+                File.Delete(path);
 
-        //    int columnCount = ;
-        //    int width  = offsetX + rowCount    * (TileWidth + separateX) - separateX;
-        //    int height = offsetY + columnCount * (TileHeight + separateY) - separateX;
-        //    Bitmap image = new Bitmap(width, height);
+            int columnCount = bitmaps.Count / rowCount + (bitmaps.Count % rowCount == 0 ? 0 : 1);
+            int width  = offset.X + rowCount    * (TileWidth  + separation.X) - separation.X;
+            int height = offset.Y + columnCount * (TileHeight + separation.Y) - separation.Y;
+            Bitmap image = new Bitmap(width, height);
 
-        //    using (Graphics graphics = Graphics.FromImage(image))
-        //    {
-        //        foreach (Bitmap bitmap in bitmaps)
-        //        {
+            Vector2<int> Position = new Vector2<int>();
+            using (Graphics graphics = Graphics.FromImage(image))
+            {
+                foreach (Bitmap bitmap in bitmaps)
+                {
+                    graphics.DrawImage(
+                    image,
+                    new Rectangle(Position.X * TileWidth, Position.Y * TileHeight, TileWidth, TileHeight),
+                    new Rectangle(0, 0, TileWidth, TileHeight),
+                    GraphicsUnit.Pixel);
 
-        //        }
-        //        graphics.DrawImage(
-        //            image,
-        //            new Rectangle(0, 0, TileWidth, TileHeight),
-        //            new Rectangle(0, 0, TileWidth, TileHeight),
-        //            GraphicsUnit.Pixel);
-        //    }
+                    if (++Position.X >= rowCount)
+                    {
+                        Position.X = 0;
+                        Position.Y++;
+                    }
+                }
+            }
 
-        //    image.Save(path, ImageFormat.Png);
-        //}
+            image.Save(path, ImageFormat.Png);
+        }
     }
 }
