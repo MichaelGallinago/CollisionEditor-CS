@@ -38,7 +38,7 @@ namespace CollisionEditor
             {
                 filePath = openFileDialog.FileName;
             }
-            TileStrip tileStrip = new TileStrip(filePath);
+            Tilemap tileStrip = new Tilemap(filePath);
             ImageOfTile.Source = Convertor.Convert(tileStrip.bitmaps[5]);
         }
     }
