@@ -37,7 +37,7 @@
                     <MenuItem Header="Anglemap"/>
                     <MenuItem Header="Heightmap"/>
                     <MenuItem Header="Widthmap"/>
-                    <MenuItem Header="Tiletmap"/>
+                    <MenuItem Header="Tiletmap" Click="MenuSaveTiletmapClick" />
                 </MenuItem>
 
                 <MenuItem Header="Save Al          Ctrl+Shift+S" Padding="0,0,-20,0" />
@@ -50,8 +50,9 @@
         </Menu>
 
 
-        <Image Grid.Column="1" HorizontalAlignment="Left" Height="64" RenderOptions.BitmapScalingMode="NearestNeighbor" Margin="63,76,0,0" Grid.Row="2" VerticalAlignment="Top" Width="64" Name ="ImageOfTile" Stretch="UniformToFill"/>
-
+        <Image Grid.Column="1" HorizontalAlignment="Left" Height="128" RenderOptions.BitmapScalingMode="NearestNeighbor" Margin="57,74,0,0" Grid.Row="2" VerticalAlignment="Top" Width="128" Name ="ImageOfTile" Stretch="UniformToFill"/>
+        <Image Source="/Сетка.png" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="1" Grid.Row="2" Margin="56,73,0,0" Height="129" Width="129"/>
+        
 
 
 
