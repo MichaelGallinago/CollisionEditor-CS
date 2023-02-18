@@ -22,8 +22,8 @@
         <Menu VerticalAlignment="Center" Grid.Column="0"  Grid.ColumnSpan="5" Foreground="Black" Height="20">
             <MenuItem Header="File" >
                 <MenuItem Header="Load" >
-                    <MenuItem Header="Tile Strip......               Ctrl+O" Click="MenuOpenTileStripClick" Padding="0,0,-20,0"/>
-                    <MenuItem Header="Anglemap...     Ctrl+Shift+O" Click="MenuOpenAngleMapClick" Padding="0,0,-20,0"/>
+                    <MenuItem Header="Tile Strip......               Ctrl+O" Name = "MenuOpenTileStrip"  Padding="0,0,-20,0"/>
+                    <MenuItem Header="Anglemap...     Ctrl+Shift+O" Name = "MenuOpenAngleMap" Padding="0,0,-20,0"/>
                 </MenuItem>
 
                 <MenuItem Header="Unload"  >
@@ -37,7 +37,7 @@
                     <MenuItem Header="Anglemap"/>
                     <MenuItem Header="Heightmap"/>
                     <MenuItem Header="Widthmap"/>
-                    <MenuItem Header="Tiletmap" Click="MenuSaveTiletmapClick" />
+                    <MenuItem Header="Tiletmap" Name = "MenuSaveTiletmap"/>
                 </MenuItem>
 
                 <MenuItem Header="Save Al          Ctrl+Shift+S" Padding="0,0,-20,0" />

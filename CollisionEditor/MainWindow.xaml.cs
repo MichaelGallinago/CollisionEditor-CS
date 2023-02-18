@@ -18,7 +18,9 @@ namespace CollisionEditor
         private Tilemap tileStrip = null;
         public MainWindow()
         {
-            
+            MenuOpenAngleMap.Click += MenuOpenAngleMapClick;
+            MenuOpenTileStrip.Click += MenuOpenTileStripClick;
+            MenuSaveTiletmap.Click += MenuSaveTiletmapClick;
         }
         private void MenuOpenAngleMapClick(object sender, RoutedEventArgs e)
         {
