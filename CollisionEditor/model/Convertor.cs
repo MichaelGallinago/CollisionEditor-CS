@@ -7,6 +7,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Media;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.Globalization;
 
 namespace CollisionEditor.model
 {
@@ -29,17 +30,17 @@ namespace CollisionEditor.model
 
         public static string GetHexAngle(byte angle)
         {
-            return "";
+            return string.Format("0x{0:X}", angle);
         }
 
-        public static float Get360Angle(byte angle)
+        public static double Get360Angle(byte angle)
         {
-            return 0f;
+            return (256 - angle) * 1.40625;
         }
 
         public static int Get256Angle(string hexAngle)
         {
-            return 0;
+            return int.Parse(hexAngle.Substring(2), NumberStyles.HexNumber);
         }
     }
 }
