@@ -6,68 +6,73 @@ using System.Drawing.Imaging;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 
 namespace CollisionEditor.model
 {
     internal class Tilemap
     {
-        public readonly int TileWidth;
-        public readonly int TileHeight;
+        public readonly Size TileSize;
 
-        public List<Bitmap> bitmaps { get; set; }
+        public List<Bitmap> Tiles { get; set; }
 
         public Tilemap(string path, int tileWidth = 16, int tileHeight = 16,
-            Vector2<int> separate = new Vector2<int>(), Vector2<int> offset = new Vector2<int>())
+            Size separate = new Size(), Size offset = new Size())
         {
-            TileWidth = tileWidth;
-            TileHeight = tileHeight;
-
-            bitmaps = new List<Bitmap>();
+            TileSize = new Size(tileWidth, tileHeight);
+            Tiles = new List<Bitmap>();
             Bitmap bitmap = new Bitmap(path);
 
-            int rowCount = (bitmap.Width - offset.X) / tileWidth;
-            int columnCount = (bitmap.Height - offset.Y) / tileHeight;
-            for (int y = 0; y < columnCount; y++)
+            Vector2<int> cellCount = new Vector2<int>(
+                (bitmap.Width - offset.Width) / TileSize.Width,
+                (bitmap.Height - offset.Height) / TileSize.Height);
+            for (int y = 0; y < cellCount.Y; y++)
             {
-                for (int x = 0; x < rowCount; x++)
+                for (int x = 0; x < cellCount.X; x++)
                 {
-                    Rectangle tile = new Rectangle(x * (tileWidth + separate.X) + offset.X,
-                        y * (tileHeight + separate.Y) + offset.Y, TileWidth, TileHeight);
-                    bitmaps.Add(bitmap.Clone(tile, bitmap.PixelFormat));
+                    Rectangle tile = new Rectangle(
+                        x * (TileSize.Width + separate.Width) + offset.Width,
+                        y * (TileSize.Height + separate.Height) + offset.Height,
+                        TileSize.Width, TileSize.Height);
+                    Tiles.Add(bitmap.Clone(tile, bitmap.PixelFormat));
                 }
             }
         }
 
-        public void Save(string path, int rowCount, Vector2<int> separation = new Vector2<int>(), Vector2<int> offset = new Vector2<int>())
+        public void Save(string path, int rowCount, Size separation = new Size(), Size offset = new Size())
         {
             if (File.Exists(path))
                 File.Delete(path);
 
-            int columnCount = bitmaps.Count / rowCount + (bitmaps.Count % rowCount == 0 ? 0 : 1);
-            int width = offset.X + rowCount * (TileWidth + separation.X) - separation.X;
-            int height = offset.Y + columnCount * (TileHeight + separation.Y) - separation.Y;
-            Bitmap image = new Bitmap(width, height);
+            Size cell = new Size(TileSize.Width + separation.Width, TileSize.Height + separation.Height);
+            int columnCount = Tiles.Count / rowCount + (Tiles.Count % rowCount == 0 ? 0 : 1);
 
-            Vector2<int> Position = new Vector2<int>();
-            using (Graphics graphics = Graphics.FromImage(image))
+            Bitmap tilemap = new Bitmap(
+                offset.Width  + rowCount    * cell.Width  - separation.Width, 
+                offset.Height + columnCount * cell.Height - separation.Height);
+            using (Graphics graphics = Graphics.FromImage(tilemap))
             {
-                foreach (Bitmap bitmap in bitmaps)
+                Vector2<int> position = new Vector2<int>();
+                foreach (Bitmap tile in Tiles)
                 {
                     graphics.DrawImage(
-                    image,
-                    new Rectangle(Position.X * TileWidth, Position.Y * TileHeight, TileWidth, TileHeight),
-                    new Rectangle(0, 0, TileWidth, TileHeight),
+                    tile,
+                    new Rectangle(
+                        offset.Width  + position.X * (TileSize.Width  + separation.Width),
+                        offset.Height + position.Y * (TileSize.Height + separation.Height),
+                        TileSize.Width, TileSize.Height),
+                    new Rectangle(0, 0, TileSize.Width, TileSize.Height),
                     GraphicsUnit.Pixel);
 
-                    if (++Position.X >= rowCount)
+                    if (++position.X >= rowCount)
                     {
-                        Position.X = 0;
-                        Position.Y++;
+                        position.X = 0;
+                        position.Y++;
                     }
                 }
             }
 
-            image.Save(path, ImageFormat.Png);
+            tilemap.Save(path, ImageFormat.Png);
         }
     }
 }
