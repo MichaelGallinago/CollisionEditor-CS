@@ -45,7 +45,7 @@
 
             </MenuItem>
             <MenuItem Header="Help" >
-                <MenuItem Header="Help is not exist" />
+                <MenuItem Header="Help is not exist" FontFamily="Webdings"  />
             </MenuItem>
         </Menu>
 
