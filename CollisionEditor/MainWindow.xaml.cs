@@ -56,7 +56,6 @@ namespace CollisionEditor
                 filePath = openFileDialog.FileName;
 
                 (this.DataContext as MainViewModel).OpenAngleMapFile(filePath);
-
             }
         }
         public static void ShowAnglemap(Anglemap anglemap)
