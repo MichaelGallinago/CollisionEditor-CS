@@ -6,6 +6,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CollisionEditor;
+using System.IO;
+
 namespace CollisionEditor.viewModel
 {
     class MainViewModel : INotifyPropertyChanged
@@ -24,12 +26,16 @@ namespace CollisionEditor.viewModel
             Anglemap anglemap = new Anglemap(filePath);
             MainWindow.ShowAnglemap(anglemap);
         }
+
         public void OpenTileStripFile(string filePath)
         {
             this.Tilemap = new Tilemap(filePath);
             MainWindow.ShowTileStrip(Convertor.BitmapConvert(Tilemap.Tiles[5]));                
         }
-
+        public void SaveTileStrip(string filePath)
+        {
+            Tilemap.Save(Path.GetFullPath(filePath), 16);
+        }
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged(string propertyName)
         {
