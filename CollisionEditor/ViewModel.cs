@@ -7,26 +7,29 @@ using System.Text;
 using System.Threading.Tasks;
 using CollisionEditor;
 using System.IO;
+using System.Reflection.Metadata;
 
 namespace CollisionEditor.viewModel
 {
     class MainViewModel : INotifyPropertyChanged
     {
 
-        // A model class that is responsible to persist and load data
         private Tilemap Tilemap { get; set;}
-
-        public MainViewModel() => this.Tilemap = null;
-
-        // Since 'destinationFilePath' was picked using a file dialog, 
-        // this method can't fail.
 
         public void OpenAngleMapFile(string filePath)
         {
             Anglemap anglemap = new Anglemap(filePath);
-            MainWindow.ShowAnglemap(anglemap);
-        }
+            byte HardCOREAngle= anglemap.Values[35];
 
+            string hexAngle = Convertor.GetHexAngle(HardCOREAngle);
+            double angle360like = Convertor.Get360Angle(HardCOREAngle);
+            int angle256like = Convertor.Get256Angle(hexAngle);
+            MainWindow.ShowAnglemap(angle256like, hexAngle, angle360like);
+        }
+        public bool TileStripIsNull()
+        {
+            return Tilemap is null;
+        }
         public void OpenTileStripFile(string filePath)
         {
             this.Tilemap = new Tilemap(filePath);

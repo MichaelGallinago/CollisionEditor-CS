@@ -1,22 +1,12 @@
-﻿using Microsoft.Win32;
-using System.Windows;
-using System.Windows.Forms;
+﻿using System.Windows;
 using CollisionEditor.model;
-using static CollisionEditor.MainWindow;
-using System.Windows.Media.Imaging;
-using System.Collections.Generic;
-using System.Windows.Media;
-using System.IO;
 using CollisionEditor.viewModel;
 
 namespace CollisionEditor
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
-        private Tilemap tileStrip = null;
+        
         public MainWindow()
         {
             InitializeComponent();
@@ -28,20 +18,25 @@ namespace CollisionEditor
         private void MenuSaveTiletmapClick(object sender, RoutedEventArgs e)
         {
 
-            //if (tileStrip is null)
-            //{
-            //    System.Windows.Forms.MessageBox.Show("Ошибка: Вы не выбрали Tilemap, чтобы её сохранить");
-            //}
-
-            System.Windows.Forms.SaveFileDialog saveFileDialog = new System.Windows.Forms.SaveFileDialog();
-
-            saveFileDialog.Filter = "Image Files(*.png)| *.png";
-            //Спрашивать RowCount
             
-            if (saveFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            if ((this.DataContext as MainViewModel).TileStripIsNull())
             {
-                (this.DataContext as MainViewModel).SaveTileStrip(saveFileDialog.FileName);
+                System.Windows.Forms.MessageBox.Show("Ошибка: Вы не выбрали Tilemap, чтобы её сохранить");
             }
+            else
+            {
+                System.Windows.Forms.SaveFileDialog saveFileDialog = new System.Windows.Forms.SaveFileDialog();
+
+                saveFileDialog.Filter = "Image Files(*.png)| *.png";
+
+                //Спрашивать RowCount
+
+                if (saveFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                {
+                    (this.DataContext as MainViewModel).SaveTileStrip(saveFileDialog.FileName);
+                }
+            }
+            
         }
 
         private void MenuOpenAngleMapClick(object sender, RoutedEventArgs e)
@@ -58,9 +53,13 @@ namespace CollisionEditor
                 (this.DataContext as MainViewModel).OpenAngleMapFile(filePath);
             }
         }
-        public static void ShowAnglemap(Anglemap anglemap)
+        public static void ShowAnglemap(int angle256like, string hexAngle, double angle360like)
         {
-            System.Windows.Forms.MessageBox.Show(string.Join(" ", anglemap.Values));
+            MainWindow mainWindow = (MainWindow)System.Windows.Application.Current.MainWindow;
+            
+            mainWindow.TextBlock256Angle.Text = angle256like.ToString();
+            mainWindow.TextBlockHexAngle.Text = hexAngle;
+            mainWindow.TextBlock360Angle.Text = angle360like.ToString();
         }
 
         private void MenuOpenTileStripClick(object sender, RoutedEventArgs e)
@@ -73,6 +72,7 @@ namespace CollisionEditor
             {
                 ImageOfTile.Source = null;
                 filePath = openFileDialog.FileName;
+
                 (this.DataContext as MainViewModel).OpenTileStripFile(filePath);
             }
         }
