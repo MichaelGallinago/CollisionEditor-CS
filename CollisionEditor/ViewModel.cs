@@ -12,7 +12,7 @@ namespace CollisionEditor.viewModel
     {
 
         // A model class that is responsible to persist and load data
-        private Tilemap Tilemap { get; }
+        private Tilemap Tilemap { get; set;}
 
         public MainViewModel() => this.Tilemap = null;
 
@@ -24,11 +24,17 @@ namespace CollisionEditor.viewModel
             Anglemap anglemap = new Anglemap(filePath);
             MainWindow.ShowAnglemap(anglemap);
         }
+        public void OpenTileStripFile(string filePath)
+        {
+            this.Tilemap = new Tilemap(filePath);
+            MainWindow.ShowTileStrip(Convertor.BitmapConvert(Tilemap.Tiles[5]));                
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
     }
 }

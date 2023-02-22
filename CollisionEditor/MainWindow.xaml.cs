@@ -44,7 +44,6 @@ namespace CollisionEditor
         private void MenuOpenTileStripClick(object sender, RoutedEventArgs e)
         {
 
-
             System.Windows.Forms.OpenFileDialog openFileDialog = new System.Windows.Forms.OpenFileDialog();
             openFileDialog.Filter = "Image Files(*.png)| *.png| All files(*.*) | *.*";
             string filePath = string.Empty;
@@ -52,8 +51,8 @@ namespace CollisionEditor
             {
                 ImageOfTile.Source = null;
                 filePath = openFileDialog.FileName;
-                tileStrip = new Tilemap(filePath);
-                ImageOfTile.Source = Convertor.BitmapConvert(tileStrip.Tiles[5]);
+                (this.DataContext as MainViewModel).OpenTileStripFile(filePath);
+                
             }
         }
 
@@ -78,5 +77,11 @@ namespace CollisionEditor
         {
             System.Windows.Forms.MessageBox.Show(string.Join(" ", anglemap.Values));
         }
+        public static void ShowTileStrip(System.Windows.Media.Imaging.BitmapSource TileStrip)
+        {
+            MainWindow mainWindow = (MainWindow)System.Windows.Application.Current.MainWindow;
+            mainWindow.ImageOfTile.Source = TileStrip;
+        }
+
     }
 }
