@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace CollisionEditor.model
 {
-    internal class Anglemap
+    public class Anglemap
     {
-        public List<byte> Values { get; set; }
+        internal List<byte> Values { get; set; }
 
         public Anglemap(string path)
         {

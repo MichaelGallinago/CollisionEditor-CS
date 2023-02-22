@@ -7,6 +7,7 @@ using System.Windows.Media.Imaging;
 using System.Collections.Generic;
 using System.Windows.Media;
 using System.IO;
+using CollisionEditor.viewModel;
 
 namespace CollisionEditor
 {
@@ -18,13 +19,14 @@ namespace CollisionEditor
         private Tilemap tileStrip = null;
         public MainWindow()
         {
+            InitializeComponent();
             MenuOpenAngleMap.Click += MenuOpenAngleMapClick;
             MenuOpenTileStrip.Click += MenuOpenTileStripClick;
             MenuSaveTiletmap.Click += MenuSaveTiletmapClick;
         }
         private void MenuOpenAngleMapClick(object sender, RoutedEventArgs e)
         {
-            
+
 
             System.Windows.Forms.OpenFileDialog openFileDialog = new System.Windows.Forms.OpenFileDialog();
             string filePath = string.Empty;
@@ -33,15 +35,16 @@ namespace CollisionEditor
             {
                 ImageOfTile.Source = null;
                 filePath = openFileDialog.FileName;
-                Anglemap anglemap = new Anglemap(filePath);
-                System.Windows.Forms.MessageBox.Show(string.Join(" ", anglemap.Values));
+
+                (this.DataContext as MainViewModel).OpenAngleMapFile(filePath);
+                
             }
         }
 
         private void MenuOpenTileStripClick(object sender, RoutedEventArgs e)
         {
-            
-            
+
+
             System.Windows.Forms.OpenFileDialog openFileDialog = new System.Windows.Forms.OpenFileDialog();
             openFileDialog.Filter = "Image Files(*.png)| *.png| All files(*.*) | *.*";
             string filePath = string.Empty;
@@ -50,7 +53,7 @@ namespace CollisionEditor
                 ImageOfTile.Source = null;
                 filePath = openFileDialog.FileName;
                 tileStrip = new Tilemap(filePath);
-                ImageOfTile.Source = Convertor.BitmapConvert(tileStrip.bitmaps[5]);
+                ImageOfTile.Source = Convertor.BitmapConvert(tileStrip.Tiles[5]);
             }
         }
 
@@ -60,15 +63,20 @@ namespace CollisionEditor
             {
                 System.Windows.Forms.MessageBox.Show("Ошибка: Вы не выбрали Tilemap, чтобы её сохранить");
             }
-            
+
             System.Windows.Forms.SaveFileDialog saveFileDialog = new System.Windows.Forms.SaveFileDialog();
-            
+
             saveFileDialog.Filter = "Image Files(*.png)| *.png";
             //Спрашивать RowCount
             if (saveFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                tileStrip.Save(Path.GetFullPath(saveFileDialog.FileName), 1);
+                tileStrip.Save(Path.GetFullPath(saveFileDialog.FileName), 16);
             }
+        }
+
+        public static void ShowAnglemap(Anglemap anglemap)
+        {
+            System.Windows.Forms.MessageBox.Show(string.Join(" ", anglemap.Values));
         }
     }
 }

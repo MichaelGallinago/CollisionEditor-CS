@@ -4,8 +4,12 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="CollisionEditorC#" Height="440" Width="550">
-    <Grid Margin="0,0,0,-6">
+        Title="CollisionEditorC#" Height="440" Width="550"
+        xmlns:local="clr-namespace:CollisionEditor.viewModel">
+    <Window.DataContext>
+        <local:MainViewModel/>
+    </Window.DataContext>
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="20"/>
             <RowDefinition Height="14*"/>
@@ -22,7 +26,7 @@
         <Menu VerticalAlignment="Center" Grid.Column="0"  Grid.ColumnSpan="5" Foreground="Black" Height="20">
             <MenuItem Header="File" >
                 <MenuItem Header="Load" >
-                    <MenuItem Header="Tile Strip......               Ctrl+O" Name = "MenuOpenTileStrip"  Padding="0,0,-20,0"/>
+                    <MenuItem Header="Tile Strip......               Ctrl+O" Name = "MenuOpenTileStrip" Padding="0,0,-20,0"/>
                     <MenuItem Header="Anglemap...     Ctrl+Shift+O" Name = "MenuOpenAngleMap" Padding="0,0,-20,0"/>
                 </MenuItem>
 
