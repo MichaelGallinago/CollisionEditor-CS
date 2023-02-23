@@ -17,8 +17,8 @@ namespace CollisionEditor
             public Vector2<int> Position { get; set; } = new Vector2<int>();
         }
 
-        RectagleAndPosition[] BlueAndGreenRectangle = new RectagleAndPosition[2];
-
+        RectagleAndPosition[] BlueAndGreenRectangle = new RectagleAndPosition[] { new RectagleAndPosition(), new RectagleAndPosition() };
+        
         public MainWindow()
         {
             InitializeComponent();
@@ -107,16 +107,8 @@ namespace CollisionEditor
             rect.Width = 8;
             rect.Height = 8;
             rect.Fill = new SolidColorBrush(Colors.Blue);
-            RectagleAndPosition r =BlueAndGreenRectangle[0];
-            System.Windows.Forms.MessageBox.Show("GBPLF0");
-            Rectangle rectangle = r.Rectangle;
-            System.Windows.Forms.MessageBox.Show("GBPLF1.5");
-            if (BlueAndGreenRectangle[0].Rectangle is not null)
-            {
-                System.Windows.Forms.MessageBox.Show("GBPLF1.5");
-                canvas.Children.Remove(BlueAndGreenRectangle[0].Rectangle);
-            }
-            System.Windows.Forms.MessageBox.Show("GBPLF1");
+
+            canvas.Children.Remove(BlueAndGreenRectangle[0].Rectangle);
             
             BlueAndGreenRectangle[0].Rectangle = rect;
             BlueAndGreenRectangle[0].Position = cordinats;
@@ -125,8 +117,7 @@ namespace CollisionEditor
             Canvas.SetTop(rect, cordinats.Y);
             
             canvas.Children.Add(rect);
-            System.Windows.Forms.MessageBox.Show("GBPLF2");
-            if (BlueAndGreenRectangle[0] == null & BlueAndGreenRectangle[1] == null)
+            if (BlueAndGreenRectangle[0] != null & BlueAndGreenRectangle[1] != null)
             {
                 (this.DataContext as MainViewModel).AngleUpdator(BlueAndGreenRectangle[0].Position, BlueAndGreenRectangle[1].Position);
             }
@@ -156,7 +147,7 @@ namespace CollisionEditor
             
             canvas.Children.Add(rect);
 
-            if (BlueAndGreenRectangle[0]==null & BlueAndGreenRectangle[1] == null)
+            if (BlueAndGreenRectangle[0]!=null & BlueAndGreenRectangle[1] != null)
             {
                 (this.DataContext as MainViewModel).AngleUpdator(BlueAndGreenRectangle[0].Position, BlueAndGreenRectangle[1].Position);
             }
