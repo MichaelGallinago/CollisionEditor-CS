@@ -70,7 +70,7 @@ namespace CollisionEditor
             
             mainWindow.TextBlock256Angle.Text = angle256like.ToString();
             mainWindow.TextBlockHexAngle.Text = hexAngle;
-            mainWindow.TextBlock360Angle.Text = angle360like.ToString();
+            mainWindow.TextBlock360Angle.Text = angle360like.ToString()+"'";
         }
 
         private void MenuOpenTileStripClick(object sender, RoutedEventArgs e)
