@@ -7,13 +7,13 @@ namespace CollisionEditor.viewModel
 {
     class MainViewModel : INotifyPropertyChanged
     {
-
+        private Anglemap Anglemap { get; set; }
         private Tilemap Tilemap { get; set;}
 
         public void OpenAngleMapFile(string filePath)
         {
-            Anglemap anglemap = new Anglemap(filePath);
-            byte HardCOREAngle= anglemap.Values[35];
+            Anglemap = new Anglemap(filePath);
+            byte HardCOREAngle= Anglemap.Values[35];
 
             string hexAngle = Convertor.GetHexAngle(HardCOREAngle);
             double angle360like = Convertor.Get360Angle(HardCOREAngle);
@@ -22,7 +22,17 @@ namespace CollisionEditor.viewModel
         }
         public void AngleUpdator(Vector2<int> vectorGreen, Vector2<int> vectorBlue)
         {
-            UpdateWithLine();
+            if (Anglemap is not null)
+            {
+                int angle256like = Anglemap.UpdateWithLine(15, vectorGreen, vectorBlue);
+                string hexAngle = Convertor.GetHexAngle((byte)angle256like);
+                double angle360like = Convertor.Get360Angle((byte)angle256like);
+                MainWindow.ShowAnglemap(angle256like, hexAngle, angle360like);
+            }
+            else
+            {
+                return;
+            }
         }
 
         public bool TileStripIsNull()

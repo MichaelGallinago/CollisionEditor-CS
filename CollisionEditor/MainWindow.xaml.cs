@@ -7,10 +7,18 @@ using System.Windows.Media;
 using System.Windows.Shapes;
 
 namespace CollisionEditor
-{
+{   
+    
     public partial class MainWindow : Window
     {
-        Rectangle[] BlueAndGreenRectangle = new Rectangle[2];
+        private class RectagleAndPosition
+        {
+            public Rectangle Rectangle { get; set; } = new Rectangle(); 
+            public Vector2<int> Position { get; set; } = new Vector2<int>();
+        }
+
+        RectagleAndPosition[] BlueAndGreenRectangle = new RectagleAndPosition[2];
+
         public MainWindow()
         {
             InitializeComponent();
@@ -40,7 +48,6 @@ namespace CollisionEditor
                     (this.DataContext as MainViewModel).SaveTileStrip(saveFileDialog.FileName);
                 }
             }
-            
         }
 
         private void MenuOpenAngleMapClick(object sender, RoutedEventArgs e)
@@ -100,18 +107,28 @@ namespace CollisionEditor
             rect.Width = 8;
             rect.Height = 8;
             rect.Fill = new SolidColorBrush(Colors.Blue);
-
-            canvas.Children.Remove(BlueAndGreenRectangle[0]);
-            BlueAndGreenRectangle[0] = rect;
+            RectagleAndPosition r =BlueAndGreenRectangle[0];
+            System.Windows.Forms.MessageBox.Show("GBPLF0");
+            Rectangle rectangle = r.Rectangle;
+            System.Windows.Forms.MessageBox.Show("GBPLF1.5");
+            if (BlueAndGreenRectangle[0].Rectangle is not null)
+            {
+                System.Windows.Forms.MessageBox.Show("GBPLF1.5");
+                canvas.Children.Remove(BlueAndGreenRectangle[0].Rectangle);
+            }
+            System.Windows.Forms.MessageBox.Show("GBPLF1");
+            
+            BlueAndGreenRectangle[0].Rectangle = rect;
+            BlueAndGreenRectangle[0].Position = cordinats;
 
             Canvas.SetLeft(rect, cordinats.X);
             Canvas.SetTop(rect, cordinats.Y);
             
             canvas.Children.Add(rect);
-
+            System.Windows.Forms.MessageBox.Show("GBPLF2");
             if (BlueAndGreenRectangle[0] == null & BlueAndGreenRectangle[1] == null)
             {
-                ;
+                (this.DataContext as MainViewModel).AngleUpdator(BlueAndGreenRectangle[0].Position, BlueAndGreenRectangle[1].Position);
             }
         }
         private void ImageOfTileGridMouseRightButtonDown(object sender, MouseButtonEventArgs e)
@@ -130,8 +147,9 @@ namespace CollisionEditor
             rect.Height = 8;
             rect.Fill = new SolidColorBrush(Colors.Green);
 
-            canvas.Children.Remove(BlueAndGreenRectangle[1]);
-            BlueAndGreenRectangle[1] = rect;
+            canvas.Children.Remove(BlueAndGreenRectangle[1].Rectangle);
+            BlueAndGreenRectangle[1].Rectangle = rect;
+            BlueAndGreenRectangle[1].Position = cordinats;
 
             Canvas.SetLeft(rect, cordinats.X);
             Canvas.SetTop(rect, cordinats.Y);
@@ -140,7 +158,7 @@ namespace CollisionEditor
 
             if (BlueAndGreenRectangle[0]==null & BlueAndGreenRectangle[1] == null)
             {
-                ;
+                (this.DataContext as MainViewModel).AngleUpdator(BlueAndGreenRectangle[0].Position, BlueAndGreenRectangle[1].Position);
             }
         }
         
