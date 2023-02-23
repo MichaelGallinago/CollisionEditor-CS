@@ -35,7 +35,7 @@ namespace CollisionEditor.model
 
         public static double Get360Angle(byte angle)
         {
-            return (256 - angle) * 1.40625;
+            return Math.Round((256 - angle) * 1.40625, 2);
         }
 
         public static int Get256Angle(string hexAngle)
