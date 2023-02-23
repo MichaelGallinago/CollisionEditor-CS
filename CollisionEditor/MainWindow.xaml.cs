@@ -2,6 +2,9 @@
 using System.Windows.Input;
 using CollisionEditor.model;
 using CollisionEditor.viewModel;
+using System.Windows.Controls;
+using System.Windows.Media;
+using System.Windows.Shapes;
 
 namespace CollisionEditor
 {
@@ -86,12 +89,31 @@ namespace CollisionEditor
         private void ImageOfTileGridMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             MainWindow mainWindow = (MainWindow)System.Windows.Application.Current.MainWindow;
-            System.Windows.Forms.MessageBox.Show($"{Mouse.GetPosition(mainWindow.ImageOfTileGrid).X}, {Mouse.GetPosition(mainWindow.ImageOfTileGrid).Y}");
+
+            
+            Rectangle rect = new Rectangle();
+            rect.Width = 8;
+            rect.Height = 8;
+            rect.Fill = new SolidColorBrush(Colors.Blue);
+            //добавляем
+            canvas.Children.Add(rect);
+            //устанавливаем расположение
+            Canvas.SetTop(rect, Mouse.GetPosition(mainWindow.ImageOfTileGrid).Y);
+            Canvas.SetLeft(rect,Mouse.GetPosition(mainWindow.ImageOfTileGrid).X);
         }
         private void ImageOfTileGridMouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
             MainWindow mainWindow = (MainWindow)System.Windows.Application.Current.MainWindow;
-            System.Windows.Forms.MessageBox.Show($"{Mouse.GetPosition(mainWindow.ImageOfTileGrid).X}, {Mouse.GetPosition(mainWindow.ImageOfTileGrid).Y}");
+            Rectangle rect = new Rectangle();
+            rect.Width = 8;
+            rect.Height = 8;
+            rect.Fill = new SolidColorBrush(Colors.Green);
+            //добавляем
+            canvas.Children.Add(rect);
+            //устанавливаем расположение
+            Canvas.SetTop(rect, Mouse.GetPosition(mainWindow.ImageOfTileGrid).Y);
+            Canvas.SetLeft(rect, Mouse.GetPosition(mainWindow.ImageOfTileGrid).X);
         }
+        
     }
 }
