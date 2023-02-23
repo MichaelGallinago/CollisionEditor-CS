@@ -26,7 +26,7 @@ namespace CollisionEditor.model
 
         public byte UpdateWithLine(int tileIndex, Vector2<int> positionGreen, Vector2<int> positionBlue)
         {
-            return Values[tileIndex] = (byte)(256 - Math.Atan2(positionGreen.Y - positionBlue.Y, positionGreen.X - positionBlue.X) * 128 / Math.PI);
+            return Values[tileIndex] = (byte)(Math.Atan2(positionBlue.Y - positionGreen.Y, positionBlue.X - positionGreen.X) * 128 / Math.PI);
         }
     }
 }
