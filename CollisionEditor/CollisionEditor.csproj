@@ -23,7 +23,6 @@
 
   <ItemGroup>
     <Folder Include="controller\" />
-    <Folder Include="viewModel\" />
   </ItemGroup>
 
   <ItemGroup>
