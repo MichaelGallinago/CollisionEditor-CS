@@ -1,6 +1,7 @@
 ﻿using CollisionEditor.model;
 using System.ComponentModel;
 using System.IO;
+using System.Windows;
 
 namespace CollisionEditor.viewModel
 {
@@ -19,6 +20,11 @@ namespace CollisionEditor.viewModel
             int angle256like = Convertor.Get256Angle(hexAngle);
             MainWindow.ShowAnglemap(angle256like, hexAngle, angle360like);
         }
+        public Vector2<int> GetCordinats( double x, double y)
+        {
+            return( AngleConstructor.GetCorrectDotPosition(new Vector2<double>(x, y)));
+        }
+
         public bool TileStripIsNull()
         {
             return Tilemap is null;

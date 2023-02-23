@@ -89,30 +89,34 @@ namespace CollisionEditor
         private void ImageOfTileGridMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             MainWindow mainWindow = (MainWindow)System.Windows.Application.Current.MainWindow;
-
             
             Rectangle rect = new Rectangle();
             rect.Width = 8;
             rect.Height = 8;
             rect.Fill = new SolidColorBrush(Colors.Blue);
-            //добавляем
+            
             canvas.Children.Add(rect);
-            //устанавливаем расположение
-            Canvas.SetTop(rect, Mouse.GetPosition(mainWindow.ImageOfTileGrid).Y);
-            Canvas.SetLeft(rect,Mouse.GetPosition(mainWindow.ImageOfTileGrid).X);
+
+            Vector2<int> cordinats = (this.DataContext as MainViewModel).GetCordinats(Mouse.GetPosition(mainWindow.ImageOfTileGrid).X , Mouse.GetPosition(mainWindow.ImageOfTileGrid).Y);
+
+            Canvas.SetLeft(rect, cordinats.X);
+            Canvas.SetTop(rect, cordinats.Y);
         }
         private void ImageOfTileGridMouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
             MainWindow mainWindow = (MainWindow)System.Windows.Application.Current.MainWindow;
+
             Rectangle rect = new Rectangle();
             rect.Width = 8;
             rect.Height = 8;
             rect.Fill = new SolidColorBrush(Colors.Green);
-            //добавляем
+            
             canvas.Children.Add(rect);
-            //устанавливаем расположение
-            Canvas.SetTop(rect, Mouse.GetPosition(mainWindow.ImageOfTileGrid).Y);
-            Canvas.SetLeft(rect, Mouse.GetPosition(mainWindow.ImageOfTileGrid).X);
+
+            Vector2<int> cordinats = (this.DataContext as MainViewModel).GetCordinats(Mouse.GetPosition(mainWindow.ImageOfTileGrid).X, Mouse.GetPosition(mainWindow.ImageOfTileGrid).Y);
+
+            Canvas.SetLeft(rect, cordinats.X);
+            Canvas.SetTop(rect, cordinats.Y);
         }
         
     }
