@@ -10,7 +10,7 @@ namespace CollisionEditor
 {
     public partial class MainWindow : Window
     {
-        
+        Rectangle[] BlueAndGreenRectangle = new Rectangle[2];
         public MainWindow()
         {
             InitializeComponent();
@@ -103,6 +103,9 @@ namespace CollisionEditor
             rect.Height = 8;
             rect.Fill = new SolidColorBrush(Colors.Blue);
 
+            canvas.Children.Remove(BlueAndGreenRectangle[0]);
+            BlueAndGreenRectangle[0] = rect;
+
             Canvas.SetLeft(rect, x);
             Canvas.SetTop(rect, y);
             
@@ -124,11 +127,15 @@ namespace CollisionEditor
             rect.Width = 8;
             rect.Height = 8;
             rect.Fill = new SolidColorBrush(Colors.Green);
+            
+            canvas.Children.Remove(BlueAndGreenRectangle[1]);
+            BlueAndGreenRectangle[1] = rect;
 
             Canvas.SetLeft(rect, x);
             Canvas.SetTop(rect, y);
-
+            
             canvas.Children.Add(rect);
+            
         }
         
     }
