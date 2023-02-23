@@ -91,12 +91,10 @@ namespace CollisionEditor
             MainWindow mainWindow = (MainWindow)System.Windows.Application.Current.MainWindow;
 
             Vector2<int> cordinats = (this.DataContext as MainViewModel).GetCordinats(Mouse.GetPosition(mainWindow.ImageOfTileGrid).X, Mouse.GetPosition(mainWindow.ImageOfTileGrid).Y);
-            int x = cordinats.X;
-            int y = cordinats.Y;
-            if (x >= 128)
-                x = 120;
-            if (y >= 128)
-                y = 120;
+            if (cordinats.X >= 128)
+                cordinats.X = 120;
+            if (cordinats.Y >= 128)
+                cordinats.Y = 120;
 
             Rectangle rect = new Rectangle();
             rect.Width = 8;
@@ -106,36 +104,44 @@ namespace CollisionEditor
             canvas.Children.Remove(BlueAndGreenRectangle[0]);
             BlueAndGreenRectangle[0] = rect;
 
-            Canvas.SetLeft(rect, x);
-            Canvas.SetTop(rect, y);
+            Canvas.SetLeft(rect, cordinats.X);
+            Canvas.SetTop(rect, cordinats.Y);
             
             canvas.Children.Add(rect);
+
+            if (BlueAndGreenRectangle[0] == null & BlueAndGreenRectangle[1] == null)
+            {
+                ;
+            }
         }
         private void ImageOfTileGridMouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
             MainWindow mainWindow = (MainWindow)System.Windows.Application.Current.MainWindow;
 
             Vector2<int> cordinats = (this.DataContext as MainViewModel).GetCordinats(Mouse.GetPosition(mainWindow.ImageOfTileGrid).X, Mouse.GetPosition(mainWindow.ImageOfTileGrid).Y);
-            int x = cordinats.X;
-            int y = cordinats.Y;
-            if (x >= 128)
-                x = 120;
-            if (y >= 128)
-                y = 120;
+            
+            if (cordinats.X >= 128)
+                cordinats.X = 120;
+            if (cordinats.Y >= 128)
+                cordinats.Y = 120;
 
             Rectangle rect = new Rectangle();
             rect.Width = 8;
             rect.Height = 8;
             rect.Fill = new SolidColorBrush(Colors.Green);
-            
+
             canvas.Children.Remove(BlueAndGreenRectangle[1]);
             BlueAndGreenRectangle[1] = rect;
 
-            Canvas.SetLeft(rect, x);
-            Canvas.SetTop(rect, y);
+            Canvas.SetLeft(rect, cordinats.X);
+            Canvas.SetTop(rect, cordinats.Y);
             
             canvas.Children.Add(rect);
-            
+
+            if (BlueAndGreenRectangle[0]==null & BlueAndGreenRectangle[1] == null)
+            {
+                ;
+            }
         }
         
     }

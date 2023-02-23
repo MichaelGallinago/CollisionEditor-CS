@@ -20,9 +20,9 @@ namespace CollisionEditor.viewModel
             int angle256like = Convertor.Get256Angle(hexAngle);
             MainWindow.ShowAnglemap(angle256like, hexAngle, angle360like);
         }
-        public Vector2<int> GetCordinats( double x, double y)
+        public void AngleUpdator(Vector2<int> vectorGreen, Vector2<int> vectorBlue)
         {
-            return( AngleConstructor.GetCorrectDotPosition(new Vector2<double>(x, y)));
+            UpdateWithLine();
         }
 
         public bool TileStripIsNull()
@@ -38,11 +38,18 @@ namespace CollisionEditor.viewModel
         {
             Tilemap.Save(Path.GetFullPath(filePath), 16);
         }
+
+        public Vector2<int> GetCordinats(double x, double y)
+        {
+            return (AngleConstructor.GetCorrectDotPosition(new Vector2<double>(x, y)));
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
 
     }
 }
