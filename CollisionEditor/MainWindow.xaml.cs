@@ -89,34 +89,46 @@ namespace CollisionEditor
         private void ImageOfTileGridMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             MainWindow mainWindow = (MainWindow)System.Windows.Application.Current.MainWindow;
-            
+
+            Vector2<int> cordinats = (this.DataContext as MainViewModel).GetCordinats(Mouse.GetPosition(mainWindow.ImageOfTileGrid).X, Mouse.GetPosition(mainWindow.ImageOfTileGrid).Y);
+            int x = cordinats.X;
+            int y = cordinats.Y;
+            if (x >= 128)
+                x = 120;
+            if (y >= 128)
+                y = 120;
+
             Rectangle rect = new Rectangle();
             rect.Width = 8;
             rect.Height = 8;
             rect.Fill = new SolidColorBrush(Colors.Blue);
+
+            Canvas.SetLeft(rect, x);
+            Canvas.SetTop(rect, y);
             
             canvas.Children.Add(rect);
-
-            Vector2<int> cordinats = (this.DataContext as MainViewModel).GetCordinats(Mouse.GetPosition(mainWindow.ImageOfTileGrid).X , Mouse.GetPosition(mainWindow.ImageOfTileGrid).Y);
-
-            Canvas.SetLeft(rect, cordinats.X);
-            Canvas.SetTop(rect, cordinats.Y);
         }
         private void ImageOfTileGridMouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
             MainWindow mainWindow = (MainWindow)System.Windows.Application.Current.MainWindow;
 
+            Vector2<int> cordinats = (this.DataContext as MainViewModel).GetCordinats(Mouse.GetPosition(mainWindow.ImageOfTileGrid).X, Mouse.GetPosition(mainWindow.ImageOfTileGrid).Y);
+            int x = cordinats.X;
+            int y = cordinats.Y;
+            if (x >= 128)
+                x = 120;
+            if (y >= 128)
+                y = 120;
+
             Rectangle rect = new Rectangle();
             rect.Width = 8;
             rect.Height = 8;
             rect.Fill = new SolidColorBrush(Colors.Green);
-            
+
+            Canvas.SetLeft(rect, x);
+            Canvas.SetTop(rect, y);
+
             canvas.Children.Add(rect);
-
-            Vector2<int> cordinats = (this.DataContext as MainViewModel).GetCordinats(Mouse.GetPosition(mainWindow.ImageOfTileGrid).X, Mouse.GetPosition(mainWindow.ImageOfTileGrid).Y);
-
-            Canvas.SetLeft(rect, cordinats.X);
-            Canvas.SetTop(rect, cordinats.Y);
         }
         
     }
