@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.Windows.Input;
 using CollisionEditor.model;
 using CollisionEditor.viewModel;
 
@@ -82,5 +83,15 @@ namespace CollisionEditor
             mainWindow.ImageOfTile.Source = TileStrip;
         }
 
+        private void ImageOfTileGridMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            MainWindow mainWindow = (MainWindow)System.Windows.Application.Current.MainWindow;
+            System.Windows.Forms.MessageBox.Show($"{Mouse.GetPosition(mainWindow.ImageOfTileGrid).X}, {Mouse.GetPosition(mainWindow.ImageOfTileGrid).Y}");
+        }
+        private void ImageOfTileGridMouseRightButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            MainWindow mainWindow = (MainWindow)System.Windows.Application.Current.MainWindow;
+            System.Windows.Forms.MessageBox.Show($"{Mouse.GetPosition(mainWindow.ImageOfTileGrid).X}, {Mouse.GetPosition(mainWindow.ImageOfTileGrid).Y}");
+        }
     }
 }
