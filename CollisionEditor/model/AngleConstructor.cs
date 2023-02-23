@@ -9,8 +9,8 @@ namespace CollisionEditor.model
         public static Vector2<int> GetCorrectDotPosition(Vector2<double> position)
         {
             return new Vector2<int>(
-                (int)Math.Round(position.X) & -cellSize, 
-                (int)Math.Round(position.Y) & -cellSize);
+                (int)Math.Floor(position.X) & -cellSize, 
+                (int)Math.Floor(position.Y) & -cellSize);
         }
     }
 }
