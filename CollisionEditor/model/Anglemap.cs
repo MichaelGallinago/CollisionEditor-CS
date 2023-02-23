@@ -26,5 +26,10 @@ namespace CollisionEditor.model
             BinaryWriter writer = new BinaryWriter(File.Open(path, FileMode.CreateNew));
             writer.Write(Values.ToArray());
         }
+
+        public void UpdateWithLine(int index, Vector2<int> positionGreen, Vector2<int> positionBlue)
+        {
+            Values[index] = (byte)(256 - Math.Atan2(positionGreen.Y - positionBlue.Y, positionGreen.X - positionBlue.X) * 128 / Math.PI);
+        }
     }
 }
