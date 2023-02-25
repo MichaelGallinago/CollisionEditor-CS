@@ -72,7 +72,6 @@
         <TextBlock Grid.Column="5" Grid.Row="5" TextWrapping="Wrap" Text="0x00" Name="TextBlockHexAngle" Grid.ColumnSpan="2" Background="#FFD8D8D8"/>
         <TextBlock Grid.Column="8" Grid.Row="5" TextWrapping="Wrap" Text="0'" Name="TextBlock360Angle" Grid.ColumnSpan="2" Background="#FFD8D8D8"/>
         <Canvas Grid.Column="0" Grid.Row="3"  Height="128" Width="128" Name ="canvas" Grid.ColumnSpan="11"/>
-
-
+        <!--<Button Command="{Binding TestCommand}"/>-->
     </Grid>
 </Window>

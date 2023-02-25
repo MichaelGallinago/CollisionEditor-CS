@@ -1,4 +1,4 @@
-﻿using System.Windows;
+using System.Windows;
 using System.Windows.Input;
 using CollisionEditor.model;
 using CollisionEditor.viewModel;

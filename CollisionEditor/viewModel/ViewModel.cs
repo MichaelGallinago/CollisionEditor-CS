@@ -2,13 +2,25 @@
 using System.ComponentModel;
 using System.IO;
 using System.Windows;
+using System.Windows.Input;
 
 namespace CollisionEditor.viewModel
 {
-    class MainViewModel : INotifyPropertyChanged
+    public class MainViewModel : INotifyPropertyChanged
     {
         private Anglemap Anglemap { get; set; }
         private Tilemap Tilemap { get; set;}
+        public ICommand TestCommand { get; set; }
+
+        public MainViewModel()
+        {
+            TestCommand = new RelayCommand(Test);
+        }
+
+        private void Test()
+        {
+            MessageBox.Show("Оно работает");
+        }
 
         public void OpenAngleMapFile(string filePath)
         {
