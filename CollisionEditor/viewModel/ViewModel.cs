@@ -16,11 +16,12 @@ namespace CollisionEditor.viewModel
         public MainViewModel(MainWindow window)
         {
             this.window = window;
-            TestCommand = new RelayCommand(Test);
+            TestCommand = new RelayCommand();
         }
 
-        private void Test()
+        private void Test(string t)
         {
+            
             MessageBox.Show("Оно работает");
         }
 

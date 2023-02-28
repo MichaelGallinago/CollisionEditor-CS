@@ -21,14 +21,14 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="10*" />
             <ColumnDefinition Width="20*" />
-            <ColumnDefinition Width="30*" />
-            <ColumnDefinition Width="30*" />
+            <ColumnDefinition Width="29*" />
+            <ColumnDefinition Width="31*" />
             <ColumnDefinition Width="20*" />
             <ColumnDefinition Width="29*" />
             <ColumnDefinition Width="31*" />
             <ColumnDefinition Width="20*" />
-            <ColumnDefinition Width="30*" />
-            <ColumnDefinition Width="30*" />
+            <ColumnDefinition Width="29*" />
+            <ColumnDefinition Width="31*" />
             <ColumnDefinition Width="20*" />
             <ColumnDefinition Width="17*" />
             <ColumnDefinition Width="258*" />
@@ -70,11 +70,25 @@
         <TextBlock Grid.Column="5" Grid.Row="5" TextWrapping="Wrap" Text="0x00" Name="TextBlockHexAngle" Grid.ColumnSpan="2" Background="#FFD8D8D8"/>
         <TextBlock Grid.Column="8" Grid.Row="5" TextWrapping="Wrap" Text="0'" Name="TextBlock360Angle" Grid.ColumnSpan="2" Background="#FFD8D8D8"/>
         <Canvas Grid.Column="0" Grid.Row="3"  Height="128" Width="128" Name ="canvas" Grid.ColumnSpan="11"/>
-        
-        <Button Grid.Column="6" Grid.Row="5" Height="10" Width="30" VerticalAlignment="Top" HorizontalAlignment="Left">
+
+        <Button Grid.Column="6" Grid.Row="5" Height="10" Width="30" VerticalAlignment="Top" HorizontalAlignment="Left" Command="{Binding TestCommand}" >
             <Path Fill="Black" Data="M 0 6 L 12 6 L 6 0 Z" Height="6" Width="12"/>
         </Button>
         <Button Grid.Column="6" Grid.Row="5" Height="10" Width="30" VerticalAlignment="Bottom" HorizontalAlignment="Left">
+            <Path Fill="Black" Data="M 0 0 L 6 6 L 12 0 Z"/>
+        </Button>
+
+        <Button Grid.Column="3" Grid.Row="5" Height="10" Width="30" VerticalAlignment="Top" HorizontalAlignment="Left">
+            <Path Fill="Black" Data="M 0 6 L 12 6 L 6 0 Z" Height="6" Width="12"/>
+        </Button>
+        <Button Grid.Column="3" Grid.Row="5" Height="10" Width="30" VerticalAlignment="Bottom" HorizontalAlignment="Left">
+            <Path Fill="Black" Data="M 0 0 L 6 6 L 12 0 Z"/>
+        </Button>
+
+        <Button Grid.Column="9" Grid.Row="5" Height="10" Width="30" VerticalAlignment="Top" HorizontalAlignment="Left">
+            <Path Fill="Black" Data="M 0 6 L 12 6 L 6 0 Z" Height="6" Width="12"/>
+        </Button>
+        <Button Grid.Column="9" Grid.Row="5" Height="10" Width="30" VerticalAlignment="Bottom" HorizontalAlignment="Left">
             <Path Fill="Black" Data="M 0 0 L 6 6 L 12 0 Z"/>
         </Button>
         <!--<Button Command="{Binding TestCommand}"/>-->
