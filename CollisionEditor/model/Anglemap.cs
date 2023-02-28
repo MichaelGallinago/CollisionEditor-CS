@@ -15,6 +15,11 @@ namespace CollisionEditor.model
             Values = reader.ReadBytes((int)reader.BaseStream.Length).ToList();
         }
 
+        public Anglemap(int tileCount)
+        {
+            Values = new List<byte>(new byte[tileCount]);
+        }
+
         public void Save(string path)
         {
             if (File.Exists(path)) 
