@@ -8,12 +8,14 @@ namespace CollisionEditor.viewModel
 {
     public class MainViewModel : INotifyPropertyChanged
     {
+        private MainWindow window;  
         private Anglemap Anglemap { get; set; }
         private Tilemap Tilemap { get; set;}
         public ICommand TestCommand { get; set; }
 
-        public MainViewModel()
+        public MainViewModel(MainWindow window)
         {
+            this.window = window;
             TestCommand = new RelayCommand(Test);
         }
 
@@ -23,7 +25,7 @@ namespace CollisionEditor.viewModel
         }
 
         public void OpenAngleMapFile(string filePath)
-        {
+        {   
             Anglemap = new Anglemap(filePath);
             byte HardCOREAngle= Anglemap.Values[35];
 
@@ -36,7 +38,7 @@ namespace CollisionEditor.viewModel
         {
             if (Anglemap is not null)
             {
-                int angle256like = Anglemap.UpdateWithLine(15, vectorGreen, vectorBlue);
+                int angle256like = Anglemap.UpdateWithLine(15, vectorGreen, vectorBlue); 
                 string hexAngle = Convertor.GetHexAngle((byte)angle256like);
                 double angle360like = Convertor.Get360Angle((byte)angle256like);
                 MainWindow.ShowAnglemap(angle256like, hexAngle, angle360like);

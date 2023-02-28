@@ -25,6 +25,7 @@ namespace CollisionEditor
             MenuOpenAngleMap.Click += MenuOpenAngleMapClick;
             MenuOpenTileStrip.Click += MenuOpenTileStripClick;
             MenuSaveTiletmap.Click += MenuSaveTiletmapClick;
+            DataContext = new MainViewModel(this);
         }
 
         private void MenuSaveTiletmapClick(object sender, RoutedEventArgs e)
@@ -52,7 +53,6 @@ namespace CollisionEditor
 
         private void MenuOpenAngleMapClick(object sender, RoutedEventArgs e)
         {
-
             System.Windows.Forms.OpenFileDialog openFileDialog = new System.Windows.Forms.OpenFileDialog();
             string filePath = string.Empty;
             openFileDialog.Filter = "Binary Files(*.bin)| *.bin| All files(*.*) | *.*";

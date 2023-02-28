@@ -6,9 +6,7 @@
         mc:Ignorable="d"
         Title="CollisionEditorC#" Height="440" Width="552"
         xmlns:local="clr-namespace:CollisionEditor.viewModel">
-    <Window.DataContext>
-        <local:MainViewModel/>
-    </Window.DataContext>
+
     <Grid Name="MyGrid">
         <Grid.RowDefinitions>
             <RowDefinition Height="20"/>
@@ -72,6 +70,8 @@
         <TextBlock Grid.Column="5" Grid.Row="5" TextWrapping="Wrap" Text="0x00" Name="TextBlockHexAngle" Grid.ColumnSpan="2" Background="#FFD8D8D8"/>
         <TextBlock Grid.Column="8" Grid.Row="5" TextWrapping="Wrap" Text="0'" Name="TextBlock360Angle" Grid.ColumnSpan="2" Background="#FFD8D8D8"/>
         <Canvas Grid.Column="0" Grid.Row="3"  Height="128" Width="128" Name ="canvas" Grid.ColumnSpan="11"/>
+        <Button FontFamily="Marlett"   Grid.Column="6" Grid.Row="5" FontSize="20" Content="5"/>
+        <Button FontFamily="Marlett" FontSize="20" Content="6"/>
         <!--<Button Command="{Binding TestCommand}"/>-->
     </Grid>
 </Window>
