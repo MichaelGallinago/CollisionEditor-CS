@@ -11,23 +11,32 @@ namespace CollisionEditor.viewModel
         private MainWindow window;  
         private Anglemap Anglemap { get; set; }
         private Tilemap Tilemap { get; set;}
+        public ICommand SelectTileCommand { get; set; }
         public ICommand Angle256Add1Command { get; set; }
+        public int ChosenTile { get; set; }
 
         public MainViewModel(MainWindow window)
         {
             this.window = window;
             Angle256Add1Command = new RelayCommand(Angle256Add1);
+            SelectTileCommand = new RelayCommand(SelectTile);
         }
+
 
         private void Angle256Add1()
         {
             
         }
 
+        private void SelectTile()
+        {
+            MainWindow.ShowTileStrip(Convertor.BitmapConvert(Tilemap.Tiles[ChosenTile]));
+        }
+
         public void OpenAngleMapFile(string filePath)
         {   
             Anglemap = new Anglemap(filePath);
-            byte HardCOREAngle= Anglemap.Values[35];
+            byte HardCOREAngle= Anglemap.Values[ChosenTile];
 
             string hexAngle = Convertor.GetHexAngle(HardCOREAngle);
             double angle360like = Convertor.Get360Angle(HardCOREAngle);
@@ -38,7 +47,7 @@ namespace CollisionEditor.viewModel
         {
             if (Anglemap is not null)
             {
-                int angle256like = Anglemap.UpdateWithLine(15, vectorGreen, vectorBlue); 
+                int angle256like = Anglemap.UpdateWithLine(ChosenTile, vectorGreen, vectorBlue); 
                 string hexAngle = Convertor.GetHexAngle((byte)angle256like);
                 double angle360like = Convertor.Get360Angle((byte)angle256like);
                 MainWindow.ShowAnglemap(angle256like, hexAngle, angle360like);
@@ -56,8 +65,9 @@ namespace CollisionEditor.viewModel
         public void OpenTileStripFile(string filePath)
         {
             this.Tilemap = new Tilemap(filePath);
-            MainWindow.ShowTileStrip(Convertor.BitmapConvert(Tilemap.Tiles[5]));                
+            MainWindow.ShowTileStrip(Convertor.BitmapConvert(Tilemap.Tiles[ChosenTile]));                
         }
+
         public void SaveTileStrip(string filePath)
         {
             Tilemap.Save(Path.GetFullPath(filePath), 16);
