@@ -25,9 +25,9 @@ namespace CollisionEditor.viewModel
 
         private void AngleAdd1()
         {
-            MessageBox.Show("Оно работает");
+            
             byte HardCOREAngle = Anglemap.ChangeAngle(ChosenTile, 1);
-            MessageBox.Show("Оно работает2");
+            
             ConvertAndShowAngles(HardCOREAngle);
         }
 
@@ -73,6 +73,7 @@ namespace CollisionEditor.viewModel
         public void OpenTileStripFile(string filePath)
         {
             this.Tilemap = new Tilemap(filePath);
+            Anglemap = new Anglemap(Tilemap.Tiles.Count);
             MainWindow.ShowTileStrip(Convertor.BitmapConvert(Tilemap.Tiles[ChosenTile]));                
         }
 
