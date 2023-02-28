@@ -11,18 +11,17 @@ namespace CollisionEditor.viewModel
         private MainWindow window;  
         private Anglemap Anglemap { get; set; }
         private Tilemap Tilemap { get; set;}
-        public ICommand TestCommand { get; set; }
+        public ICommand Angle256Add1Command { get; set; }
 
         public MainViewModel(MainWindow window)
         {
             this.window = window;
-            TestCommand = new RelayCommand();
+            Angle256Add1Command = new RelayCommand(Angle256Add1);
         }
 
-        private void Test(string t)
+        private void Angle256Add1()
         {
             
-            MessageBox.Show("Оно работает");
         }
 
         public void OpenAngleMapFile(string filePath)
