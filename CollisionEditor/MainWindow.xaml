@@ -14,7 +14,7 @@
             <RowDefinition Height="69*"/>
             <RowDefinition Height="164*"/>
             <RowDefinition Height="78*"/>
-            <RowDefinition Height="21*"/>
+            <RowDefinition Height="20*"/>
             <RowDefinition Height="65*"/>
             <RowDefinition Height="3*"/>
         </Grid.RowDefinitions>
@@ -24,8 +24,8 @@
             <ColumnDefinition Width="30*" />
             <ColumnDefinition Width="30*" />
             <ColumnDefinition Width="20*" />
-            <ColumnDefinition Width="30*" />
-            <ColumnDefinition Width="30*" />
+            <ColumnDefinition Width="29*" />
+            <ColumnDefinition Width="31*" />
             <ColumnDefinition Width="20*" />
             <ColumnDefinition Width="30*" />
             <ColumnDefinition Width="30*" />
@@ -70,8 +70,13 @@
         <TextBlock Grid.Column="5" Grid.Row="5" TextWrapping="Wrap" Text="0x00" Name="TextBlockHexAngle" Grid.ColumnSpan="2" Background="#FFD8D8D8"/>
         <TextBlock Grid.Column="8" Grid.Row="5" TextWrapping="Wrap" Text="0'" Name="TextBlock360Angle" Grid.ColumnSpan="2" Background="#FFD8D8D8"/>
         <Canvas Grid.Column="0" Grid.Row="3"  Height="128" Width="128" Name ="canvas" Grid.ColumnSpan="11"/>
-        <Button FontFamily="Marlett"   Grid.Column="6" Grid.Row="5" FontSize="20" Content="5"/>
-        <Button FontFamily="Marlett" FontSize="20" Content="6"/>
+        
+        <Button Grid.Column="6" Grid.Row="5" Height="10" Width="30" VerticalAlignment="Top" HorizontalAlignment="Left">
+            <Path Fill="Black" Data="M 0 6 L 12 6 L 6 0 Z" Height="6" Width="12"/>
+        </Button>
+        <Button Grid.Column="6" Grid.Row="5" Height="10" Width="30" VerticalAlignment="Bottom" HorizontalAlignment="Left">
+            <Path Fill="Black" Data="M 0 0 L 6 6 L 12 0 Z"/>
+        </Button>
         <!--<Button Command="{Binding TestCommand}"/>-->
     </Grid>
 </Window>
