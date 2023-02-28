@@ -7,7 +7,7 @@ namespace CollisionEditor.model
 {
     public class Anglemap
     {
-        internal List<byte> Values { get; set; }
+        internal List<byte> Values { get; private set; }
 
         public Anglemap(string path)
         {
@@ -24,9 +24,19 @@ namespace CollisionEditor.model
             writer.Write(Values.ToArray());
         }
 
-        public byte UpdateWithLine(int tileIndex, Vector2<int> positionGreen, Vector2<int> positionBlue)
+        public byte SetAngleWithLine(int tileIndex, Vector2<int> positionGreen, Vector2<int> positionBlue)
         {
             return Values[tileIndex] = (byte)(Math.Atan2(positionBlue.Y - positionGreen.Y, positionBlue.X - positionGreen.X) * 128 / Math.PI);
+        }
+
+        public byte SetAngle(int tileIndex, byte value)
+        {
+            return Values[tileIndex] = value;
+        }
+
+        public byte ChangeAngle(int tileIndex, int value)
+        {
+            return Values[tileIndex] = (byte)(Values[tileIndex] + value);
         }
     }
 }
