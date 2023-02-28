@@ -12,20 +12,23 @@ namespace CollisionEditor.viewModel
         private Anglemap Anglemap { get; set; }
         private Tilemap Tilemap { get; set;}
         public ICommand SelectTileCommand { get; set; }
-        public ICommand Angle256Add1Command { get; set; }
+        public ICommand AngleAdd1Command { get; set; }
         public int ChosenTile { get; set; }
 
         public MainViewModel(MainWindow window)
         {
             this.window = window;
-            Angle256Add1Command = new RelayCommand(Angle256Add1);
+            AngleAdd1Command = new RelayCommand(AngleAdd1);
             SelectTileCommand = new RelayCommand(SelectTile);
         }
 
 
-        private void Angle256Add1()
+        private void AngleAdd1()
         {
-            
+            MessageBox.Show("Оно работает");
+            byte HardCOREAngle = Anglemap.ChangeAngle(ChosenTile, 1);
+            MessageBox.Show("Оно работает2");
+            ConvertAndShowAngles(HardCOREAngle);
         }
 
         private void SelectTile()
@@ -33,21 +36,26 @@ namespace CollisionEditor.viewModel
             MainWindow.ShowTileStrip(Convertor.BitmapConvert(Tilemap.Tiles[ChosenTile]));
         }
 
-        public void OpenAngleMapFile(string filePath)
-        {   
-            Anglemap = new Anglemap(filePath);
-            byte HardCOREAngle= Anglemap.Values[ChosenTile];
-
+        private void ConvertAndShowAngles(byte HardCOREAngle)
+        {
             string hexAngle = Convertor.GetHexAngle(HardCOREAngle);
             double angle360like = Convertor.Get360Angle(HardCOREAngle);
             int angle256like = Convertor.Get256Angle(hexAngle);
             MainWindow.ShowAnglemap(angle256like, hexAngle, angle360like);
         }
+
+        public void OpenAngleMapFile(string filePath)
+        {   
+            Anglemap = new Anglemap(filePath);
+            byte HardCOREAngle= Anglemap.Values[ChosenTile];
+
+            ConvertAndShowAngles(HardCOREAngle);
+        }
         public void AngleUpdator(Vector2<int> vectorGreen, Vector2<int> vectorBlue)
         {
             if (Anglemap is not null)
             {
-                int angle256like = Anglemap.UpdateWithLine(ChosenTile, vectorGreen, vectorBlue); 
+                int angle256like = Anglemap.SetAngleWithLine(ChosenTile, vectorGreen, vectorBlue); 
                 string hexAngle = Convertor.GetHexAngle((byte)angle256like);
                 double angle360like = Convertor.Get360Angle((byte)angle256like);
                 MainWindow.ShowAnglemap(angle256like, hexAngle, angle360like);
