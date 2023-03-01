@@ -20,7 +20,7 @@ namespace CollisionEditor
         }
 
         RectagleAndPosition[] BlueAndGreenRectangle = new RectagleAndPosition[] { new RectagleAndPosition(), new RectagleAndPosition() };
-        
+        Rectangle RedLine = new Rectangle();
         public MainWindow()
         {
             InitializeComponent();
@@ -129,12 +129,14 @@ namespace CollisionEditor
                 line.Fill = new SolidColorBrush(Colors.Red);
                 string stringAngle = TextBlock360Angle.Text.TrimEnd('\'');
                 float floatAngle = float.Parse(stringAngle);
-                RotateTransform rotateTransform1 = new RotateTransform(floatAngle);
+                RotateTransform rotateTransform1 = new RotateTransform(180 - floatAngle);
                 line.RenderTransformOrigin = new Point(0.5, 0.5); 
                 
                 Canvas.SetTop(line, 64);
                 line.RenderTransform = rotateTransform1;
 
+                canvas.Children.Remove(RedLine);
+                RedLine = line;
                 canvas.Children.Add(line);
             }
         }
@@ -174,12 +176,14 @@ namespace CollisionEditor
                 line.Fill = new SolidColorBrush(Colors.Red);
                 string stringAngle = TextBlock360Angle.Text.TrimEnd('\'');
                 float floatAngle = float.Parse(stringAngle);
-                RotateTransform rotateTransform1 = new RotateTransform(floatAngle);
+                RotateTransform rotateTransform1 = new RotateTransform(180-floatAngle);
                 line.RenderTransformOrigin = new Point(0.5, 0.5);
 
                 Canvas.SetTop(line, 64);
                 line.RenderTransform = rotateTransform1;
 
+                canvas.Children.Remove(RedLine);
+                RedLine = line;
                 canvas.Children.Add(line);
             }
         }
