@@ -34,17 +34,34 @@ namespace CollisionEditor.model
             }
         }
 
-        public void Save(string path, int rowCount, Size separation = new Size(), Size offset = new Size())
+        public void Save(string path, int columnCount, Size separation = new Size(), Size offset = new Size())
         {
             if (File.Exists(path))
                 File.Delete(path);
 
             Size cell = new Size(TileSize.Width + separation.Width, TileSize.Height + separation.Height);
-            int columnCount = Tiles.Count / rowCount + (Tiles.Count % rowCount == 0 ? 0 : 1);
+            int rowCount = (Tiles.Count & -columnCount) / columnCount;
 
-            Bitmap tilemap = new Bitmap(
-                offset.Width  + rowCount    * cell.Width  - separation.Width, 
-                offset.Height + columnCount * cell.Height - separation.Height);
+            Size tilemapSize = new Size(
+                offset.Width  + columnCount * cell.Width  - separation.Width, 
+                offset.Height + rowCount    * cell.Height - separation.Height);
+
+            Bitmap tilemap = DrawTilemap(columnCount, tilemapSize, separation, offset);
+
+            tilemap.Save(path, ImageFormat.Png);
+        }
+
+        public Bitmap GetTilePanel(int panelWidth, Size separation)
+        {
+            int columnCount = (panelWidth - separation.Width) / (TileSize.Width + separation.Width);
+            int panelHeight = (Tiles.Count & -columnCount) / columnCount * (TileSize.Height + separation.Height);
+
+            return DrawTilemap(columnCount, new Size(panelWidth, panelHeight), separation, separation);
+        }
+
+        private Bitmap DrawTilemap(int columnCount, Size tilemapSize, Size separation, Size offset)
+        {
+            Bitmap tilemap = new Bitmap(tilemapSize.Width, tilemapSize.Height);
             using (Graphics graphics = Graphics.FromImage(tilemap))
             {
                 Vector2<int> position = new Vector2<int>();
@@ -59,15 +76,14 @@ namespace CollisionEditor.model
                     new Rectangle(0, 0, TileSize.Width, TileSize.Height),
                     GraphicsUnit.Pixel);
 
-                    if (++position.X >= rowCount)
+                    if (++position.X >= columnCount)
                     {
                         position.X = 0;
                         position.Y++;
                     }
                 }
             }
-
-            tilemap.Save(path, ImageFormat.Png);
+            return tilemap;
         }
     }
 }
