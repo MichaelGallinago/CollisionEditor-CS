@@ -74,21 +74,21 @@
         <Button Grid.Column="3" Command="{Binding AngleAdd1Command}" Grid.Row="5" Height="10" Width="30" VerticalAlignment="Top" HorizontalAlignment="Left">
             <Path Fill="Black" Data="M 0 6 L 12 6 L 6 0 Z" Height="6" Width="12"/>
         </Button>
-        <Button Grid.Column="3" Grid.Row="5" Height="10" Width="30" VerticalAlignment="Bottom" HorizontalAlignment="Left">
+        <Button Grid.Column="3" Command="{Binding AngleDeduct1Command}" Grid.Row="5" Height="10" Width="30" VerticalAlignment="Bottom" HorizontalAlignment="Left">
             <Path Fill="Black" Data="M 0 0 L 6 6 L 12 0 Z"/>
         </Button>
 
-        <Button Grid.Column="6" Grid.Row="5" Height="10" Width="30" VerticalAlignment="Top" HorizontalAlignment="Left">
+        <Button Grid.Column="6" Command="{Binding AngleAdd1Command}"  Grid.Row="5" Height="10" Width="30" VerticalAlignment="Top" HorizontalAlignment="Left">
             <Path Fill="Black" Data="M 0 6 L 12 6 L 6 0 Z" Height="6" Width="12"/>
         </Button>
-        <Button Grid.Column="6" Grid.Row="5" Height="10" Width="30" VerticalAlignment="Bottom" HorizontalAlignment="Left">
+        <Button Grid.Column="6" Command="{Binding AngleDeduct1Command}" Grid.Row="5" Height="10" Width="30" VerticalAlignment="Bottom" HorizontalAlignment="Left">
             <Path Fill="Black" Data="M 0 0 L 6 6 L 12 0 Z"/>
         </Button>
 
-        <Button Grid.Column="9" Grid.Row="5" Height="10" Width="30" VerticalAlignment="Top" HorizontalAlignment="Left">
+        <Button Grid.Column="9" Command="{Binding AngleAdd1Command}"  Grid.Row="5" Height="10" Width="30" VerticalAlignment="Top" HorizontalAlignment="Left">
             <Path Fill="Black" Data="M 0 6 L 12 6 L 6 0 Z" Height="6" Width="12"/>
         </Button>
-        <Button Grid.Column="9" Grid.Row="5" Height="10" Width="30" VerticalAlignment="Bottom" HorizontalAlignment="Left">
+        <Button Grid.Column="9" Command="{Binding AngleDeduct1Command}" Grid.Row="5" Height="10" Width="30" VerticalAlignment="Bottom" HorizontalAlignment="Left">
             <Path Fill="Black" Data="M 0 0 L 6 6 L 12 0 Z"/>
         </Button>
 

@@ -13,21 +13,29 @@ namespace CollisionEditor.viewModel
         private Tilemap Tilemap { get; set;}
         public ICommand SelectTileCommand { get; set; }
         public ICommand AngleAdd1Command { get; set; }
+        public ICommand AngleDeduct1Command { get; set; }
         public int ChosenTile { get; set; }
 
         public MainViewModel(MainWindow window)
         {
             this.window = window;
             AngleAdd1Command = new RelayCommand(AngleAdd1);
+            AngleDeduct1Command = new RelayCommand(AngleDeduct1);
             SelectTileCommand = new RelayCommand(SelectTile);
+            
         }
 
 
         private void AngleAdd1()
         {
-            
             byte HardCOREAngle = Anglemap.ChangeAngle(ChosenTile, 1);
             
+            ConvertAndShowAngles(HardCOREAngle);
+        }
+        private void AngleDeduct1()
+        {
+            byte HardCOREAngle = Anglemap.ChangeAngle(ChosenTile, -1);
+
             ConvertAndShowAngles(HardCOREAngle);
         }
 
