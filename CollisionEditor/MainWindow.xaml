@@ -60,7 +60,10 @@
 
             </MenuItem>
             <MenuItem Header="Help" >
-                <MenuItem Header="Help is not exist" FontFamily="Webdings"  />
+                <MenuItem Header="there is no help, and if you try to find it, you won't be able to,
+                          because it can't even be, kamon, this is an application made by two students on a project, 
+                          we don't really know how it works, but if you try to find us, then you know, you won't succeed,
+                          loshara" FontFamily="Webdings"  />
             </MenuItem>
         </Menu>
 
