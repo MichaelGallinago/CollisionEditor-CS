@@ -5,6 +5,8 @@ using CollisionEditor.viewModel;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
+using System;
+using System.Windows.Media.Media3D;
 
 namespace CollisionEditor
 {   
@@ -120,6 +122,20 @@ namespace CollisionEditor
             if (BlueAndGreenRectangle[0] != null & BlueAndGreenRectangle[1] != null)
             {
                 (this.DataContext as MainViewModel).AngleUpdator(BlueAndGreenRectangle[0].Position, BlueAndGreenRectangle[1].Position);
+                
+                Rectangle line = new Rectangle();
+                line.Width = 128;
+                line.Height = 1;
+                line.Fill = new SolidColorBrush(Colors.Red);
+                string stringAngle = TextBlock360Angle.Text.TrimEnd('\'');
+                float floatAngle = float.Parse(stringAngle);
+                RotateTransform rotateTransform1 = new RotateTransform(floatAngle);
+                line.RenderTransformOrigin = new Point(0.5, 0.5); 
+                
+                Canvas.SetTop(line, 64);
+                line.RenderTransform = rotateTransform1;
+
+                canvas.Children.Add(line);
             }
         }
         private void ImageOfTileGridMouseRightButtonDown(object sender, MouseButtonEventArgs e)
@@ -149,7 +165,22 @@ namespace CollisionEditor
 
             if (BlueAndGreenRectangle[0]!=null & BlueAndGreenRectangle[1] != null)
             {
+
                 (this.DataContext as MainViewModel).AngleUpdator(BlueAndGreenRectangle[0].Position, BlueAndGreenRectangle[1].Position);
+
+                Rectangle line = new Rectangle();
+                line.Width = 128;
+                line.Height = 1;
+                line.Fill = new SolidColorBrush(Colors.Red);
+                string stringAngle = TextBlock360Angle.Text.TrimEnd('\'');
+                float floatAngle = float.Parse(stringAngle);
+                RotateTransform rotateTransform1 = new RotateTransform(floatAngle);
+                line.RenderTransformOrigin = new Point(0.5, 0.5);
+
+                Canvas.SetTop(line, 64);
+                line.RenderTransform = rotateTransform1;
+
+                canvas.Children.Add(line);
             }
         }
         
