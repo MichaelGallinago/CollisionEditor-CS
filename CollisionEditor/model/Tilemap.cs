@@ -2,6 +2,8 @@
 using System.IO;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 
 namespace CollisionEditor.model
 {
@@ -9,28 +11,74 @@ namespace CollisionEditor.model
     {
         public readonly Size TileSize;
 
-        public List<Bitmap> Tiles { get; set; }
+        public List<Bitmap> Tiles { get; private set; }
+        public List<byte[]> Widthmap { get; private set; }
+        public List<byte[]> Heightmap { get; private set; }
+
 
         public Tilemap(string path, int tileWidth = 16, int tileHeight = 16,
             Size separate = new Size(), Size offset = new Size())
         {
             TileSize = new Size(tileWidth, tileHeight);
+
             Tiles = new List<Bitmap>();
+            Widthmap  = new List<byte[]>();
+            Heightmap = new List<byte[]>();
+
             Bitmap bitmap = new Bitmap(path);
 
             Vector2<int> cellCount = new Vector2<int>(
-                (bitmap.Width - offset.Width) / TileSize.Width,
+                (bitmap.Width  - offset.Width)  / TileSize.Width,
                 (bitmap.Height - offset.Height) / TileSize.Height);
+
             for (int y = 0; y < cellCount.Y; y++)
             {
                 for (int x = 0; x < cellCount.X; x++)
                 {
-                    Rectangle tile = new Rectangle(
-                        x * (TileSize.Width + separate.Width) + offset.Width,
+                    Rectangle tileBounds = new Rectangle(
+                        x * (TileSize.Width  + separate.Width)  + offset.Width,
                         y * (TileSize.Height + separate.Height) + offset.Height,
                         TileSize.Width, TileSize.Height);
-                    Tiles.Add(bitmap.Clone(tile, bitmap.PixelFormat));
+
+                    Tiles.Add(bitmap.Clone(tileBounds, bitmap.PixelFormat));
                 }
+            }
+
+            CreateCollisionmaps();
+        }
+
+        private void CreateCollisionmaps()
+        {
+            for (int i = 0; i < Tiles.Count; i++)
+            {
+                Widthmap.Add(new byte[TileSize.Width]);
+                Heightmap.Add(new byte[TileSize.Height]);
+
+                for (int x = 0; x < TileSize.Width; x++)
+                {
+                    for (int y = 0; y < TileSize.Height; y++)
+                    {
+                        if (Tiles[i].GetPixel(x, y).A > 0)
+                        {
+                            Widthmap[i][x]++;
+                            Heightmap[i][y]++;
+                        }
+                    }
+                }
+            }
+        }
+
+        public Tilemap(int angleCount, int tileWidth = 16, int tileHeight = 16)
+        {
+            Tiles = new List<Bitmap>(angleCount);
+            Widthmap  = new List<byte[]>(angleCount);
+            Heightmap = new List<byte[]>(angleCount);
+
+            for (int i = 0; i < angleCount; i++)
+            {
+                Tiles[i] = new Bitmap(tileWidth, tileHeight);
+                Widthmap[i]  = new byte[tileWidth];
+                Heightmap[i] = new byte[tileHeight];
             }
         }
 
