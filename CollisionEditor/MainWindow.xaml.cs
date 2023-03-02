@@ -110,35 +110,43 @@ namespace CollisionEditor
             rect.Height = 8;
             rect.Fill = new SolidColorBrush(Colors.Blue);
 
-            canvas.Children.Remove(BlueAndGreenRectangle[0].Rectangle);
+            canvasForRectangles.Children.Remove(BlueAndGreenRectangle[0].Rectangle);
             
             BlueAndGreenRectangle[0].Rectangle = rect;
             BlueAndGreenRectangle[0].Position = cordinats;
 
             Canvas.SetLeft(rect, cordinats.X);
             Canvas.SetTop(rect, cordinats.Y);
-            
-            canvas.Children.Add(rect);
+
+            canvasForRectangles.Children.Add(rect);
             if (BlueAndGreenRectangle[0] != null & BlueAndGreenRectangle[1] != null)
             {
                 (this.DataContext as MainViewModel).AngleUpdator(BlueAndGreenRectangle[0].Position, BlueAndGreenRectangle[1].Position);
-                
-                Rectangle line = new Rectangle();
-                line.Width = 128;
-                line.Height = 1;
-                line.Fill = new SolidColorBrush(Colors.Red);
-                string stringAngle = TextBlock360Angle.Text.TrimEnd('\'');
-                float floatAngle = float.Parse(stringAngle);
-                RotateTransform rotateTransform1 = new RotateTransform(180 - floatAngle);
-                line.RenderTransformOrigin = new Point(0.5, 0.5); 
-                
-                Canvas.SetTop(line, 64);
-                line.RenderTransform = rotateTransform1;
 
-                canvas.Children.Remove(RedLine);
-                RedLine = line;
-                canvas.Children.Add(line);
+                DrawRedLine();
             }
+        }
+        private void DrawRedLine()
+        {
+            Rectangle line = new Rectangle();
+            line.Width = 128*Math.Sqrt(2);
+            line.Height = 1;
+            line.Fill = new SolidColorBrush(Colors.Red);
+            string stringAngle = TextBlock360Angle.Text.TrimEnd('\'');
+            float floatAngle = float.Parse(stringAngle);
+            if (floatAngle > 180)
+            {
+                floatAngle = floatAngle - 180;
+            }
+            RotateTransform rotateTransform1 = new RotateTransform(180-floatAngle);
+            line.RenderTransformOrigin = new Point(0.5, 0.5);
+
+            Canvas.SetTop(line, 64);
+            line.RenderTransform = rotateTransform1;
+
+            canvasForLine.Children.Remove(RedLine);
+            RedLine = line;
+            canvasForLine.Children.Add(line);
         }
         private void ImageOfTileGridMouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
@@ -156,35 +164,21 @@ namespace CollisionEditor
             rect.Height = 8;
             rect.Fill = new SolidColorBrush(Colors.Green);
 
-            canvas.Children.Remove(BlueAndGreenRectangle[1].Rectangle);
+            canvasForRectangles.Children.Remove(BlueAndGreenRectangle[1].Rectangle);
             BlueAndGreenRectangle[1].Rectangle = rect;
             BlueAndGreenRectangle[1].Position = cordinats;
 
             Canvas.SetLeft(rect, cordinats.X);
             Canvas.SetTop(rect, cordinats.Y);
-            
-            canvas.Children.Add(rect);
+
+            canvasForRectangles.Children.Add(rect);
 
             if (BlueAndGreenRectangle[0]!=null & BlueAndGreenRectangle[1] != null)
             {
 
                 (this.DataContext as MainViewModel).AngleUpdator(BlueAndGreenRectangle[0].Position, BlueAndGreenRectangle[1].Position);
 
-                Rectangle line = new Rectangle();
-                line.Width = 128;
-                line.Height = 1;
-                line.Fill = new SolidColorBrush(Colors.Red);
-                string stringAngle = TextBlock360Angle.Text.TrimEnd('\'');
-                float floatAngle = float.Parse(stringAngle);
-                RotateTransform rotateTransform1 = new RotateTransform(180-floatAngle);
-                line.RenderTransformOrigin = new Point(0.5, 0.5);
-
-                Canvas.SetTop(line, 64);
-                line.RenderTransform = rotateTransform1;
-
-                canvas.Children.Remove(RedLine);
-                RedLine = line;
-                canvas.Children.Add(line);
+                DrawRedLine();
             }
         }
         
