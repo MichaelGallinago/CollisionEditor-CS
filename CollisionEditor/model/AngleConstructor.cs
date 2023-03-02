@@ -4,7 +4,7 @@ namespace CollisionEditor.model
 {
     static internal class AngleConstructor
     {
-        const int cellSize = 8;
+        public const int cellSize = 8;
         
         public static Vector2<int> GetCorrectDotPosition(Vector2<double> position)
         {
