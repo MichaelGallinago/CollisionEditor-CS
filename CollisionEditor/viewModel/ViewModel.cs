@@ -74,7 +74,7 @@ namespace CollisionEditor.viewModel
             }
         }
 
-        public bool TileStripIsNull()
+        public bool TilemapIsNull()
         {
             return Tilemap is null;
         }
@@ -85,7 +85,7 @@ namespace CollisionEditor.viewModel
             MainWindow.ShowTileStrip(Convertor.BitmapConvert(Tilemap.Tiles[ChosenTile]));                
         }
 
-        public void SaveTileStrip(string filePath)
+        public void SaveTilemap(string filePath)
         {
             Tilemap.Save(Path.GetFullPath(filePath), 16);
         }

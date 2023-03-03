@@ -37,7 +37,7 @@
         <Menu VerticalAlignment="Center" Grid.Column="0"  Grid.ColumnSpan="15" Foreground="Black" Height="20">
             <MenuItem Header="File" >
                 <MenuItem Header="Load" >
-                    <MenuItem Header="Tile Strip......               Ctrl+O" Name = "MenuOpenTileStrip" Padding="0,0,-20,0"/>
+                    <MenuItem Header="Tilemap........               Ctrl+O" Name = "MenuOpenTileStrip" Padding="0,0,-20,0"/>
                     <MenuItem Header="Anglemap...     Ctrl+Shift+O" Name = "MenuOpenAngleMap" Padding="0,0,-20,0"/>
                 </MenuItem>
 
@@ -72,13 +72,12 @@
         <Canvas Grid.Column="0" Grid.Row="3"  Height="128" Width="128" Name ="canvasForRectangles" Grid.ColumnSpan="11"/>
         <Canvas Grid.Column="0" Grid.Row="3"  Height="128" Width="181" Name ="canvasForLine" Grid.ColumnSpan="11"/>
 
-        <Rectangle Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" Grid.RowSpan="3" Height="311"  Stroke="#FFD2D2D2" Width="60" HorizontalAlignment="Left" Fill="#FFD2D2D2"/>
-        <Rectangle Grid.Row="2" Grid.Column="8" Grid.ColumnSpan="3" Grid.RowSpan="3" Height="311"  Stroke="#FFD2D2D2" Width="69" HorizontalAlignment="Right" Fill="#FFD2D2D2"/>
+        <!--<Rectangle Grid.Row="2" Grid.ColumnSpan="12" Grid.RowSpan="2"  Stroke="#FFD2D2D2" Width="232" HorizontalAlignment="Center" Fill="" Margin="0,5,0,0"/>
         <Rectangle Grid.Row="5" Grid.Column="1" Height="20"  Stroke="#FFE0DCDC" Width="20" HorizontalAlignment="Left" Fill="#FFE0DCDC"/>
         <Rectangle Grid.Row="5" Grid.Column="4" Height="20"  Stroke="#FFE0DCDC" Width="20" HorizontalAlignment="Left" Fill="#FFE0DCDC"/>
         <Rectangle Grid.Row="5" Grid.Column="7" Height="20"  Stroke="#FFE0DCDC" Width="20" HorizontalAlignment="Left" Fill="#FFE0DCDC"/>
-        <Rectangle Grid.Row="5" Grid.Column="10" Height="20"  Stroke="#FFE0DCDC" Width="20" HorizontalAlignment="Left" Fill="#FFE0DCDC"/>
-        
+        <Rectangle Grid.Row="5" Grid.Column="10" Height="20"  Stroke="#FFE0DCDC" Width="20" HorizontalAlignment="Left" Fill="#FFE0DCDC"/>-->
+
         <Button Grid.Column="3" Command="{Binding AngleAdd1Command}" Grid.Row="5" Height="10" Width="30" VerticalAlignment="Top" HorizontalAlignment="Left" Background="#FFDEDDDD">
             <Path Fill="Black" Data="M 0 6 L 12 6 L 6 0 Z" Height="6" Width="12"/>
         </Button>
@@ -99,10 +98,10 @@
         <Button Grid.Column="9" Command="{Binding AngleDeduct1Command}" Grid.Row="5" Height="10" Width="30" VerticalAlignment="Bottom" HorizontalAlignment="Left">
             <Path Fill="Black" Data="M 0 0 L 6 6 L 12 0 Z"/>
         </Button>
-        
-        
+
+
         <TextBox Grid.Column="11" Grid.Row="2" TextWrapping="Wrap" Background="#FFD8D8D8" Text="{Binding ChosenTile,Mode=TwoWay}" Grid.ColumnSpan="2" Margin="16,0,172,0"/>
         <Button Grid.Column="12" Grid.Row="2" Background="#FFD8D8D8" Content="Select Tile" Command="{Binding SelectTileCommand}" Margin="125,0,0,0" />
-        
+
     </Grid>
 </Window>
