@@ -2,7 +2,7 @@
 
 namespace CollisionEditor.model
 {
-    static internal class AngleConstructor
+    internal static class AngleConstructor
     {
         public const int cellSize = 8;
         

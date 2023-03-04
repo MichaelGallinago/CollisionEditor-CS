@@ -32,8 +32,6 @@ namespace CollisionEditor
 
         private void MenuSaveTiletmapClick(object sender, RoutedEventArgs e)
         {
-
-            
             if ((this.DataContext as MainViewModel).TilemapIsNull())
             {
                 System.Windows.Forms.MessageBox.Show("Ошибка: Вы не выбрали Tilemap, чтобы её сохранить");

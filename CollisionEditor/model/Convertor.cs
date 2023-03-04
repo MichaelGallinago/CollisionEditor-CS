@@ -7,15 +7,16 @@ using System.Globalization;
 
 namespace CollisionEditor.model
 {
-    static internal class Convertor
+    internal static class Convertor
     {
+        private const double dpi = 0.1;
         public static BitmapSource BitmapConvert(Bitmap bitmap)
         {
             var bitmapData = bitmap.LockBits(
                 new Rectangle(0, 0, bitmap.Width, bitmap.Height),
                 ImageLockMode.ReadOnly, bitmap.PixelFormat);
 
-            var bitmapSource = BitmapSource.Create(bitmapData.Width, bitmapData.Height, 0.1, 0.1,
+            var bitmapSource = BitmapSource.Create(bitmapData.Width, bitmapData.Height, dpi, dpi,
                 PixelFormats.Bgra32, null,
                 bitmapData.Scan0, bitmapData.Stride * bitmapData.Height, bitmapData.Stride);
 

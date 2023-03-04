@@ -2,12 +2,10 @@
 using System.IO;
 using System.Drawing;
 using System.Drawing.Imaging;
-using System.Linq;
-using System.Reflection.Metadata.Ecma335;
 
 namespace CollisionEditor.model
 {
-    internal class Tilemap
+    internal class TileSet
     {
         public readonly Size TileSize;
 
@@ -15,8 +13,7 @@ namespace CollisionEditor.model
         public List<byte[]> Widthmap { get; private set; }
         public List<byte[]> Heightmap { get; private set; }
 
-
-        public Tilemap(string path, int tileWidth = 16, int tileHeight = 16,
+        public TileSet(string path, int tileWidth = 16, int tileHeight = 16,
             Size separate = new Size(), Size offset = new Size())
         {
             TileSize = new Size(tileWidth, tileHeight);
@@ -68,7 +65,7 @@ namespace CollisionEditor.model
             }
         }
 
-        public Tilemap(int angleCount, int tileWidth = 16, int tileHeight = 16)
+        public TileSet(int angleCount, int tileWidth = 16, int tileHeight = 16)
         {
             Tiles = new List<Bitmap>(angleCount);
             Widthmap  = new List<byte[]>(angleCount);
