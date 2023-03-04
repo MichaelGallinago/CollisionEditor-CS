@@ -78,24 +78,24 @@
         <Rectangle Grid.Row="5" Grid.Column="7" Height="20"  Stroke="#FFE0DCDC" Width="20" HorizontalAlignment="Left" Fill="#FFE0DCDC"/>
         <Rectangle Grid.Row="5" Grid.Column="10" Height="20"  Stroke="#FFE0DCDC" Width="20" HorizontalAlignment="Left" Fill="#FFE0DCDC"/>-->
 
-        <Button Grid.Column="3" Command="{Binding AngleAdd1Command}" Grid.Row="5" Height="10" Width="30" VerticalAlignment="Top" HorizontalAlignment="Left" Background="#FFDEDDDD">
+        <Button Grid.Column="3" Command="{Binding AngleIncrementCommand}" Grid.Row="5" Height="10" Width="30" VerticalAlignment="Top" HorizontalAlignment="Left" Background="#FFDEDDDD">
             <Path Fill="Black" Data="M 0 6 L 12 6 L 6 0 Z" Height="6" Width="12"/>
         </Button>
-        <Button Grid.Column="3" Command="{Binding AngleDeduct1Command}" Grid.Row="5" Height="10" Width="30" VerticalAlignment="Bottom" HorizontalAlignment="Left">
+        <Button Grid.Column="3" Command="{Binding AngleDecrementCommand}" Grid.Row="5" Height="10" Width="30" VerticalAlignment="Bottom" HorizontalAlignment="Left">
             <Path Fill="Black" Data="M 0 0 L 6 6 L 12 0 Z"/>
         </Button>
 
-        <Button Grid.Column="6" Command="{Binding AngleAdd1Command}"  Grid.Row="5" Height="10" Width="30" VerticalAlignment="Top" HorizontalAlignment="Left">
+        <Button Grid.Column="6" Command="{Binding AngleIncrimentCommand}"  Grid.Row="5" Height="10" Width="30" VerticalAlignment="Top" HorizontalAlignment="Left">
             <Path Fill="Black" Data="M 0 6 L 12 6 L 6 0 Z" Height="6" Width="12"/>
         </Button>
-        <Button Grid.Column="6" Command="{Binding AngleDeduct1Command}" Grid.Row="5" Height="10" Width="30" VerticalAlignment="Bottom" HorizontalAlignment="Left">
+        <Button Grid.Column="6" Command="{Binding AngleDecrementCommand}" Grid.Row="5" Height="10" Width="30" VerticalAlignment="Bottom" HorizontalAlignment="Left">
             <Path Fill="Black" Data="M 0 0 L 6 6 L 12 0 Z"/>
         </Button>
 
-        <Button Grid.Column="9" Command="{Binding AngleAdd1Command}"  Grid.Row="5" Height="10" Width="30" VerticalAlignment="Top" HorizontalAlignment="Left">
+        <Button Grid.Column="9" Command="{Binding AngleIncrimentCommand}"  Grid.Row="5" Height="10" Width="30" VerticalAlignment="Top" HorizontalAlignment="Left">
             <Path Fill="Black" Data="M 0 6 L 12 6 L 6 0 Z" Height="6" Width="12"/>
-        </Button>
-        <Button Grid.Column="9" Command="{Binding AngleDeduct1Command}" Grid.Row="5" Height="10" Width="30" VerticalAlignment="Bottom" HorizontalAlignment="Left">
+        </Button> 
+        <Button Grid.Column="9" Command="{Binding AngleDecrementCommand}" Grid.Row="5" Height="10" Width="30" VerticalAlignment="Bottom" HorizontalAlignment="Left">
             <Path Fill="Black" Data="M 0 0 L 6 6 L 12 0 Z"/>
         </Button>
 
