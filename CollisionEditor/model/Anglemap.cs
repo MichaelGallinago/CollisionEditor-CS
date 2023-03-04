@@ -5,17 +5,17 @@ using System.Linq;
 
 namespace CollisionEditor.model
 {
-    public class Anglemap
+    public class AngleMap
     {
         internal List<byte> Values { get; private set; }
 
-        public Anglemap(string path)
+        public AngleMap(string path)
         {
             BinaryReader reader = new BinaryReader(File.Open(path, FileMode.Open));
             Values = reader.ReadBytes((int)reader.BaseStream.Length).ToList();
         }
 
-        public Anglemap(int tileCount)
+        public AngleMap(int tileCount)
         {
             Values = new List<byte>(new byte[tileCount]);
         }

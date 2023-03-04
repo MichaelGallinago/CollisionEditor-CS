@@ -10,8 +10,8 @@ namespace CollisionEditor.model
         public readonly Size TileSize;
 
         public List<Bitmap> Tiles { get; private set; }
-        public List<byte[]> Widthmap { get; private set; }
-        public List<byte[]> Heightmap { get; private set; }
+        public List<byte[]> WidthMap { get; private set; }
+        public List<byte[]> HeightMap { get; private set; }
 
         public TileSet(string path, int tileWidth = 16, int tileHeight = 16,
             Size separate = new Size(), Size offset = new Size())
@@ -19,8 +19,8 @@ namespace CollisionEditor.model
             TileSize = new Size(tileWidth, tileHeight);
 
             Tiles = new List<Bitmap>();
-            Widthmap  = new List<byte[]>();
-            Heightmap = new List<byte[]>();
+            WidthMap  = new List<byte[]>();
+            HeightMap = new List<byte[]>();
 
             Bitmap bitmap = new Bitmap(path);
 
@@ -48,8 +48,8 @@ namespace CollisionEditor.model
         {
             for (int i = 0; i < Tiles.Count; i++)
             {
-                Widthmap.Add(new byte[TileSize.Width]);
-                Heightmap.Add(new byte[TileSize.Height]);
+                WidthMap.Add(new byte[TileSize.Width]);
+                HeightMap.Add(new byte[TileSize.Height]);
 
                 for (int x = 0; x < TileSize.Width; x++)
                 {
@@ -57,8 +57,8 @@ namespace CollisionEditor.model
                     {
                         if (Tiles[i].GetPixel(x, y).A > 0)
                         {
-                            Widthmap[i][x]++;
-                            Heightmap[i][y]++;
+                            WidthMap[i][x]++;
+                            HeightMap[i][y]++;
                         }
                     }
                 }
@@ -68,14 +68,14 @@ namespace CollisionEditor.model
         public TileSet(int angleCount, int tileWidth = 16, int tileHeight = 16)
         {
             Tiles = new List<Bitmap>(angleCount);
-            Widthmap  = new List<byte[]>(angleCount);
-            Heightmap = new List<byte[]>(angleCount);
+            WidthMap  = new List<byte[]>(angleCount);
+            HeightMap = new List<byte[]>(angleCount);
 
             for (int i = 0; i < angleCount; i++)
             {
                 Tiles[i] = new Bitmap(tileWidth, tileHeight);
-                Widthmap[i]  = new byte[tileWidth];
-                Heightmap[i] = new byte[tileHeight];
+                WidthMap[i]  = new byte[tileWidth];
+                HeightMap[i] = new byte[tileHeight];
             }
         }
 
