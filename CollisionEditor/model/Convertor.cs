@@ -9,8 +9,7 @@ namespace CollisionEditor.model
 {
     internal static class Convertor
     {
-        private const double dpi = 0.1;
-        public static BitmapSource BitmapConvert(Bitmap bitmap)
+        public static BitmapSource BitmapConvert(Bitmap bitmap, double dpi = 0.1)
         {
             var bitmapData = bitmap.LockBits(
                 new Rectangle(0, 0, bitmap.Width, bitmap.Height),

@@ -13,7 +13,8 @@ namespace CollisionEditor.model
         public List<byte[]> WidthMap { get; private set; }
         public List<byte[]> HeightMap { get; private set; }
 
-        public TileSet(string path, int tileWidth = 16, int tileHeight = 16,
+        public TileSet(string path, AngleMap? angleMap = null, 
+            int tileWidth = 16, int tileHeight = 16,
             Size separate = new Size(), Size offset = new Size())
         {
             TileSize = new Size(tileWidth, tileHeight);
@@ -67,6 +68,8 @@ namespace CollisionEditor.model
 
         public TileSet(int angleCount, int tileWidth = 16, int tileHeight = 16)
         {
+            TileSize = new Size(tileWidth, tileHeight);
+
             Tiles = new List<Bitmap>(angleCount);
             WidthMap  = new List<byte[]>(angleCount);
             HeightMap = new List<byte[]>(angleCount);
@@ -129,6 +132,11 @@ namespace CollisionEditor.model
                 }
             }
             return tilemap;
+        }
+
+        public Bitmap SetTile(int tileIndex, Bitmap tile)
+        {
+            return Tiles[tileIndex] = tile;
         }
     }
 }
