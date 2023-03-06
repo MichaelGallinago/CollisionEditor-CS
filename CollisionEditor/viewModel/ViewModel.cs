@@ -166,7 +166,7 @@ namespace CollisionEditor.viewModel
 
         public Vector2<int> GetCordinats(double x, double y)
         {
-            return (AngleConstructor.GetCorrectDotPosition(new Vector2<double>(x, y)));
+            return (AngleConstructor.GetCorrectDotPosition(new Vector2<double>(x, y),8));
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
