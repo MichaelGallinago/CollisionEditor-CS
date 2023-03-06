@@ -59,22 +59,27 @@ namespace CollisionEditor
             MainWindow mainWindow = (MainWindow)System.Windows.Application.Current.MainWindow;
 
             Vector2<int> cordinats = (this.DataContext as MainViewModel).GetCordinats(Mouse.GetPosition(mainWindow.ImageOfTileGrid).X, Mouse.GetPosition(mainWindow.ImageOfTileGrid).Y);
+
+            DrawSquare(Colors.Blue, cordinats, BlueAndGreenSquare.Item1);
+        }
+        
+        private void DrawSquare(Color color, Vector2<int> cordinats, SquareAndPosition squareAndPosition)
+        {
+            Rectangle square = GetRectangle(color);
             if (cordinats.X >= 128)
                 cordinats.X = 120;
             if (cordinats.Y >= 128)
                 cordinats.Y = 120;
 
-            Rectangle rect = GetRectangle(Colors.Blue);
+            canvasForRectangles.Children.Remove(squareAndPosition.Square);
 
-            canvasForRectangles.Children.Remove(BlueAndGreenSquare.Item1.Square);
-            
-            BlueAndGreenSquare.Item1.Square = rect;
-            BlueAndGreenSquare.Item1.Position = cordinats;
+            squareAndPosition.Square = square;
+            squareAndPosition.Position = cordinats;
 
-            Canvas.SetLeft(rect, cordinats.X);
-            Canvas.SetTop(rect, cordinats.Y);
+            Canvas.SetLeft(square, cordinats.X);
+            Canvas.SetTop(square, cordinats.Y);
 
-            canvasForRectangles.Children.Add(rect);
+            canvasForRectangles.Children.Add(square);
             if (BlueAndGreenSquare.Item1 != null & BlueAndGreenSquare.Item2 != null)
             {
                 (this.DataContext as MainViewModel).AngleUpdator(BlueAndGreenSquare.Item1.Position, BlueAndGreenSquare.Item2.Position);
@@ -82,35 +87,13 @@ namespace CollisionEditor
                 DrawRedLine();
             }
         }
-        
-        private void ImageOfTileGridMouseRightButtonDown(object sender, MouseButtonEventArgs e)
+    private void ImageOfTileGridMouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
             MainWindow mainWindow = (MainWindow)System.Windows.Application.Current.MainWindow;
 
             Vector2<int> cordinats = (this.DataContext as MainViewModel).GetCordinats(Mouse.GetPosition(mainWindow.ImageOfTileGrid).X, Mouse.GetPosition(mainWindow.ImageOfTileGrid).Y);
-            
-            if (cordinats.X >= 128)
-                cordinats.X = 120;
-            if (cordinats.Y >= 128)
-                cordinats.Y = 120;
 
-            Rectangle rect = GetRectangle(Colors.Green);
-
-            canvasForRectangles.Children.Remove(BlueAndGreenSquare.Item2.Square);
-            BlueAndGreenSquare.Item2.Square = rect;
-            BlueAndGreenSquare.Item2.Position = cordinats;
-
-            Canvas.SetLeft(rect, cordinats.X);
-            Canvas.SetTop(rect, cordinats.Y);
-
-            canvasForRectangles.Children.Add(rect);
-
-            if (BlueAndGreenSquare.Item1 != null & BlueAndGreenSquare.Item2 != null)
-            {
-                (this.DataContext as MainViewModel).AngleUpdator(BlueAndGreenSquare.Item1.Position, BlueAndGreenSquare.Item2.Position);
-
-                DrawRedLine();
-            }
+            DrawSquare(Colors.Green, cordinats, BlueAndGreenSquare.Item2);
         }
 
         
