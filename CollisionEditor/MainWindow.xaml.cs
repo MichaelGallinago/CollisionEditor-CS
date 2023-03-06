@@ -24,9 +24,7 @@ namespace CollisionEditor
 
         private void ImageOfTileGridMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            MainWindow mainWindow = (MainWindow)System.Windows.Application.Current.MainWindow;
-
-            Vector2<int> cordinats = (this.DataContext as MainViewModel).GetCordinats(Mouse.GetPosition(mainWindow.ImageOfTileGrid).X, Mouse.GetPosition(mainWindow.ImageOfTileGrid).Y);
+            Vector2<int> cordinats = (this.DataContext as MainViewModel).GetCordinats(Mouse.GetPosition(ImageOfTileGrid).X, Mouse.GetPosition(ImageOfTileGrid).Y);
 
             SquaresService.DrawSquare(Colors.Blue, cordinats, BlueAndGreenSquare.Item1);
 
@@ -40,9 +38,7 @@ namespace CollisionEditor
 
         private void ImageOfTileGridMouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
-            MainWindow mainWindow = (MainWindow)System.Windows.Application.Current.MainWindow;
-
-            Vector2<int> cordinats = (this.DataContext as MainViewModel).GetCordinats(Mouse.GetPosition(mainWindow.ImageOfTileGrid).X, Mouse.GetPosition(mainWindow.ImageOfTileGrid).Y);
+            Vector2<int> cordinats = (this.DataContext as MainViewModel).GetCordinats(Mouse.GetPosition(ImageOfTileGrid).X, Mouse.GetPosition(ImageOfTileGrid).Y);
 
             SquaresService.DrawSquare(Colors.Green, cordinats, BlueAndGreenSquare.Item2);
 
@@ -53,11 +49,6 @@ namespace CollisionEditor
                 RedLineService.DrawRedLine(ref RedLine);
             }
         }
-
-        
-        
-
-        
 
         private void ExitClick(object sender, RoutedEventArgs e)
         {
