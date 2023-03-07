@@ -50,9 +50,6 @@ namespace CollisionEditor
             }
         }
 
-        private void ExitClick(object sender, RoutedEventArgs e)
-        {
-            this.Close();
-        }
+        
     }
 }

@@ -56,7 +56,7 @@
                 </MenuItem>
 
                 <MenuItem Header="Save Al          Ctrl+Shift+S" Padding="0,0,-20,0" />
-                <MenuItem Header="Exit                         Alt+F4" Padding="0,0,-20,0" Click="ExitClick" />
+                <MenuItem Header="Exit                         Alt+F4" Padding="0,0,-20,0" Command="{Binding ExitAppCommand}" />
 
             </MenuItem>
             <MenuItem Header="Help" >
