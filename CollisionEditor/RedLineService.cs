@@ -11,11 +11,10 @@ namespace CollisionEditor
 {
     internal class RedLineService
     {
-        
+        static MainWindow mainWindow = (MainWindow)System.Windows.Application.Current.MainWindow;
 
         public static void DrawRedLine(ref Rectangle redLine)
-        {
-            MainWindow mainWindow = (MainWindow)System.Windows.Application.Current.MainWindow;
+        { 
             Rectangle line = new Rectangle();
             line.Width = 128 * Math.Sqrt(2);
             line.Height = 1;

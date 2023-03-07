@@ -17,7 +17,7 @@ namespace CollisionEditor.viewModel
         public ICommand SelectTileCommand { get; set; }
         public ICommand AngleIncrementCommand { get; set; }
         public ICommand AngleDecrementCommand { get; set; }
-
+        public ICommand ExitAppCommand { get; set; }
         public int ChosenTile { get; set; }
 
         public MainViewModel(MainWindow window)
@@ -31,6 +31,7 @@ namespace CollisionEditor.viewModel
             AngleDecrementCommand = new RelayCommand(AngleDecrement);
             SelectTileCommand = new RelayCommand(SelectTile);
 
+            ExitAppCommand = new RelayCommand(ExitApp);
         }
 
         private void MenuOpenAngleMap()
@@ -119,13 +120,16 @@ namespace CollisionEditor.viewModel
         {
             ShowTileStrip(Convertor.BitmapConvert(TileSet.Tiles[ChosenTile]));
         }
-
         
-        public void SaveTileMap(string filePath)
+        private void SaveTileMap(string filePath)
         {
             TileSet.Save(Path.GetFullPath(filePath), 16);
         }
 
+        private void ExitApp()
+        {
+            window.Close();
+        }
         public static void ShowAnglemap(int angle256like, string hexAngle, double angle360like)
         {
             MainWindow mainWindow = (MainWindow)System.Windows.Application.Current.MainWindow;
@@ -166,7 +170,7 @@ namespace CollisionEditor.viewModel
 
         public Vector2<int> GetCordinats(double x, double y)
         {
-            return (AngleConstructor.GetCorrectDotPosition(new Vector2<double>(x, y)));
+            return (AngleConstructor.GetCorrectDotPosition(new Vector2<double>(x, y),8));
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
