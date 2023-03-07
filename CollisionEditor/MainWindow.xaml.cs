@@ -19,6 +19,7 @@ namespace CollisionEditor
             DataContext = new MainViewModel(this);
         }
 
+
         (SquareAndPosition, SquareAndPosition) BlueAndGreenSquare = (new SquareAndPosition(), new SquareAndPosition());
         Rectangle RedLine = new Rectangle();
 
@@ -49,7 +50,6 @@ namespace CollisionEditor
                 RedLineService.DrawRedLine(ref RedLine);
             }
         }
-
         
     }
 }

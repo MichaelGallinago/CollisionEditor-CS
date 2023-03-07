@@ -45,20 +45,10 @@ namespace CollisionEditor.viewModel
                 filePath = openFileDialog.FileName;
 
                 AngleMap = new AngleMap(filePath);
-                byte HardCOREAngle = AngleMap.Values[ChosenTile];
-
-                ConvertAndShowAngles(HardCOREAngle);
+                (int byteAngle, string hexAngle, double fullAngle) angles = ViewModelAssistant.GetAngles(AngleMap, ChosenTile);
+                ShowAngles(angles.byteAngle, angles.hexAngle, angles.fullAngle);
             }
         }
-
-        private void ConvertAndShowAngles(byte HardCOREAngle)
-        {
-            string hexAngle = Convertor.GetHexAngle(HardCOREAngle);
-            double angle360like = Convertor.Get360Angle(HardCOREAngle);
-            int angle256like = Convertor.Get256Angle(hexAngle);
-            ShowAnglemap(angle256like, hexAngle, angle360like);
-        }
-
 
         private void MenuOpenTileMap()
         {
@@ -105,15 +95,17 @@ namespace CollisionEditor.viewModel
 
         private void AngleIncrement()
         {
-            byte HardCOREAngle = AngleMap.ChangeAngle(ChosenTile, 1);
-            
-            ConvertAndShowAngles(HardCOREAngle);
+            byte byteAngle = AngleMap.ChangeAngle(ChosenTile, 1);
+            string hexAngle = Convertor.GetHexAngle(byteAngle);
+            double fullangle = Convertor.GetFullAngle(byteAngle);
+            ShowAngles(byteAngle, hexAngle, fullangle);
         }
         private void AngleDecrement()
         {
-            byte HardCOREAngle = AngleMap.ChangeAngle(ChosenTile, -1);
-
-            ConvertAndShowAngles(HardCOREAngle);
+            byte byteAngle = AngleMap.ChangeAngle(ChosenTile, -1);
+            string hexAngle = Convertor.GetHexAngle(byteAngle);
+            double fullangle = Convertor.GetFullAngle(byteAngle);
+            ShowAngles(byteAngle, hexAngle, fullangle);
         }
 
         private void SelectTile()
@@ -130,7 +122,7 @@ namespace CollisionEditor.viewModel
         {
             window.Close();
         }
-        public static void ShowAnglemap(int angle256like, string hexAngle, double angle360like)
+        public static void ShowAngles(int angle256like, string hexAngle, double angle360like)
         {
             MainWindow mainWindow = (MainWindow)System.Windows.Application.Current.MainWindow;
 
@@ -139,22 +131,14 @@ namespace CollisionEditor.viewModel
             mainWindow.TextBlock360Angle.Text = angle360like.ToString() + "'";
         }
 
-
-        public void OpenAngleMapFile(string filePath)
-        {   
-            AngleMap = new AngleMap (filePath);
-            byte HardCOREAngle= AngleMap.Values[ChosenTile];
-
-            ConvertAndShowAngles(HardCOREAngle);
-        }
         public void AngleUpdator(Vector2<int> vectorGreen, Vector2<int> vectorBlue)
         {
             if (AngleMap is not null)
             {
                 int angle256like = AngleMap.SetAngleWithLine(ChosenTile, vectorGreen, vectorBlue); 
                 string hexAngle = Convertor.GetHexAngle((byte)angle256like);
-                double angle360like = Convertor.Get360Angle((byte)angle256like);
-                ShowAnglemap(angle256like, hexAngle, angle360like);
+                double angle360like = Convertor.GetFullAngle((byte)angle256like);
+                ShowAngles(angle256like, hexAngle, angle360like);
             }
             else
             {
@@ -170,7 +154,7 @@ namespace CollisionEditor.viewModel
 
         public Vector2<int> GetCordinats(double x, double y)
         {
-            return (AngleConstructor.GetCorrectDotPosition(new Vector2<double>(x, y),8));
+            return (ViewModelAssistant.GetCorrectDotPosition(new Vector2<double>(x, y),8));
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
