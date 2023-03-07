@@ -1,8 +1,10 @@
-﻿namespace CollisionEditor.viewModel
+﻿using CollisionEditor.model;
+
+namespace CollisionEditor.viewModel
 {
-    public class ViewModelAngleService : ViewModelTileMapService
+    public class ViewModelAngleService
     {
-        public string GetAngleMapFilePath()
+        public static string GetAngleMapFilePath()
         {
             System.Windows.Forms.OpenFileDialog openFileDialog = new System.Windows.Forms.OpenFileDialog();
             string filePath = string.Empty;
@@ -12,6 +14,10 @@
                 filePath = openFileDialog.FileName;
             }
             return filePath;
+        }
+        public static (int byteAngle, string hexAngle, double fullAngle) GetAngles(byte byteAngle)
+        {
+            return (byteAngle, Convertor.GetHexAngle(byteAngle), Convertor.GetFullAngle(byteAngle));
         }
     }
 }
