@@ -29,12 +29,12 @@ namespace CollisionEditor.model
             return string.Format("0x{0:X}", angle);
         }
 
-        public static double Get360Angle(byte angle)
+        public static double GetFullAngle(byte angle)
         {
             return Math.Round((256 - angle) * 1.40625, 2);
         }
 
-        public static int Get256Angle(string hexAngle)
+        public static int GetByteAngle(string hexAngle)
         {
             return int.Parse(hexAngle.Substring(2), NumberStyles.HexNumber);
         }
