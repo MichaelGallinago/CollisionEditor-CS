@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.IO;
 using System.Windows;
+using System.Windows.Forms;
 using System.Windows.Input;
 
 namespace CollisionEditor.viewModel
@@ -25,7 +26,7 @@ namespace CollisionEditor.viewModel
             this.window = window;
             MenuOpenAngleMapCommand = new RelayCommand(MenuOpenAngleMap);
             MenuOpenTileMapCommand = new RelayCommand(MenuOpenTileMap);
-            MenuSaveTileMapCommand = new RelayCommand(MenuSaveTiletMap);
+            MenuSaveTileMapCommand = new RelayCommand(MenuSaveTileMap);
 
             AngleIncrementCommand = new RelayCommand(AngleIncrement);
             AngleDecrementCommand = new RelayCommand(AngleDecrement);
@@ -36,121 +37,94 @@ namespace CollisionEditor.viewModel
 
         private void MenuOpenAngleMap()
         {
-            System.Windows.Forms.OpenFileDialog openFileDialog = new System.Windows.Forms.OpenFileDialog();
-            string filePath = string.Empty;
-            openFileDialog.Filter = "Binary Files(*.bin)| *.bin| All files(*.*) | *.*";
-            if (openFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            string filePath = ViewModelAngleService.GetAngleMapFilePath();
+            if (filePath is not null)
             {
                 window.ImageOfTile.Source = null;
-                filePath = openFileDialog.FileName;
-
                 AngleMap = new AngleMap(filePath);
                 (int byteAngle, string hexAngle, double fullAngle) angles = ViewModelAssistant.GetAngles(AngleMap, ChosenTile);
                 ShowAngles(angles.byteAngle, angles.hexAngle, angles.fullAngle);
             }
         }
+        public static void ShowAngles(int byteAngle, string hexAngle, double fullAngle)
+        {
+            MainWindow mainWindow = (MainWindow)System.Windows.Application.Current.MainWindow;
+
+            mainWindow.TextBlockByteAngle.Text = byteAngle.ToString();
+            mainWindow.TextBlockHexAngle.Text = hexAngle;
+            mainWindow.TextBlockFullAngle.Text = fullAngle.ToString() + "'";
+        }
 
         private void MenuOpenTileMap()
         {
-            System.Windows.Forms.OpenFileDialog openFileDialog = new System.Windows.Forms.OpenFileDialog();
-            openFileDialog.Filter = "Image Files(*.png)| *.png| All files(*.*) | *.*";
-            string filePath = string.Empty;
-            if (openFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-            {
-                window.ImageOfTile.Source = null;
-                filePath = openFileDialog.FileName;
-
-                this.TileSet = new TileSet(filePath);
-                AngleMap = new AngleMap(TileSet.Tiles.Count);
-                Convertor.BitmapConvert(TileSet.Tiles[ChosenTile]);
-                ShowTileStrip(Convertor.BitmapConvert(TileSet.Tiles[ChosenTile]));
-            }
+            string filePath = ViewModelTileService.GetTileMapFilePath();
+            this.TileSet = new TileSet(filePath);
+            AngleMap = new AngleMap(TileSet.Tiles.Count);
+            Convertor.BitmapConvert(TileSet.Tiles[ChosenTile]);
+            ShowTile(Convertor.BitmapConvert(TileSet.Tiles[ChosenTile]));
         }
-        private static void ShowTileStrip(System.Windows.Media.Imaging.BitmapSource TileStrip)
+
+        private static void ShowTile(System.Windows.Media.Imaging.BitmapSource TileStrip)
         {
             MainWindow mainWindow = (MainWindow)System.Windows.Application.Current.MainWindow;
             mainWindow.ImageOfTile.Source = TileStrip;
         }
 
-        private void MenuSaveTiletMap()
+        private void MenuSaveTileMap()
         {
-            if (TileMapIsNull())
+            if (TileSet is null)
             {
                 System.Windows.Forms.MessageBox.Show("Ошибка: Вы не выбрали Tilemap, чтобы её сохранить");
             }
             else
             {
-                System.Windows.Forms.SaveFileDialog saveFileDialog = new System.Windows.Forms.SaveFileDialog();
-
-                saveFileDialog.Filter = "Image Files(*.png)| *.png";
-
-                //Спрашивать RowCount
-
-                if (saveFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                string filePath = ViewModelTileService.GetTileMapSavePath();
+                if (filePath is not null)
                 {
-                    SaveTileMap(saveFileDialog.FileName);
+                    TileSet.Save(Path.GetFullPath(filePath), 16);
                 }
             }
-        }
+        }    
 
         private void AngleIncrement()
         {
             byte byteAngle = AngleMap.ChangeAngle(ChosenTile, 1);
-            string hexAngle = Convertor.GetHexAngle(byteAngle);
-            double fullangle = Convertor.GetFullAngle(byteAngle);
-            ShowAngles(byteAngle, hexAngle, fullangle);
+
+            (int byteAngle, string hexAngle, double fullAngle) angles = ViewModelAngleService.GetAngles(byteAngle);
+            ShowAngles(byteAngle, angles.hexAngle, angles.fullAngle);
         }
         private void AngleDecrement()
         {
             byte byteAngle = AngleMap.ChangeAngle(ChosenTile, -1);
-            string hexAngle = Convertor.GetHexAngle(byteAngle);
-            double fullangle = Convertor.GetFullAngle(byteAngle);
-            ShowAngles(byteAngle, hexAngle, fullangle);
+
+            (int byteAngle, string hexAngle, double fullAngle) angles = ViewModelAngleService.GetAngles(byteAngle);
+            ShowAngles(byteAngle, angles.hexAngle, angles.fullAngle);
         }
 
         private void SelectTile()
         {
-            ShowTileStrip(Convertor.BitmapConvert(TileSet.Tiles[ChosenTile]));
-        }
-        
-        private void SaveTileMap(string filePath)
-        {
-            TileSet.Save(Path.GetFullPath(filePath), 16);
+            ShowTile(Convertor.BitmapConvert(TileSet.Tiles[ChosenTile]));
         }
 
         private void ExitApp()
         {
             window.Close();
         }
-        public static void ShowAngles(int angle256like, string hexAngle, double angle360like)
-        {
-            MainWindow mainWindow = (MainWindow)System.Windows.Application.Current.MainWindow;
-
-            mainWindow.TextBlock256Angle.Text = angle256like.ToString();
-            mainWindow.TextBlockHexAngle.Text = hexAngle;
-            mainWindow.TextBlock360Angle.Text = angle360like.ToString() + "'";
-        }
 
         public void AngleUpdator(Vector2<int> vectorGreen, Vector2<int> vectorBlue)
         {
             if (AngleMap is not null)
             {
-                int angle256like = AngleMap.SetAngleWithLine(ChosenTile, vectorGreen, vectorBlue); 
-                string hexAngle = Convertor.GetHexAngle((byte)angle256like);
-                double angle360like = Convertor.GetFullAngle((byte)angle256like);
-                ShowAngles(angle256like, hexAngle, angle360like);
+                byte byteAngle = AngleMap.SetAngleWithLine(ChosenTile, vectorGreen, vectorBlue);
+
+                (int byteAngle, string hexAngle, double fullAngle) angles = ViewModelAngleService.GetAngles(byteAngle);
+                ShowAngles(byteAngle, angles.hexAngle, angles.fullAngle);   
             }
             else
             {
                 return;
             }
-        }
-
-        public bool TileMapIsNull()
-        {
-            return TileSet is null;
-        }
-        
+        }      
 
         public Vector2<int> GetCordinats(double x, double y)
         {
@@ -162,7 +136,5 @@ namespace CollisionEditor.viewModel
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-
-
     }
 }

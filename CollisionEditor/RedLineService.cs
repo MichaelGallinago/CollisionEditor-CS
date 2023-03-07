@@ -20,7 +20,7 @@ namespace CollisionEditor
             line.Height = 1;
             line.Fill = new SolidColorBrush(Colors.Red);
 
-            string stringAngle = mainWindow.TextBlock360Angle.Text.TrimEnd('\'');
+            string stringAngle = mainWindow.TextBlockFullAngle.Text.TrimEnd('\'');
             float floatAngle = float.Parse(stringAngle);
             if (floatAngle > 180)
             {
