@@ -1,6 +1,6 @@
 ﻿namespace CollisionEditor.viewModel
 {
-    public class ViewModelTileService
+    public static class ViewModelTileService
     {
 
         public static string GetTileMapFilePath()

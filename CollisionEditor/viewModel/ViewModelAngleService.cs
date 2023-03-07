@@ -2,7 +2,7 @@
 
 namespace CollisionEditor.viewModel
 {
-    public class ViewModelAngleService
+    public static class ViewModelAngleService
     {
         public static string GetAngleMapFilePath()
         {

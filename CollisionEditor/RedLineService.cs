@@ -9,7 +9,7 @@ using System;
 using System.Windows.Media.Media3D;
 namespace CollisionEditor
 {
-    internal class RedLineService
+    internal static class RedLineService
     {
         static MainWindow mainWindow = (MainWindow)System.Windows.Application.Current.MainWindow;
 

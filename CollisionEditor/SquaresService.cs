@@ -9,7 +9,7 @@ using System;
 using System.Windows.Media.Media3D;
 namespace CollisionEditor
 {
-    internal class SquaresService
+    internal static class SquaresService
     {
         static MainWindow mainWindow = (MainWindow)System.Windows.Application.Current.MainWindow;
         private static Rectangle GetRectangle(Color color)
