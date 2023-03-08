@@ -22,8 +22,11 @@ namespace CollisionEditor
                 floatAngle = floatAngle - 180;
             }
 
+            Line newLine = new Line();
+            newLine.X1 = 0;
+
             Rectangle line = new Rectangle();
-            line.Width = 128 * (1 + (Math.Sqrt(2) - 1) * Math.Abs(Math.Sin(floatAngle * 2 / 180 * Math.PI)));
+            line.Width = 128 / Math.Abs(Math.Cos((-45 + ((floatAngle + 45) % 90)) / 180 * Math.PI));
             line.Height = 1;
             line.Fill = new SolidColorBrush(Colors.Red);
 
