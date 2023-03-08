@@ -27,8 +27,8 @@ namespace CollisionEditor
             line.Height = 1;
             line.Fill = new SolidColorBrush(Colors.Red);
 
-            RotateTransform rotateTransform1 = new RotateTransform(180 - floatAngle);
-            line.RenderTransformOrigin = new Point(0.5 * (128 * Math.Sqrt(2) / line.Width), 0.5);
+            RotateTransform rotateTransform1 = new RotateTransform(180 - floatAngle,64,0);
+            //line.RenderTransformOrigin = new Point(0.5 * (128 * Math.Sqrt(2) / line.Width), 0);
 
             Canvas.SetTop(line, 64);
             line.RenderTransform = rotateTransform1;

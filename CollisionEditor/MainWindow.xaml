@@ -70,7 +70,7 @@
         <TextBlock Grid.Column="5" Grid.Row="5" TextWrapping="Wrap" Text="0x00" Name="TextBlockHexAngle"  Padding="2,0,0,0"  Background="#FFB1B1B1"/>
         <TextBlock Grid.Column="8" Grid.Row="5" TextWrapping="Wrap" Text="0'" Name="TextBlockFullAngle"  Padding="2,0,0,0"  Background="#FFB1B1B1"/>
         <Canvas Grid.Column="0" Grid.Row="3"  Height="128" Width="128" Name ="canvasForRectangles" Grid.ColumnSpan="11"/>
-        <Canvas Grid.Column="0" Grid.Row="3"  Height="128" Width="181" Name ="canvasForLine" Grid.ColumnSpan="11"/>
+        <Canvas Grid.Column="0" Grid.Row="3"  Height="128" Width="128" Name ="canvasForLine" Grid.ColumnSpan="11"/>
 
         
 
