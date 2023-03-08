@@ -3,17 +3,112 @@
         xmlns:vm="using:CollisionEditorCS.ViewModels"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="440"
         x:Class="CollisionEditorCS.Views.MainWindow"
         Icon="/Assets/avalonia-logo.ico"
-        Title="CollisionEditorCS">
+        Title="CollisionEditorC#" Width="600" Height="440">
 
-    <Design.DataContext>
+	<Design.DataContext>
         <!-- This only sets the DataContext for the previewer in an IDE,
              to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
         <vm:MainWindowViewModel/>
     </Design.DataContext>
 
-    <TextBlock Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+	<!--<TextBlock Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/> -->
+	<Grid Name="MyGrid">
+		<Grid.RowDefinitions>
+			<RowDefinition Height="20"/>
+			<RowDefinition Height="5*"/>
+			<RowDefinition Height="69*"/>
+			<RowDefinition Height="164*"/>
+			<RowDefinition Height="78*"/>
+			<RowDefinition Height="20*"/>
+			<RowDefinition Height="65*"/>
+			<RowDefinition Height="3*"/>
+		</Grid.RowDefinitions>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="10*" />
+			<ColumnDefinition Width="20*" />
+			<ColumnDefinition Width="29*" />
+			<ColumnDefinition Width="31*" />
+			<ColumnDefinition Width="20*" />
+			<ColumnDefinition Width="29*" />
+			<ColumnDefinition Width="31*" />
+			<ColumnDefinition Width="20*" />
+			<ColumnDefinition Width="29*" />
+			<ColumnDefinition Width="31*" />
+			<ColumnDefinition Width="20*" />
+			<ColumnDefinition Width="17*" />
+			<ColumnDefinition Width="290*" />
+			<ColumnDefinition Width="10*" />
+		</Grid.ColumnDefinitions>
+		<Menu VerticalAlignment="Center" Grid.Column="0"  Grid.ColumnSpan="15" Foreground="Black" Height="20">
+			<MenuItem Header="File" >
+				<MenuItem Header="Load" >
+					<MenuItem Header="TileMap........               Ctrl+O" Command="{Binding MenuOpenTileMapCommand}" Padding="0,0,-20,0"/>
+					<MenuItem Header="AngleMap...     Ctrl+Shift+O" Command="{Binding MenuOpenAngleMapCommand}" Padding="0,0,-20,0"/>
+				</MenuItem>
 
-</Window>
+				<MenuItem Header="Unload"  >
+					<MenuItem Header="Tile Strip"/>
+					<MenuItem Header="Anglemap"/>
+				</MenuItem>
+
+				<MenuItem Header="Unload All     Ctrl+Shift+U" Padding="0,0,-20,0"  />
+
+				<MenuItem Header="Save">
+					<MenuItem Header="Anglemap"/>
+					<MenuItem Header="Heightmap"/>
+					<MenuItem Header="Widthmap"/>
+					<MenuItem Header="Tiletmap" Command="{Binding MenuSaveTileMapCommand}"/>
+				</MenuItem>
+
+				<MenuItem Header="Save Al          Ctrl+Shift+S" Padding="0,0,-20,0" />
+				<MenuItem Header="Exit                         Alt+F4" Padding="0,0,-20,0" Command="{Binding ExitAppCommand}" />
+
+			</MenuItem>
+			<MenuItem Header="Help" >
+				<MenuItem Header="Due to the memetic danger caused by SCP-[DATA DELETED] help has been removed" FontFamily="Webdings"  />
+			</MenuItem>
+		</Menu>
+		<!--<ImageBrush Source="avares://ChromER.Avalonia.UI/Assets/folder_background.png"/>-->
+		<Image Grid.Column="0" Grid.Row="3" Height="128" RenderOptions.BitmapScalingMode="NearestNeighbor"  Width="128" Name ="ImageOfTile" Grid.ColumnSpan="11"/>
+		<Image Grid.Column="0" Grid.Row="3" Source="/Assets/Grid.png" Height="129" Width="129" Grid.ColumnSpan="11" Name ="ImageOfTileGrid" MouseLeftButtonDown="ImageOfTileGridMouseLeftButtonDown" MouseRightButtonDown="ImageOfTileGridMouseRightButtonDown"/>
+		<TextBlock Grid.Column="2" Grid.Row="5" TextWrapping="Wrap" Text="0" Name="TextBlockByteAngle" Grid.ColumnSpan="2" Background="#FFB1B1B1" />
+		<TextBlock Grid.Column="5" Grid.Row="5" TextWrapping="Wrap" Text="0x00" Name="TextBlockHexAngle" Grid.ColumnSpan="2" Background="#FFB1B1B1"/>
+		<TextBlock Grid.Column="8" Grid.Row="5" TextWrapping="Wrap" Text="0'" Name="TextBlockFullAngle" Grid.ColumnSpan="2" Background="#FFB1B1B1"/>
+		<Canvas Grid.Column="0" Grid.Row="3"  Height="128" Width="128" Name ="canvasForRectangles" Grid.ColumnSpan="11"/>
+		<Canvas Grid.Column="0" Grid.Row="3"  Height="128" Width="181" Name ="canvasForLine" Grid.ColumnSpan="11"/>
+
+		<!--<Rectangle Grid.Row="2" Grid.ColumnSpan="12" Grid.RowSpan="2"  Stroke="#FFD2D2D2" Width="232" HorizontalAlignment="Center" Fill="" Margin="0,5,0,0"/>
+        <Rectangle Grid.Row="5" Grid.Column="1" Height="20"  Stroke="#FFE0DCDC" Width="20" HorizontalAlignment="Left" Fill="#FFE0DCDC"/>
+        <Rectangle Grid.Row="5" Grid.Column="4" Height="20"  Stroke="#FFE0DCDC" Width="20" HorizontalAlignment="Left" Fill="#FFE0DCDC"/>
+        <Rectangle Grid.Row="5" Grid.Column="7" Height="20"  Stroke="#FFE0DCDC" Width="20" HorizontalAlignment="Left" Fill="#FFE0DCDC"/>
+        <Rectangle Grid.Row="5" Grid.Column="10" Height="20"  Stroke="#FFE0DCDC" Width="20" HorizontalAlignment="Left" Fill="#FFE0DCDC"/>-->
+
+		<Button Grid.Column="3" Command="{Binding AngleIncrementCommand}" Grid.Row="5" Height="10" Width="30" VerticalAlignment="Top" HorizontalAlignment="Left" Background="#FFDEDDDD">
+			<Path Fill="Black" Data="M 0 6 L 12 6 L 6 0 Z" Height="6" Width="12"/>
+		</Button>
+		<Button Grid.Column="3" Command="{Binding AngleDecrementCommand}" Grid.Row="5" Height="10" Width="30" VerticalAlignment="Bottom" HorizontalAlignment="Left">
+			<Path Fill="Black" Data="M 0 0 L 6 6 L 12 0 Z"/>
+		</Button>
+
+		<Button Grid.Column="6" Command="{Binding AngleIncrimentCommand}"  Grid.Row="5" Height="10" Width="30" VerticalAlignment="Top" HorizontalAlignment="Left">
+			<Path Fill="Black" Data="M 0 6 L 12 6 L 6 0 Z" Height="6" Width="12"/>
+		</Button>
+		<Button Grid.Column="6" Command="{Binding AngleDecrementCommand}" Grid.Row="5" Height="10" Width="30" VerticalAlignment="Bottom" HorizontalAlignment="Left">
+			<Path Fill="Black" Data="M 0 0 L 6 6 L 12 0 Z"/>
+		</Button>
+
+		<Button Grid.Column="9" Command="{Binding AngleIncrimentCommand}"  Grid.Row="5" Height="10" Width="30" VerticalAlignment="Top" HorizontalAlignment="Left">
+			<Path Fill="Black" Data="M 0 6 L 12 6 L 6 0 Z" Height="6" Width="12"/>
+		</Button>
+		<Button Grid.Column="9" Command="{Binding AngleDecrementCommand}" Grid.Row="5" Height="10" Width="30" VerticalAlignment="Bottom" HorizontalAlignment="Left">
+			<Path Fill="Black" Data="M 0 0 L 6 6 L 12 0 Z"/>
+		</Button>
+
+
+		<TextBox Grid.Column="11" Grid.Row="2" TextWrapping="Wrap" Background="#FFD8D8D8" Text="{Binding ChosenTile,Mode=TwoWay}" Grid.ColumnSpan="2" Margin="16,0,172,0"/>
+		<Button Grid.Column="12" Grid.Row="2" Background="#FFD8D8D8" Content="Select Tile" Command="{Binding SelectTileCommand}" Margin="125,0,0,0" />
+	</Grid>
+	</Window>
