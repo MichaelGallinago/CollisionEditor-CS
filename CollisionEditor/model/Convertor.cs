@@ -31,7 +31,7 @@ namespace CollisionEditor.model
 
         public static double GetFullAngle(byte angle)
         {
-            return Math.Round((256 - angle) * 1.40625, 2);
+            return Math.Round((256 - angle) * 1.40625, 1);
         }
 
         public static int GetByteAngle(string hexAngle)

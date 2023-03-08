@@ -14,20 +14,21 @@ namespace CollisionEditor
         static MainWindow mainWindow = (MainWindow)System.Windows.Application.Current.MainWindow;
 
         public static void DrawRedLine(ref Rectangle redLine)
-        { 
-            Rectangle line = new Rectangle();
-            line.Width = 128 * Math.Sqrt(2);
-            line.Height = 1;
-            line.Fill = new SolidColorBrush(Colors.Red);
-
+        {
             string stringAngle = mainWindow.TextBlockFullAngle.Text.TrimEnd('\'');
             float floatAngle = float.Parse(stringAngle);
             if (floatAngle > 180)
             {
                 floatAngle = floatAngle - 180;
             }
+
+            Rectangle line = new Rectangle();
+            line.Width = 128 * (1 + (Math.Sqrt(2) - 1) * Math.Abs(Math.Sin(floatAngle * 2 / 180 * Math.PI)));
+            line.Height = 1;
+            line.Fill = new SolidColorBrush(Colors.Red);
+
             RotateTransform rotateTransform1 = new RotateTransform(180 - floatAngle);
-            line.RenderTransformOrigin = new Point(0.5, 0.5);
+            line.RenderTransformOrigin = new Point(0.5 * (128 * Math.Sqrt(2) / line.Width), 0.5);
 
             Canvas.SetTop(line, 64);
             line.RenderTransform = rotateTransform1;
