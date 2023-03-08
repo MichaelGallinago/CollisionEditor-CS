@@ -15,6 +15,7 @@ namespace CollisionEditor.viewModel
         public ICommand MenuOpenAngleMapCommand { get; set; }
         public ICommand MenuOpenTileMapCommand { get; set; }
         public ICommand MenuSaveTileMapCommand { get; set; }
+        public ICommand MenuSaveAngleMapCommand { get; set; }
         public ICommand SelectTileCommand { get; set; }
         public ICommand AngleIncrementCommand { get; set; }
         public ICommand AngleDecrementCommand { get; set; }
@@ -27,6 +28,7 @@ namespace CollisionEditor.viewModel
             MenuOpenAngleMapCommand = new RelayCommand(MenuOpenAngleMap);
             MenuOpenTileMapCommand = new RelayCommand(MenuOpenTileMap);
             MenuSaveTileMapCommand = new RelayCommand(MenuSaveTileMap);
+            MenuSaveAngleMapCommand = new RelayCommand(MenuSaveAngleMap);
 
             AngleIncrementCommand = new RelayCommand(AngleIncrement);
             AngleDecrementCommand = new RelayCommand(AngleDecrement);
@@ -74,7 +76,7 @@ namespace CollisionEditor.viewModel
         {
             if (TileSet is null)
             {
-                System.Windows.Forms.MessageBox.Show("Ошибка: Вы не выбрали Tilemap, чтобы её сохранить");
+                System.Windows.Forms.MessageBox.Show("Error: You haven't chosen TileMap to save");
             }
             else
             {
@@ -84,7 +86,22 @@ namespace CollisionEditor.viewModel
                     TileSet.Save(Path.GetFullPath(filePath), 16);
                 }
             }
-        }    
+        }
+        private void MenuSaveAngleMap()
+        {
+            if (AngleMap is null)
+            {
+                System.Windows.Forms.MessageBox.Show("Error: You haven't chosen AngleMap to save");
+            }
+            else
+            {
+                string filePath = ViewModelAngleService.GetAngleMapSavePath();
+                if (filePath is not null)
+                {
+                    AngleMap.Save(Path.GetFullPath(filePath));
+                }
+            }
+        }
 
         private void AngleIncrement()
         {

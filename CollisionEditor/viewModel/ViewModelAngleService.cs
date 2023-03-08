@@ -15,6 +15,19 @@ namespace CollisionEditor.viewModel
             }
             return filePath;
         }
+
+        public static string GetAngleMapSavePath()
+        {
+            System.Windows.Forms.SaveFileDialog saveFileDialog = new System.Windows.Forms.SaveFileDialog();
+            saveFileDialog.Filter = "Binary Files(*.bin)| *.bin";
+            string filePath = string.Empty;
+            if (saveFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                filePath = saveFileDialog.FileName;
+            }
+            return filePath;
+        }
+
         public static (int byteAngle, string hexAngle, double fullAngle) GetAngles(byte byteAngle)
         {
             return (byteAngle, Convertor.GetHexAngle(byteAngle), Convertor.GetFullAngle(byteAngle));
