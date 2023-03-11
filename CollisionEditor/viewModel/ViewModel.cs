@@ -15,6 +15,8 @@ namespace CollisionEditor.viewModel
         public ICommand MenuOpenAngleMapCommand { get; set; }
         public ICommand MenuOpenTileMapCommand { get; set; }
         public ICommand MenuSaveTileMapCommand { get; set; }
+        public ICommand MenuSaveWidthMapCommand { get; set; }
+        public ICommand MenuSaveHeightMapCommand { get; set; }
         public ICommand MenuSaveAngleMapCommand { get; set; }
         public ICommand SelectTileCommand { get; set; }
         public ICommand AngleIncrementCommand { get; set; }
@@ -28,6 +30,8 @@ namespace CollisionEditor.viewModel
             MenuOpenAngleMapCommand = new RelayCommand(MenuOpenAngleMap);
             MenuOpenTileMapCommand = new RelayCommand(MenuOpenTileMap);
             MenuSaveTileMapCommand = new RelayCommand(MenuSaveTileMap);
+            MenuSaveWidthMapCommand = new RelayCommand(MenuSaveWidthMap);
+            MenuSaveHeightMapCommand = new RelayCommand(MenuSaveHeightMap);
             MenuSaveAngleMapCommand = new RelayCommand(MenuSaveAngleMap);
 
             AngleIncrementCommand = new RelayCommand(AngleIncrement);
@@ -62,8 +66,8 @@ namespace CollisionEditor.viewModel
             string filePath = ViewModelTileService.GetTileMapFilePath();
             this.TileSet = new TileSet(filePath);
             AngleMap = new AngleMap(TileSet.Tiles.Count);
-            Convertor.BitmapConvert(TileSet.Tiles[ChosenTile]);
-            ShowTile(Convertor.BitmapConvert(TileSet.Tiles[ChosenTile]));
+            ViewModelAssistant.BitmapConvert(TileSet.Tiles[ChosenTile]);
+            ShowTile(ViewModelAssistant.BitmapConvert(TileSet.Tiles[ChosenTile]));
         }
 
         private static void ShowTile(System.Windows.Media.Imaging.BitmapSource TileStrip)
@@ -87,6 +91,39 @@ namespace CollisionEditor.viewModel
                 }
             }
         }
+
+        private void MenuSaveWidthMap()
+        {
+            if (TileSet is null)
+            {
+                System.Windows.Forms.MessageBox.Show("Error: The WidthMap isn't generated!");
+            }
+            else
+            {
+                string filePath = ViewModelTileService.GetWidthMapSavePath();
+                if (filePath is not null)
+                {
+                    TileSet.SaveCollisionMap(Path.GetFullPath(filePath), TileSet.WidthMap);
+                }
+            }
+        }
+
+        private void MenuSaveHeightMap()
+        {
+            if (TileSet is null)
+            {
+                System.Windows.Forms.MessageBox.Show("Error: The HeightMap isn't generated!");
+            }
+            else
+            {
+                string filePath = ViewModelTileService.GetWidthMapSavePath();
+                if (filePath is not null)
+                {
+                    TileSet.SaveCollisionMap(Path.GetFullPath(filePath), TileSet.HeightMap);
+                }
+            }
+        }
+
         private void MenuSaveAngleMap()
         {
             if (AngleMap is null)
@@ -120,7 +157,7 @@ namespace CollisionEditor.viewModel
 
         private void SelectTile()
         {
-            ShowTile(Convertor.BitmapConvert(TileSet.Tiles[ChosenTile]));
+            ShowTile(ViewModelAssistant.BitmapConvert(TileSet.Tiles[ChosenTile]));
         }
 
         private void ExitApp()

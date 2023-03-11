@@ -49,10 +49,10 @@
                 <MenuItem Header="Unload All     Ctrl+Shift+U" Padding="0,0,-20,0"  />
 
                 <MenuItem Header="Save">
-                    <MenuItem Header="Anglemap" Command="{Binding MenuSaveAngleMapCommand}"/>
-                    <MenuItem Header="Heightmap"/>
-                    <MenuItem Header="Widthmap"/>
-                    <MenuItem Header="Tiletmap" Command="{Binding MenuSaveTileMapCommand}"/>
+                    <MenuItem Header="AngleMap" Command="{Binding MenuSaveAngleMapCommand}"/>
+                    <MenuItem Header="HeightMap" Command="{Binding MenuSaveHeightMapCommand}"/>
+                    <MenuItem Header="WidthMap" Command="{Binding MenuSaveWidthMapCommand}"/>
+                    <MenuItem Header="TileMap" Command="{Binding MenuSaveTileMapCommand}"/>
                 </MenuItem>
 
                 <MenuItem Header="Save Al          Ctrl+Shift+S" Padding="0,0,-20,0" />

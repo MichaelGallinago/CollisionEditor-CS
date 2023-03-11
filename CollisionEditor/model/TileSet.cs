@@ -2,6 +2,7 @@
 using System.IO;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.Linq;
 
 namespace CollisionEditor.model
 {
@@ -94,9 +95,23 @@ namespace CollisionEditor.model
                 offset.Width  + columnCount * cell.Width  - separation.Width, 
                 offset.Height + rowCount    * cell.Height - separation.Height);
 
-            Bitmap tilemap = DrawTilemap(columnCount, tilemapSize, separation, offset);
+            Bitmap tilemap = DrawTileMap(columnCount, tilemapSize, separation, offset);
 
             tilemap.Save(path, ImageFormat.Png);
+        }
+
+        public void SaveCollisionMap(string path, List<byte[]> collisionMap)
+        {
+            if (File.Exists(path))
+                File.Delete(path);
+
+            BinaryWriter writer = new BinaryWriter(File.Open(path, FileMode.CreateNew));
+
+            byte[] allVallues = new byte[0];
+            foreach (byte[] values in collisionMap)
+                allVallues.Concat(values);
+
+            writer.Write(allVallues);
         }
 
         public Bitmap GetTilePanel(int panelWidth, Size separation)
@@ -104,10 +119,10 @@ namespace CollisionEditor.model
             int columnCount = (panelWidth - separation.Width) / (TileSize.Width + separation.Width);
             int panelHeight = (Tiles.Count & -columnCount) / columnCount * (TileSize.Height + separation.Height);
 
-            return DrawTilemap(columnCount, new Size(panelWidth, panelHeight), separation, separation);
+            return DrawTileMap(columnCount, new Size(panelWidth, panelHeight), separation, separation);
         }
 
-        private Bitmap DrawTilemap(int columnCount, Size tilemapSize, Size separation, Size offset)
+        private Bitmap DrawTileMap(int columnCount, Size tilemapSize, Size separation, Size offset)
         {
             Bitmap tilemap = new Bitmap(tilemapSize.Width, tilemapSize.Height);
             using (Graphics graphics = Graphics.FromImage(tilemap))

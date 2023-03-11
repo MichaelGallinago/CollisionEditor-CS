@@ -30,7 +30,7 @@ namespace CollisionEditor.viewModel
 
         public static (int byteAngle, string hexAngle, double fullAngle) GetAngles(byte byteAngle)
         {
-            return (byteAngle, Convertor.GetHexAngle(byteAngle), Convertor.GetFullAngle(byteAngle));
+            return (byteAngle, ViewModelAssistant.GetHexAngle(byteAngle), ViewModelAssistant.GetFullAngle(byteAngle));
         }
     }
 }
