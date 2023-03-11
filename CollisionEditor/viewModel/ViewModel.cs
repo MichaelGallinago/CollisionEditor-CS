@@ -64,10 +64,13 @@ namespace CollisionEditor.viewModel
         private void MenuOpenTileMap()
         {
             string filePath = ViewModelTileService.GetTileMapFilePath();
+            if (filePath is not null)
+            {
             this.TileSet = new TileSet(filePath);
             AngleMap = new AngleMap(TileSet.Tiles.Count);
             ViewModelAssistant.BitmapConvert(TileSet.Tiles[ChosenTile]);
             ShowTile(ViewModelAssistant.BitmapConvert(TileSet.Tiles[ChosenTile]));
+            }
         }
 
         private static void ShowTile(System.Windows.Media.Imaging.BitmapSource TileStrip)
