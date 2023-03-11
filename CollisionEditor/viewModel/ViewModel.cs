@@ -70,6 +70,8 @@ namespace CollisionEditor.viewModel
             AngleMap = new AngleMap(TileSet.Tiles.Count);
             ViewModelAssistant.BitmapConvert(TileSet.Tiles[ChosenTile]);
             ShowTile(ViewModelAssistant.BitmapConvert(TileSet.Tiles[ChosenTile]));
+            window.Heights.Text = ViewModelAssistant.GetCollisionValues(TileSet.HeightMap[ChosenTile]);
+            window.Widths.Text = ViewModelAssistant.GetCollisionValues(TileSet.WidthMap[ChosenTile]);
             }
         }
 

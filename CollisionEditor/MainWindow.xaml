@@ -83,11 +83,11 @@
         <Rectangle Grid.Row="5" Grid.Column="10" Height="20"  Stroke="#FFE0DCDC" Width="20" HorizontalAlignment="Left" Fill="#FFE0DCDC"/>-->
 
         <Border Grid.Row="5" Grid.Column="2" Grid.ColumnSpan="8" Background="GhostWhite" BorderBrush="Silver" BorderThickness="0.8,0.8,0.8,2" CornerRadius="3,3,3,3">
-            <TextBlock/>
+            <TextBlock x:Name="Heights" HorizontalAlignment="Center"/>
         </Border>
 
         <Border Grid.Row="7" Grid.Column="2" Grid.ColumnSpan="8" Background="GhostWhite" BorderBrush="Silver" BorderThickness="0.8,0.8,0.8,2" CornerRadius="3,3,3,3">
-            <TextBlock/>
+            <TextBlock x:Name="Widths" HorizontalAlignment="Center"/>
         </Border>
         <Button Grid.Column="3" Command="{Binding AngleIncrementCommand}" Grid.Row="9" Height="10" Width="25" VerticalAlignment="Top" HorizontalAlignment="Left" Background="#FFDEDDDD">
             <Path Fill="Black" Data="M 0 6 L 12 6 L 6 0 Z" Height="6" Width="12"/>
