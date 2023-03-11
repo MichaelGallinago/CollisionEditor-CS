@@ -15,7 +15,7 @@ namespace CollisionEditor
     {
         static MainWindow mainWindow = (MainWindow)System.Windows.Application.Current.MainWindow;
 
-        public static void DrawRedLine(ref Rectangle redLine)
+        public static void DrawRedLine(ref Line redLine)
         {
             string stringAngle = mainWindow.TextBlockFullAngle.Text.TrimEnd('\'');
             float floatAngle = float.Parse(stringAngle);
@@ -35,24 +35,10 @@ namespace CollisionEditor
             Canvas.SetLeft(newLine, 64);
             newLine.Stroke = new SolidColorBrush(Colors.Red);
             newLine.Fill = new SolidColorBrush(Colors.Red);
-            mainWindow.canvasForLine.Children.Add(newLine);
-            /*
-            Rectangle line = new Rectangle();
-            line.Width = 128 / Math.Abs(Math.Cos((-45 + ((floatAngle + 45) % 90)) / 180 * Math.PI));
-            line.Height = 1;
-            line.Fill = new SolidColorBrush(Colors.Red);
-            
-
-            RotateTransform rotateTransform1 = new RotateTransform(180 - floatAngle,64,0);
-            //line.RenderTransformOrigin = new Point(0.5 * (128 * Math.Sqrt(2) / line.Width), 0);
-
-            Canvas.SetTop(line, 64);
-            line.RenderTransform = rotateTransform1;
 
             mainWindow.canvasForLine.Children.Remove(redLine);
-            redLine = line;
-            mainWindow.canvasForLine.Children.Add(line);
-            */
+            redLine = newLine;
+            mainWindow.canvasForLine.Children.Add(newLine);
         }
     }
 }

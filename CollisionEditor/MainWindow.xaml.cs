@@ -18,18 +18,20 @@ namespace CollisionEditor
 
 
         (SquareAndPosition, SquareAndPosition) BlueAndGreenSquare = (new SquareAndPosition(), new SquareAndPosition());
-        Rectangle RedLine = new Rectangle();
+        Line RedLine = new Line();
 
         private void ImageOfTileGridMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             Vector2<int> cordinats = (this.DataContext as MainViewModel).GetCordinats(Mouse.GetPosition(ImageOfTileGrid).X, Mouse.GetPosition(ImageOfTileGrid).Y);
 
+            
             SquaresService.DrawSquare(Colors.Blue, cordinats, BlueAndGreenSquare.Item1);
-
+            
             if (BlueAndGreenSquare.Item1 != null & BlueAndGreenSquare.Item2 != null)
             {
+                
                 (this.DataContext as MainViewModel).AngleUpdator(BlueAndGreenSquare.Item1.Position, BlueAndGreenSquare.Item2.Position);
-
+                
                 RedLineService.DrawRedLine(ref RedLine);
             }
         }
