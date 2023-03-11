@@ -19,7 +19,7 @@ namespace CollisionEditor.model
 
         public static string GetCollisionValues(byte[] collisionArray)
         {
-            return string.Join("  ", collisionArray);
+            return string.Join(" ", collisionArray);
         }
 
         public static Vector2<int> GetCorrectDotPosition(Vector2<double> position, int cellSize)

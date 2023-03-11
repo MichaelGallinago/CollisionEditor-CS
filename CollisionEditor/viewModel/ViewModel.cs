@@ -66,12 +66,13 @@ namespace CollisionEditor.viewModel
             string filePath = ViewModelTileService.GetTileMapFilePath();
             if (filePath is not null)
             {
-            this.TileSet = new TileSet(filePath);
-            AngleMap = new AngleMap(TileSet.Tiles.Count);
-            ViewModelAssistant.BitmapConvert(TileSet.Tiles[ChosenTile]);
-            ShowTile(ViewModelAssistant.BitmapConvert(TileSet.Tiles[ChosenTile]));
-            window.Heights.Text = ViewModelAssistant.GetCollisionValues(TileSet.HeightMap[ChosenTile]);
-            window.Widths.Text = ViewModelAssistant.GetCollisionValues(TileSet.WidthMap[ChosenTile]);
+                ChosenTile = 0;
+                this.TileSet = new TileSet(filePath);
+                AngleMap = new AngleMap(TileSet.Tiles.Count);
+                ViewModelAssistant.BitmapConvert(TileSet.Tiles[ChosenTile]);
+                ShowTile(ViewModelAssistant.BitmapConvert(TileSet.Tiles[ChosenTile]));
+                window.Heights.Text = ViewModelAssistant.GetCollisionValues(TileSet.HeightMap[ChosenTile]);
+                window.Widths.Text = ViewModelAssistant.GetCollisionValues(TileSet.WidthMap[ChosenTile]);
             }
         }
 
@@ -163,6 +164,8 @@ namespace CollisionEditor.viewModel
         private void SelectTile()
         {
             ShowTile(ViewModelAssistant.BitmapConvert(TileSet.Tiles[ChosenTile]));
+            window.Heights.Text = ViewModelAssistant.GetCollisionValues(TileSet.HeightMap[ChosenTile]);
+            window.Widths.Text = ViewModelAssistant.GetCollisionValues(TileSet.WidthMap[ChosenTile]);
         }
 
         private void ExitApp()
