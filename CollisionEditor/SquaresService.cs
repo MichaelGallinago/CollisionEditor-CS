@@ -7,6 +7,8 @@ using System.Windows.Media;
 using System.Windows.Shapes;
 using System;
 using System.Windows.Media.Media3D;
+using System.Runtime.CompilerServices;
+
 namespace CollisionEditor
 {
     internal static class SquaresService
@@ -31,13 +33,17 @@ namespace CollisionEditor
 
             mainWindow.canvasForRectangles.Children.Remove(squareAndPosition.Square);
 
-            squareAndPosition.Square = square;
-            squareAndPosition.Position = cordinats;
-
             Canvas.SetLeft(square, cordinats.X);
             Canvas.SetTop(square, cordinats.Y);
-
-            mainWindow.canvasForRectangles.Children.Add(square);
+            
+            
+            if (cordinats != squareAndPosition.Position)
+            {
+                mainWindow.canvasForRectangles.Children.Add(square);
+            }
+            
+            squareAndPosition.Square = square;
+            squareAndPosition.Position = cordinats;
         }
 
     }
