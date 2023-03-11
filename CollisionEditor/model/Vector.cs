@@ -1,7 +1,4 @@
-﻿using System;
-using System.Numerics;
-
-namespace CollisionEditor.model
+﻿namespace CollisionEditor.model
 {
     public struct Vector2<T>
     {
@@ -16,10 +13,9 @@ namespace CollisionEditor.model
 
         public bool Equals(Vector2<T> obj)
         {
-            if ((X is null) || (Y is null) || (obj.X is null) || (obj.Y is null))
-                return false;
-
-            return X.Equals(obj.X) && Y.Equals(obj.Y);
+            bool conditionX = X is null || obj.X is null ? X is null && obj.X is null : X.Equals(obj.X);
+            bool conditionY = Y is null || obj.Y is null ? Y is null && obj.Y is null : Y.Equals(obj.Y);
+            return conditionX && conditionY;
         }
     }
 }
