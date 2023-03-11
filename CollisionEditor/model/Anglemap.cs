@@ -26,7 +26,9 @@ namespace CollisionEditor.model
                 File.Delete(path);
 
             BinaryWriter writer = new BinaryWriter(File.Open(path, FileMode.CreateNew));
-            writer.Write(Values.ToArray());
+
+            foreach (byte value in Values)
+                writer.Write(value);
         }
 
         public byte SetAngleWithLine(int tileIndex, Vector2<int> positionGreen, Vector2<int> positionBlue)

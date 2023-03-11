@@ -107,11 +107,9 @@ namespace CollisionEditor.model
 
             BinaryWriter writer = new BinaryWriter(File.Open(path, FileMode.CreateNew));
 
-            byte[] allVallues = new byte[0];
             foreach (byte[] values in collisionMap)
-                allVallues.Concat(values);
-
-            writer.Write(allVallues);
+                foreach (byte value in values)
+                    writer.Write(value);
         }
 
         public Bitmap GetTilePanel(int panelWidth, Size separation)
