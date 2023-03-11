@@ -7,6 +7,8 @@ using System.Windows.Media;
 using System.Windows.Shapes;
 using System;
 using System.Windows.Media.Media3D;
+using static System.Windows.Forms.LinkLabel;
+
 namespace CollisionEditor
 {
     internal static class RedLineService
@@ -23,12 +25,23 @@ namespace CollisionEditor
             }
 
             Line newLine = new Line();
-            newLine.X1 = 0;
-
+            double length = 64 / Math.Abs(Math.Cos((-45 + ((floatAngle + 45) % 90)) / 180 * Math.PI));
+            floatAngle += 90;
+            newLine.X1 = length * Math.Sin(floatAngle / 180 * Math.PI);
+            newLine.Y1 = length * Math.Cos(floatAngle / 180 * Math.PI);
+            newLine.X2 = -newLine.X1;
+            newLine.Y2 = -newLine.Y1;
+            Canvas.SetTop(newLine, 64);
+            Canvas.SetLeft(newLine, 64);
+            newLine.Stroke = new SolidColorBrush(Colors.Red);
+            newLine.Fill = new SolidColorBrush(Colors.Red);
+            mainWindow.canvasForLine.Children.Add(newLine);
+            /*
             Rectangle line = new Rectangle();
             line.Width = 128 / Math.Abs(Math.Cos((-45 + ((floatAngle + 45) % 90)) / 180 * Math.PI));
             line.Height = 1;
             line.Fill = new SolidColorBrush(Colors.Red);
+            
 
             RotateTransform rotateTransform1 = new RotateTransform(180 - floatAngle,64,0);
             //line.RenderTransformOrigin = new Point(0.5 * (128 * Math.Sqrt(2) / line.Width), 0);
@@ -39,6 +52,7 @@ namespace CollisionEditor
             mainWindow.canvasForLine.Children.Remove(redLine);
             redLine = line;
             mainWindow.canvasForLine.Children.Add(line);
+            */
         }
     }
 }
