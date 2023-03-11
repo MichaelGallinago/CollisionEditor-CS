@@ -36,15 +36,17 @@ namespace CollisionEditor
             Canvas.SetLeft(square, cordinats.X);
             Canvas.SetTop(square, cordinats.Y);
             
-            
-            if (cordinats != squareAndPosition.Position)
+            if (Equals(color, squareAndPosition.Color))
+            {
+                
+            }
+            else
             {
                 mainWindow.canvasForRectangles.Children.Add(square);
             }
-            
             squareAndPosition.Square = square;
             squareAndPosition.Position = cordinats;
+            squareAndPosition.Color= color;
         }
-
     }
 }
