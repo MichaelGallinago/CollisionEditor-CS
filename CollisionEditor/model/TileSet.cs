@@ -59,8 +59,8 @@ namespace CollisionEditor.model
                     {
                         if (Tiles[i].GetPixel(x, y).A > 0)
                         {
-                            WidthMap[i][x]++;
-                            HeightMap[i][y]++;
+                            WidthMap[i][y]++;
+                            HeightMap[i][x]++;
                         }
                     }
                 }
@@ -105,11 +105,10 @@ namespace CollisionEditor.model
             if (File.Exists(path))
                 File.Delete(path);
 
-            BinaryWriter writer = new BinaryWriter(File.Open(path, FileMode.CreateNew));
-
-            foreach (byte[] values in collisionMap)
-                foreach (byte value in values)
-                    writer.Write(value);
+            using BinaryWriter writer = new BinaryWriter(File.Open(path, FileMode.CreateNew));
+                foreach (byte[] values in collisionMap)
+                    foreach (byte value in values)
+                        writer.Write(value);
         }
 
         public Bitmap GetTilePanel(int panelWidth, Size separation)

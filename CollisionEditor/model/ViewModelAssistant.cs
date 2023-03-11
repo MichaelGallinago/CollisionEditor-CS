@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.Linq;
 using System.Collections.Generic;
+using System.Text;
 
 namespace CollisionEditor.model
 {
@@ -19,7 +20,11 @@ namespace CollisionEditor.model
 
         public static string GetCollisionValues(byte[] collisionArray)
         {
-            return string.Join(" ", collisionArray);
+            StringBuilder builder = new StringBuilder();
+            foreach (byte value in collisionArray)
+                builder.Append((char)(value + (value < 10 ? 48 : 55)));
+
+            return string.Join(" ", builder.ToString().ToCharArray());
         }
 
         public static Vector2<int> GetCorrectDotPosition(Vector2<double> position, int cellSize)
