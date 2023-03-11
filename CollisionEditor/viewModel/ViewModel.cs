@@ -64,6 +64,7 @@ namespace CollisionEditor.viewModel
             AngleMap = new AngleMap(TileSet.Tiles.Count);
             Convertor.BitmapConvert(TileSet.Tiles[ChosenTile]);
             ShowTile(Convertor.BitmapConvert(TileSet.Tiles[ChosenTile]));
+            
         }
 
         private static void ShowTile(System.Windows.Media.Imaging.BitmapSource TileStrip)
