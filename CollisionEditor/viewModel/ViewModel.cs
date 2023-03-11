@@ -60,11 +60,14 @@ namespace CollisionEditor.viewModel
         private void MenuOpenTileMap()
         {
             string filePath = ViewModelTileService.GetTileMapFilePath();
-            this.TileSet = new TileSet(filePath);
-            AngleMap = new AngleMap(TileSet.Tiles.Count);
-            Convertor.BitmapConvert(TileSet.Tiles[ChosenTile]);
-            ShowTile(Convertor.BitmapConvert(TileSet.Tiles[ChosenTile]));
-            
+            if (filePath is not null)
+            {
+                this.TileSet = new TileSet(filePath);
+               
+                Convertor.BitmapConvert(TileSet.Tiles[ChosenTile]);
+                ShowTile(Convertor.BitmapConvert(TileSet.Tiles[ChosenTile]));
+            }
+
         }
 
         private static void ShowTile(System.Windows.Media.Imaging.BitmapSource TileStrip)
