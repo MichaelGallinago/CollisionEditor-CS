@@ -13,8 +13,12 @@
 
         public bool Equals(Vector2<T> obj)
         {
-            bool conditionX = X is null || obj.X is null ? X is null && obj.X is null : X.Equals(obj.X);
-            bool conditionY = Y is null || obj.Y is null ? Y is null && obj.Y is null : Y.Equals(obj.Y);
+            bool conditionX = X is null || obj.X is null ? 
+                X is null && obj.X is null : X.Equals(obj.X);
+
+            bool conditionY = Y is null || obj.Y is null ? 
+                Y is null && obj.Y is null : Y.Equals(obj.Y);
+
             return conditionX && conditionY;
         }
     }
