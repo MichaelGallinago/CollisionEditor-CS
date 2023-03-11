@@ -31,8 +31,8 @@ namespace CollisionEditor
             {
                 
                 (this.DataContext as MainViewModel).AngleUpdator(BlueAndGreenSquare.Item1.Position, BlueAndGreenSquare.Item2.Position);
-                
-                RedLineService.DrawRedLine(ref RedLine);
+
+                DrawRedLine();
             }
         }
 
@@ -46,9 +46,13 @@ namespace CollisionEditor
             {
                 (this.DataContext as MainViewModel).AngleUpdator(BlueAndGreenSquare.Item1.Position, BlueAndGreenSquare.Item2.Position);
 
-                RedLineService.DrawRedLine(ref RedLine);
+                DrawRedLine();
             }
         }
         
+        internal void DrawRedLine()
+        {
+            RedLineService.DrawRedLine(ref RedLine);
+        }
     }
 }

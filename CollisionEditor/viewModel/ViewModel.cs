@@ -152,6 +152,8 @@ namespace CollisionEditor.viewModel
 
             (int byteAngle, string hexAngle, double fullAngle) angles = ViewModelAngleService.GetAngles(byteAngle);
             ShowAngles(byteAngle, angles.hexAngle, angles.fullAngle);
+
+            window.DrawRedLine();
         }
         private void AngleDecrement()
         {
@@ -159,6 +161,8 @@ namespace CollisionEditor.viewModel
 
             (int byteAngle, string hexAngle, double fullAngle) angles = ViewModelAngleService.GetAngles(byteAngle);
             ShowAngles(byteAngle, angles.hexAngle, angles.fullAngle);
+            
+            window.DrawRedLine();
         }
 
         private void SelectTile()
