@@ -25,7 +25,7 @@ namespace CollisionEditor
             
             SquaresService.DrawSquare(Colors.Blue, cordinats, BlueAndGreenSquare.Item1);
             
-            if (BlueAndGreenSquare.Item1 != null & BlueAndGreenSquare.Item2 != null)
+            if (BlueAndGreenSquare.Item1.Square != null & BlueAndGreenSquare.Item2.Square != null)
             {
                 (this.DataContext as MainViewModel).AngleUpdator(BlueAndGreenSquare.Item1.Position, BlueAndGreenSquare.Item2.Position);
 
@@ -39,7 +39,7 @@ namespace CollisionEditor
 
             SquaresService.DrawSquare(Colors.Green, cordinats, BlueAndGreenSquare.Item2);
 
-            if (BlueAndGreenSquare.Item1 != null & BlueAndGreenSquare.Item2 != null)
+            if (BlueAndGreenSquare.Item1.Square != null & BlueAndGreenSquare.Item2.Square != null)
             {
                 (this.DataContext as MainViewModel).AngleUpdator(BlueAndGreenSquare.Item1.Position, BlueAndGreenSquare.Item2.Position);
 
