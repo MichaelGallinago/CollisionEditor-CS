@@ -105,7 +105,7 @@ namespace CollisionEditor.viewModel
 
         private void MenuSaveTileMap()
         {
-            if (TileSet is null)
+            if (TileSet.Tiles.Count==0)
             {
                 System.Windows.Forms.MessageBox.Show("Error: You haven't chosen TileMap to save");
             }
@@ -121,7 +121,7 @@ namespace CollisionEditor.viewModel
 
         private void MenuSaveWidthMap()
         {
-            if (TileSet is null)
+            if (TileSet.Tiles.Count == 0)
             {
                 System.Windows.Forms.MessageBox.Show("Error: The WidthMap isn't generated!");
             }
@@ -137,7 +137,7 @@ namespace CollisionEditor.viewModel
 
         private void MenuSaveHeightMap()
         {
-            if (TileSet is null)
+            if (TileSet.Tiles.Count == 0)
             {
                 System.Windows.Forms.MessageBox.Show("Error: The HeightMap isn't generated!");
             }
@@ -153,7 +153,7 @@ namespace CollisionEditor.viewModel
 
         private void MenuSaveAngleMap()
         {
-            if (AngleMap is null)
+            if (AngleMap.Values.Count==0)
             {
                 System.Windows.Forms.MessageBox.Show("Error: You haven't chosen AngleMap to save");
             }
@@ -225,7 +225,7 @@ namespace CollisionEditor.viewModel
 
         public void AngleUpdator(Vector2<int> vectorGreen, Vector2<int> vectorBlue)
         {
-            if (AngleMap is not null)
+            if (AngleMap.Values.Count!=0)
             {
                 byte byteAngle = AngleMap.SetAngleWithLine(ChosenTile, vectorGreen, vectorBlue);
 
