@@ -35,10 +35,10 @@ namespace CollisionEditor
 
             Canvas.SetLeft(square, cordinats.X);
             Canvas.SetTop(square, cordinats.Y);
-            
-            if (Equals(color, squareAndPosition.Color))
+           
+            if (Equals(cordinats, squareAndPosition.Position) && Equals(squareAndPosition.Color, color))
             {
-                
+
             }
             else
             {

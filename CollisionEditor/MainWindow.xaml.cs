@@ -7,7 +7,6 @@ using System.Windows.Shapes;
 
 namespace CollisionEditor
 {   
-    
     public partial class MainWindow : Window
     {
         public MainWindow()
@@ -22,14 +21,12 @@ namespace CollisionEditor
 
         private void ImageOfTileGridMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            Vector2<int> cordinats = (this.DataContext as MainViewModel).GetCordinats(Mouse.GetPosition(ImageOfTileGrid).X, Mouse.GetPosition(ImageOfTileGrid).Y);
-
+            Vector2<int> cordinats = (this.DataContext as MainViewModel).GetCordinats(Mouse.GetPosition(canvasForRectangles).X, Mouse.GetPosition(canvasForRectangles).Y);
             
             SquaresService.DrawSquare(Colors.Blue, cordinats, BlueAndGreenSquare.Item1);
             
             if (BlueAndGreenSquare.Item1 != null & BlueAndGreenSquare.Item2 != null)
             {
-                
                 (this.DataContext as MainViewModel).AngleUpdator(BlueAndGreenSquare.Item1.Position, BlueAndGreenSquare.Item2.Position);
 
                 DrawRedLine();
@@ -38,7 +35,7 @@ namespace CollisionEditor
 
         private void ImageOfTileGridMouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
-            Vector2<int> cordinats = (this.DataContext as MainViewModel).GetCordinats(Mouse.GetPosition(ImageOfTileGrid).X, Mouse.GetPosition(ImageOfTileGrid).Y);
+            Vector2<int> cordinats = (this.DataContext as MainViewModel).GetCordinats(Mouse.GetPosition(canvasForRectangles).X, Mouse.GetPosition(canvasForRectangles).Y);
 
             SquaresService.DrawSquare(Colors.Green, cordinats, BlueAndGreenSquare.Item2);
 
