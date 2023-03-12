@@ -68,16 +68,10 @@
         </Menu>
 
         <Image Grid.Column="0" Grid.Row="3" Height="128" RenderOptions.BitmapScalingMode="NearestNeighbor"  Width="128" Name ="ImageOfTile" Grid.ColumnSpan="11"/>
-        <Image Grid.Column="0" Grid.Row="3" Source="/Сетка.png" Height="129" Width="129" Grid.ColumnSpan="11" Name ="ImageOfTileGrid" MouseLeftButtonDown="ImageOfTileGridMouseLeftButtonDown" MouseRightButtonDown="ImageOfTileGridMouseRightButtonDown"/>
-        <TextBlock Grid.Column="2" Grid.Row="9" TextWrapping="Wrap" Text="0" Name="TextBlockByteAngle" Padding="2,0,0,0"  Background="#FFB1B1B1" />
-        <TextBlock Grid.Column="5" Grid.Row="9" TextWrapping="Wrap" Text="0x00" Name="TextBlockHexAngle"  Padding="2,0,0,0"  Background="#FFB1B1B1"/>
-        <TextBlock Grid.Column="8" Grid.Row="9" TextWrapping="Wrap" Text="0'" Name="TextBlockFullAngle"  Padding="2,0,0,0"  Background="#FFB1B1B1"/>
-        <Canvas Grid.Column="0" Grid.Row="3"  Height="128" Width="128" Name ="canvasForRectangles" Grid.ColumnSpan="11"/>
-        <Canvas Grid.Column="0" Grid.Row="3"  Height="128" Width="128" Name ="canvasForLine" Grid.ColumnSpan="11" />
-
+        <Image Grid.Column="0" Grid.Row="3" Source="/Сетка.png" Height="129" Width="129" Grid.ColumnSpan="11"/>
         <Canvas Grid.Column="0" Grid.Row="3"  Height="128" Width="128" Name ="canvasForRectangles" Grid.ColumnSpan="11" Focusable="True" MouseLeftButtonDown="CanvasForRectanglesMouseLeftButtonDown" MouseRightButtonDown="CanvasForRectanglesMouseRightButtonDown" Background="Transparent"/>
         <Canvas Grid.Column="0" Grid.Row="3"  Height="128" Width="128" Name ="canvasForLine" Grid.ColumnSpan="11"/>
-
+        
         <Border Grid.Row="5" Grid.Column="2" Grid.ColumnSpan="8" Background="GhostWhite" BorderBrush="Silver" BorderThickness="0.8,0.8,0.8,2" CornerRadius="3,3,3,3">
             <TextBlock x:Name="Heights" HorizontalAlignment="Center"/>
         </Border>
@@ -85,6 +79,11 @@
         <Border Grid.Row="7" Grid.Column="2" Grid.ColumnSpan="8" Background="GhostWhite" BorderBrush="Silver" BorderThickness="0.8,0.8,0.8,2" CornerRadius="3,3,3,3">
             <TextBlock x:Name="Widths" HorizontalAlignment="Center"/>
         </Border>
+
+        <TextBlock Grid.Column="2" Grid.Row="9" TextWrapping="Wrap" Text="0" Name="TextBlockByteAngle" Padding="2,0,0,0"  Background="#FFB1B1B1" />
+        <TextBlock Grid.Column="5" Grid.Row="9" TextWrapping="Wrap" Text="0x00" Name="TextBlockHexAngle"  Padding="2,0,0,0"  Background="#FFB1B1B1"/>
+        <TextBlock Grid.Column="8" Grid.Row="9" TextWrapping="Wrap" Text="0'" Name="TextBlockFullAngle"  Padding="2,0,0,0"  Background="#FFB1B1B1"/>
+        
         <Button Grid.Column="3" Command="{Binding AngleIncrementCommand}" Grid.Row="9" Height="10" Width="25" VerticalAlignment="Top" HorizontalAlignment="Left" Background="#FFDEDDDD">
             <Path Fill="Black" Data="M 0 6 L 12 6 L 6 0 Z" Height="6" Width="12"/>
         </Button>
