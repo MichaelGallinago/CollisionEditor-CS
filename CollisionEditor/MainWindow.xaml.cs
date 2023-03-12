@@ -19,13 +19,13 @@ namespace CollisionEditor
         (SquareAndPosition, SquareAndPosition) BlueAndGreenSquare = (new SquareAndPosition(), new SquareAndPosition());
         Line RedLine = new Line();
 
-        private void ImageOfTileGridMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private void CanvasForRectanglesMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             Vector2<int> cordinats = (this.DataContext as MainViewModel).GetCordinats(Mouse.GetPosition(canvasForRectangles).X, Mouse.GetPosition(canvasForRectangles).Y);
             
             SquaresService.DrawSquare(Colors.Blue, cordinats, BlueAndGreenSquare.Item1);
             
-            if (BlueAndGreenSquare.Item1 != null & BlueAndGreenSquare.Item2 != null)
+            if (BlueAndGreenSquare.Item1.Square != null & BlueAndGreenSquare.Item2.Square != null)
             {
                 (this.DataContext as MainViewModel).AngleUpdator(BlueAndGreenSquare.Item1.Position, BlueAndGreenSquare.Item2.Position);
 
@@ -33,13 +33,13 @@ namespace CollisionEditor
             }
         }
 
-        private void ImageOfTileGridMouseRightButtonDown(object sender, MouseButtonEventArgs e)
+        private void CanvasForRectanglesMouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
             Vector2<int> cordinats = (this.DataContext as MainViewModel).GetCordinats(Mouse.GetPosition(canvasForRectangles).X, Mouse.GetPosition(canvasForRectangles).Y);
 
             SquaresService.DrawSquare(Colors.Green, cordinats, BlueAndGreenSquare.Item2);
 
-            if (BlueAndGreenSquare.Item1 != null & BlueAndGreenSquare.Item2 != null)
+            if (BlueAndGreenSquare.Item1.Square != null & BlueAndGreenSquare.Item2.Square != null)
             {
                 (this.DataContext as MainViewModel).AngleUpdator(BlueAndGreenSquare.Item1.Position, BlueAndGreenSquare.Item2.Position);
 
