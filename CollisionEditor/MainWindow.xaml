@@ -59,7 +59,7 @@
                     <MenuItem Header="TileMap" Command="{Binding MenuSaveTileMapCommand}"/>
                 </MenuItem>
 
-                <MenuItem Header="Save Al          Ctrl+Shift+S" Padding="0,0,-20,0"/>
+                <MenuItem Header="Save Al          Ctrl+Shift+S" Padding="0,0,-20,0" Command="{Binding MenuSaveAllCommand}"/>
                 <MenuItem Header="Exit                         Alt+F4" Padding="0,0,-20,0" Command="{Binding ExitAppCommand}"/>
 
             </MenuItem>
