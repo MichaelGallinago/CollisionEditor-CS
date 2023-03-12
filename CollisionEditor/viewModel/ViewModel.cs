@@ -59,6 +59,9 @@ namespace CollisionEditor.viewModel
             MainWindow mainWindow = (MainWindow)System.Windows.Application.Current.MainWindow;
 
             mainWindow.TextBlockByteAngle.Text = byteAngle.ToString();
+            mainWindow.ByteAngleIncrimentButton.IsEnabled= true;
+            mainWindow.ByteAngleDecrementButton.IsEnabled = true;
+
             mainWindow.TextBlockHexAngle.Text = hexAngle;
             mainWindow.TextBlockFullAngle.Text = fullAngle.ToString() + "'";
         }
@@ -74,6 +77,9 @@ namespace CollisionEditor.viewModel
                 ShowTile(ViewModelAssistant.BitmapConvert(TileSet.Tiles[ChosenTile]));
                 window.Heights.Text = ViewModelAssistant.GetCollisionValues(TileSet.HeightMap[ChosenTile]);
                 window.Widths.Text = ViewModelAssistant.GetCollisionValues(TileSet.WidthMap[ChosenTile]);
+
+                (int byteAngle, string hexAngle, double fullAngle) angles = ViewModelAssistant.GetAngles(AngleMap, ChosenTile);
+                ShowAngles(angles.byteAngle, angles.hexAngle, angles.fullAngle);
             }
         }
 
@@ -161,6 +167,7 @@ namespace CollisionEditor.viewModel
 
             (int byteAngle, string hexAngle, double fullAngle) angles = ViewModelAngleService.GetAngles(byteAngle);
             ShowAngles(byteAngle, angles.hexAngle, angles.fullAngle);
+            window.DrawRedLine();
         }
         private void AngleDecrement()
         {
@@ -168,6 +175,7 @@ namespace CollisionEditor.viewModel
 
             (int byteAngle, string hexAngle, double fullAngle) angles = ViewModelAngleService.GetAngles(byteAngle);
             ShowAngles(byteAngle, angles.hexAngle, angles.fullAngle);
+            window.DrawRedLine();
         }
 
         private void SelectTile()

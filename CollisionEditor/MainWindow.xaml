@@ -40,8 +40,8 @@
         <Menu VerticalAlignment="Center" Grid.Column="0"  Grid.ColumnSpan="15" Foreground="Black" Height="20">
             <MenuItem Header="File">
                 <MenuItem Header="Load" >
-                    <MenuItem Header="TileMap........               Ctrl+D" Command="{Binding MenuOpenTileMapCommand}" Padding="0,0,-20,0"/>
-                    <MenuItem Header="AngleMap...     Ctrl+W" Command="{Binding MenuOpenAngleMapCommand}" Padding="0,0,-20,0"/>
+                    <MenuItem Header="TileMap........               Ctrl+O" Command="{Binding MenuOpenTileMapCommand}" Padding="0,0,-20,0"/>
+                    <MenuItem Header="AngleMap...     Ctrl+Shift+O" Command="{Binding MenuOpenAngleMapCommand}" Padding="0,0,-20,0"/>
                 </MenuItem>
 
                 <MenuItem Header="Unload">
@@ -49,7 +49,7 @@
                     <MenuItem Header="Anglemap"/>
                 </MenuItem>
 
-                <MenuItem Header="Unload All     CTRL+A" Padding="0,0,-20,0"  />
+                <MenuItem Header="Unload All     Ctrl+Shift+U" Padding="0,0,-20,0"  />
 
                 <MenuItem Header="Save">
                     <MenuItem Header="AngleMap" Command="{Binding MenuSaveAngleMapCommand}"/>
@@ -58,7 +58,7 @@
                     <MenuItem Header="TileMap" Command="{Binding MenuSaveTileMapCommand}"/>
                 </MenuItem>
 
-                <MenuItem Header="Save Al          Ctrl+S" Padding="0,0,-20,0" Command="{Binding MenuSaveAllCommand}"/>
+                <MenuItem Header="Save Al          Ctrl+Shift+S" Padding="0,0,-20,0" Command="{Binding MenuSaveAllCommand}"/>
                 <MenuItem Header="Exit                         Alt+F4" Padding="0,0,-20,0" Command="{Binding ExitAppCommand}"/>
 
             </MenuItem>
@@ -83,11 +83,11 @@
         <TextBlock Grid.Column="2" Grid.Row="9" TextWrapping="Wrap" Text="0" Name="TextBlockByteAngle" Padding="2,0,0,0"  Background="#FFB1B1B1" />
         <TextBlock Grid.Column="5" Grid.Row="9" TextWrapping="Wrap" Text="0x00" Name="TextBlockHexAngle"  Padding="2,0,0,0"  Background="#FFB1B1B1"/>
         <TextBlock Grid.Column="8" Grid.Row="9" TextWrapping="Wrap" Text="0'" Name="TextBlockFullAngle"  Padding="2,0,0,0"  Background="#FFB1B1B1"/>
-        
-        <Button Grid.Column="3" Command="{Binding AngleIncrementCommand}" Grid.Row="9" Height="10" Width="25" VerticalAlignment="Top" HorizontalAlignment="Left" Background="#FFDEDDDD">
+
+        <Button Grid.Column="3" Command="{Binding AngleIncrementCommand}" IsEnabled="False" x:Name="ByteAngleIncrimentButton" Grid.Row="9" Height="10" Width="25" VerticalAlignment="Top" HorizontalAlignment="Left" Background="#FFDEDDDD">
             <Path Fill="Black" Data="M 0 6 L 12 6 L 6 0 Z" Height="6" Width="12"/>
         </Button>
-        <Button Grid.Column="3" Command="{Binding AngleDecrementCommand}" Grid.Row="9" Height="10" Width="25" VerticalAlignment="Bottom" HorizontalAlignment="Left">
+        <Button Grid.Column="3" Command="{Binding AngleDecrementCommand}" IsEnabled="False" x:Name="ByteAngleDecrementButton" Grid.Row="9" Height="10" Width="25" VerticalAlignment="Bottom" HorizontalAlignment="Left">
             <Path Fill="Black" Data="M 0 0 L 6 6 L 12 0 Z"/>
         </Button>
 
