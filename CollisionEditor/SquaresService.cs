@@ -1,13 +1,7 @@
-﻿using System.Windows;
-using System.Windows.Input;
-using CollisionEditor.model;
-using CollisionEditor.viewModel;
+﻿using CollisionEditor.model;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
-using System;
-using System.Windows.Media.Media3D;
-using System.Runtime.CompilerServices;
 
 namespace CollisionEditor
 {

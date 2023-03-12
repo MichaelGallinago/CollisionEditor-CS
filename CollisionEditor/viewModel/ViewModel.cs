@@ -18,6 +18,7 @@ namespace CollisionEditor.viewModel
         public ICommand MenuSaveWidthMapCommand { get; set; }
         public ICommand MenuSaveHeightMapCommand { get; set; }
         public ICommand MenuSaveAngleMapCommand { get; set; }
+        public ICommand MenuSaveAllCommand { get; set; }
         public ICommand SelectTileCommand { get; set; }
         public ICommand AngleIncrementCommand { get; set; }
         public ICommand AngleDecrementCommand { get; set; }
@@ -33,6 +34,7 @@ namespace CollisionEditor.viewModel
             MenuSaveWidthMapCommand = new RelayCommand(MenuSaveWidthMap);
             MenuSaveHeightMapCommand = new RelayCommand(MenuSaveHeightMap);
             MenuSaveAngleMapCommand = new RelayCommand(MenuSaveAngleMap);
+            MenuSaveAllCommand = new RelayCommand(MenuSaveAll);
 
             AngleIncrementCommand = new RelayCommand(AngleIncrement);
             AngleDecrementCommand = new RelayCommand(AngleDecrement);
@@ -144,6 +146,14 @@ namespace CollisionEditor.viewModel
                 }
             }
         }
+
+        private void MenuSaveAll()
+        {
+            MenuSaveAngleMap();
+            MenuSaveHeightMap();
+            MenuSaveWidthMap();
+            MenuSaveTileMap();
+        }        
 
         private void AngleIncrement()
         {
