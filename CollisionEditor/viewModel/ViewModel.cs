@@ -32,7 +32,7 @@ namespace CollisionEditor.viewModel
         {
             AngleMap = new AngleMap(0);
             TileSet  = new TileSet(0);
-
+            ChosenTile =0;
             this.window = window;
             MenuOpenAngleMapCommand = new RelayCommand(MenuOpenAngleMap);
             MenuOpenTileMapCommand = new RelayCommand(MenuOpenTileMap);
@@ -212,7 +212,12 @@ namespace CollisionEditor.viewModel
         }
 
         private void SelectTile()
-        {
+        {       
+            if (ChosenTile>TileSet.Tiles.Count-1)
+            {
+                ChosenTile = TileSet.Tiles.Count - 1;
+            }
+            
             ShowTile(ViewModelAssistant.BitmapConvert(TileSet.Tiles[ChosenTile]));
             window.Heights.Text = ViewModelAssistant.GetCollisionValues(TileSet.HeightMap[ChosenTile]);
             window.Widths.Text  = ViewModelAssistant.GetCollisionValues(TileSet.WidthMap[ChosenTile]);
