@@ -106,7 +106,7 @@
             <Path Fill="Black" Data="M 0 0 L 6 6 L 12 0 Z"/>
         </Button>
 
-        <TextBox Grid.Column="11" Grid.Row="2" TextWrapping="Wrap" Background="#FFD8D8D8" Text="{Binding ChosenTile,Mode=TwoWay,IsAsync=True}"  Grid.ColumnSpan="2" Margin="16,0,172,0"/>
+        <TextBox Grid.Column="11" Grid.Row="2" TextWrapping="Wrap" Background="#FFD8D8D8" x:Name="ChosenTileTextBox" Text="{Binding ChosenTile,Mode=TwoWay,IsAsync=True}"  Grid.ColumnSpan="2" Margin="16,0,172,0"/>
         <Button Grid.Column="12" Grid.Row="2" Background="#FFD8D8D8" Content="Select Tile" Command="{Binding SelectTileCommand}" Margin="125,0,0,0" />
     </Grid>
     <Window.InputBindings>

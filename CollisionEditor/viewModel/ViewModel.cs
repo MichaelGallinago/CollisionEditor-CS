@@ -217,7 +217,7 @@ namespace CollisionEditor.viewModel
             {
                 ChosenTile = TileSet.Tiles.Count - 1;
             }
-            
+            window.ChosenTileTextBox.Text = ChosenTile.ToString();
             ShowTile(ViewModelAssistant.BitmapConvert(TileSet.Tiles[ChosenTile]));
             window.Heights.Text = ViewModelAssistant.GetCollisionValues(TileSet.HeightMap[ChosenTile]);
             window.Widths.Text  = ViewModelAssistant.GetCollisionValues(TileSet.WidthMap[ChosenTile]);
