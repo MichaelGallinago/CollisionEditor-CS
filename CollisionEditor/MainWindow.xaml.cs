@@ -19,7 +19,7 @@ namespace CollisionEditor
         (SquareAndPosition, SquareAndPosition) BlueAndGreenSquare = (new SquareAndPosition(), new SquareAndPosition());
         Line RedLine = new Line();
 
-        private void ImageOfTileGridMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private void CanvasForRectanglesMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             Vector2<int> cordinats = (this.DataContext as MainViewModel).GetCordinats(Mouse.GetPosition(canvasForRectangles).X, Mouse.GetPosition(canvasForRectangles).Y);
             
@@ -33,7 +33,7 @@ namespace CollisionEditor
             }
         }
 
-        private void ImageOfTileGridMouseRightButtonDown(object sender, MouseButtonEventArgs e)
+        private void CanvasForRectanglesMouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
             Vector2<int> cordinats = (this.DataContext as MainViewModel).GetCordinats(Mouse.GetPosition(canvasForRectangles).X, Mouse.GetPosition(canvasForRectangles).Y);
 

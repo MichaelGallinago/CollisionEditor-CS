@@ -71,7 +71,7 @@
         <Image Grid.Column="0" Grid.Row="3" Height="128" RenderOptions.BitmapScalingMode="NearestNeighbor" Width="128" Name ="ImageOfTile" Grid.ColumnSpan="11"/>
         <Image Grid.Column="0" Grid.Row="3" Source="/Сетка.png" Height="129" Width="129" Grid.ColumnSpan="11"/>
 
-        <Canvas Grid.Column="0" Grid.Row="3"  Height="128" Width="128" Name ="canvasForRectangles" Grid.ColumnSpan="11" Focusable="True" MouseLeftButtonDown="ImageOfTileGridMouseLeftButtonDown" MouseRightButtonDown="ImageOfTileGridMouseRightButtonDown" Background="Transparent"/>
+        <Canvas Grid.Column="0" Grid.Row="3"  Height="128" Width="128" Name ="canvasForRectangles" Grid.ColumnSpan="11" Focusable="True" MouseLeftButtonDown="CanvasForRectanglesMouseLeftButtonDown" MouseRightButtonDown="CanvasForRectanglesMouseRightButtonDown" Background="Transparent"/>
         <Canvas Grid.Column="0" Grid.Row="3"  Height="128" Width="128" Name ="canvasForLine" Grid.ColumnSpan="11"/>
 
         <Border Grid.Row="5" Grid.Column="2" Grid.ColumnSpan="8" Background="GhostWhite" BorderBrush="Silver" BorderThickness="0.8,0.8,0.8,2" CornerRadius="3,3,3,3">

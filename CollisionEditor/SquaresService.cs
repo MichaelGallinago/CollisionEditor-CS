@@ -27,8 +27,6 @@ namespace CollisionEditor
 
             mainWindow.canvasForRectangles.Children.Remove(squareAndPosition.Square);
 
-            
-
             Canvas.SetLeft(square, cordinats.X);
             Canvas.SetTop(square, cordinats.Y);
            
