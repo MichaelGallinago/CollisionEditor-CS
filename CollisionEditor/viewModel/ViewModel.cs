@@ -63,7 +63,12 @@ namespace CollisionEditor.viewModel
             mainWindow.ByteAngleDecrementButton.IsEnabled = true;
 
             mainWindow.TextBlockHexAngle.Text = hexAngle;
+            mainWindow.HexAngleIncrimentButton.IsEnabled = true;
+            mainWindow.HexAngleDecrementButton.IsEnabled = true;
+
             mainWindow.TextBlockFullAngle.Text = fullAngle.ToString() + "'";
+            mainWindow.FullAngleIncrimentButton.IsEnabled = true;
+            mainWindow.FullAngleDecrementButton.IsEnabled = true;
         }
 
         private void MenuOpenTileMap()
@@ -167,6 +172,7 @@ namespace CollisionEditor.viewModel
 
             (int byteAngle, string hexAngle, double fullAngle) angles = ViewModelAngleService.GetAngles(byteAngle);
             ShowAngles(byteAngle, angles.hexAngle, angles.fullAngle);
+
             window.DrawRedLine();
         }
         private void AngleDecrement()
@@ -175,6 +181,7 @@ namespace CollisionEditor.viewModel
 
             (int byteAngle, string hexAngle, double fullAngle) angles = ViewModelAngleService.GetAngles(byteAngle);
             ShowAngles(byteAngle, angles.hexAngle, angles.fullAngle);
+
             window.DrawRedLine();
         }
 
