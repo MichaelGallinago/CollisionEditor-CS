@@ -27,20 +27,25 @@ namespace CollisionEditor
 
             mainWindow.canvasForRectangles.Children.Remove(squareAndPosition.Square);
 
+            
+
             Canvas.SetLeft(square, cordinats.X);
             Canvas.SetTop(square, cordinats.Y);
            
             if (Equals(cordinats, squareAndPosition.Position) && Equals(squareAndPosition.Color, color))
             {
-
+                squareAndPosition.Square = null;
+                squareAndPosition.Position = new Vector2<int>();
+                squareAndPosition.Color = new Color();
             }
             else
             {
                 mainWindow.canvasForRectangles.Children.Add(square);
+                squareAndPosition.Square = square;
+                squareAndPosition.Position = cordinats;
+                squareAndPosition.Color = color;
             }
-            squareAndPosition.Square = square;
-            squareAndPosition.Position = cordinats;
-            squareAndPosition.Color= color;
+            
         }
     }
 }
