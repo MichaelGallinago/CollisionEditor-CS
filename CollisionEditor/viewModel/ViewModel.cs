@@ -9,9 +9,9 @@ namespace CollisionEditor.viewModel
 {
     public class MainViewModel : INotifyPropertyChanged
     {
-        private MainWindow window;  
+        private MainWindow window;
         private AngleMap AngleMap { get; set; }
-        private TileSet TileSet { get; set;}
+        private TileSet TileSet { get; set; }
         public ICommand MenuOpenAngleMapCommand { get; set; }
         public ICommand MenuOpenTileMapCommand { get; set; }
         public ICommand MenuSaveTileMapCommand { get; set; }
@@ -19,6 +19,9 @@ namespace CollisionEditor.viewModel
         public ICommand MenuSaveHeightMapCommand { get; set; }
         public ICommand MenuSaveAngleMapCommand { get; set; }
         public ICommand MenuSaveAllCommand { get; set; }
+        public ICommand MenuUnloadTileMapCommand { get; set; }
+        public ICommand MenuUnloadAngleMapCommand { get; set; }
+        public ICommand MenuUnloadAllCommand { get; set; }
         public ICommand SelectTileCommand { get; set; }
         public ICommand AngleIncrementCommand { get; set; }
         public ICommand AngleDecrementCommand { get; set; }
@@ -27,6 +30,9 @@ namespace CollisionEditor.viewModel
 
         public MainViewModel(MainWindow window)
         {
+            AngleMap = new AngleMap(0);
+            TileSet  = new TileSet(0);
+
             this.window = window;
             MenuOpenAngleMapCommand = new RelayCommand(MenuOpenAngleMap);
             MenuOpenTileMapCommand = new RelayCommand(MenuOpenTileMap);
@@ -35,6 +41,9 @@ namespace CollisionEditor.viewModel
             MenuSaveHeightMapCommand = new RelayCommand(MenuSaveHeightMap);
             MenuSaveAngleMapCommand = new RelayCommand(MenuSaveAngleMap);
             MenuSaveAllCommand = new RelayCommand(MenuSaveAll);
+            MenuUnloadTileMapCommand = new RelayCommand(MenuUnloadTileMap);
+            MenuUnloadAngleMapCommand = new RelayCommand(MenuUnloadAngleMap);
+            MenuUnloadAllCommand = new RelayCommand(MenuUnloadAll);
 
             AngleIncrementCommand = new RelayCommand(AngleIncrement);
             AngleDecrementCommand = new RelayCommand(AngleDecrement);
@@ -76,7 +85,7 @@ namespace CollisionEditor.viewModel
             string filePath = ViewModelTileService.GetTileMapFilePath();
             if (filePath is not null)
             {
-                this.TileSet = new TileSet(filePath);
+                TileSet = new TileSet(filePath);
                 AngleMap = new AngleMap(TileSet.Tiles.Count);
                 ViewModelAssistant.BitmapConvert(TileSet.Tiles[ChosenTile]);
                 ShowTile(ViewModelAssistant.BitmapConvert(TileSet.Tiles[ChosenTile]));
@@ -164,7 +173,23 @@ namespace CollisionEditor.viewModel
             MenuSaveHeightMap();
             MenuSaveWidthMap();
             MenuSaveTileMap();
-        }        
+        }
+
+        private void MenuUnloadTileMap()
+        {
+            TileSet = new TileSet(AngleMap.Values.Count);
+        }
+
+        private void MenuUnloadAngleMap()
+        {
+            AngleMap = new AngleMap(TileSet.Tiles.Count);
+        }
+
+        private void MenuUnloadAll()
+        {
+            TileSet = new TileSet(0);
+            AngleMap = new AngleMap(0);
+        }
 
         private void AngleIncrement()
         {
@@ -175,6 +200,7 @@ namespace CollisionEditor.viewModel
 
             window.DrawRedLine();
         }
+
         private void AngleDecrement()
         {
             byte byteAngle = AngleMap.ChangeAngle(ChosenTile, -1);
