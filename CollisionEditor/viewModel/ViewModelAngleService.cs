@@ -28,9 +28,15 @@ namespace CollisionEditor.viewModel
             return filePath;
         }
 
-        public static (int byteAngle, string hexAngle, double fullAngle) GetAngles(byte byteAngle)
+        public static (byte byteAngle, string hexAngle, double fullAngle) GetAngles(byte byteAngle)
         {
             return (byteAngle, ViewModelAssistant.GetHexAngle(byteAngle), ViewModelAssistant.GetFullAngle(byteAngle));
+        }
+
+        public static (byte byteAngle, string hexAngle, double fullAngle) GetAngles(string hexAngle)
+        {
+            var byteAngle = ViewModelAssistant.GetByteAngle(hexAngle);
+            return (byteAngle, hexAngle, ViewModelAssistant.GetFullAngle(byteAngle));
         }
     }
 }

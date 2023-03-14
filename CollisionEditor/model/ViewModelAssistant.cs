@@ -4,8 +4,6 @@ using System.Windows.Media.Imaging;
 using System.Windows.Media;
 using System.Drawing;
 using System.Drawing.Imaging;
-using System.Linq;
-using System.Collections.Generic;
 using System.Text;
 
 namespace CollisionEditor.model
@@ -59,9 +57,9 @@ namespace CollisionEditor.model
             return Math.Round((256 - angle) * 1.40625, 1);
         }
 
-        public static int GetByteAngle(string hexAngle)
+        public static byte GetByteAngle(string hexAngle)
         {
-            return int.Parse(hexAngle.Substring(2), NumberStyles.HexNumber);
+            return byte.Parse(hexAngle.Substring(2), NumberStyles.HexNumber);
         }
 
         public static void SupplementElements(AngleMap angleMap, TileSet tileSet)
