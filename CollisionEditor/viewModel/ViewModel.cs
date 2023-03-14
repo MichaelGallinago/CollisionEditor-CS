@@ -70,6 +70,7 @@ namespace CollisionEditor.viewModel
                 AngleMap = new AngleMap(filePath);
                 (int byteAngle, string hexAngle, double fullAngle) angles = ViewModelAssistant.GetAngles(AngleMap, chosenTile);
                 ShowAngles(angles.byteAngle, angles.hexAngle, angles.fullAngle);
+                window.SelectTileButton.IsEnabled = true;
             }
         }
         public static void ShowAngles(int byteAngle, string hexAngle, double fullAngle)
@@ -103,6 +104,7 @@ namespace CollisionEditor.viewModel
 
                 (int byteAngle, string hexAngle, double fullAngle) angles = ViewModelAssistant.GetAngles(AngleMap, chosenTile);
                 ShowAngles(angles.byteAngle, angles.hexAngle, angles.fullAngle);
+                window.SelectTileButton.IsEnabled = true;
             }
         }
 
@@ -221,7 +223,7 @@ namespace CollisionEditor.viewModel
         }
 
         private void SelectTile()
-        {       
+        {   
             if (chosenTile>TileSet.Tiles.Count-1)
             {
                 chosenTile = TileSet.Tiles.Count - 1;
