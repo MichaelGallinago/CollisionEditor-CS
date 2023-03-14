@@ -11,7 +11,7 @@ namespace CollisionEditor
 
         public static void DrawRedLine(ref Line redLine)
         {
-            string stringAngle = mainWindow.TextBlockFullAngle.Text.TrimEnd('\'');
+            string stringAngle = mainWindow.TextBlockFullAngle.Text.TrimEnd('°');
             float floatAngle = float.Parse(stringAngle);
             if (floatAngle > 180)
             {

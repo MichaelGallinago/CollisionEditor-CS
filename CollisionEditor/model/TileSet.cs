@@ -2,7 +2,6 @@
 using System.IO;
 using System.Drawing;
 using System.Drawing.Imaging;
-using System.Linq;
 
 namespace CollisionEditor.model
 {
@@ -14,7 +13,7 @@ namespace CollisionEditor.model
         public List<byte[]> WidthMap { get; private set; }
         public List<byte[]> HeightMap { get; private set; }
 
-        public TileSet(string path, AngleMap? angleMap = null, 
+        public TileSet(string path, 
             int tileWidth = 16, int tileHeight = 16,
             Size separate = new Size(), Size offset = new Size())
         {
@@ -40,6 +39,11 @@ namespace CollisionEditor.model
                         TileSize.Width, TileSize.Height);
 
                     Tiles.Add(bitmap.Clone(tileBounds, bitmap.PixelFormat));
+                    if (Tiles.Count == int.MaxValue)
+                    {
+                        CreateCollisionmaps();
+                        return;
+                    }
                 }
             }
 

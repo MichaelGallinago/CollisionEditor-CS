@@ -12,7 +12,7 @@ namespace CollisionEditor.model
         public AngleMap(string path)
         {
             BinaryReader reader = new BinaryReader(File.Open(path, FileMode.Open));
-            Values = reader.ReadBytes((int)reader.BaseStream.Length).ToList();
+            Values = reader.ReadBytes((int)Math.Min(int.MaxValue, reader.BaseStream.Length)).ToList();
         }
 
         public AngleMap(int tileCount)
