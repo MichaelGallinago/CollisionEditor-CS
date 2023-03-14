@@ -77,9 +77,9 @@ namespace CollisionEditor.model
 
             for (int i = 0; i < angleCount; i++)
             {
-                Tiles[i] = new Bitmap(tileWidth, tileHeight);
-                WidthMap[i]  = new byte[tileWidth];
-                HeightMap[i] = new byte[tileHeight];
+                Tiles.Add(new Bitmap(tileWidth, tileHeight));
+                WidthMap.Add(new byte[tileWidth]);
+                HeightMap.Add(new byte[tileHeight]);
             }
         }
 
