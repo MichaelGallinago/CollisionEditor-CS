@@ -10,7 +10,7 @@ namespace CollisionEditor.model
 {
     internal static class ViewModelAssistant
     {
-        public static (int byteAngle, string hexAngle, double fullAngle) GetAngles(AngleMap angleMap, int chosenTile)
+        public static (byte byteAngle, string hexAngle, double fullAngle) GetAngles(AngleMap angleMap, int chosenTile)
         {
             byte angle = angleMap.Values[chosenTile];
             return (angle, GetHexAngle(angle), GetFullAngle(angle));
