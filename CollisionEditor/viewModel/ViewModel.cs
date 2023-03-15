@@ -38,6 +38,20 @@ namespace CollisionEditor.viewModel
 
             }
         }
+        private string _hexAngle;
+        public string HexAngle
+        {
+            get => _hexAngle;
+            set
+            {
+                _hexAngle = value;
+                (byte byteAngle, string hexAngle, double fullAngle) angles = ViewModelAngleService.GetAngles(_hexAngle);
+                ShowAngles(angles.byteAngle, angles.hexAngle, angles.fullAngle);
+
+                window.DrawRedLine();
+
+            }
+        }
         private uint _chosenTile;
         public uint ChosenTile
         {
@@ -53,6 +67,7 @@ namespace CollisionEditor.viewModel
             tileSet  = new TileSet(0);
             _chosenTile = 0;
             _byteAngle = 0;
+            _hexAngle = "0x00";
             this.window = window;
             MenuOpenAngleMapCommand = new RelayCommand(MenuOpenAngleMap);
             MenuOpenTileMapCommand = new RelayCommand(MenuOpenTileMap);
@@ -82,7 +97,10 @@ namespace CollisionEditor.viewModel
                 tileSet = new TileSet(angleMap.Values.Count);
                 (byte byteAngle, string hexAngle, double fullAngle) angles = ViewModelAssistant.GetAngles(angleMap, _chosenTile);
                 ShowAngles(angles.byteAngle, angles.hexAngle, angles.fullAngle);
+                window.SelectTileTextBox.IsEnabled = true;
                 window.SelectTileButton.IsEnabled = true;
+                window.TextBoxByteAngle.IsEnabled = true;
+                window.TextBlockHexAngle.IsEnabled = true;
             }
         }
         public void ShowAngles(byte byteAngle, string hexAngle, double fullAngle)
@@ -94,7 +112,8 @@ namespace CollisionEditor.viewModel
             mainWindow.ByteAngleIncrimentButton.IsEnabled= true;
             mainWindow.ByteAngleDecrementButton.IsEnabled = true;
 
-            mainWindow.TextBlockHexAngle.Text = hexAngle;
+            _hexAngle = hexAngle;
+            OnPropertyChanged(nameof(HexAngle));
             mainWindow.HexAngleIncrimentButton.IsEnabled = true;
             mainWindow.HexAngleDecrementButton.IsEnabled = true;
 
@@ -117,7 +136,10 @@ namespace CollisionEditor.viewModel
 
                 (byte byteAngle, string hexAngle, double fullAngle) angles = ViewModelAssistant.GetAngles(angleMap, _chosenTile);
                 ShowAngles(angles.byteAngle, angles.hexAngle, angles.fullAngle);
+                window.SelectTileTextBox.IsEnabled = true;
                 window.SelectTileButton.IsEnabled = true;
+                window.TextBoxByteAngle.IsEnabled = true;
+                window.TextBlockHexAngle.IsEnabled = true;
             }
         }
 
@@ -246,6 +268,9 @@ namespace CollisionEditor.viewModel
             ShowTile(ViewModelAssistant.BitmapConvert(tileSet.Tiles[(int)_chosenTile]));
             window.Heights.Text = ViewModelAssistant.GetCollisionValues(tileSet.HeightMap[(int)_chosenTile]);
             window.Widths.Text  = ViewModelAssistant.GetCollisionValues(tileSet.WidthMap[(int)_chosenTile]);
+            
+            (byte byteAngle, string hexAngle, double fullAngle) angles = ViewModelAssistant.GetAngles(angleMap, _chosenTile);
+            ShowAngles(angles.byteAngle, angles.hexAngle, angles.fullAngle);
         }
 
         private void ExitApp()
