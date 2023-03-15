@@ -90,20 +90,26 @@ namespace CollisionEditor
             }
         }
 
-
+        private static bool IsOnTheCanvas(System.Windows.Controls.Canvas canvasForRectangles)
+        {   
+            if (Mouse.GetPosition(canvasForRectangles).X >= 0 && Mouse.GetPosition(canvasForRectangles).X <= 128 && Mouse.GetPosition(canvasForRectangles).Y >= 0 && Mouse.GetPosition(canvasForRectangles).Y <= 128)
+            {
+                return true;
+            }
+            return false;
+        }
         
         private async void canvasForRectangles_MouseLeave(object sender, MouseEventArgs e)
         {
             await Task.Delay(1000);
-            while (canvasForRectangles.Opacity>=0.1)
+            while (canvasForRectangles.Opacity>=0.1 && IsOnTheCanvas(canvasForRectangles))
             {
                 await Task.Delay(100);
-                
-                canvasForRectangles.Opacity-=0.1;
+                 canvasForRectangles.Opacity -= 0.1;
             }
         }
         private void canvasForRectangles_MouseEnter(object sender, MouseEventArgs e)
-        {
+        {   
             canvasForRectangles.Opacity = 1;
         }
     }
