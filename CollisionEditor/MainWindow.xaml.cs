@@ -5,10 +5,7 @@ using CollisionEditor.viewModel;
 using System.Windows.Media;
 using System.Windows.Shapes;
 using System.Linq;
-using System.Timers;
 using System;
-using System.Windows.Threading;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace CollisionEditor
@@ -60,8 +57,10 @@ namespace CollisionEditor
 
         private void TextBoxHexAngle_KeyDown(object sender, KeyEventArgs e)
         {
+            bool isCtrl = (Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl));
             Key[] exceptions = new Key[] { Key.Back, Key.Delete, Key.Left, Key.Right };
-            if (TextBoxHexAngle.Text.Length >= 4 && !exceptions.Contains(e.Key))
+            if (TextBoxHexAngle.Text.Length >= 4 && !exceptions.Contains(e.Key) && !isCtrl 
+                || TextBoxHexAngle.Text.Length > 0 && e.Key == Key.C && isCtrl)
                 e.Handled = true;
         }
 

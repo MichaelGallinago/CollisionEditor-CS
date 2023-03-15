@@ -51,32 +51,19 @@ namespace CollisionEditor.viewModel
             set
             {
                 _hexAngle = value;
-                switch (_hexAngle.Length)
-                {
-                    case 1: case 2:
-                        if (_hexAngle[_hexAngle.Length - 1] != (char)('0' | _hexAngle.Length))
-                        {
-                            AddError(nameof(HexAngle), $"Error in {_hexAngle.Length}");
-                            return;
-                        }
-                        break;
-                    case 3: case 4:
-                        if (!hexademicalAlplhabet.Contains(_hexAngle[_hexAngle.Length - 1]))
-                        {
-                            AddError(nameof(HexAngle), $"Error in {_hexAngle.Length}");
-                            return;
-                        }
-                        break;
-                }
 
-                if (_hexAngle.Length != 4)
+                if (_hexAngle.Length != 4 || _hexAngle[0] != '0' || _hexAngle[1] != 'x'
+                    || !hexademicalAlplhabet.Contains(_hexAngle[2]) || !hexademicalAlplhabet.Contains(_hexAngle[3]))
                 {
-                    AddError(nameof(HexAngle), $"Error! Incorrect length!");
+                    AddError(nameof(HexAngle), "Error! Wrong hexadecimal number");
                     return;
                 }
 
+                ClearErrors(nameof(HexAngle));
+
                 (byte byteAngle, string hexAngle, double fullAngle) angles = ViewModelAngleService.GetAngles(_hexAngle);
                 ByteAngle = angles.byteAngle;
+                angleMap.SetAngle((int)ChosenTile, angles.byteAngle);
                 window.DrawRedLine();
             }
         }
@@ -187,7 +174,7 @@ namespace CollisionEditor.viewModel
             else
             {
                 string filePath = ViewModelTileService.GetTileMapSavePath();
-                if (filePath is not null)
+                if (filePath is not null && filePath != string.Empty)
                 {
                     tileSet.Save(Path.GetFullPath(filePath), 16);
                 }
@@ -352,11 +339,20 @@ namespace CollisionEditor.viewModel
             }
 
             _propertyErrors[propertyName].Add(errorMessage);
+            OnErrorsChanged(propertyName);
         }
 
         private void OnErrorsChanged(string propertyName)
         {
             ErrorsChanged?.Invoke(this, new DataErrorsChangedEventArgs(propertyName));
+        }
+
+        public void ClearErrors(string propertyName)
+        {
+            if (_propertyErrors.Remove(propertyName))
+            {
+                OnErrorsChanged(propertyName);
+            }
         }
     }
 }

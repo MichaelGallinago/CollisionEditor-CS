@@ -59,7 +59,7 @@ namespace CollisionEditor.model
 
         public static byte GetByteAngle(string hexAngle)
         {
-          return byte.Parse(hexAngle.Substring(2), NumberStyles.HexNumber);
+         return byte.Parse(hexAngle.Substring(2), NumberStyles.HexNumber);
         }
 
         public static void SupplementElements(AngleMap angleMap, TileSet tileSet)
