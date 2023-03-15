@@ -49,7 +49,7 @@ namespace CollisionEditor.model
 
         public static string GetHexAngle(byte angle)
         {
-            return string.Format("0x{0:X}", angle);
+            return "0x" + string.Format("{0:X}", angle).PadLeft(2, '0');
         }
 
         public static double GetFullAngle(byte angle)
@@ -59,7 +59,7 @@ namespace CollisionEditor.model
 
         public static byte GetByteAngle(string hexAngle)
         {
-            return byte.Parse(hexAngle.Substring(2), NumberStyles.HexNumber);
+          return byte.Parse(hexAngle.Substring(2), NumberStyles.HexNumber);
         }
 
         public static void SupplementElements(AngleMap angleMap, TileSet tileSet)

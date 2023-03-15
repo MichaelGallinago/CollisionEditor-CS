@@ -53,36 +53,11 @@ namespace CollisionEditor
             RedLineService.DrawRedLine(ref RedLine);
         }
 
-        void OnPreviewTextInput(object sender, TextCompositionEventArgs e)
+        private void TextBoxHexAngle_KeyDown(object sender, KeyEventArgs e)
         {
-            e.Handled = !e.Text.All(IsGood);
-        }
-        bool IsGood(char c)
-        {
-            if (TextBoxHexAngle.Text.Length >= 4)
-                return false;
-            if (c >= '0' && c <= '9')
-                return true;
-            if (c >= 'A' && c <= 'F')
-                return true;
-            
-            return false;
-        }
-
-
-        private void TextBoxHexAngle_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.Back)
-            {
-                if (TextBoxHexAngle.Text.Length<2)
-                {
-                    TextBoxHexAngle.Text = "0x00";
-                }
-                if (TextBoxHexAngle.Text.Substring(0, 2) != "0x")
-                {
-                    TextBoxHexAngle.Text = "0x00";
-                }
-            }
+            Key[] exceptions = new Key[] { Key.Back, Key.Delete, Key.Left, Key.Right };
+            if (TextBoxHexAngle.Text.Length >= 4 && !exceptions.Contains(e.Key))
+                e.Handled = true;
         }
 
         private void canvasForRectangles_MouseLeave(object sender, MouseEventArgs e)
@@ -93,6 +68,11 @@ namespace CollisionEditor
         private void canvasForRectangles_MouseEnter(object sender, MouseEventArgs e)
         {
             canvasForRectangles.Opacity = 0.5;
+        }
+
+        private void TextBoxHexAngle_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+
         }
     }
 }

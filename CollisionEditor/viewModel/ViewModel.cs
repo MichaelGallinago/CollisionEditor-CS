@@ -1,11 +1,15 @@
 ﻿using CollisionEditor.model;
+using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
+using System.Linq;
 using System.Windows.Input;
 
 namespace CollisionEditor.viewModel
 {
-    public class MainViewModel : INotifyPropertyChanged
+    public class MainViewModel : INotifyPropertyChanged, INotifyDataErrorInfo
     {
         private MainWindow window;
         private AngleMap angleMap;
@@ -38,23 +42,41 @@ namespace CollisionEditor.viewModel
                 window.DrawRedLine();
             }
         }
+
+        private const string hexademicalAlplhabet = "0123456789ABCDEF";
         private string _hexAngle;
         public string HexAngle
         {
             get => _hexAngle;
             set
             {
-                if (value == "0x")
+                _hexAngle = value;
+                switch (_hexAngle.Length)
                 {
-                    _hexAngle = "0x00";
+                    case 1: case 2:
+                        if (_hexAngle[_hexAngle.Length - 1] != (char)('0' | _hexAngle.Length))
+                        {
+                            AddError(nameof(HexAngle), $"Error in {_hexAngle.Length}");
+                            return;
+                        }
+                        break;
+                    case 3: case 4:
+                        if (!hexademicalAlplhabet.Contains(_hexAngle[_hexAngle.Length - 1]))
+                        {
+                            AddError(nameof(HexAngle), $"Error in {_hexAngle.Length}");
+                            return;
+                        }
+                        break;
                 }
-                else
-                {
-                    _hexAngle = value;
-                }
-                (byte byteAngle, string hexAngle, double fullAngle) angles = ViewModelAngleService.GetAngles(_hexAngle);
-                ShowAngles(angles.byteAngle, angles.hexAngle, angles.fullAngle);
 
+                if (_hexAngle.Length != 4)
+                {
+                    AddError(nameof(HexAngle), $"Error! Incorrect length!");
+                    return;
+                }
+
+                (byte byteAngle, string hexAngle, double fullAngle) angles = ViewModelAngleService.GetAngles(_hexAngle);
+                ByteAngle = angles.byteAngle;
                 window.DrawRedLine();
             }
         }
@@ -67,6 +89,7 @@ namespace CollisionEditor.viewModel
                 _chosenTile = value;
             }
         }
+
         public MainViewModel(MainWindow window)
         {
             angleMap = new AngleMap(0);
@@ -305,9 +328,35 @@ namespace CollisionEditor.viewModel
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
+        public event EventHandler<DataErrorsChangedEventArgs>? ErrorsChanged;
+
         protected virtual void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        public bool HasErrors => _propertyErrors.Any();
+
+        private readonly Dictionary<string, List<string>> _propertyErrors = new Dictionary<string, List<string>>();
+
+        public IEnumerable GetErrors(string? propertyName)
+        {
+            return _propertyErrors.GetValueOrDefault(propertyName, null);
+        }
+
+        public void AddError(string propertyName, string errorMessage)
+        {
+            if (!_propertyErrors.ContainsKey(propertyName))
+            {
+                _propertyErrors.Add(propertyName, new List<string>());
+            }
+
+            _propertyErrors[propertyName].Add(errorMessage);
+        }
+
+        private void OnErrorsChanged(string propertyName)
+        {
+            ErrorsChanged?.Invoke(this, new DataErrorsChangedEventArgs(propertyName));
         }
     }
 }
