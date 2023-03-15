@@ -47,7 +47,16 @@ namespace CollisionEditor
                 DrawRedLine();
             }
         }
-        
+
+        private void CanvasForRectanglesMouseEnter(object sender, MouseButtonEventArgs e)
+        {
+        }
+
+        private void CanvasForRectanglesMouseLeave(object sender, MouseButtonEventArgs e)
+        {
+        }
+
+
         internal void DrawRedLine()
         {
             RedLineService.DrawRedLine(ref RedLine);
