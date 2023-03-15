@@ -5,6 +5,11 @@ using CollisionEditor.viewModel;
 using System.Windows.Media;
 using System.Windows.Shapes;
 using System.Linq;
+using System.Timers;
+using System;
+using System.Windows.Threading;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace CollisionEditor
 {   
@@ -85,14 +90,21 @@ namespace CollisionEditor
             }
         }
 
-        private void canvasForRectangles_MouseLeave(object sender, MouseEventArgs e)
-        {
-            canvasForRectangles.Opacity= 0;
-        }
 
+        
+        private async void canvasForRectangles_MouseLeave(object sender, MouseEventArgs e)
+        {
+            await Task.Delay(1000);
+            while (canvasForRectangles.Opacity>=0.1)
+            {
+                await Task.Delay(100);
+                
+                canvasForRectangles.Opacity-=0.1;
+            }
+        }
         private void canvasForRectangles_MouseEnter(object sender, MouseEventArgs e)
         {
-            canvasForRectangles.Opacity = 0.5;
+            canvasForRectangles.Opacity = 1;
         }
     }
 }
