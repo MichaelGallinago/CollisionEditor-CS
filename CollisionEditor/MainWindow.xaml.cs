@@ -48,16 +48,6 @@ namespace CollisionEditor
             }
         }
 
-
-        private void CanvasForRectanglesIsMouseOver(object sender, MouseButtonEventArgs e)
-        {
-            if ((this.DataContext as MainViewModel).window.canvasForRectangles.IsMouseOver)
-                (this.DataContext as MainViewModel).window.canvasForRectangles.Opacity += 0.05;
-            else
-                (this.DataContext as MainViewModel).window.canvasForRectangles.Opacity -= 0.05;
-            (this.DataContext as MainViewModel).window.canvasForRectangles.Opacity = (this.DataContext as MainViewModel).window.canvasForRectangles.Opacity;
-        }
-
         internal void DrawRedLine()
         {
             RedLineService.DrawRedLine(ref RedLine);
@@ -93,6 +83,16 @@ namespace CollisionEditor
                     TextBoxHexAngle.Text = "0x00";
                 }
             }
+        }
+
+        private void canvasForRectangles_MouseLeave(object sender, MouseEventArgs e)
+        {
+            canvasForRectangles.Opacity= 0;
+        }
+
+        private void canvasForRectangles_MouseEnter(object sender, MouseEventArgs e)
+        {
+            canvasForRectangles.Opacity = 0.5;
         }
     }
 }

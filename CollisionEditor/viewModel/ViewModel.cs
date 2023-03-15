@@ -24,6 +24,7 @@ namespace CollisionEditor.viewModel
         public ICommand AngleIncrementCommand { get; set; }
         public ICommand AngleDecrementCommand { get; set; }
         public ICommand ExitAppCommand { get; set; }
+
         private byte _byteAngle;
         public byte ByteAngle
         {
@@ -55,7 +56,6 @@ namespace CollisionEditor.viewModel
                 ShowAngles(angles.byteAngle, angles.hexAngle, angles.fullAngle);
 
                 window.DrawRedLine();
-
             }
         }
         private uint _chosenTile;
