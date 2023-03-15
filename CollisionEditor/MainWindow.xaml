@@ -3,10 +3,10 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         mc:Ignorable="d"
         Title="CollisionEditorC#" Height="440" Width="600" 
         xmlns:local="clr-namespace:CollisionEditor.viewModel">
-
 
     <Grid>
         <Grid.RowDefinitions>
@@ -73,18 +73,12 @@
 
         <Image Grid.Column="0" Grid.Row="3" Height="128" RenderOptions.BitmapScalingMode="NearestNeighbor"  Width="128" Name ="ImageOfTile" Grid.ColumnSpan="11"/>
         <Image Grid.Column="0" Grid.Row="3" Source="/Grid.png" Height="129" Width="129" Grid.ColumnSpan="11"/>
-        <Canvas Grid.Column="0" Grid.Row="3"  Height="128" Width="128" Name ="canvasForRectangles" Grid.ColumnSpan="11" Focusable="True" MouseLeftButtonDown="CanvasForRectanglesMouseLeftButtonDown" MouseRightButtonDown="CanvasForRectanglesMouseRightButtonDown" Background="Transparent">
-            <Canvas.Style>
-                <Style TargetType="Canvas">
-                    <Setter Property="Background" Value="Transparent"/>
-                    <Style.Triggers>
-                        <Trigger Property="IsMouseOver"  Value="True">
-                            <Setter Property="Canvas.Background" Value="LightSkyBlue">
-                            </Setter>
-                        </Trigger>
-                    </Style.Triggers>
-                </Style>
-            </Canvas.Style>
+        <Canvas x:Name="canvasForRectangles" Grid.Column="0" Grid.Row="3"  Height="128" Width="128" Grid.ColumnSpan="11" Focusable="True" MouseLeftButtonDown="CanvasForRectanglesMouseLeftButtonDown" MouseRightButtonDown="CanvasForRectanglesMouseRightButtonDown" Background="Transparent">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="IsMouseOver">
+                    <i:InvokeCommandAction Command="{Binding CanvasForRectanglesIsMouseOver}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
         </Canvas>
         <Canvas Grid.Column="0" Grid.Row="3"  Height="128" Width="128" Name ="canvasForLine" Grid.ColumnSpan="11"/>
 

@@ -48,14 +48,15 @@ namespace CollisionEditor
             }
         }
 
-        private void CanvasForRectanglesMouseEnter(object sender, MouseButtonEventArgs e)
-        {
-        }
 
-        private void CanvasForRectanglesMouseLeave(object sender, MouseButtonEventArgs e)
+        private void CanvasForRectanglesIsMouseOver(object sender, MouseButtonEventArgs e)
         {
+            if ((this.DataContext as MainViewModel).window.canvasForRectangles.IsMouseOver)
+                (this.DataContext as MainViewModel).window.canvasForRectangles.Opacity += 0.05;
+            else
+                (this.DataContext as MainViewModel).window.canvasForRectangles.Opacity -= 0.05;
+            (this.DataContext as MainViewModel).window.canvasForRectangles.Opacity = (this.DataContext as MainViewModel).window.canvasForRectangles.Opacity;
         }
-
 
         internal void DrawRedLine()
         {
