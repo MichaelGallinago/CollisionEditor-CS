@@ -29,13 +29,12 @@ namespace CollisionEditor.viewModel
         {
             get => _byteAngle;
             set
-            {
+            {   
                 _byteAngle = value;
                 (byte byteAngle, string hexAngle, double fullAngle) angles = ViewModelAngleService.GetAngles(_byteAngle);
                 ShowAngles(angles.byteAngle, angles.hexAngle, angles.fullAngle);
 
                 window.DrawRedLine();
-
             }
         }
         private string _hexAngle;
@@ -43,7 +42,8 @@ namespace CollisionEditor.viewModel
         {
             get => _hexAngle;
             set
-            {
+            {   
+
                 _hexAngle = value;
                 (byte byteAngle, string hexAngle, double fullAngle) angles = ViewModelAngleService.GetAngles(_hexAngle);
                 ShowAngles(angles.byteAngle, angles.hexAngle, angles.fullAngle);
@@ -100,7 +100,7 @@ namespace CollisionEditor.viewModel
                 window.SelectTileTextBox.IsEnabled = true;
                 window.SelectTileButton.IsEnabled = true;
                 window.TextBoxByteAngle.IsEnabled = true;
-                window.TextBlockHexAngle.IsEnabled = true;
+                window.TextBoxHexAngle.IsEnabled = true;
             }
         }
         public void ShowAngles(byte byteAngle, string hexAngle, double fullAngle)
@@ -139,7 +139,7 @@ namespace CollisionEditor.viewModel
                 window.SelectTileTextBox.IsEnabled = true;
                 window.SelectTileButton.IsEnabled = true;
                 window.TextBoxByteAngle.IsEnabled = true;
-                window.TextBlockHexAngle.IsEnabled = true;
+                window.TextBoxHexAngle.IsEnabled = true;
             }
         }
 

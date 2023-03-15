@@ -4,6 +4,7 @@ using CollisionEditor.model;
 using CollisionEditor.viewModel;
 using System.Windows.Media;
 using System.Windows.Shapes;
+using System.Linq;
 
 namespace CollisionEditor
 {   
@@ -50,6 +51,35 @@ namespace CollisionEditor
         internal void DrawRedLine()
         {
             RedLineService.DrawRedLine(ref RedLine);
+        }
+
+        void OnPreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = !e.Text.All(IsGood);
+        }
+        bool IsGood(char c)
+        {
+            if (c >= '0' && c <= '9')
+                return true;
+            if (c >= 'A' && c <= 'F')
+                return true;
+            return false;
+        }
+
+
+        private void TextBoxHexAngle_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Back)
+            {
+                if (TextBoxHexAngle.Text.Length<2)
+                {
+                    TextBoxHexAngle.Text = "0x00";
+                }
+                if (TextBoxHexAngle.Text.Substring(0, 2) != "0x")
+                {
+                    TextBoxHexAngle.Text = "0x00";
+                }
+            }
         }
     }
 }
