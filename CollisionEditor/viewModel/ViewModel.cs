@@ -46,8 +46,12 @@ namespace CollisionEditor.viewModel
                 if (value=="0x") 
                 {
                     _hexAngle = "0x00";
+                    OnPropertyChanged(nameof(HexAngle));
                 }
-                _hexAngle = value;
+                else
+                {
+                    _hexAngle = value;
+                }
                 (byte byteAngle, string hexAngle, double fullAngle) angles = ViewModelAngleService.GetAngles(_hexAngle);
                 ShowAngles(angles.byteAngle, angles.hexAngle, angles.fullAngle);
 
