@@ -42,11 +42,10 @@ namespace CollisionEditor.viewModel
         {
             get => _hexAngle;
             set
-            {   
-                if (value=="0x") 
+            {
+                if (value == "0x")
                 {
                     _hexAngle = "0x00";
-                    OnPropertyChanged(nameof(HexAngle));
                 }
                 else
                 {
