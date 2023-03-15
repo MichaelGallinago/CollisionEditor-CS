@@ -5,6 +5,11 @@ using CollisionEditor.viewModel;
 using System.Windows.Media;
 using System.Windows.Shapes;
 using System.Linq;
+using System.Timers;
+using System;
+using System.Windows.Threading;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace CollisionEditor
 {   
@@ -60,14 +65,27 @@ namespace CollisionEditor
                 e.Handled = true;
         }
 
-        private void canvasForRectangles_MouseLeave(object sender, MouseEventArgs e)
-        {
-            canvasForRectangles.Opacity= 0;
+        private static bool IsOnTheCanvas(System.Windows.Controls.Canvas canvasForRectangles)
+        {   
+            if (Mouse.GetPosition(canvasForRectangles).X >= 0 && Mouse.GetPosition(canvasForRectangles).X <= 128 && Mouse.GetPosition(canvasForRectangles).Y >= 0 && Mouse.GetPosition(canvasForRectangles).Y <= 128)
+            {
+                return true;
+            }
+            return false;
         }
-
-        private void canvasForRectangles_MouseEnter(object sender, MouseEventArgs e)
+        
+        private async void canvasForRectangles_MouseLeave(object sender, MouseEventArgs e)
         {
-            canvasForRectangles.Opacity = 0.5;
+            await Task.Delay(1000);
+            while (canvasForRectangles.Opacity>=0.1 && IsOnTheCanvas(canvasForRectangles))
+            {
+                await Task.Delay(100);
+                 canvasForRectangles.Opacity -= 0.1;
+            }
+        }
+        private void canvasForRectangles_MouseEnter(object sender, MouseEventArgs e)
+        {   
+            canvasForRectangles.Opacity = 1;
         }
 
         private void TextBoxHexAngle_PreviewTextInput(object sender, TextCompositionEventArgs e)
