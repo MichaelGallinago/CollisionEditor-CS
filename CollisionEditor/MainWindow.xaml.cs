@@ -59,10 +59,13 @@ namespace CollisionEditor
         }
         bool IsGood(char c)
         {
+            if (TextBoxHexAngle.Text.Length >= 4)
+                return false;
             if (c >= '0' && c <= '9')
                 return true;
             if (c >= 'A' && c <= 'F')
                 return true;
+            
             return false;
         }
 
