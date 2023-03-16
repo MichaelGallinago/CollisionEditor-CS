@@ -152,10 +152,14 @@ namespace CollisionEditor.viewModel
 
                 (byte byteAngle, string hexAngle, double fullAngle) angles = ViewModelAssistant.GetAngles(angleMap, _chosenTile);
                 ShowAngles(angles.byteAngle, angles.hexAngle, angles.fullAngle);
-                window.SelectTileTextBox.IsEnabled = true;
-                window.SelectTileButton.IsEnabled = true;
                 window.TextBoxByteAngle.IsEnabled = true;
                 window.TextBoxHexAngle.IsEnabled = true;
+                System.Drawing.Size size = new System.Drawing.Size(2, 2);
+                ShowTileMap(ViewModelAssistant.GetTilePanel(tileSet, (int)window.ImageOfTileMap.Height, size));
+                
+                window.SelectTileTextBox.IsEnabled = true;
+                window.SelectTileButton.IsEnabled = true;
+                
             }
         }
 
@@ -163,6 +167,11 @@ namespace CollisionEditor.viewModel
         {
             MainWindow mainWindow = (MainWindow)System.Windows.Application.Current.MainWindow;
             mainWindow.ImageOfTile.Source = TileStrip;
+        }
+        private static void ShowTileMap(System.Drawing.Bitmap TileMap)
+        {
+            MainWindow mainWindow = (MainWindow)System.Windows.Application.Current.MainWindow;
+            mainWindow.ImageOfTileMap.Source = TileMap;
         }
 
         private void MenuSaveTileMap()
