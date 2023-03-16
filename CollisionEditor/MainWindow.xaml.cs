@@ -102,7 +102,7 @@ namespace CollisionEditor
         private async void canvasForRectangles_MouseLeave(object sender, MouseEventArgs e)
         {
             await Task.Delay(1000);
-            while (canvasForRectangles.Opacity>=0.1 && IsOnTheCanvas(canvasForRectangles))
+            while (canvasForRectangles.Opacity>=0.1 &&  !IsOnTheCanvas(canvasForRectangles))
             {
                 await Task.Delay(100);
                  canvasForRectangles.Opacity -= 0.1;
