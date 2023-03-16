@@ -156,7 +156,7 @@ namespace CollisionEditor.viewModel
                 window.TextBoxHexAngle.IsEnabled = true;
 
                 System.Drawing.Size size = new System.Drawing.Size(4, 4);
-                int imageOfTileMapWidth = (int)((window.Width/587)*278);
+                int imageOfTileMapWidth = (int)((window.Width/587) * 278);
                 window.ImageOfTileMap.Width = (window.Width / 587) * 278;
                 window.ImageOfTileMap.Height = (window.Height/ 424) * 303;
                 ShowTileMap(ViewModelAssistant.GetTilePanel(tileSet, imageOfTileMapWidth, size));

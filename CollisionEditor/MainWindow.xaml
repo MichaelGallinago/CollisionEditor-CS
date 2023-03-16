@@ -108,10 +108,10 @@
         </Button>
         <ScrollViewer Grid.Column="12" Grid.Row="2" Grid.RowSpan="6" Grid.ColumnSpan="2">
             <Canvas  Width="{Binding ActualWidth, ElementName=ImageOfTileMap}" Height="{Binding ActualHeight, ElementName=ImageOfTileMap}">
-                <Canvas.Background>
+                <Canvas.Background >
                     <VisualBrush  >
                         <VisualBrush.Visual>
-                            <Image Name ="ImageOfTileMap" RenderOptions.BitmapScalingMode="NearestNeighbor"  SnapsToDevicePixels ="True"/>
+                            <Image Name ="ImageOfTileMap" RenderOptions.BitmapScalingMode="NearestNeighbor" Stretch="Fill" SnapsToDevicePixels ="True"/>
                         </VisualBrush.Visual>
                     </VisualBrush>
                 </Canvas.Background>
