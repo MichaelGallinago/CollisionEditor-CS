@@ -154,6 +154,7 @@ namespace CollisionEditor.viewModel
                 ShowAngles(angles.byteAngle, angles.hexAngle, angles.fullAngle);
                 window.TextBoxByteAngle.IsEnabled = true;
                 window.TextBoxHexAngle.IsEnabled = true;
+
                 System.Drawing.Size size = new System.Drawing.Size(2, 2);
                 ShowTileMap(ViewModelAssistant.GetTilePanel(tileSet, (int)window.ImageOfTileMap.Height, size));
                 
@@ -168,8 +169,9 @@ namespace CollisionEditor.viewModel
             MainWindow mainWindow = (MainWindow)System.Windows.Application.Current.MainWindow;
             mainWindow.ImageOfTile.Source = TileStrip;
         }
-        private static void ShowTileMap(System.Drawing.Bitmap TileMap)
+        private static void ShowTileMap(System.Windows.Media.Imaging.BitmapSource TileMap)
         {
+            
             MainWindow mainWindow = (MainWindow)System.Windows.Application.Current.MainWindow;
             mainWindow.ImageOfTileMap.Source = TileMap;
         }
