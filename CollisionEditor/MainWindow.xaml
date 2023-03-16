@@ -3,7 +3,6 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         mc:Ignorable="d"
         Title="CollisionEditorC#" Height="440" Width="600">
 
@@ -112,6 +111,7 @@
         <Button Grid.Column="13" Grid.Row="9" Background="#FFD8D8D8" Content="Select Tile" x:Name="SelectTileButton"  IsEnabled="False" Command="{Binding SelectTileCommand}" />
         
     </Grid>
+
     <Window.InputBindings>
         <KeyBinding Command="{Binding MenuOpenTileMapCommand}" Gesture="CTRL+D" />
         <KeyBinding Command="{Binding MenuOpenAngleMapCommand}" Gesture="CTRL+W" />
