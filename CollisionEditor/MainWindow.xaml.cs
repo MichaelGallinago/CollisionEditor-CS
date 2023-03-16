@@ -15,6 +15,7 @@ namespace CollisionEditor
         public MainWindow()
         {
             InitializeComponent();
+            canvasForRectanglesUpdate();
             DataContext = new MainViewModel(this);
         }
 
@@ -64,32 +65,25 @@ namespace CollisionEditor
                 e.Handled = true;
         }
 
-        private static bool IsOnTheCanvas(System.Windows.Controls.Canvas canvasForRectangles)
-        {   
-            if (Mouse.GetPosition(canvasForRectangles).X >= 0 && Mouse.GetPosition(canvasForRectangles).X <= 128 && Mouse.GetPosition(canvasForRectangles).Y >= 0 && Mouse.GetPosition(canvasForRectangles).Y <= 128)
-            {
-                return true;
-            }
-            return false;
-        }
-        
-        private async void canvasForRectangles_MouseLeave(object sender, MouseEventArgs e)
+        private bool _inRectangleCanvas = false;
+
+        private async void canvasForRectanglesUpdate()
         {
-            await Task.Delay(1000);
-            while (canvasForRectangles.Opacity>=0.1 && IsOnTheCanvas(canvasForRectangles))
+            while (true)
             {
-                await Task.Delay(100);
-                 canvasForRectangles.Opacity -= 0.1;
+                await Task.Delay(10);
+                canvasForRectangles.Opacity = Math.Clamp(canvasForRectangles.Opacity + 0.05 * (_inRectangleCanvas ? 1 : -1), 0d, 1d);
             }
         }
+
         private void canvasForRectangles_MouseEnter(object sender, MouseEventArgs e)
-        {   
-            canvasForRectangles.Opacity = 1;
+        {
+            _inRectangleCanvas = true;
         }
 
-        private void TextBoxHexAngle_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        private void canvasForRectangles_MouseLeave(object sender, MouseEventArgs e)
         {
-
+            _inRectangleCanvas = false;
         }
     }
 }
