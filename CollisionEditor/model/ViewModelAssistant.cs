@@ -82,5 +82,13 @@ namespace CollisionEditor.model
                 }
             }
         }
+
+        public static Bitmap GetTilePanel(TileSet tileSet, int panelWidth, Size separation)
+        {
+            int columnCount = (panelWidth - separation.Width) / (tileSet.TileSize.Width + separation.Width);
+            int panelHeight = (tileSet.Tiles.Count & -columnCount) / columnCount * (tileSet.TileSize.Height + separation.Height);
+
+            return tileSet.DrawTileMap(columnCount, new Size(panelWidth, panelHeight), separation, separation);
+        }
     }
 }

@@ -115,15 +115,7 @@ namespace CollisionEditor.model
                         writer.Write(value);
         }
 
-        public Bitmap GetTilePanel(int panelWidth, Size separation)
-        {
-            int columnCount = (panelWidth - separation.Width) / (TileSize.Width + separation.Width);
-            int panelHeight = (Tiles.Count & -columnCount) / columnCount * (TileSize.Height + separation.Height);
-
-            return DrawTileMap(columnCount, new Size(panelWidth, panelHeight), separation, separation);
-        }
-
-        private Bitmap DrawTileMap(int columnCount, Size tilemapSize, Size separation, Size offset)
+        public Bitmap DrawTileMap(int columnCount, Size tilemapSize, Size separation, Size offset)
         {
             Bitmap tilemap = new Bitmap(tilemapSize.Width, tilemapSize.Height);
             using (Graphics graphics = Graphics.FromImage(tilemap))
