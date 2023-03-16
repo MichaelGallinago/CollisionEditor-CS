@@ -1,11 +1,15 @@
 ﻿using CollisionEditor.model;
+using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
+using System.Linq;
 using System.Windows.Input;
 
 namespace CollisionEditor.viewModel
 {
-    public class MainViewModel : INotifyPropertyChanged
+    public class MainViewModel : INotifyPropertyChanged, INotifyDataErrorInfo
     {
         private MainWindow window;
         private AngleMap angleMap;
@@ -38,23 +42,28 @@ namespace CollisionEditor.viewModel
                 window.DrawRedLine();
             }
         }
+
+        private const string hexademicalAlplhabet = "0123456789ABCDEF";
         private string _hexAngle;
         public string HexAngle
         {
             get => _hexAngle;
             set
             {
-                if (value == "0x")
-                {
-                    _hexAngle = "0x00";
-                }
-                else
-                {
-                    _hexAngle = value;
-                }
-                (byte byteAngle, string hexAngle, double fullAngle) angles = ViewModelAngleService.GetAngles(_hexAngle);
-                ShowAngles(angles.byteAngle, angles.hexAngle, angles.fullAngle);
+                _hexAngle = value;
 
+                if (_hexAngle.Length != 4 || _hexAngle[0] != '0' || _hexAngle[1] != 'x'
+                    || !hexademicalAlplhabet.Contains(_hexAngle[2]) || !hexademicalAlplhabet.Contains(_hexAngle[3]))
+                {
+                    AddError(nameof(HexAngle), "Error! Wrong hexadecimal number");
+                    return;
+                }
+
+                ClearErrors(nameof(HexAngle));
+
+                (byte byteAngle, string hexAngle, double fullAngle) angles = ViewModelAngleService.GetAngles(_hexAngle);
+                ByteAngle = angles.byteAngle;
+                angleMap.SetAngle((int)ChosenTile, angles.byteAngle);
                 window.DrawRedLine();
             }
         }
@@ -67,6 +76,7 @@ namespace CollisionEditor.viewModel
                 _chosenTile = value;
             }
         }
+
         public MainViewModel(MainWindow window)
         {
             angleMap = new AngleMap(0);
@@ -164,7 +174,7 @@ namespace CollisionEditor.viewModel
             else
             {
                 string filePath = ViewModelTileService.GetTileMapSavePath();
-                if (filePath is not null)
+                if (filePath is not null && filePath != string.Empty)
                 {
                     tileSet.Save(Path.GetFullPath(filePath), 16);
                 }
@@ -305,9 +315,44 @@ namespace CollisionEditor.viewModel
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
+        public event EventHandler<DataErrorsChangedEventArgs>? ErrorsChanged;
+
         protected virtual void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        public bool HasErrors => _propertyErrors.Any();
+
+        private readonly Dictionary<string, List<string>> _propertyErrors = new Dictionary<string, List<string>>();
+
+        public IEnumerable GetErrors(string? propertyName)
+        {
+            return _propertyErrors.GetValueOrDefault(propertyName, null);
+        }
+
+        public void AddError(string propertyName, string errorMessage)
+        {
+            if (!_propertyErrors.ContainsKey(propertyName))
+            {
+                _propertyErrors.Add(propertyName, new List<string>());
+            }
+
+            _propertyErrors[propertyName].Add(errorMessage);
+            OnErrorsChanged(propertyName);
+        }
+
+        private void OnErrorsChanged(string propertyName)
+        {
+            ErrorsChanged?.Invoke(this, new DataErrorsChangedEventArgs(propertyName));
+        }
+
+        public void ClearErrors(string propertyName)
+        {
+            if (_propertyErrors.Remove(propertyName))
+            {
+                OnErrorsChanged(propertyName);
+            }
         }
     }
 }

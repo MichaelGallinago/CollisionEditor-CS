@@ -84,7 +84,7 @@
         </Border>
 
         <TextBox Grid.Column="2" Grid.Row="9" TextWrapping="Wrap" IsEnabled="False" Text="{Binding Path=ByteAngle,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Name="TextBoxByteAngle" Padding="2,0,0,0"  Background="#FFB1B1B1" />
-        <TextBox Grid.Column="5" Grid.Row="9" TextWrapping="Wrap" IsEnabled="False" Text="{Binding Path=HexAngle,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  PreviewTextInput="OnPreviewTextInput" KeyUp="TextBoxHexAngle_KeyUp"  Name="TextBoxHexAngle"  Padding="2,0,0,0"  Background="#FFB1B1B1"/>
+        <TextBox Grid.Column="5" Grid.Row="9" TextWrapping="Wrap" IsEnabled="False" Text="{Binding Path=HexAngle,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" PreviewKeyDown="TextBoxHexAngle_KeyDown" Name="TextBoxHexAngle"  Padding="2,0,0,0"  Background="#FFB1B1B1"/>
         <TextBlock Grid.Column="8" Grid.Row="9" TextWrapping="Wrap" Text="0°" Name="TextBlockFullAngle"  Padding="2,0,0,0"  Background="#FFB1B1B1"/>
 
         <Button Grid.Column="3" Command="{Binding AngleIncrementCommand}" IsEnabled="False" x:Name="ByteAngleIncrimentButton" Grid.Row="9" Height="10" Width="25" VerticalAlignment="Top" HorizontalAlignment="Left">
