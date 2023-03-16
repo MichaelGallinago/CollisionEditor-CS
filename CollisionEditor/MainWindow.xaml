@@ -110,7 +110,7 @@
                 <Canvas.Background >
                     <VisualBrush  >
                         <VisualBrush.Visual>
-                            <Image Name ="ImageOfTileMap" RenderOptions.BitmapScalingMode="NearestNeighbor" Stretch="Fill" SnapsToDevicePixels ="True"/>
+                            <Image Name ="ImageOfTileMap" RenderOptions.BitmapScalingMode="NearestNeighbor" Stretch="UniformToFill" SnapsToDevicePixels ="True"/>
                         </VisualBrush.Visual>
                     </VisualBrush>
                 </Canvas.Background>
