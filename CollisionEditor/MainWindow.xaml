@@ -52,7 +52,7 @@
                     <MenuItem Header="Anglemap"/>
                 </MenuItem>
 
-                <MenuItem Header="Unload All     Ctrl+Shift+U" Padding="0,0,-20,0"  />
+                <MenuItem Header="Unload All" InputGestureText="Ctrl+Shift+U" Padding="0,0,-20,0"  />
 
                 <MenuItem Header="Save">
                     <MenuItem Header="AngleMap" Command="{Binding MenuSaveAngleMapCommand}"/>
