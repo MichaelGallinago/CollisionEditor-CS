@@ -4,11 +4,10 @@ using CollisionEditor.model;
 using CollisionEditor.viewModel;
 using System.Windows.Media;
 using System.Windows.Shapes;
+using System.Windows.Controls;
 using System.Linq;
 using System;
 using System.Threading.Tasks;
-using System.Windows.Controls;
-using System.Runtime.Intrinsics.Arm;
 
 namespace CollisionEditor
 {   
@@ -20,15 +19,16 @@ namespace CollisionEditor
             DataContext = new MainViewModel(this);
         }
 
-
         (SquareAndPosition, SquareAndPosition) BlueAndGreenSquare = (new SquareAndPosition(), new SquareAndPosition());
         Line RedLine = new Line();
 
         private void CanvasForRectanglesMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            Vector2<int> cordinats = (this.DataContext as MainViewModel).GetCordinats(Mouse.GetPosition(canvasForRectangles).X, Mouse.GetPosition(canvasForRectangles).Y);
-            
-            SquaresService.DrawSquare(Colors.Blue, cordinats, BlueAndGreenSquare.Item1);
+            var mousePosition = e.GetPosition(RectanglesGrid);
+            Vector2<int> position = GetGridPosition(mousePosition, RectanglesGrid);
+            //Vector2<int> cordinats = (this.DataContext as MainViewModel).GetCordinats(Mouse.GetPosition(canvasForRectangles).X, Mouse.GetPosition(canvasForRectangles).Y);
+
+            SquaresService.DrawSquare(Colors.Blue, position, BlueAndGreenSquare.Item1);
             
             if (BlueAndGreenSquare.Item1.Square != null & BlueAndGreenSquare.Item2.Square != null)
             {
@@ -38,11 +38,34 @@ namespace CollisionEditor
             }
         }
 
+        private Vector2<int> GetGridPosition(Point mousePosition, Grid grid)
+        {
+            Vector2<int> position = new Vector2<int>();
+
+            foreach (var column in grid.ColumnDefinitions)
+            {
+                if (mousePosition.X > column.Offset && mousePosition.X < (column.Offset + column.ActualWidth))
+                    break;
+                position.X++;
+            }
+
+            foreach (var row in grid.ColumnDefinitions)
+            {
+                if (mousePosition.Y > row.Offset && mousePosition.Y < (row.Offset + row.ActualWidth))
+                    break;
+                position.Y++;
+            }
+
+            return position;
+        }
+
         private void CanvasForRectanglesMouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
-            Vector2<int> cordinats = (this.DataContext as MainViewModel).GetCordinats(Mouse.GetPosition(canvasForRectangles).X, Mouse.GetPosition(canvasForRectangles).Y);
+            var mousePosition = e.GetPosition(RectanglesGrid);
+            Vector2<int> position = GetGridPosition(mousePosition, RectanglesGrid);
+            //Vector2<int> cordinats = (this.DataContext as MainViewModel).GetCordinats(Mouse.GetPosition(canvasForRectangles).X, Mouse.GetPosition(canvasForRectangles).Y);
 
-            SquaresService.DrawSquare(Colors.Green, cordinats, BlueAndGreenSquare.Item2);
+            SquaresService.DrawSquare(Colors.Green, position, BlueAndGreenSquare.Item2);
 
             if (BlueAndGreenSquare.Item1.Square != null & BlueAndGreenSquare.Item2.Square != null)
             {

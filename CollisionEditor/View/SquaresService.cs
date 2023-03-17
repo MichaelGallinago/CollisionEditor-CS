@@ -1,5 +1,6 @@
 ﻿using CollisionEditor.model;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Media;
 using System.Windows.Shapes;
 
@@ -8,29 +9,19 @@ namespace CollisionEditor
     internal static class SquaresService
     {
         static MainWindow mainWindow = (MainWindow)System.Windows.Application.Current.MainWindow;
-        private static Rectangle GetRectangle(Color color)
+
+        public static void DrawSquare(Color color, Vector2<int> position, SquareAndPosition squareAndPosition)
         {
-            Rectangle rect = new Rectangle();
-            rect.Width = 8;
-            rect.Height = 8;
-            rect.Fill = new SolidColorBrush(color);
-            return rect;
-        }
+            Rectangle square = new Rectangle()
+            {
+                Fill = new SolidColorBrush(color)
+            };
 
-        public static void DrawSquare(Color color, Vector2<int> cordinats, SquareAndPosition squareAndPosition)
-        {
-            Rectangle square = GetRectangle(color);
-            if (cordinats.X >= 128)
-                cordinats.X = 120;
-            if (cordinats.Y >= 128)
-                cordinats.Y = 120;
+            mainWindow.RectanglesGrid.Children.Remove(squareAndPosition.Square);
+            square.SetValue(Grid.ColumnProperty, position.X);
+            square.SetValue(Grid.RowProperty,    position.Y);
 
-            mainWindow.canvasForRectangles.Children.Remove(squareAndPosition.Square);
-
-            Canvas.SetLeft(square, cordinats.X);
-            Canvas.SetTop(square, cordinats.Y);
-           
-            if (Equals(cordinats, squareAndPosition.Position) && Equals(squareAndPosition.Color, color))
+            if (Equals(position, squareAndPosition.Position) && Equals(color, squareAndPosition.Color))
             {
                 squareAndPosition.Square = null;
                 squareAndPosition.Position = new Vector2<int>();
@@ -38,9 +29,9 @@ namespace CollisionEditor
             }
             else
             {
-                mainWindow.canvasForRectangles.Children.Add(square);
+                mainWindow.RectanglesGrid.Children.Add(square);
                 squareAndPosition.Square = square;
-                squareAndPosition.Position = cordinats;
+                squareAndPosition.Position = position;
                 squareAndPosition.Color = color;
             }
             

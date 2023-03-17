@@ -5,7 +5,11 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
+using System.Windows.Controls;
+using System.Windows;
 using System.Windows.Input;
+using System.Windows.Media;
+using System.Drawing;
 
 namespace CollisionEditor.viewModel
 {
@@ -108,7 +112,7 @@ namespace CollisionEditor.viewModel
             string filePath = ViewModelAngleService.GetAngleMapFilePath();
             if (filePath is not null && filePath != string.Empty)
             {
-                window.ImageOfTile.Source = null;
+                //window.ImageOfTile.Source = null;
                 angleMap = new AngleMap(filePath);
                 tileSet = new TileSet(angleMap.Values.Count);
                 (byte byteAngle, string hexAngle, double fullAngle) angles = ViewModelAssistant.GetAngles(angleMap, _chosenTile);
@@ -146,7 +150,9 @@ namespace CollisionEditor.viewModel
                 tileSet = new TileSet(filePath);
                 angleMap = new AngleMap(tileSet.Tiles.Count);
                 ViewModelAssistant.BitmapConvert(tileSet.Tiles[(int)_chosenTile]);
-                ShowTile(ViewModelAssistant.BitmapConvert(tileSet.Tiles[(int)_chosenTile]));
+                //ShowTile(ViewModelAssistant.BitmapConvert(tileSet.Tiles[(int)_chosenTile]));
+                TileGridUpdate(tileSet, (int)ChosenTile, window);
+                RectanglesGridUpdate();
                 window.Heights.Text = ViewModelAssistant.GetCollisionValues(tileSet.HeightMap[(int)_chosenTile]);
                 window.Widths.Text = ViewModelAssistant.GetCollisionValues(tileSet.WidthMap[(int)_chosenTile]);
 
@@ -170,11 +176,10 @@ namespace CollisionEditor.viewModel
         private static void ShowTile(System.Windows.Media.Imaging.BitmapSource TileStrip)
         {
             MainWindow mainWindow = (MainWindow)System.Windows.Application.Current.MainWindow;
-            mainWindow.ImageOfTile.Source = TileStrip;
+            //mainWindow.ImageOfTile.Source = TileStrip;
         }
         private static void ShowTileMap(System.Windows.Media.Imaging.BitmapSource TileMap)
         {
-            
             MainWindow mainWindow = (MainWindow)System.Windows.Application.Current.MainWindow;
             mainWindow.ImageOfTileMap.Source = TileMap;
         }
@@ -184,14 +189,13 @@ namespace CollisionEditor.viewModel
             if (tileSet.Tiles.Count==0)
             {
                 System.Windows.Forms.MessageBox.Show("Error: You haven't chosen TileMap to save");
+                return;
             }
-            else
+
+            string filePath = ViewModelTileService.GetTileMapSavePath();
+            if (filePath is not null && filePath != string.Empty)
             {
-                string filePath = ViewModelTileService.GetTileMapSavePath();
-                if (filePath is not null && filePath != string.Empty)
-                {
-                    tileSet.Save(Path.GetFullPath(filePath), 16);
-                }
+                tileSet.Save(Path.GetFullPath(filePath), 16);
             }
         }
 
@@ -200,14 +204,13 @@ namespace CollisionEditor.viewModel
             if (tileSet.Tiles.Count == 0)
             {
                 System.Windows.Forms.MessageBox.Show("Error: The WidthMap isn't generated!");
+                return;
             }
-            else
+
+            string filePath = ViewModelTileService.GetWidthMapSavePath();
+            if (filePath is not null && filePath != string.Empty)
             {
-                string filePath = ViewModelTileService.GetWidthMapSavePath();
-                if (filePath is not null && filePath != string.Empty)
-                {
-                    tileSet.SaveCollisionMap(Path.GetFullPath(filePath), tileSet.WidthMap);
-                }
+                tileSet.SaveCollisionMap(Path.GetFullPath(filePath), tileSet.WidthMap);
             }
         }
 
@@ -216,14 +219,13 @@ namespace CollisionEditor.viewModel
             if (tileSet.Tiles.Count == 0)
             {
                 System.Windows.Forms.MessageBox.Show("Error: The HeightMap isn't generated!");
+                return;
             }
-            else
+
+            string filePath = ViewModelTileService.GetWidthMapSavePath();
+            if (filePath is not null && filePath != string.Empty)
             {
-                string filePath = ViewModelTileService.GetWidthMapSavePath();
-                if (filePath is not null && filePath != string.Empty)
-                {
-                    tileSet.SaveCollisionMap(Path.GetFullPath(filePath), tileSet.HeightMap);
-                }
+                tileSet.SaveCollisionMap(Path.GetFullPath(filePath), tileSet.HeightMap);
             }
         }
 
@@ -232,14 +234,13 @@ namespace CollisionEditor.viewModel
             if (angleMap.Values.Count==0)
             {
                 System.Windows.Forms.MessageBox.Show("Error: You haven't chosen AngleMap to save");
+                return;
             }
-            else
+
+            string filePath = ViewModelAngleService.GetAngleMapSavePath();
+            if (filePath is not null && filePath != string.Empty)
             {
-                string filePath = ViewModelAngleService.GetAngleMapSavePath();
-                if (filePath is not null && filePath != string.Empty)
-                {
-                    angleMap.Save(Path.GetFullPath(filePath));
-                }
+                angleMap.Save(Path.GetFullPath(filePath));
             }
         }
 
@@ -289,13 +290,14 @@ namespace CollisionEditor.viewModel
 
         private void SelectTile()
         {   
-            if (_chosenTile > tileSet.Tiles.Count-1)
+            if (_chosenTile > tileSet.Tiles.Count - 1)
             {
                 _chosenTile = (uint)tileSet.Tiles.Count - 1;
                 OnPropertyChanged(nameof(ChosenTile));
             }
-            
-            ShowTile(ViewModelAssistant.BitmapConvert(tileSet.Tiles[(int)_chosenTile]));
+
+            //ShowTile(ViewModelAssistant.BitmapConvert(tileSet.Tiles[(int)_chosenTile]));
+            TileGridUpdate(tileSet, (int)ChosenTile, window);
             window.Heights.Text = ViewModelAssistant.GetCollisionValues(tileSet.HeightMap[(int)_chosenTile]);
             window.Widths.Text  = ViewModelAssistant.GetCollisionValues(tileSet.WidthMap[(int)_chosenTile]);
             
@@ -310,17 +312,13 @@ namespace CollisionEditor.viewModel
 
         public void AngleUpdator(Vector2<int> vectorGreen, Vector2<int> vectorBlue)
         {
-            if (angleMap.Values.Count!=0)
-            {
-                byte byteAngle = angleMap.SetAngleWithLine((int)_chosenTile, vectorGreen, vectorBlue);
-
-                (int byteAngle, string hexAngle, double fullAngle) angles = ViewModelAngleService.GetAngles(byteAngle);
-                ShowAngles(byteAngle, angles.hexAngle, angles.fullAngle);   
-            }
-            else
-            {
+            if (angleMap.Values.Count == 0)
                 return;
-            }
+
+            byte byteAngle = angleMap.SetAngleWithLine((int)_chosenTile, vectorGreen, vectorBlue);
+
+            (int byteAngle, string hexAngle, double fullAngle) angles = ViewModelAngleService.GetAngles(byteAngle);
+            ShowAngles(byteAngle, angles.hexAngle, angles.fullAngle);
         }      
 
         public Vector2<int> GetCordinats(double x, double y)
@@ -348,9 +346,7 @@ namespace CollisionEditor.viewModel
         public void AddError(string propertyName, string errorMessage)
         {
             if (!_propertyErrors.ContainsKey(propertyName))
-            {
                 _propertyErrors.Add(propertyName, new List<string>());
-            }
 
             _propertyErrors[propertyName].Add(errorMessage);
             OnErrorsChanged(propertyName);
@@ -364,9 +360,51 @@ namespace CollisionEditor.viewModel
         public void ClearErrors(string propertyName)
         {
             if (_propertyErrors.Remove(propertyName))
-            {
                 OnErrorsChanged(propertyName);
+        }
+
+        private void RectanglesGridUpdate()
+        {
+            window.RectanglesGrid.ColumnDefinitions.Clear();
+            window.RectanglesGrid.RowDefinitions.Clear();
+
+            var size = tileSet.TileSize;
+
+            for (int x = 0; x < size.Width; x++)
+                window.RectanglesGrid.ColumnDefinitions.Add(new ColumnDefinition());
+
+            for (int y = 0; y < size.Height; y++)
+                window.RectanglesGrid.RowDefinitions.Add(new RowDefinition());
+        }
+
+        private static void TileGridUpdate(TileSet tileSet, int ChosenTile, MainWindow window)
+        {
+            window.TileGrid.Children.Clear();
+
+            var size = tileSet.TileSize;
+
+            window.TileGrid.Rows    = size.Height;
+            window.TileGrid.Columns = size.Width;
+            window.TileGrid.Background = new SolidColorBrush(Colors.Transparent);
+
+            Bitmap tile = tileSet.Tiles[ChosenTile];
+
+            for (int y = 0; y < size.Height; y++)
+            {
+                for (int x = 0; x < size.Width; x++)
+                {
+                    Border Border = new Border()
+                    {
+                        BorderThickness = new Thickness(x == 0 ? 1d : 0d, y == 0 ? 1d : 0d, 1d, 1d),
+                        Background = new SolidColorBrush(tile.GetPixel(x, y).A > 0 ? Colors.Black : Colors.Transparent),
+                        BorderBrush = new SolidColorBrush(Colors.Gray),
+                    };
+                    //Border.SetValue(Grid.ColumnProperty, x);
+                    //Border.SetValue(Grid.RowProperty,    y);
+                    window.TileGrid.Children.Add(Border);
+                }
             }
         }
+
     }
 }

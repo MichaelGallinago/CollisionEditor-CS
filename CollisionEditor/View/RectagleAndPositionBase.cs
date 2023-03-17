@@ -1,6 +1,7 @@
 ﻿using CollisionEditor.model;
 using System.Windows.Media;
 using System.Windows.Shapes;
+
 namespace CollisionEditor
 {
     internal class SquareAndPosition
