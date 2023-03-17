@@ -71,7 +71,8 @@
         </Menu>
         
         <UniformGrid x:Name="TileGrid" Grid.Column="0" Grid.Row="3" Height="128" Width="128" Grid.ColumnSpan="11" SnapsToDevicePixels="true" Background="Transparent"/>
-        <Grid x:Name="RectanglesGrid"  Grid.Column="0" Grid.Row="3" Height="128" Width="128" Grid.ColumnSpan="11" SnapsToDevicePixels="true" Focusable="True" Background="Transparent" MouseLeftButtonDown="CanvasForRectanglesMouseLeftButtonDown" MouseRightButtonDown="CanvasForRectanglesMouseRightButtonDown"/>
+        <Grid x:Name="RectanglesGrid"  Grid.Column="0" Grid.Row="3" Height="128" Width="128" Grid.ColumnSpan="11" SnapsToDevicePixels="true" Focusable="True" Background="Transparent" 
+              MouseLeftButtonDown="CanvasForRectanglesMouseLeftButtonDown" MouseRightButtonDown="CanvasForRectanglesMouseRightButtonDown" MouseEnter="RectanglesGrid_MouseEnter" MouseLeave="RectanglesGrid_MouseLeave"/>
         <Canvas Grid.Column="0" Grid.Row="3"  Height="128" Width="128" Name ="canvasForLine" Grid.ColumnSpan="11"/>
 
         <Border Grid.Row="5" Grid.Column="2" Grid.ColumnSpan="8" Background="GhostWhite" BorderBrush="Silver" BorderThickness="0.8,0.8,0.8,2" CornerRadius="3,3,3,3">

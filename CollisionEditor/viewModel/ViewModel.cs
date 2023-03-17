@@ -112,7 +112,6 @@ namespace CollisionEditor.viewModel
             string filePath = ViewModelAngleService.GetAngleMapFilePath();
             if (filePath is not null && filePath != string.Empty)
             {
-                //window.ImageOfTile.Source = null;
                 angleMap = new AngleMap(filePath);
                 tileSet = new TileSet(angleMap.Values.Count);
                 (byte byteAngle, string hexAngle, double fullAngle) angles = ViewModelAssistant.GetAngles(angleMap, _chosenTile);
@@ -150,7 +149,6 @@ namespace CollisionEditor.viewModel
                 tileSet = new TileSet(filePath);
                 angleMap = new AngleMap(tileSet.Tiles.Count);
                 ViewModelAssistant.BitmapConvert(tileSet.Tiles[(int)_chosenTile]);
-                //ShowTile(ViewModelAssistant.BitmapConvert(tileSet.Tiles[(int)_chosenTile]));
                 TileGridUpdate(tileSet, (int)ChosenTile, window);
                 RectanglesGridUpdate();
                 window.Heights.Text = ViewModelAssistant.GetCollisionValues(tileSet.HeightMap[(int)_chosenTile]);
@@ -173,11 +171,6 @@ namespace CollisionEditor.viewModel
             }
         }
 
-        private static void ShowTile(System.Windows.Media.Imaging.BitmapSource TileStrip)
-        {
-            MainWindow mainWindow = (MainWindow)System.Windows.Application.Current.MainWindow;
-            //mainWindow.ImageOfTile.Source = TileStrip;
-        }
         private static void ShowTileMap(System.Windows.Media.Imaging.BitmapSource TileMap)
         {
             MainWindow mainWindow = (MainWindow)System.Windows.Application.Current.MainWindow;
@@ -296,7 +289,6 @@ namespace CollisionEditor.viewModel
                 OnPropertyChanged(nameof(ChosenTile));
             }
 
-            //ShowTile(ViewModelAssistant.BitmapConvert(tileSet.Tiles[(int)_chosenTile]));
             TileGridUpdate(tileSet, (int)ChosenTile, window);
             window.Heights.Text = ViewModelAssistant.GetCollisionValues(tileSet.HeightMap[(int)_chosenTile]);
             window.Widths.Text  = ViewModelAssistant.GetCollisionValues(tileSet.WidthMap[(int)_chosenTile]);
@@ -399,8 +391,7 @@ namespace CollisionEditor.viewModel
                         Background = new SolidColorBrush(tile.GetPixel(x, y).A > 0 ? Colors.Black : Colors.Transparent),
                         BorderBrush = new SolidColorBrush(Colors.Gray),
                     };
-                    //Border.SetValue(Grid.ColumnProperty, x);
-                    //Border.SetValue(Grid.RowProperty,    y);
+
                     window.TileGrid.Children.Add(Border);
                 }
             }

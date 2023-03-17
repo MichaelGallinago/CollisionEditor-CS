@@ -91,27 +91,27 @@ namespace CollisionEditor
 
         private bool _inRectangleCanvas = false;
 
-        private async void canvasForRectanglesUpdate(bool isAppear)
+        private async void RectanglesGridUpdate(bool isAppear)
         {
             _inRectangleCanvas = isAppear;
-            while (isAppear && canvasForRectangles.Opacity < 1d || !isAppear && canvasForRectangles.Opacity > 0d)
+            while (isAppear && RectanglesGrid.Opacity < 1d || !isAppear && RectanglesGrid.Opacity > 0d)
             {
                 if (_inRectangleCanvas != isAppear)
                     return;
 
                 await Task.Delay(10);
-                canvasForRectangles.Opacity = Math.Clamp(canvasForRectangles.Opacity + (isAppear ? 0.05 : -0.05), 0d, 1d);
+                RectanglesGrid.Opacity = Math.Clamp(RectanglesGrid.Opacity + (isAppear ? 0.05 : -0.05), 0d, 1d);
             }
         }
 
-        private void canvasForRectangles_MouseEnter(object sender, MouseEventArgs e)
+        private void RectanglesGrid_MouseEnter(object sender, MouseEventArgs e)
         {
-            canvasForRectanglesUpdate(true);
+            RectanglesGridUpdate(true);
         }
 
-        private void canvasForRectangles_MouseLeave(object sender, MouseEventArgs e)
+        private void RectanglesGrid_MouseLeave(object sender, MouseEventArgs e)
         {
-            canvasForRectanglesUpdate(false);
+            RectanglesGridUpdate(false);
         }
 
         private void WindowSizeChanged(object sender, SizeChangedEventArgs e)
