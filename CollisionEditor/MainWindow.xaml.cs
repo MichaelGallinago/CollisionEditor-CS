@@ -26,7 +26,6 @@ namespace CollisionEditor
         {
             var mousePosition = e.GetPosition(RectanglesGrid);
             Vector2<int> position = GetGridPosition(mousePosition, RectanglesGrid);
-            //Vector2<int> cordinats = (this.DataContext as MainViewModel).GetCordinats(Mouse.GetPosition(canvasForRectangles).X, Mouse.GetPosition(canvasForRectangles).Y);
 
             SquaresService.DrawSquare(Colors.Blue, position, BlueAndGreenSquare.Item1);
             
@@ -60,7 +59,8 @@ namespace CollisionEditor
         }
 
         private void CanvasForRectanglesMouseRightButtonDown(object sender, MouseButtonEventArgs e)
-        {
+        {   
+
             var mousePosition = e.GetPosition(RectanglesGrid);
             Vector2<int> position = GetGridPosition(mousePosition, RectanglesGrid);
             //Vector2<int> cordinats = (this.DataContext as MainViewModel).GetCordinats(Mouse.GetPosition(canvasForRectangles).X, Mouse.GetPosition(canvasForRectangles).Y);
@@ -119,6 +119,8 @@ namespace CollisionEditor
             double actualHeight = ActualHeight / 424 * 20;
             double actualWidth = ActualWidth / 587 * 26;
             double actualFontSize = (25.4 / 96 * actualHeight) / 0.35 - 4;
+
+
 
             Heights.Height = actualHeight;
             Heights.FontSize = actualFontSize;
