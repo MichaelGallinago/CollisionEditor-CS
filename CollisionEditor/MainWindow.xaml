@@ -43,8 +43,8 @@
         <Menu VerticalAlignment="Center" Grid.Column="0"  Grid.ColumnSpan="15" Foreground="Black" Height="20">
             <MenuItem Header="File">
                 <MenuItem Header="Load" >
-                    <MenuItem Header="TileMap........               Ctrl+O" Command="{Binding MenuOpenTileMapCommand}" Padding="0,0,-20,0"/>
-                    <MenuItem Header="AngleMap...     Ctrl+Shift+O" Command="{Binding MenuOpenAngleMapCommand}" Padding="0,0,-20,0"/>
+                    <MenuItem Header="TileMap........"  InputGestureText="Ctrl+O" Command="{Binding MenuOpenTileMapCommand}" Padding="0,0,-20,0"/>
+                    <MenuItem Header="AngleMap..." InputGestureText="Ctrl+Shift+O" Command="{Binding MenuOpenAngleMapCommand}" Padding="0,0,-20,0"/>
                 </MenuItem>
 
                 <MenuItem Header="Unload">
@@ -61,8 +61,8 @@
                     <MenuItem Header="TileMap" Command="{Binding MenuSaveTileMapCommand}"/>
                 </MenuItem>
 
-                <MenuItem Header="Save All          Ctrl+S" Padding="0,0,-20,0" Command="{Binding MenuSaveAllCommand}"/>
-                <MenuItem Header="Exit                         Alt+F4" Padding="0,0,-20,0" Command="{Binding ExitAppCommand}"/>
+                <MenuItem Header="Save All" InputGestureText="Ctrl+S" Padding="0,0,-20,0" Command="{Binding MenuSaveAllCommand}"/>
+                <MenuItem Header="Exit" InputGestureText="Alt+F4" Padding="0,0,-20,0" Command="{Binding ExitAppCommand}"/>
 
             </MenuItem>
             <MenuItem Header="Help" >
