@@ -72,7 +72,7 @@
         
         <UniformGrid x:Name="TileGrid" Grid.Column="0" Grid.Row="3" Height="128" Width="128" Grid.ColumnSpan="11" SnapsToDevicePixels="true" Background="Transparent"/>
         <Grid x:Name="RectanglesGrid"  Grid.Column="0" Grid.Row="3" Height="128" Width="128" Grid.ColumnSpan="11" SnapsToDevicePixels="true" Focusable="True" Background="Transparent" 
-              MouseLeftButtonDown="CanvasForRectanglesMouseLeftButtonDown" MouseRightButtonDown="CanvasForRectanglesMouseRightButtonDown" MouseEnter="RectanglesGrid_MouseEnter" MouseLeave="RectanglesGrid_MouseLeave"/>
+              MouseLeftButtonDown="RectanglesGrid_MouseLeftButtonDown" MouseRightButtonDown="RectanglesGrid_MouseRightButtonDown" MouseEnter="RectanglesGrid_MouseEnter" MouseLeave="RectanglesGrid_MouseLeave"/>
         <Canvas Grid.Column="0" Grid.Row="3"  Height="128" Width="128" Name ="canvasForLine" Grid.ColumnSpan="11"/>
 
         <Border Grid.Row="5" Grid.Column="2" Grid.ColumnSpan="8" Background="GhostWhite" BorderBrush="Silver" BorderThickness="0.8,0.8,0.8,2" CornerRadius="3,3,3,3">
@@ -82,29 +82,29 @@
             <TextBlock x:Name="Widths" HorizontalAlignment="Center"/>
         </Border>
         
-        <TextBox Grid.Column="2" Grid.Row="9" TextWrapping="Wrap"  IsEnabled="False" Text="{Binding Path=ByteAngle,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Name="TextBoxByteAngle" Padding="2,0,0,0"  Background="#FFB1B1B1"/>
-        <TextBox Grid.Column="5" Grid.Row="9" TextWrapping="Wrap" IsEnabled="False" Text="{Binding Path=HexAngle,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Name="TextBoxHexAngle"  Padding="2,0,0,0"  Background="#FFB1B1B1"/>
+        <TextBox Grid.Column="2" Grid.Row="9" TextWrapping="Wrap" IsEnabled="False" Text="{Binding Path=ByteAngle,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Name="TextBoxByteAngle" Padding="2,0,0,0"  Background="#FFB1B1B1"/>
+        <TextBox Grid.Column="5" Grid.Row="9" TextWrapping="Wrap" IsEnabled="False" Text="{Binding Path=HexAngle,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Name="TextBoxHexAngle"  Padding="2,0,0,0"  Background="#FFB1B1B1" PreviewKeyDown="TextBoxHexAngle_PreviewKeyDown"/>
         <TextBlock Grid.Column="8" Grid.Row="9" TextWrapping="Wrap" Text="0°" Name="TextBlockFullAngle"  Padding="2,0,0,0"  Background="#FFB1B1B1"/>
 
         <Button Grid.Column="3" Command="{Binding AngleIncrementCommand}" IsEnabled="False" x:Name="ByteAngleIncrimentButton" Grid.Row="9" Height="10" Width="25" VerticalAlignment="Top" HorizontalAlignment="Left">
-            <Path Fill="Black" Data="M 0 6 L 12 6 L 6 0 Z" Height="6" Width="12"/>
+            <Path Fill="Black" Data="M 0 6 L 12 6 L 6 0 Z" Stretch="Uniform" Height="Auto" Width="Auto"/>
         </Button>
         <Button Grid.Column="3" Command="{Binding AngleDecrementCommand}" IsEnabled="False" x:Name="ByteAngleDecrementButton" Grid.Row="9" Height="10" Width="25" VerticalAlignment="Bottom" HorizontalAlignment="Left">
-            <Path Fill="Black" Data="M 0 0 L 6 6 L 12 0 Z"/>
+            <Path Fill="Black" Data="M 0 0 L 6 6 L 12 0 Z" Stretch="Uniform" Height="Auto" Width="Auto"/>
         </Button>
 
         <Button Grid.Column="6" Command="{Binding AngleIncrementCommand}" IsEnabled="False" x:Name="HexAngleIncrimentButton" Grid.Row="9" Height="10" Width="25" VerticalAlignment="Top" HorizontalAlignment="Left">
-            <Path Fill="Black" Data="M 0 6 L 12 6 L 6 0 Z" Height="6" Width="12"/>
+            <Path Fill="Black" Data="M 0 6 L 12 6 L 6 0 Z" Stretch="Uniform" Height="Auto" Width="Auto"/>
         </Button>
         <Button Grid.Column="6" Command="{Binding AngleDecrementCommand}" IsEnabled="False" x:Name="HexAngleDecrementButton" Grid.Row="9" Height="10" Width="25" VerticalAlignment="Bottom" HorizontalAlignment="Left">
-            <Path Fill="Black" Data="M 0 0 L 6 6 L 12 0 Z"/>
+            <Path Fill="Black" Data="M 0 0 L 6 6 L 12 0 Z" Stretch="Uniform" Height="Auto" Width="Auto"/>
         </Button>
 
         <Button Grid.Column="9" Command="{Binding AngleIncrementCommand}" IsEnabled="False" x:Name="FullAngleIncrimentButton" Grid.Row="9" Height="10" Width="25" VerticalAlignment="Top" HorizontalAlignment="Left">
-            <Path Fill="Black" Data="M 0 6 L 12 6 L 6 0 Z" Height="6" Width="12"/>
+            <Path Fill="Black" Data="M 0 6 L 12 6 L 6 0 Z" Stretch="Uniform" Height="Auto" Width="Auto"/>
         </Button>
         <Button Grid.Column="9" Command="{Binding AngleDecrementCommand}" IsEnabled="False" x:Name="FullAngleDecrementButton" Grid.Row="9" Height="10" Width="25" VerticalAlignment="Bottom" HorizontalAlignment="Left">
-            <Path Fill="Black" Data="M 0 0 L 6 6 L 12 0 Z"/>
+            <Path Fill="Black" Data="M 0 0 L 6 6 L 12 0 Z" Stretch="Uniform" Height="Auto" Width="Auto"/>
         </Button>
 
         <ScrollViewer x:Name="scrollViewer" Grid.Column="12" Grid.Row="2" Grid.RowSpan="6" Grid.ColumnSpan="2">
@@ -118,8 +118,8 @@
                 </Canvas.Background>
             </Canvas>
         </ScrollViewer>
-        
-        <TextBox Grid.Column="12" Grid.Row="9" TextWrapping="Wrap" Background="#FFD8D8D8" x:Name="SelectTileTextBox"  IsEnabled="False" Text="{Binding Path=ChosenTile,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+
+        <TextBox Grid.Column="12" Grid.Row="9" TextWrapping="Wrap" Background="#FFD8D8D8" x:Name="SelectTileTextBox"  IsEnabled="False" Text="{Binding Path=ChosenTile,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" PreviewKeyDown="SelectTileTextBox_PreviewKeyDown"/>
         <Button Grid.Column="13" Grid.Row="9" Background="#FFD8D8D8" Content="Select Tile" x:Name="SelectTileButton"  IsEnabled="False" Command="{Binding SelectTileCommand}" />
         
     </Grid>

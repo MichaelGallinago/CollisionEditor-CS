@@ -22,21 +22,6 @@ namespace CollisionEditor
         (SquareAndPosition, SquareAndPosition) BlueAndGreenSquare = (new SquareAndPosition(), new SquareAndPosition());
         Line RedLine = new Line();
 
-        private void CanvasForRectanglesMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            var mousePosition = e.GetPosition(RectanglesGrid);
-            Vector2<int> position = GetGridPosition(mousePosition, RectanglesGrid);
-
-            SquaresService.DrawSquare(Colors.Blue, position, BlueAndGreenSquare.Item1);
-            
-            if (BlueAndGreenSquare.Item1.Square != null & BlueAndGreenSquare.Item2.Square != null)
-            {
-                (this.DataContext as MainViewModel).AngleUpdator(BlueAndGreenSquare.Item1.Position, BlueAndGreenSquare.Item2.Position);
-
-                DrawRedLine();
-            }
-        }
-
         private Vector2<int> GetGridPosition(Point mousePosition, Grid grid)
         {
             Vector2<int> position = new Vector2<int>();
@@ -58,9 +43,23 @@ namespace CollisionEditor
             return position;
         }
 
-        private void CanvasForRectanglesMouseRightButtonDown(object sender, MouseButtonEventArgs e)
-        {   
+        private void RectanglesGrid_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            var mousePosition = e.GetPosition(RectanglesGrid);
+            Vector2<int> position = GetGridPosition(mousePosition, RectanglesGrid);
 
+            SquaresService.DrawSquare(Colors.Blue, position, BlueAndGreenSquare.Item1);
+            
+            if (BlueAndGreenSquare.Item1.Square != null & BlueAndGreenSquare.Item2.Square != null)
+            {
+                (this.DataContext as MainViewModel).AngleUpdator(BlueAndGreenSquare.Item1.Position, BlueAndGreenSquare.Item2.Position);
+
+                DrawRedLine();
+            }
+        }
+
+        private void RectanglesGrid_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
+        {   
             var mousePosition = e.GetPosition(RectanglesGrid);
             Vector2<int> position = GetGridPosition(mousePosition, RectanglesGrid);
 
@@ -79,7 +78,13 @@ namespace CollisionEditor
             RedLineService.DrawRedLine(ref RedLine);
         }
 
-        private void TextBoxHexAngle_KeyDown(object sender, KeyEventArgs e)
+        private void SelectTileTextBox_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+                (this.DataContext as MainViewModel).SelectTile();
+        }
+
+        private void TextBoxHexAngle_PreviewKeyDown(object sender, KeyEventArgs e)
         {
             bool isCtrl = (Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl));
             Key[] exceptions = new Key[] { Key.Back, Key.Delete, Key.Left, Key.Right };
