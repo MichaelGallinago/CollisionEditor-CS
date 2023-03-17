@@ -165,6 +165,8 @@ namespace CollisionEditor
             SelectTileTextBox.FontSize = actualFontSize;
             SelectTileButton.Height = actualHeightTextAndButtons - 2;
             SelectTileButton.FontSize = actualFontSize;
+
+            DrawRedLine();
         }
     }
 }
