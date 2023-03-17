@@ -43,8 +43,8 @@
         <Menu VerticalAlignment="Center" Grid.Column="0"  Grid.ColumnSpan="15" Foreground="Black" Height="20">
             <MenuItem Header="File">
                 <MenuItem Header="Load" >
-                    <MenuItem Header="TileMap"  InputGestureText="Ctrl+O" Command="{Binding MenuOpenTileMapCommand}" />
-                    <MenuItem Header="AngleMap" InputGestureText="Ctrl+Shift+O" Command="{Binding MenuOpenAngleMapCommand}" />
+                    <MenuItem Header="TileMap"  InputGestureText="Ctrl+D" Command="{Binding MenuOpenTileMapCommand}" />
+                    <MenuItem Header="AngleMap" InputGestureText="Ctrl+W" Command="{Binding MenuOpenAngleMapCommand}" />
                 </MenuItem>
 
                 <MenuItem Header="Unload">
@@ -52,7 +52,7 @@
                     <MenuItem Header="Anglemap"/>
                 </MenuItem>
 
-                <MenuItem Header="Unload All" InputGestureText="Ctrl+Shift+U" HorizontalAlignment="Right"  />
+                <MenuItem Header="Unload All" InputGestureText="Ctrl+A" HorizontalAlignment="Right"  />
 
                 <MenuItem Header="Save">
                     <MenuItem Header="AngleMap" Command="{Binding MenuSaveAngleMapCommand}"/>
