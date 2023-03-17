@@ -6,7 +6,8 @@
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         mc:Ignorable="d"
         Title="CollisionEditorC#" Height="440" Width="600" MinHeight="440" MinWidth="600" 
-        SizeChanged ="WindowSizeChanged">
+        SizeChanged ="WindowSizeChanged" 
+        FontFamily="Fonts/#Droid Sans Mono">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="20"/>
@@ -76,10 +77,10 @@
         <Canvas Grid.Column="0" Grid.Row="3"  Height="128" Width="128" Name ="canvasForLine" Grid.ColumnSpan="11"/>
 
         <Border Grid.Row="5" Grid.Column="2" Grid.ColumnSpan="8" Background="GhostWhite" BorderBrush="Silver" BorderThickness="0.8,0.8,0.8,2" CornerRadius="3,3,3,3">
-            <TextBlock x:Name="Heights"  HorizontalAlignment="Center" FontFamily="Cascadia Mono"/>
+            <TextBlock x:Name="Heights"  HorizontalAlignment="Center"/>
         </Border>
         <Border Grid.Row="7" Grid.Column="2" Grid.ColumnSpan="8" Background="GhostWhite" BorderBrush="Silver" BorderThickness="0.8,0.8,0.8,2" CornerRadius="3,3,3,3">
-            <TextBlock x:Name="Widths" HorizontalAlignment="Center" FontFamily="Cascadia Mono"/>
+            <TextBlock x:Name="Widths" HorizontalAlignment="Center"/>
         </Border>
         
         <TextBox Grid.Column="2" Grid.Row="9" TextWrapping="Wrap"  IsEnabled="False" Text="{Binding Path=ByteAngle,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Name="TextBoxByteAngle" Padding="2,0,0,0"  Background="#FFB1B1B1"/>

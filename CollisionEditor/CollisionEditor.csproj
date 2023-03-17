@@ -17,6 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Fonts\DroidSansMono.ttf" />
     <None Remove="Grid.png" />
   </ItemGroup>
 
@@ -29,6 +30,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Fonts\DroidSansMono.ttf" />
     <Resource Include="Grid.png" />
   </ItemGroup>
 
