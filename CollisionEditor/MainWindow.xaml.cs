@@ -7,6 +7,7 @@ using System.Windows.Shapes;
 using System.Linq;
 using System;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 
 namespace CollisionEditor
 {   
@@ -88,5 +89,6 @@ namespace CollisionEditor
         {
             canvasForRectanglesUpdate(false);
         }
+        
     }
 }
