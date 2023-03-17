@@ -92,21 +92,45 @@ namespace CollisionEditor
         }
 
         private void WindowSizeChanged(object sender, SizeChangedEventArgs e)
-        {
-            TextBlockFullAngle.Height = ActualHeight / 424 * 20;
-            TextBlockFullAngle.FontSize = (25.4 / 96 * TextBlockFullAngle.Height) / 0.35 - 2 ;
+        {   
+            double actualHeight = ActualHeight / 424 * 20;
+            double actualWidth = ActualWidth / 587 * 26;
+            double actualFontSize = (25.4 / 96 * actualHeight) / 0.35 - 4;
 
-            TextBoxByteAngle.Height = ActualHeight / 424 * 20;
-            TextBoxByteAngle.FontSize = (25.4 / 96 * TextBoxByteAngle.Height) / 0.35 - 2 ;
+            Heights.Height = actualHeight;
+            Heights.FontSize = actualFontSize;
 
-            TextBoxHexAngle.Height = ActualHeight / 424 * 20;
-            TextBoxHexAngle.FontSize = (25.4 / 96 * TextBoxHexAngle.Height) / 0.35 - 2 ;
+            Widths.Height = actualHeight;
+            Widths.FontSize = actualFontSize;
+            
+            TextBlockFullAngle.Height = actualHeight;
+            TextBlockFullAngle.FontSize = actualFontSize;
+            TextBoxByteAngle.Height = actualHeight;
+            TextBoxByteAngle.FontSize = actualFontSize;
+            TextBoxHexAngle.Height = actualHeight;
+            TextBoxHexAngle.FontSize = actualFontSize;
 
-            SelectTileTextBox.Height = ActualHeight / 424 * 20 -2;
-            SelectTileTextBox.FontSize = (25.4 / 96 * SelectTileTextBox.Height) / 0.35 -2;
 
-            SelectTileButton.Height = ActualHeight / 424 * 20 -2;
-            SelectTileButton.FontSize = (25.4 / 96 * SelectTileButton.Height) / 0.35 - 2;
+            ByteAngleIncrimentButton.Height = actualHeight/2;
+            ByteAngleIncrimentButton.Width = actualWidth;
+            ByteAngleDecrementButton.Height = actualHeight/2 -1;
+            ByteAngleDecrementButton.Width = actualWidth;
+
+            HexAngleIncrimentButton.Height = actualHeight / 2;
+            HexAngleIncrimentButton.Width = actualWidth - 1;
+            HexAngleDecrementButton.Height = actualHeight / 2 - 1;
+            HexAngleDecrementButton.Width = actualWidth - 1;
+
+            FullAngleIncrimentButton.Height = actualHeight / 2;
+            FullAngleIncrimentButton.Width = actualWidth-1;
+            FullAngleDecrementButton.Height = actualHeight / 2 - 1;
+            FullAngleDecrementButton.Width = actualWidth-1;
+
+
+            SelectTileTextBox.Height = actualHeight - 2;
+            SelectTileTextBox.FontSize = actualFontSize;
+            SelectTileButton.Height = actualHeight - 2;
+            SelectTileButton.FontSize = actualFontSize;
         }
     }
 }
