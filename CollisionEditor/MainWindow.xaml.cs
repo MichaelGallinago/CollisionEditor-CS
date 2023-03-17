@@ -63,7 +63,6 @@ namespace CollisionEditor
 
             var mousePosition = e.GetPosition(RectanglesGrid);
             Vector2<int> position = GetGridPosition(mousePosition, RectanglesGrid);
-            //Vector2<int> cordinats = (this.DataContext as MainViewModel).GetCordinats(Mouse.GetPosition(canvasForRectangles).X, Mouse.GetPosition(canvasForRectangles).Y);
 
             SquaresService.DrawSquare(Colors.Green, position, BlueAndGreenSquare.Item2);
 

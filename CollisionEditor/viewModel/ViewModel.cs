@@ -105,6 +105,9 @@ namespace CollisionEditor.viewModel
             SelectTileCommand = new RelayCommand(SelectTile);
 
             ExitAppCommand = new RelayCommand(ExitApp);
+
+            RectanglesGridUpdate();
+            TileGridUpdate(tileSet, (int)_chosenTile, window);
         }
 
         private void MenuOpenAngleMap()
@@ -379,7 +382,7 @@ namespace CollisionEditor.viewModel
             window.TileGrid.Columns = size.Width;
             window.TileGrid.Background = new SolidColorBrush(Colors.Transparent);
 
-            Bitmap tile = tileSet.Tiles[ChosenTile];
+            Bitmap tile = tileSet.Tiles.Count > 0 ? tileSet.Tiles[ChosenTile] : new Bitmap(size.Height, size.Width);
 
             for (int y = 0; y < size.Height; y++)
             {
