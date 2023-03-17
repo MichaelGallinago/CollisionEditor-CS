@@ -93,15 +93,15 @@ namespace CollisionEditor
 
         private async void RectanglesGridUpdate(bool isAppear)
         {
-            _inRectangleCanvas = isAppear;
-            while (isAppear && RectanglesGrid.Opacity < 1d || !isAppear && RectanglesGrid.Opacity > 0d)
-            {
-                if (_inRectangleCanvas != isAppear)
-                    return;
+            //_inRectangleCanvas = isAppear;
+            //while (isAppear && canvasForRectangles.Opacity < 1d || !isAppear && canvasForRectangles.Opacity > 0d)
+            //{
+            //    if (_inRectangleCanvas != isAppear)
+            //        return;
 
-                await Task.Delay(10);
-                RectanglesGrid.Opacity = Math.Clamp(RectanglesGrid.Opacity + (isAppear ? 0.05 : -0.05), 0d, 1d);
-            }
+            //    await Task.Delay(10);
+            //    canvasForRectangles.Opacity = Math.Clamp(canvasForRectangles.Opacity + (isAppear ? 0.05 : -0.05), 0d, 1d);
+            //}
         }
 
         private void RectanglesGrid_MouseEnter(object sender, MouseEventArgs e)
@@ -116,45 +116,54 @@ namespace CollisionEditor
 
         private void WindowSizeChanged(object sender, SizeChangedEventArgs e)
         {   
-            double actualHeight = ActualHeight / 424 * 20;
-            double actualWidth = ActualWidth / 587 * 26;
-            double actualFontSize = (25.4 / 96 * actualHeight) / 0.35 - 4;
+            double actualHeightTextAndButtons = ActualHeight / 424 * 20;
+            double actualWidthTextAndButtons = ActualWidth / 587 * 26;
+            double actualFontSize = (25.4 / 96 * actualHeightTextAndButtons) / 0.35 - 4;
 
+            double actualHeightGrid = ActualHeight / 424 * 128;
+            
+            TileGrid.Width = actualHeightGrid;
+            TileGrid.Height = actualHeightGrid;
 
+            RectanglesGrid.Width = actualHeightGrid;
+            RectanglesGrid.Height = actualHeightGrid;
 
-            Heights.Height = actualHeight;
+            canvasForLine.Width = actualHeightGrid;
+            canvasForLine.Height = actualHeightGrid;
+
+            Heights.Height = actualHeightTextAndButtons;
             Heights.FontSize = actualFontSize;
 
-            Widths.Height = actualHeight;
+            Widths.Height = actualHeightTextAndButtons;
             Widths.FontSize = actualFontSize;
             
-            TextBlockFullAngle.Height = actualHeight;
+            TextBlockFullAngle.Height = actualHeightTextAndButtons;
             TextBlockFullAngle.FontSize = actualFontSize;
-            TextBoxByteAngle.Height = actualHeight;
+            TextBoxByteAngle.Height = actualHeightTextAndButtons;
             TextBoxByteAngle.FontSize = actualFontSize;
-            TextBoxHexAngle.Height = actualHeight;
+            TextBoxHexAngle.Height = actualHeightTextAndButtons;
             TextBoxHexAngle.FontSize = actualFontSize;
 
 
-            ByteAngleIncrimentButton.Height = actualHeight/2;
-            ByteAngleIncrimentButton.Width = actualWidth;
-            ByteAngleDecrementButton.Height = actualHeight/2 -1;
-            ByteAngleDecrementButton.Width = actualWidth;
+            ByteAngleIncrimentButton.Height = actualHeightTextAndButtons/2;
+            ByteAngleIncrimentButton.Width = actualWidthTextAndButtons;
+            ByteAngleDecrementButton.Height = actualHeightTextAndButtons/2 -1;
+            ByteAngleDecrementButton.Width = actualWidthTextAndButtons;
 
-            HexAngleIncrimentButton.Height = actualHeight / 2;
-            HexAngleIncrimentButton.Width = actualWidth - 1;
-            HexAngleDecrementButton.Height = actualHeight / 2 - 1;
-            HexAngleDecrementButton.Width = actualWidth - 1;
+            HexAngleIncrimentButton.Height = actualHeightTextAndButtons / 2;
+            HexAngleIncrimentButton.Width = actualWidthTextAndButtons - 1;
+            HexAngleDecrementButton.Height = actualHeightTextAndButtons / 2 - 1;
+            HexAngleDecrementButton.Width = actualWidthTextAndButtons - 1;
 
-            FullAngleIncrimentButton.Height = actualHeight / 2;
-            FullAngleIncrimentButton.Width = actualWidth-1;
-            FullAngleDecrementButton.Height = actualHeight / 2 - 1;
-            FullAngleDecrementButton.Width = actualWidth-1;
+            FullAngleIncrimentButton.Height = actualHeightTextAndButtons / 2;
+            FullAngleIncrimentButton.Width = actualWidthTextAndButtons-1;
+            FullAngleDecrementButton.Height = actualHeightTextAndButtons / 2 - 1;
+            FullAngleDecrementButton.Width = actualWidthTextAndButtons-1;
 
 
-            SelectTileTextBox.Height = actualHeight - 2;
+            SelectTileTextBox.Height = actualHeightTextAndButtons - 2;
             SelectTileTextBox.FontSize = actualFontSize;
-            SelectTileButton.Height = actualHeight - 2;
+            SelectTileButton.Height = actualHeightTextAndButtons - 2;
             SelectTileButton.FontSize = actualFontSize;
         }
     }
