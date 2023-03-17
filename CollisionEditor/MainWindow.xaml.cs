@@ -8,6 +8,7 @@ using System.Linq;
 using System;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using System.Runtime.Intrinsics.Arm;
 
 namespace CollisionEditor
 {   
@@ -89,6 +90,23 @@ namespace CollisionEditor
         {
             canvasForRectanglesUpdate(false);
         }
-        
+
+        private void WindowSizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            TextBlockFullAngle.Height = ActualHeight / 424 * 20;
+            TextBlockFullAngle.FontSize = (25.4 / 96 * TextBlockFullAngle.Height) / 0.35 - 2 ;
+
+            TextBoxByteAngle.Height = ActualHeight / 424 * 20;
+            TextBoxByteAngle.FontSize = (25.4 / 96 * TextBoxByteAngle.Height) / 0.35 - 2 ;
+
+            TextBoxHexAngle.Height = ActualHeight / 424 * 20;
+            TextBoxHexAngle.FontSize = (25.4 / 96 * TextBoxHexAngle.Height) / 0.35 - 2 ;
+
+            SelectTileTextBox.Height = ActualHeight / 424 * 20;
+            SelectTileTextBox.FontSize = (25.4 / 96 * SelectTileTextBox.Height) / 0.35 -2;
+
+            SelectTileButton.Height = ActualHeight / 424 * 20;
+            SelectTileButton.FontSize = (25.4 / 96 * SelectTileButton.Height) / 0.35 - 2;
+        }
     }
 }
