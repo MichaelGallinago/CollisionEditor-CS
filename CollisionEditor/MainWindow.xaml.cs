@@ -89,19 +89,19 @@ namespace CollisionEditor
                 e.Handled = true;
         }
 
-        private bool _inRectangleCanvas = false;
+        private bool _inRectanglesGrid = false;
 
         private async void RectanglesGridUpdate(bool isAppear)
         {
-            //_inRectangleCanvas = isAppear;
-            //while (isAppear && canvasForRectangles.Opacity < 1d || !isAppear && canvasForRectangles.Opacity > 0d)
-            //{
-            //    if (_inRectangleCanvas != isAppear)
-            //        return;
+            _inRectanglesGrid = isAppear;
+            while (isAppear && RectanglesGrid.Opacity < 1d || !isAppear && RectanglesGrid.Opacity > 0d)
+            {
+                if (_inRectanglesGrid != isAppear)
+                    return;
 
-            //    await Task.Delay(10);
-            //    canvasForRectangles.Opacity = Math.Clamp(canvasForRectangles.Opacity + (isAppear ? 0.05 : -0.05), 0d, 1d);
-            //}
+                await Task.Delay(10);
+                RectanglesGrid.Opacity = Math.Clamp(RectanglesGrid.Opacity + (isAppear ? 0.05 : -0.05), 0d, 1d);
+            }
         }
 
         private void RectanglesGrid_MouseEnter(object sender, MouseEventArgs e)
