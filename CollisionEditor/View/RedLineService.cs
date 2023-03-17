@@ -18,15 +18,17 @@ namespace CollisionEditor
                 floatAngle = floatAngle - 180;
             }
 
+            int size = (int)mainWindow.canvasForLine.Width / 2;
+
             Line newLine = new Line();
-            double length = 64 / Math.Abs(Math.Cos((-45 + ((floatAngle + 45) % 90)) / 180 * Math.PI));
+            double length = size / Math.Abs(Math.Cos((-45 + ((floatAngle + 45) % 90)) / 180 * Math.PI));
             floatAngle += 90;
             newLine.X1 = length * Math.Sin(floatAngle / 180 * Math.PI);
             newLine.Y1 = length * Math.Cos(floatAngle / 180 * Math.PI);
             newLine.X2 = -newLine.X1;
             newLine.Y2 = -newLine.Y1;
-            Canvas.SetTop(newLine, 64);
-            Canvas.SetLeft(newLine, 64);
+            Canvas.SetTop(newLine, size);
+            Canvas.SetLeft(newLine, size);
             newLine.Stroke = new SolidColorBrush(Colors.Red);
             newLine.Fill = new SolidColorBrush(Colors.Red);
 
