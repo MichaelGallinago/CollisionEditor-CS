@@ -94,6 +94,7 @@ namespace CollisionEditor
         private void WindowSizeChanged(object sender, SizeChangedEventArgs e)
         {   
             double actualHeight = ActualHeight / 424 * 20;
+            double actualWidth = ActualWidth / 587 * 26;
             double actualFontSize = (25.4 / 96 * actualHeight) / 0.35 - 4;
 
             Heights.Height = actualHeight;
@@ -108,6 +109,23 @@ namespace CollisionEditor
             TextBoxByteAngle.FontSize = actualFontSize;
             TextBoxHexAngle.Height = actualHeight;
             TextBoxHexAngle.FontSize = actualFontSize;
+
+
+            ByteAngleIncrimentButton.Height = actualHeight/2;
+            ByteAngleIncrimentButton.Width = actualWidth;
+            ByteAngleDecrementButton.Height = actualHeight/2 -1;
+            ByteAngleDecrementButton.Width = actualWidth;
+
+            HexAngleIncrimentButton.Height = actualHeight / 2;
+            HexAngleIncrimentButton.Width = actualWidth - 1;
+            HexAngleDecrementButton.Height = actualHeight / 2 - 1;
+            HexAngleDecrementButton.Width = actualWidth - 1;
+
+            FullAngleIncrimentButton.Height = actualHeight / 2;
+            FullAngleIncrimentButton.Width = actualWidth-1;
+            FullAngleDecrementButton.Height = actualHeight / 2 - 1;
+            FullAngleDecrementButton.Width = actualWidth-1;
+
 
             SelectTileTextBox.Height = actualHeight - 2;
             SelectTileTextBox.FontSize = actualFontSize;
