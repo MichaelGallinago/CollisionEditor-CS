@@ -67,7 +67,7 @@
 
             </MenuItem>
             <MenuItem Header="Help" >
-                <Button Content="Due to the memetic danger caused by SCP-[DATA DELETED] help has been removed" Click="Help_Click"  FontFamily="Webdings"  />
+                <MenuItem Header="Due to the memetic danger caused by SCP-[DATA DELETED] help has been removed" Click="Help_Click"  FontFamily="Webdings"  />
             </MenuItem>
         </Menu>
         
