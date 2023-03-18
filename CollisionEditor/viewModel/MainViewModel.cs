@@ -162,8 +162,20 @@ namespace CollisionEditor.viewModel
 
                 System.Drawing.Size size = new System.Drawing.Size(4, 4);
                 int imageOfTileMapWidth = (int)((window.Width/587) * 278);
-                window.ImageOfTileMap.Width = (window.Width / 587) * 278;
-                window.ImageOfTileMap.Height = (window.Height/ 424) * 303;
+
+                foreach (Bitmap tile in tileSet.Tiles)
+                {
+                    var image = new System.Windows.Controls.Image()
+                    {
+                        Width = tileSet.TileSize.Width * 2,
+                        Height = tileSet.TileSize.Height * 2
+                    };
+                    image.Source = ViewModelAssistant.BitmapConvert(tile);
+                    window.TileMapGrid.Children.Add(image);
+                }
+
+                //window.ImageOfTileMap.Width = (window.Width / 587) * 278;
+                //window.ImageOfTileMap.Height = (window.Height/ 424) * 303;
                 ShowTileMap(ViewModelAssistant.GetTilePanel(tileSet, imageOfTileMapWidth, size));
                 
                 window.SelectTileTextBox.IsEnabled = true;
@@ -175,7 +187,7 @@ namespace CollisionEditor.viewModel
         private static void ShowTileMap(System.Windows.Media.Imaging.BitmapSource TileMap)
         {
             MainWindow mainWindow = (MainWindow)System.Windows.Application.Current.MainWindow;
-            mainWindow.ImageOfTileMap.Source = TileMap;
+            //mainWindow.ImageOfTileMap.Source = TileMap;
         }
 
         private void MenuSaveTileMap()
