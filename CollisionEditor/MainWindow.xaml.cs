@@ -8,6 +8,7 @@ using System.Windows.Controls;
 using System.Linq;
 using System;
 using System.Threading.Tasks;
+using System.Diagnostics;
 
 namespace CollisionEditor
 {   
@@ -175,6 +176,15 @@ namespace CollisionEditor
             SelectTileButton.FontSize = actualFontSize;
 
             DrawRedLine();
+        }
+
+        private void Help_Click(object sender, RoutedEventArgs e)
+        {
+            Process.Start(new ProcessStartInfo()
+            {
+                FileName = "https://youtu.be/V-_O7nl0Ii0?t=17",
+                UseShellExecute = true,
+            });
         }
     }
 }
