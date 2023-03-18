@@ -140,8 +140,6 @@ namespace CollisionEditor.viewModel
             mainWindow.HexAngleDecrementButton.IsEnabled = true;
 
             mainWindow.TextBlockFullAngle.Text = fullAngle.ToString() + "°";
-            mainWindow.FullAngleIncrimentButton.IsEnabled = true;
-            mainWindow.FullAngleDecrementButton.IsEnabled = true;
         }
 
         private void MenuOpenTileMap()
