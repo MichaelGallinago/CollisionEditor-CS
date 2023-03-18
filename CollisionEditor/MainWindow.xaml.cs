@@ -141,11 +141,11 @@ namespace CollisionEditor
             Widths.Height = actualHeightTextAndButtons;
             Widths.FontSize = actualFontSize;
             
-            TextBlockFullAngle.Height = actualHeightTextAndButtons;
+            TextBlockFullAngle.Height = actualHeightTextAndButtons - 2;
             TextBlockFullAngle.FontSize = actualFontSize;
-            TextBoxByteAngle.Height = actualHeightTextAndButtons;
+            TextBoxByteAngle.Height = actualHeightTextAndButtons - 2;
             TextBoxByteAngle.FontSize = actualFontSize;
-            TextBoxHexAngle.Height = actualHeightTextAndButtons;
+            TextBoxHexAngle.Height = actualHeightTextAndButtons - 2;
             TextBoxHexAngle.FontSize = actualFontSize;
 
 
