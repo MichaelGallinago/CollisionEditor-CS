@@ -150,14 +150,14 @@ namespace CollisionEditor
 
 
             ByteAngleIncrimentButton.Height = actualHeightTextAndButtons/2;
-            ByteAngleIncrimentButton.Width = actualWidthTextAndButtons;
+            ByteAngleIncrimentButton.Width = actualWidthTextAndButtons - 2;
             ByteAngleDecrementButton.Height = actualHeightTextAndButtons/2 -1;
-            ByteAngleDecrementButton.Width = actualWidthTextAndButtons;
+            ByteAngleDecrementButton.Width = actualWidthTextAndButtons - 2;
 
             HexAngleIncrimentButton.Height = actualHeightTextAndButtons / 2;
-            HexAngleIncrimentButton.Width = actualWidthTextAndButtons - 1;
+            HexAngleIncrimentButton.Width = actualWidthTextAndButtons - 2;
             HexAngleDecrementButton.Height = actualHeightTextAndButtons / 2 - 1;
-            HexAngleDecrementButton.Width = actualWidthTextAndButtons - 1;
+            HexAngleDecrementButton.Width = actualWidthTextAndButtons - 2;
 
 
             SelectTileTextBox.Height = actualHeightTextAndButtons - 2;
