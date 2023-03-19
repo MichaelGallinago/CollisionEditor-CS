@@ -171,7 +171,7 @@ namespace CollisionEditor
             TriangleDownHexAngle.Height = actualWidthTextAndButtons / 2 - 3;
             TriangleDownHexAngle.Width = actualWidthTextAndButtons / 2 - 3;
 
-            
+            TileMapGrid.Width = 284 + (((int)(ActualWidth / 587 * 278) - 314) / 32) * 32;
 
             SelectTileTextBox.Height = actualHeightTextAndButtons - 2;
             SelectTileTextBox.FontSize = actualFontSize;
