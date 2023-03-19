@@ -161,10 +161,8 @@ namespace CollisionEditor.viewModel
                 window.TextBoxHexAngle.IsEnabled = true;
 
                 System.Drawing.Size size = new System.Drawing.Size(4, 4);
-                int imageOfTileMapWidth = (int)((window.Width/587) * 278);
+                int imageOfTileMapWidth = (int)(window.Width / 587 * 278);
 
-                window.TileMapGrid.Height = (int)Math.Ceiling(tileSet.Tiles.Count / 8d) * (tileSet.TileSize.Height * 2 + 4) - 4;
-                
                 foreach (Bitmap tile in tileSet.Tiles)
                 {
                     var image = new System.Windows.Controls.Image()

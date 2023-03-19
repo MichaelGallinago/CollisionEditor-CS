@@ -121,13 +121,12 @@ namespace CollisionEditor
 
         private void WindowSizeChanged(object sender, SizeChangedEventArgs e)
         {
-            
             double actualHeightTextAndButtons = ActualHeight / 424 * 20;
             double actualWidthTextAndButtons = ActualWidth / 587 * 26;
             double actualFontSize = (25.4 / 96 * actualHeightTextAndButtons) / 0.35 - 4;
 
             double actualHeightGrid = ActualHeight / 424 * 128;
-            
+
             TileGrid.Width = actualHeightGrid;
             TileGrid.Height = actualHeightGrid;
 
@@ -172,12 +171,14 @@ namespace CollisionEditor
             TriangleDownHexAngle.Width = actualWidthTextAndButtons / 2 - 3;
 
             TileMapGrid.Width = 284 + (((int)(ActualWidth / 587 * 278) - 314) / 32) * 32;
+            TileMapGrid.Columns = ((int)TileMapGrid.Width + 4) / (16 * 2 + 4);
+            double tileCount = 248d;
+            TileMapGrid.Height = (int)Math.Ceiling(tileCount / TileMapGrid.Columns) * (16 * 2 + 4) - 4;
 
             SelectTileTextBox.Height = actualHeightTextAndButtons - 2;
             SelectTileTextBox.FontSize = actualFontSize;
             SelectTileButton.Height = actualHeightTextAndButtons - 2;
             SelectTileButton.FontSize = actualFontSize;
-
 
             DrawRedLine();
         }
