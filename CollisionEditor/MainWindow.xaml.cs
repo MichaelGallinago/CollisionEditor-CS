@@ -154,28 +154,23 @@ namespace CollisionEditor
 
             ByteAngleIncrimentButton.Height = actualHeightTextAndButtons / 2;
             ByteAngleIncrimentButton.Width = actualWidthUpAndDownButtons - 3; 
-            
-            TriangleUpByteAngle.Height = actualHeightTextAndButtons / 2 - 3 ;
-            TriangleUpByteAngle.Width = actualWidthUpAndDownButtons / 2 - 3 ;
-
             ByteAngleDecrementButton.Height = actualHeightTextAndButtons / 2 - 1;
             ByteAngleDecrementButton.Width = actualWidthUpAndDownButtons - 3;
 
-            TriangleDownByteAngle.Height = actualHeightTextAndButtons / 2 - 3;
-            TriangleDownByteAngle.Width = actualWidthUpAndDownButtons / 2 - 3;
-
+            TriangleUpByteAngle.Height = actualHeightTextAndButtons / 2 - 5;
+            TriangleUpByteAngle.Width = actualWidthUpAndDownButtons / 2 - 5;
+            TriangleDownByteAngle.Height = actualHeightTextAndButtons / 2 - 5;
+            TriangleDownByteAngle.Width = actualWidthUpAndDownButtons / 2 - 5;
 
             HexAngleIncrimentButton.Height = actualHeightTextAndButtons / 2;
             HexAngleIncrimentButton.Width = actualWidthUpAndDownButtons - 3;
-
-            TriangleUpHexAngle.Height = actualHeightTextAndButtons / 2 - 3;
-            TriangleUpHexAngle.Width = actualWidthUpAndDownButtons / 2 - 3;
-
             HexAngleDecrementButton.Height = actualHeightTextAndButtons / 2 - 1;
             HexAngleDecrementButton.Width = actualWidthUpAndDownButtons - 3;
 
-            TriangleDownHexAngle.Height = actualHeightTextAndButtons / 2 - 3;
-            TriangleDownHexAngle.Width = actualWidthUpAndDownButtons / 2 - 3;
+            TriangleUpHexAngle.Height = actualHeightTextAndButtons / 2 - 5;
+            TriangleUpHexAngle.Width = actualWidthUpAndDownButtons / 2 - 5;
+            TriangleDownHexAngle.Height = actualHeightTextAndButtons / 2 - 5;
+            TriangleDownHexAngle.Width = actualWidthUpAndDownButtons / 2 - 5;
 
             TileMapGrid.Width = 284 + (((int)(ActualWidth / 587 * 278) - 314) / 32) * 32;
             TileMapGrid.Columns = ((int)TileMapGrid.Width + 4) / (16 * 2 + 4);
