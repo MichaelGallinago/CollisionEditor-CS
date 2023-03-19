@@ -1,7 +1,5 @@
 ﻿using CollisionEditor.model;
 using System.Windows.Controls;
-using System.Windows.Media;
-using System.Windows.Shapes;
 
 namespace CollisionEditor
 {
@@ -9,31 +7,30 @@ namespace CollisionEditor
     {
         static MainWindow mainWindow = (MainWindow)System.Windows.Application.Current.MainWindow;
 
-        public static void DrawSquare(Color color, Vector2<int> position, SquareAndPosition squareAndPosition)
+        public static void MoveSquare(Vector2<int> position, SquareAndPosition firstSquare, SquareAndPosition secondSquare)
         {
-            Rectangle square = new Rectangle()
-            {
-                Fill = new SolidColorBrush(color)
-            };
+            firstSquare.Square.SetValue(Grid.ColumnProperty, position.X);
+            firstSquare.Square.SetValue(Grid.RowProperty,    position.Y);
 
-            mainWindow.RectanglesGrid.Children.Remove(squareAndPosition.Square);
-            square.SetValue(Grid.ColumnProperty, position.X);
-            square.SetValue(Grid.RowProperty,    position.Y);
-
-            if (Equals(position, squareAndPosition.Position) && Equals(color, squareAndPosition.Color))
+            bool isFirstExists = mainWindow.RectanglesGrid.Children.Contains(firstSquare.Square);
+            if (!Equals(position, firstSquare.Position) && isFirstExists ||  !isFirstExists)
             {
-                squareAndPosition.Square = null;
-                squareAndPosition.Position = new Vector2<int>();
-                squareAndPosition.Color = new Color();
+                firstSquare.Position = position;
+
+                if (Equals(position, secondSquare.Position) && mainWindow.RectanglesGrid.Children.Contains(secondSquare.Square))
+                {
+                    mainWindow.RectanglesGrid.Children.Remove(secondSquare.Square);
+                }
+
+                if (!isFirstExists)
+                {
+                    mainWindow.RectanglesGrid.Children.Add(firstSquare.Square);
+                }
             }
             else
             {
-                mainWindow.RectanglesGrid.Children.Add(square);
-                squareAndPosition.Square = square;
-                squareAndPosition.Position = position;
-                squareAndPosition.Color = color;
+                mainWindow.RectanglesGrid.Children.Remove(firstSquare.Square);
             }
-            
         }
     }
 }

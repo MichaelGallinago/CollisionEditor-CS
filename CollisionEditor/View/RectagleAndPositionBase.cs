@@ -9,5 +9,11 @@ namespace CollisionEditor
         public Rectangle Square { get; set; } = new Rectangle();
         public Vector2<int> Position { get; set; } = new Vector2<int>();
         public Color Color { get; set; }
+
+        public SquareAndPosition(Color color)
+        {
+            Color = color;
+            Square.Fill = new SolidColorBrush(Color);
+        }
     }
 }

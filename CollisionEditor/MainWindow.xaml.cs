@@ -20,7 +20,7 @@ namespace CollisionEditor
             DataContext = new MainViewModel(this);
         }
 
-        (SquareAndPosition, SquareAndPosition) BlueAndGreenSquare = (new SquareAndPosition(), new SquareAndPosition());
+        (SquareAndPosition, SquareAndPosition) BlueAndGreenSquare = (new SquareAndPosition(Colors.Blue), new SquareAndPosition(Colors.Green));
         Line RedLine = new Line();
 
         private Vector2<int> GetGridPosition(Point mousePosition, Grid grid)
@@ -49,7 +49,7 @@ namespace CollisionEditor
             var mousePosition = e.GetPosition(RectanglesGrid);
             Vector2<int> position = GetGridPosition(mousePosition, RectanglesGrid);
 
-            SquaresService.DrawSquare(Colors.Blue, position, BlueAndGreenSquare.Item1);
+            SquaresService.MoveSquare(position, BlueAndGreenSquare.Item1, BlueAndGreenSquare.Item2);
             
             if (BlueAndGreenSquare.Item1.Square != null & BlueAndGreenSquare.Item2.Square != null)
             {
@@ -64,7 +64,7 @@ namespace CollisionEditor
             var mousePosition = e.GetPosition(RectanglesGrid);
             Vector2<int> position = GetGridPosition(mousePosition, RectanglesGrid);
 
-            SquaresService.DrawSquare(Colors.Green, position, BlueAndGreenSquare.Item2);
+            SquaresService.MoveSquare(position, BlueAndGreenSquare.Item2, BlueAndGreenSquare.Item1);
 
             if (BlueAndGreenSquare.Item1.Square != null & BlueAndGreenSquare.Item2.Square != null)
             {
