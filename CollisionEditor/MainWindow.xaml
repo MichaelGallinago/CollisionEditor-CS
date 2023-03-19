@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="CollisionEditorC#" Height="440" Width="600" MinHeight="440" MinWidth="600" 
+        Title="CollisionEditorC#" Height="440" Width="664" MinHeight="440" MinWidth="664" 
         SizeChanged ="WindowSizeChanged" 
         FontFamily="Fonts/#Droid Sans Mono">
     <Grid>
@@ -67,7 +67,7 @@
 
             </MenuItem>
             <MenuItem Header="Help" >
-                <MenuItem Header="Due to the memetic danger caused by SCP-[DATA DELETED] help has been removed" Click="Help_Click"  FontFamily="Webdings"  />
+                <MenuItem Header="Call tech support" Click="Help_Click"/>
             </MenuItem>
         </Menu>
         
@@ -102,16 +102,7 @@
         </Button>
 
         <ScrollViewer x:Name="scrollViewer" Grid.Column="12" Grid.Row="2" Grid.RowSpan="6" Grid.ColumnSpan="2">
-            <!--<Canvas  Width="{Binding ActualWidth, ElementName=ImageOfTileMap}" Height="{Binding ActualHeight, ElementName=ImageOfTileMap}">
-                <Canvas.Background >
-                    <VisualBrush  >
-                        <VisualBrush.Visual>
-                            <Image Name ="ImageOfTileMap" Stretch="Fill" SnapsToDevicePixels ="True"/>
-                        </VisualBrush.Visual>
-                    </VisualBrush>
-                </Canvas.Background>
-            </Canvas>-->
-            <UniformGrid x:Name="TileMapGrid" Columns="8" SnapsToDevicePixels="true" Background="Transparent" RenderOptions.BitmapScalingMode="NearestNeighbor"/>
+            <UniformGrid x:Name="TileMapGrid" Columns="8" SnapsToDevicePixels="true" Width="284" Background="Transparent" RenderOptions.BitmapScalingMode="NearestNeighbor" />
         </ScrollViewer>
 
         <TextBox Grid.Column="12" Grid.Row="9" Grid.RowSpan ="2" TextWrapping="Wrap" Background="#FFD8D8D8" x:Name="SelectTileTextBox"  IsEnabled="False" Text="{Binding Path=ChosenTile,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" PreviewKeyDown="SelectTileTextBox_PreviewKeyDown"/>

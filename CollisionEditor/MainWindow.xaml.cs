@@ -120,7 +120,8 @@ namespace CollisionEditor
         }
 
         private void WindowSizeChanged(object sender, SizeChangedEventArgs e)
-        {   
+        {
+            
             double actualHeightTextAndButtons = ActualHeight / 424 * 20;
             double actualWidthTextAndButtons = ActualWidth / 587 * 26;
             double actualFontSize = (25.4 / 96 * actualHeightTextAndButtons) / 0.35 - 4;
@@ -170,10 +171,13 @@ namespace CollisionEditor
             TriangleDownHexAngle.Height = actualWidthTextAndButtons / 2 - 3;
             TriangleDownHexAngle.Width = actualWidthTextAndButtons / 2 - 3;
 
+            
+
             SelectTileTextBox.Height = actualHeightTextAndButtons - 2;
             SelectTileTextBox.FontSize = actualFontSize;
             SelectTileButton.Height = actualHeightTextAndButtons - 2;
             SelectTileButton.FontSize = actualFontSize;
+
 
             DrawRedLine();
         }

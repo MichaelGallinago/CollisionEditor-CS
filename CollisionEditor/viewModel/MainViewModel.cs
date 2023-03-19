@@ -164,6 +164,7 @@ namespace CollisionEditor.viewModel
                 int imageOfTileMapWidth = (int)((window.Width/587) * 278);
 
                 window.TileMapGrid.Height = (int)Math.Ceiling(tileSet.Tiles.Count / 8d) * (tileSet.TileSize.Height * 2 + 4) - 4;
+                
                 foreach (Bitmap tile in tileSet.Tiles)
                 {
                     var image = new System.Windows.Controls.Image()
@@ -175,8 +176,6 @@ namespace CollisionEditor.viewModel
                     window.TileMapGrid.Children.Add(image);
                 }
 
-                //window.ImageOfTileMap.Width = (window.Width / 587) * 278;
-                //window.ImageOfTileMap.Height = (window.Height/ 424) * 303;
                 ShowTileMap(ViewModelAssistant.GetTilePanel(tileSet, imageOfTileMapWidth, size));
                 
                 window.SelectTileTextBox.IsEnabled = true;
