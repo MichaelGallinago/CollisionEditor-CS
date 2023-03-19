@@ -83,9 +83,9 @@
             <TextBlock x:Name="Widths" HorizontalAlignment="Center"/>
         </Border>
 
-        <TextBox Grid.Column="2" Grid.Row="9" Grid.RowSpan="2" TextWrapping="Wrap" IsEnabled="False" Text="{Binding Path=ByteAngle,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Name="TextBoxByteAngle" Padding="2,0,0,0"  Background="#FFB1B1B1" />
+        <TextBox Grid.Column="2" Grid.Row="9" Grid.RowSpan="2" TextWrapping="Wrap" IsEnabled="False" Text="{Binding Path=ByteAngle,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Name="TextBoxByteAngle" Padding="2,0,0,0"  Background="#FFB1B1B1"/>
         <TextBox Grid.Column="5" Grid.Row="9" Grid.RowSpan="2" TextWrapping="Wrap" IsEnabled="False" Text="{Binding Path=HexAngle,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Name="TextBoxHexAngle"  Padding="2,0,0,0"  Background="#FFB1B1B1" PreviewKeyDown="TextBoxHexAngle_PreviewKeyDown" />
-        <TextBlock Grid.Column="8" Grid.Row="9" Grid.RowSpan="2" Grid.ColumnSpan="2" TextWrapping="Wrap" Text="0°" Name="TextBlockFullAngle"    Background="#FFB1B1B1"/>
+        <TextBlock Grid.Column="8" Grid.Row="9" Grid.RowSpan="2" Grid.ColumnSpan="2" TextWrapping="Wrap" Text="0°" Name="TextBlockFullAngle"    Background="#FFB1B1B1" Padding="2,0,0,0"/>
 
         <Button Grid.Column="3" Command="{Binding AngleIncrementCommand}" IsEnabled="False" x:Name="ByteAngleIncrimentButton" Grid.Row="9" Height="10" Width="25"  HorizontalAlignment="Left">
             <Path Fill="Black" Data="M 0 6 L 12 6 L 6 0 Z" Stretch="Uniform" x:Name="TriangleUpByteAngle" />

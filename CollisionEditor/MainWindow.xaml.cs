@@ -123,7 +123,7 @@ namespace CollisionEditor
         {
             double actualHeightTextAndButtons = ActualHeight / 424 * 20;
             double actualWidthUpAndDownButtons = ActualWidth / 587 * 25;
-            double actualFontSize = (25.4 / 96 * actualHeightTextAndButtons) / 0.35 - 4;
+            double actualFontSize = Math.Min((25.4 / 96 * actualHeightTextAndButtons) / 0.35 - 4, (25.4 / 96 * (ActualWidth / 587 * 41)) / 0.35 - 20);
 
             double actualHeightGrid = ActualHeight / 424 * 128;
 
