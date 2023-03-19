@@ -122,7 +122,7 @@ namespace CollisionEditor
         private void WindowSizeChanged(object sender, SizeChangedEventArgs e)
         {
             double actualHeightTextAndButtons = ActualHeight / 424 * 20;
-            double actualWidthTextAndButtons = ActualWidth / 587 * 26;
+            double actualWidthUpAndDownButtons = ActualWidth / 587 * 25;
             double actualFontSize = (25.4 / 96 * actualHeightTextAndButtons) / 0.35 - 4;
 
             double actualHeightGrid = ActualHeight / 424 * 128;
@@ -152,28 +152,34 @@ namespace CollisionEditor
             TextBoxHexAngle.FontSize = actualFontSize;
 
 
-            ByteAngleIncrimentButton.Height = actualHeightTextAndButtons/2;
-            ByteAngleIncrimentButton.Width = actualWidthTextAndButtons - 3;          
-            TriangleUpByteAngle.Height = actualWidthTextAndButtons / 2 - 3 ;
-            TriangleUpByteAngle.Width = actualWidthTextAndButtons /2 - 3 ;
+            ByteAngleIncrimentButton.Height = actualHeightTextAndButtons / 2;
+            ByteAngleIncrimentButton.Width = actualWidthUpAndDownButtons - 3; 
+            
+            TriangleUpByteAngle.Height = actualHeightTextAndButtons / 2 - 3 ;
+            TriangleUpByteAngle.Width = actualWidthUpAndDownButtons / 2 - 3 ;
 
-            ByteAngleDecrementButton.Height = actualHeightTextAndButtons/2 -1;
-            ByteAngleDecrementButton.Width = actualWidthTextAndButtons - 3;
-            TriangleDownByteAngle.Height = actualWidthTextAndButtons / 2 - 3;
-            TriangleDownByteAngle.Width = actualWidthTextAndButtons / 2 - 3;
+            ByteAngleDecrementButton.Height = actualHeightTextAndButtons / 2 - 1;
+            ByteAngleDecrementButton.Width = actualWidthUpAndDownButtons - 3;
+
+            TriangleDownByteAngle.Height = actualHeightTextAndButtons / 2 - 3;
+            TriangleDownByteAngle.Width = actualWidthUpAndDownButtons / 2 - 3;
+
 
             HexAngleIncrimentButton.Height = actualHeightTextAndButtons / 2;
-            HexAngleIncrimentButton.Width = actualWidthTextAndButtons - 3;
-            TriangleUpHexAngle.Height = actualWidthTextAndButtons / 2 - 3;
-            TriangleUpHexAngle.Width = actualWidthTextAndButtons / 2 - 3;
+            HexAngleIncrimentButton.Width = actualWidthUpAndDownButtons - 3;
+
+            TriangleUpHexAngle.Height = actualHeightTextAndButtons / 2 - 3;
+            TriangleUpHexAngle.Width = actualWidthUpAndDownButtons / 2 - 3;
 
             HexAngleDecrementButton.Height = actualHeightTextAndButtons / 2 - 1;
-            HexAngleDecrementButton.Width = actualWidthTextAndButtons - 3;
-            TriangleDownHexAngle.Height = actualWidthTextAndButtons / 2 - 3;
-            TriangleDownHexAngle.Width = actualWidthTextAndButtons / 2 - 3;
+            HexAngleDecrementButton.Width = actualWidthUpAndDownButtons - 3;
+
+            TriangleDownHexAngle.Height = actualHeightTextAndButtons / 2 - 3;
+            TriangleDownHexAngle.Width = actualWidthUpAndDownButtons / 2 - 3;
 
             TileMapGrid.Width = 284 + (((int)(ActualWidth / 587 * 278) - 314) / 32) * 32;
             TileMapGrid.Columns = ((int)TileMapGrid.Width + 4) / (16 * 2 + 4);
+
             double tileCount = 248d;
             TileMapGrid.Height = (int)Math.Ceiling(tileCount / TileMapGrid.Columns) * (16 * 2 + 4) - 4;
 
