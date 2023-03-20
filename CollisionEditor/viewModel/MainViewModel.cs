@@ -10,7 +10,6 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Drawing;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace CollisionEditor.viewModel
 {
@@ -131,12 +130,14 @@ namespace CollisionEditor.viewModel
                 window.SelectTileButton.IsEnabled = true;
                 window.TextBoxByteAngle.IsEnabled = true;
                 window.TextBoxHexAngle.IsEnabled = true;
+
+                TileMapGridUpdate(TileSet.Tiles.Count);
+                window.DrawRedLine();
             }
         }
+
         public void ShowAngles(byte byteAngle, string hexAngle, double fullAngle)
         {
-            
-
             _byteAngle = byteAngle;
             OnPropertyChanged(nameof(ByteAngle));
             window.ByteAngleIncrimentButton.IsEnabled= true;
@@ -189,13 +190,20 @@ namespace CollisionEditor.viewModel
                 
                 window.SelectTileTextBox.IsEnabled = true;
                 window.SelectTileButton.IsEnabled = true;
-                
+
+                TileMapGridUpdate(TileSet.Tiles.Count);
+                window.DrawRedLine();
             }
+        }
+
+        public void TileMapGridUpdate(int tileCount)
+        {
+            window.TileMapGrid.Height = Math.Max(0, (int)Math.Ceiling((double)tileCount / window.TileMapGrid.Columns) * (16 * 2 + 4) - 4);
         }
 
         private void MenuSaveTileMap()
         {
-            if (TileSet.Tiles.Count==0)
+            if (TileSet.Tiles.Count == 0)
             {
                 System.Windows.Forms.MessageBox.Show("Error: You haven't chosen TileMap to save");
                 return;
@@ -284,7 +292,6 @@ namespace CollisionEditor.viewModel
 
         private void MenuUnloadAll()
         {   
-
             window.TileMapGrid.Children.Clear();
             TileSet = new TileSet(0);
             AngleMap = new AngleMap(0);

@@ -9,8 +9,6 @@ using System.Linq;
 using System;
 using System.Threading.Tasks;
 using System.Diagnostics;
-using System.Windows.Data;
-
 
 namespace CollisionEditor
 {   
@@ -48,6 +46,9 @@ namespace CollisionEditor
 
         private void RectanglesGrid_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
+            if ((this.DataContext as MainViewModel).AngleMap.Values.Count <= 0)
+                return;
+
             var mousePosition = e.GetPosition(RectanglesGrid);
             Vector2<int> position = GetGridPosition(mousePosition, RectanglesGrid);
 
@@ -62,7 +63,10 @@ namespace CollisionEditor
         }
 
         private void RectanglesGrid_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
-        {   
+        {
+            if ((this.DataContext as MainViewModel).AngleMap.Values.Count <= 0)
+                return;
+
             var mousePosition = e.GetPosition(RectanglesGrid);
             Vector2<int> position = GetGridPosition(mousePosition, RectanglesGrid);
 
@@ -78,8 +82,8 @@ namespace CollisionEditor
 
         internal void DrawRedLine()
         {
-            int countOfAngles = (this.DataContext as MainViewModel).AngleMap.Values.Count;
-            RedLineService.DrawRedLine(ref RedLine);
+            if ((this.DataContext as MainViewModel).AngleMap.Values.Count > 0)
+                RedLineService.DrawRedLine(ref RedLine);
         }
 
         private void SelectTileTextBox_PreviewKeyDown(object sender, KeyEventArgs e)
@@ -180,8 +184,7 @@ namespace CollisionEditor
             TileMapGrid.Width = 284 + (((int)(ActualWidth / 587 * 278) - 314) / 32) * 32;
             TileMapGrid.Columns = ((int)TileMapGrid.Width + 4) / (16 * 2 + 4);
 
-            double tileCount = 248d;
-            TileMapGrid.Height = (int)Math.Ceiling(tileCount / TileMapGrid.Columns) * (16 * 2 + 4) - 4;
+            TileMapGrid.Height = Math.Max(0, (int)Math.Ceiling((double)countOfTiles / TileMapGrid.Columns) * (16 * 2 + 4) - 4);
 
             SelectTileTextBox.Height = actualHeightTextAndButtons - 2;
             SelectTileTextBox.FontSize = actualFontSize;
