@@ -78,7 +78,7 @@ namespace CollisionEditor
 
         internal void DrawRedLine()
         {
-            int countOfAngles = (this.DataContext as MainViewModel).CountOfAngles;
+            int countOfAngles = (this.DataContext as MainViewModel).AngleMap.Values.Count;
             RedLineService.DrawRedLine(ref RedLine);
         }
 
@@ -124,7 +124,7 @@ namespace CollisionEditor
 
         private void WindowSizeChanged(object sender, SizeChangedEventArgs e)
         {
-            int countOfTiles = (this.DataContext as MainViewModel).CountOfTiles;
+            int countOfTiles = (this.DataContext as MainViewModel).TileSet.Tiles.Count;
 
             double actualHeightTextAndButtons = ActualHeight / 424 * 20;
             double actualWidthUpAndDownButtons = ActualWidth / 587 * 23;
