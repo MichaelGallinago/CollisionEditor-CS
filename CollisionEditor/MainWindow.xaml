@@ -75,7 +75,7 @@
         <Grid x:Name="RectanglesGrid"  Grid.Column="0" Grid.Row="3" Height="128" Width="128" Grid.ColumnSpan="11" SnapsToDevicePixels="true" Focusable="True" Background="Transparent" 
               MouseLeftButtonDown="RectanglesGrid_MouseLeftButtonDown" MouseRightButtonDown="RectanglesGrid_MouseRightButtonDown" MouseEnter="RectanglesGrid_MouseEnter" MouseLeave="RectanglesGrid_MouseLeave"/>
         <Canvas Grid.Column="0" Grid.Row="3"  Height="128" Width="128" Name ="canvasForLine" Grid.ColumnSpan="11" IsHitTestVisible="False"/>
-
+        
         <Border Grid.Row="5" Grid.Column="2" Grid.ColumnSpan="8" Background="GhostWhite" BorderBrush="Silver" BorderThickness="0.8,0.8,0.8,2" CornerRadius="3,3,3,3">
             <TextBlock x:Name="Heights"  HorizontalAlignment="Center"/>
         </Border>
@@ -100,14 +100,14 @@
         <Button Grid.Column="6" Command="{Binding AngleDecrementCommand}" IsEnabled="False" x:Name="HexAngleDecrementButton" Grid.Row="10" Height="10" Width="25"  HorizontalAlignment="Left">
             <Path Fill="Black" Data="M 0 0 L 6 6 L 12 0 Z" Stretch="Uniform" x:Name="TriangleDownHexAngle"/>
         </Button>
-
+        
         <ScrollViewer x:Name="scrollViewer" Grid.Column="12" Grid.Row="2" Grid.RowSpan="6" Grid.ColumnSpan="2">
             <UniformGrid x:Name="TileMapGrid" Columns="8" SnapsToDevicePixels="true" Background="Transparent" RenderOptions.BitmapScalingMode="NearestNeighbor" MouseLeftButtonDown="TileMapGrid_MouseLeftButtonDown"   />
         </ScrollViewer>
-
+    
         <TextBox Grid.Column="12" Grid.Row="9" Grid.RowSpan ="2" TextWrapping="Wrap" Background="#FFD8D8D8" x:Name="SelectTileTextBox"  IsEnabled="False" Text="{Binding Path=ChosenTile,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" PreviewKeyDown="SelectTileTextBox_PreviewKeyDown"/>
         <Button Grid.Column="13" Grid.Row="9"  Grid.RowSpan ="2" Background="#FFD8D8D8" Content="Select Tile" x:Name="SelectTileButton"  IsEnabled="False" Command="{Binding SelectTileCommand}" />
-        
+        <Rectangle x:Name="BorderRectangle" Grid.Column="12" Grid.Row="2" Grid.RowSpan ="6" Grid.ColumnSpan="2" Height="Auto" Stroke="Black" Width="Auto"/>
     </Grid>
 
     <Window.InputBindings>
