@@ -198,7 +198,7 @@ namespace CollisionEditor.viewModel
 
         public void TileMapGridUpdate(int tileCount)
         {
-            window.TileMapGrid.Height = Math.Max(0, (int)Math.Ceiling((double)tileCount / window.TileMapGrid.Columns) * (16 * 2 + 4) - 4);
+            window.TileMapGrid.Height = (int)Math.Ceiling((double)tileCount / window.TileMapGrid.Columns) * (16 * 2 + 4);
         }
 
         private void MenuSaveTileMap()
