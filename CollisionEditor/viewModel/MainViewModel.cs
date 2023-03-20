@@ -347,6 +347,9 @@ namespace CollisionEditor.viewModel
             
             (byte byteAngle, string hexAngle, double fullAngle) angles = ViewModelAssistant.GetAngles(AngleMap, _chosenTile);
             ShowAngles(angles.byteAngle, angles.hexAngle, angles.fullAngle);
+
+            window.DrawRedLine();
+            window.RectanglesGrid.Children.Clear();
         }
 
         private void ExitApp()
