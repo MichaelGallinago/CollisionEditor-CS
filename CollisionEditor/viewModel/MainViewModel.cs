@@ -17,7 +17,9 @@ namespace CollisionEditor.viewModel
     {
         private MainWindow window;
         private AngleMap angleMap;
+        public int CountOfAngles { get; private set; }
         private TileSet tileSet;
+        public int CountOfTiles { get; private set; }
         public ICommand MenuOpenAngleMapCommand { get; set; }
         public ICommand MenuOpenTileMapCommand { get; set; }
         public ICommand MenuSaveTileMapCommand { get; set; }
@@ -160,8 +162,7 @@ namespace CollisionEditor.viewModel
                 window.TextBoxByteAngle.IsEnabled = true;
                 window.TextBoxHexAngle.IsEnabled = true;
 
-                System.Drawing.Size size = new System.Drawing.Size(4, 4);
-                int imageOfTileMapWidth = (int)(window.Width / 587 * 278);
+                window.TileMapGrid.Children.Clear();
 
                 foreach (Bitmap tile in tileSet.Tiles)
                 {
@@ -173,8 +174,6 @@ namespace CollisionEditor.viewModel
                     image.Source = ViewModelAssistant.BitmapConvert(tile);
                     window.TileMapGrid.Children.Add(image);
                 }
-
-                ShowTileMap(ViewModelAssistant.GetTilePanel(tileSet, imageOfTileMapWidth, size));
                 
                 window.SelectTileTextBox.IsEnabled = true;
                 window.SelectTileButton.IsEnabled = true;
@@ -182,11 +181,7 @@ namespace CollisionEditor.viewModel
             }
         }
 
-        private static void ShowTileMap(System.Windows.Media.Imaging.BitmapSource TileMap)
-        {
-            MainWindow mainWindow = (MainWindow)System.Windows.Application.Current.MainWindow;
-            //mainWindow.ImageOfTileMap.Source = TileMap;
-        }
+        
 
         private void MenuSaveTileMap()
         {
@@ -258,7 +253,16 @@ namespace CollisionEditor.viewModel
 
         private void MenuUnloadTileMap()
         {
+            window.TileMapGrid.Children.Clear();
             tileSet = new TileSet(angleMap.Values.Count);
+
+            TileGridUpdate(tileSet, (int)ChosenTile, window);
+            window.Heights.Text = ViewModelAssistant.GetCollisionValues(tileSet.HeightMap[(int)_chosenTile]);
+            window.Widths.Text = ViewModelAssistant.GetCollisionValues(tileSet.WidthMap[(int)_chosenTile]);
+
+            (byte byteAngle, string hexAngle, double fullAngle) angles = ViewModelAssistant.GetAngles(angleMap, _chosenTile);
+            ShowAngles(angles.byteAngle, angles.hexAngle, angles.fullAngle);
+
         }
 
         private void MenuUnloadAngleMap()
@@ -274,6 +278,7 @@ namespace CollisionEditor.viewModel
 
         private void AngleIncrement()
         {
+            window.TileGrid.Children.Clear();
             byte byteAngle = angleMap.ChangeAngle((int)_chosenTile, 1);
 
             (byte byteAngle, string hexAngle, double fullAngle) angles = ViewModelAngleService.GetAngles(byteAngle);
