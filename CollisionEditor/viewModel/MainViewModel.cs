@@ -78,7 +78,7 @@ namespace CollisionEditor.viewModel
         {
             get => _chosenTile;
             set
-            {
+            {   
                 _chosenTile = value;
             }
         }
@@ -337,7 +337,8 @@ namespace CollisionEditor.viewModel
         }
 
         public void SelectTile()
-        {   
+        {
+            OnPropertyChanged(nameof(ChosenTile));
             if (_chosenTile > TileSet.Tiles.Count - 1)
             {
                 _chosenTile = (uint)TileSet.Tiles.Count - 1;

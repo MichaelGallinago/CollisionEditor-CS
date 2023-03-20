@@ -150,11 +150,11 @@ namespace CollisionEditor
             border.BorderThickness = new Thickness(2);
             border.Width = 36;
             border.Height = 36;
-            border.Child = lastTile;
-            //border.Child = newTile;
-
+            border.Child = newTile;
             TileMapGrid.Children.RemoveAt((int)(this.DataContext as MainViewModel).ChosenTile);
             TileMapGrid.Children.Insert((int)(this.DataContext as MainViewModel).ChosenTile, border);
+
+            (this.DataContext as MainViewModel).SelectTile();
         }
 
         private Image GetTile(int index)
