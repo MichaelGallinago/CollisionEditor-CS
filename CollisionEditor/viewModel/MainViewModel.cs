@@ -33,9 +33,6 @@ namespace CollisionEditor.ViewModel
         public ICommand AngleDecrementCommand { get; }
         public ICommand ExitAppCommand { get; }
 
-        private MainWindow _window;
-        private byte _byteAngle;
-
         public byte ByteAngle
         {
             get => _byteAngle;
@@ -49,8 +46,6 @@ namespace CollisionEditor.ViewModel
             }
         }
 
-        private const string hexademicalAlplhabet = "0123456789ABCDEF";
-        private string _hexAngle;
         public string HexAngle
         {
             get => _hexAngle;
@@ -59,7 +54,7 @@ namespace CollisionEditor.ViewModel
                 _hexAngle = value;
 
                 if (_hexAngle.Length != 4 || _hexAngle[0] != '0' || _hexAngle[1] != 'x'
-                    || !hexademicalAlplhabet.Contains(_hexAngle[2]) || !hexademicalAlplhabet.Contains(_hexAngle[3]))
+                    || !_hexadecimalAlphabet.Contains(_hexAngle[2]) || !_hexadecimalAlphabet.Contains(_hexAngle[3]))
                 {
                     AddError(nameof(HexAngle), "Error! Wrong hexadecimal number");
                     return;
@@ -73,7 +68,7 @@ namespace CollisionEditor.ViewModel
                 _window.DrawRedLine();
             }
         }
-        private uint _chosenTile;
+
         public uint ChosenTile
         {
             get => _chosenTile;
@@ -82,6 +77,14 @@ namespace CollisionEditor.ViewModel
                 _chosenTile = value;
             }
         }
+
+
+        private const string _hexadecimalAlphabet = "0123456789ABCDEF";
+
+        private MainWindow _window;
+        private byte _byteAngle;
+        private string _hexAngle;
+        private uint _chosenTile;
 
         public MainViewModel(MainWindow window)
         {
@@ -114,8 +117,8 @@ namespace CollisionEditor.ViewModel
 
         private void MenuOpenAngleMap()
         {
-            string filePath = ViewModelAngleService.GetAngleMapFilePath();
-            if (filePath is not null && filePath != string.Empty)
+            string filePath = ViewModelFileService.GetFileOpenPath(ViewModelFileService.Filters.AngleMap);
+            if (filePath != string.Empty)
             {   
                 AngleMap = new AngleMap(filePath);
                 if (TileSet is null)
@@ -141,7 +144,7 @@ namespace CollisionEditor.ViewModel
         {
             _byteAngle = byteAngle;
             OnPropertyChanged(nameof(ByteAngle));
-            _window.ByteAngleIncrimentButton.IsEnabled= true;
+            _window.ByteAngleIncrimentButton.IsEnabled = true;
             _window.ByteAngleDecrementButton.IsEnabled = true;
 
             _hexAngle = hexAngle;
@@ -154,8 +157,8 @@ namespace CollisionEditor.ViewModel
 
         private void MenuOpenTileMap()
         {
-            string filePath = ViewModelTileService.GetTileMapFilePath();
-            if (filePath is not null && filePath != string.Empty)
+            string filePath = ViewModelFileService.GetFileOpenPath(ViewModelFileService.Filters.TileMap);
+            if (filePath != string.Empty)
             {
                 TileSet = new TileSet(filePath);
                 if (AngleMap is null)
@@ -210,8 +213,8 @@ namespace CollisionEditor.ViewModel
                 return;
             }
 
-            string filePath = ViewModelTileService.GetTileMapSavePath();
-            if (filePath is not null && filePath != string.Empty)
+            string filePath = ViewModelFileService.GetFileSavePath(ViewModelFileService.Filters.TileMap);
+            if (filePath != string.Empty)
             {
                 TileSet.Save(Path.GetFullPath(filePath), 16);
             }
@@ -225,8 +228,8 @@ namespace CollisionEditor.ViewModel
                 return;
             }
 
-            string filePath = ViewModelTileService.GetWidthMapSavePath();
-            if (filePath is not null && filePath != string.Empty)
+            string filePath = ViewModelFileService.GetFileSavePath(ViewModelFileService.Filters.WidthMap);
+            if (filePath != string.Empty)
             {
                 TileSet.SaveCollisionMap(Path.GetFullPath(filePath), TileSet.WidthMap);
             }
@@ -240,8 +243,8 @@ namespace CollisionEditor.ViewModel
                 return;
             }
 
-            string filePath = ViewModelTileService.GetWidthMapSavePath();
-            if (filePath is not null && filePath != string.Empty)
+            string filePath = ViewModelFileService.GetFileSavePath(ViewModelFileService.Filters.HeightMap);
+            if (filePath != string.Empty)
             {
                 TileSet.SaveCollisionMap(Path.GetFullPath(filePath), TileSet.HeightMap);
             }
@@ -249,14 +252,14 @@ namespace CollisionEditor.ViewModel
 
         private void MenuSaveAngleMap()
         {
-            if (AngleMap.Values.Count==0)
+            if (AngleMap.Values.Count == 0)
             {
                 System.Windows.Forms.MessageBox.Show("Error: You haven't chosen AngleMap to save");
                 return;
             }
 
-            string filePath = ViewModelAngleService.GetAngleMapSavePath();
-            if (filePath is not null && filePath != string.Empty)
+            string filePath = ViewModelFileService.GetFileSavePath(ViewModelFileService.Filters.AngleMap);
+            if (filePath != string.Empty)
             {
                 AngleMap.Save(Path.GetFullPath(filePath));
             }

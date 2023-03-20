@@ -1,53 +1,44 @@
-﻿namespace CollisionEditor.ViewModel
+﻿using System.Collections.Generic;
+using System.Windows.Forms;
+
+namespace CollisionEditor.ViewModel
 {
-    public static class ViewModelTileService
+    public static class ViewModelFileService
     {
-        public static string GetTileMapFilePath()
+        public enum Filters { TileMap, AngleMap, WidthMap, HeightMap }
+
+        private static Dictionary<Filters, string> _filters = new Dictionary<Filters, string>()
         {
-            System.Windows.Forms.OpenFileDialog openFileDialog = new System.Windows.Forms.OpenFileDialog();
-            openFileDialog.Filter = "Image Files(*.png)| *.png| All files(*.*) | *.*";
-            string filePath = string.Empty;
-            if (openFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            [Filters.TileMap]   = "Image Files(*.png)| *.png",
+            [Filters.AngleMap]  = "Binary Files(*.bin)| *.bin",
+            [Filters.WidthMap]  = "Binary Files(*.bin)| *.bin",
+            [Filters.HeightMap] = "Binary Files(*.bin)| *.bin"
+        };
+
+        public static string GetFileSavePath(Filters filterID)
+        {
+            var fileDialog = new SaveFileDialog()
             {
-                filePath = openFileDialog.FileName;
-            }
-            return filePath;
+                Filter = _filters[filterID]
+            };
+
+            if (fileDialog.ShowDialog() == DialogResult.OK)
+                return fileDialog.FileName;
+
+            return string.Empty;
         }
 
-        public static string GetTileMapSavePath()
+        public static string GetFileOpenPath(Filters filterID)
         {
-            System.Windows.Forms.SaveFileDialog saveFileDialog = new System.Windows.Forms.SaveFileDialog();
-            saveFileDialog.Filter = "Image Files(*.png)| *.png";
-            string filePath = string.Empty;
-            if (saveFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            var fileDialog = new OpenFileDialog()
             {
-                filePath = saveFileDialog.FileName;
-            }
-            return filePath;
-        }
+                Filter = _filters[filterID] + "| All files(*.*) | *.*"
+            };
 
-        public static string GetWidthMapSavePath()
-        {
-            System.Windows.Forms.SaveFileDialog saveFileDialog = new System.Windows.Forms.SaveFileDialog();
-            saveFileDialog.Filter = "Binary Files(*.bin)| *.bin";
-            string filePath = string.Empty;
-            if (saveFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-            {
-                filePath = saveFileDialog.FileName;
-            }
-            return filePath;
-        }
+            if (fileDialog.ShowDialog() == DialogResult.OK)
+                return fileDialog.FileName;
 
-        public static string GetHeightMapSavePath() 
-        {
-            System.Windows.Forms.SaveFileDialog saveFileDialog = new System.Windows.Forms.SaveFileDialog();
-            saveFileDialog.Filter = "Binary Files(*.bin)| *.bin";
-            string filePath = string.Empty;
-            if (saveFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-            {
-                filePath = saveFileDialog.FileName;
-            }
-            return filePath;
+            return string.Empty;
         }
     }
 }
