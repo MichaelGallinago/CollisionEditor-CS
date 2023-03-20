@@ -5,7 +5,7 @@ using System.Drawing.Imaging;
 
 namespace CollisionEditor.model
 {
-    internal class TileSet
+    public class TileSet
     {
         public readonly Size TileSize;
 
