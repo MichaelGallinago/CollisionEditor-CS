@@ -54,7 +54,7 @@ namespace CollisionEditor
 
             SquaresService.MoveSquare(position, BlueAndGreenSquare.Item1, BlueAndGreenSquare.Item2);
             
-            if (BlueAndGreenSquare.Item1.Square != null & BlueAndGreenSquare.Item2.Square != null)
+            if (RectanglesGrid.Children.Contains(BlueAndGreenSquare.Item1.Square) && RectanglesGrid.Children.Contains(BlueAndGreenSquare.Item2.Square))
             {
                 (this.DataContext as MainViewModel).AngleUpdator(BlueAndGreenSquare.Item1.Position, BlueAndGreenSquare.Item2.Position);
 
@@ -72,7 +72,7 @@ namespace CollisionEditor
 
             SquaresService.MoveSquare(position, BlueAndGreenSquare.Item2, BlueAndGreenSquare.Item1);
 
-            if (BlueAndGreenSquare.Item1.Square != null & BlueAndGreenSquare.Item2.Square != null)
+            if (RectanglesGrid.Children.Contains(BlueAndGreenSquare.Item1.Square) && RectanglesGrid.Children.Contains(BlueAndGreenSquare.Item2.Square))
             {
                 (this.DataContext as MainViewModel).AngleUpdator(BlueAndGreenSquare.Item1.Position, BlueAndGreenSquare.Item2.Position);
 
