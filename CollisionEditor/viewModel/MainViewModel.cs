@@ -316,7 +316,6 @@ namespace CollisionEditor.viewModel
 
         private void AngleIncrement()
         {
-            window.TileGrid.Children.Clear();
             byte byteAngle = AngleMap.ChangeAngle((int)_chosenTile, 1);
 
             (byte byteAngle, string hexAngle, double fullAngle) angles = ViewModelAngleService.GetAngles(byteAngle);
