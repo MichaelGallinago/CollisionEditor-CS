@@ -131,12 +131,13 @@ namespace CollisionEditor
             return (uint)mousePosition.X / 36 + ((uint)mousePosition.Y / 36)* (uint)TileMapGrid.Columns;
         }
 
+        public int LastChozenTile { get; set; }
         private void TileMapGrid_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             if ((this.DataContext as MainViewModel).TileSet.Tiles.Count <= 0)
                 return;
 
-            Image lastTile = GetTile((int)(this.DataContext as MainViewModel).ChosenTile);
+            Image lastTile = (this.DataContext as MainViewModel).GetTile((int)(this.DataContext as MainViewModel).ChosenTile);
 
             TileMapGrid.Children.RemoveAt((int)(this.DataContext as MainViewModel).ChosenTile);
             TileMapGrid.Children.Insert((int)(this.DataContext as MainViewModel).ChosenTile, lastTile);
@@ -148,30 +149,20 @@ namespace CollisionEditor
             if ((this.DataContext as MainViewModel).ChosenTile > (this.DataContext as MainViewModel).TileSet.Tiles.Count-1)
                 (this.DataContext as MainViewModel).ChosenTile = (uint)(this.DataContext as MainViewModel).TileSet.Tiles.Count - 1;
             
-            Image newTile = GetTile((int)(this.DataContext as MainViewModel).ChosenTile);
+            Image newTile = (this.DataContext as MainViewModel).GetTile((int)(this.DataContext as MainViewModel).ChosenTile);
+
             Border border = new Border();
             border.BorderBrush = new SolidColorBrush(Colors.Red);
             border.BorderThickness = new Thickness(2);
             border.Width = 36;
             border.Height = 36;
             border.Child = newTile;
+            
             TileMapGrid.Children.RemoveAt((int)(this.DataContext as MainViewModel).ChosenTile);
             TileMapGrid.Children.Insert((int)(this.DataContext as MainViewModel).ChosenTile, border);
 
-            (this.DataContext as MainViewModel).SelectTile();
-        }
-
-
-        private Image GetTile(int index)
-        {
-            System.Drawing.Bitmap tile = (this.DataContext as MainViewModel).TileSet.Tiles[index];
-            var image = new System.Windows.Controls.Image()
-            {
-                Width = (this.DataContext as MainViewModel).TileSet.TileSize.Width * 2,
-                Height = (this.DataContext as MainViewModel).TileSet.TileSize.Height * 2
-            };
-            image.Source = ViewModelAssistant.BitmapConvert(tile);
-            return image;
+            (this.DataContext as MainViewModel).SelectTileFromTileMap();
+            LastChozenTile = (int)(this.DataContext as MainViewModel).ChosenTile;
         }
 
         private void WindowSizeChanged(object sender, SizeChangedEventArgs e)

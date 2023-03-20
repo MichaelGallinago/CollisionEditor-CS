@@ -10,7 +10,6 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Drawing;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace CollisionEditor.viewModel
 {
@@ -338,13 +337,30 @@ namespace CollisionEditor.viewModel
 
         public void SelectTile()
         {
-            OnPropertyChanged(nameof(ChosenTile));
             if (_chosenTile > TileSet.Tiles.Count - 1)
             {
                 _chosenTile = (uint)TileSet.Tiles.Count - 1;
                 OnPropertyChanged(nameof(ChosenTile));
             }
 
+            System.Windows.Controls.Image lastTile = GetTile(window.LastChozenTile);
+
+            window.TileMapGrid.Children.RemoveAt(window.LastChozenTile);
+            window.TileMapGrid.Children.Insert(window.LastChozenTile, lastTile);
+
+            System.Windows.Controls.Image newTile = GetTile((int)_chosenTile);
+
+            Border border = new Border();
+            border.BorderBrush = new SolidColorBrush(Colors.Red);
+            border.BorderThickness = new Thickness(2);
+            border.Width = 36;
+            border.Height = 36;
+            border.Child = newTile;
+
+            window.TileMapGrid.Children.RemoveAt((int)_chosenTile);
+            window.TileMapGrid.Children.Insert((int)_chosenTile, border);
+
+            window.LastChozenTile = (int)_chosenTile;
             TileGridUpdate(TileSet, (int)ChosenTile, window);
             window.Heights.Text = ViewModelAssistant.GetCollisionValues(TileSet.HeightMap[(int)_chosenTile]);
             window.Widths.Text  = ViewModelAssistant.GetCollisionValues(TileSet.WidthMap[(int)_chosenTile]);
@@ -354,6 +370,32 @@ namespace CollisionEditor.viewModel
 
             window.DrawRedLine();
             window.RectanglesGrid.Children.Clear();
+        }
+
+        public void SelectTileFromTileMap()
+        {
+            OnPropertyChanged(nameof(ChosenTile));
+            TileGridUpdate(TileSet, (int)ChosenTile, window);
+            window.Heights.Text = ViewModelAssistant.GetCollisionValues(TileSet.HeightMap[(int)_chosenTile]);
+            window.Widths.Text = ViewModelAssistant.GetCollisionValues(TileSet.WidthMap[(int)_chosenTile]);
+
+            (byte byteAngle, string hexAngle, double fullAngle) angles = ViewModelAssistant.GetAngles(AngleMap, _chosenTile);
+            ShowAngles(angles.byteAngle, angles.hexAngle, angles.fullAngle);
+
+            window.DrawRedLine();
+            window.RectanglesGrid.Children.Clear();
+        }
+
+        internal System.Windows.Controls.Image GetTile(int index)
+        {
+            Bitmap tile = TileSet.Tiles[index];
+            var image = new System.Windows.Controls.Image()
+            {
+                Width = TileSet.TileSize.Width * 2,
+                Height = TileSet.TileSize.Height * 2
+            };
+            image.Source = ViewModelAssistant.BitmapConvert(tile);
+            return image;
         }
 
         private void ExitApp()
