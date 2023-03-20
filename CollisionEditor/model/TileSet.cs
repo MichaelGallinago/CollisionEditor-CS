@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using System.IO;
-using System.Drawing;
 using System.Drawing.Imaging;
+using System.Drawing;
+using System.IO;
 
 namespace CollisionEditor.model
 {
@@ -13,8 +13,7 @@ namespace CollisionEditor.model
         public List<byte[]> WidthMap { get; private set; }
         public List<byte[]> HeightMap { get; private set; }
 
-        public TileSet(string path, 
-            int tileWidth = 16, int tileHeight = 16,
+        public TileSet(string path, int tileWidth = 16, int tileHeight = 16,
             Size separate = new Size(), Size offset = new Size())
         {
             TileSize = new Size(tileWidth, tileHeight);
@@ -41,16 +40,16 @@ namespace CollisionEditor.model
                     Tiles.Add(bitmap.Clone(tileBounds, bitmap.PixelFormat));
                     if (Tiles.Count == int.MaxValue)
                     {
-                        CreateCollisionmaps();
+                        CreateCollisionMap();
                         return;
                     }
                 }
             }
 
-            CreateCollisionmaps();
+            CreateCollisionMap();
         }
 
-        private void CreateCollisionmaps()
+        private void CreateCollisionMap()
         {
             for (int i = 0; i < Tiles.Count; i++)
             {
@@ -95,13 +94,13 @@ namespace CollisionEditor.model
             Size cell = new Size(TileSize.Width + separation.Width, TileSize.Height + separation.Height);
             int rowCount = (Tiles.Count & -columnCount) / columnCount;
 
-            Size tilemapSize = new Size(
+            Size tileMapSize = new Size(
                 offset.Width  + columnCount * cell.Width  - separation.Width, 
                 offset.Height + rowCount    * cell.Height - separation.Height);
 
-            Bitmap tilemap = DrawTileMap(columnCount, tilemapSize, separation, offset);
+            Bitmap tileMap = DrawTileMap(columnCount, tileMapSize, separation, offset);
 
-            tilemap.Save(path, ImageFormat.Png);
+            tileMap.Save(path, ImageFormat.Png);
         }
 
         public void SaveCollisionMap(string path, List<byte[]> collisionMap)
@@ -115,10 +114,10 @@ namespace CollisionEditor.model
                         writer.Write(value);
         }
 
-        public Bitmap DrawTileMap(int columnCount, Size tilemapSize, Size separation, Size offset)
+        public Bitmap DrawTileMap(int columnCount, Size tileMapSize, Size separation, Size offset)
         {
-            Bitmap tilemap = new Bitmap(tilemapSize.Width, tilemapSize.Height);
-            using (Graphics graphics = Graphics.FromImage(tilemap))
+            Bitmap tileMap = new Bitmap(tileMapSize.Width, tileMapSize.Height);
+            using (Graphics graphics = Graphics.FromImage(tileMap))
             {
                 Vector2<int> position = new Vector2<int>();
                 foreach (Bitmap tile in Tiles)
@@ -139,7 +138,7 @@ namespace CollisionEditor.model
                     }
                 }
             }
-            return tilemap;
+            return tileMap;
         }
 
         public Bitmap SetTile(int tileIndex, Bitmap tile)

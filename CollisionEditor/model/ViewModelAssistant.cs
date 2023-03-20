@@ -1,10 +1,10 @@
-﻿using System;
-using System.Globalization;
-using System.Windows.Media.Imaging;
+﻿using System.Windows.Media.Imaging;
 using System.Windows.Media;
-using System.Drawing;
+using System.Globalization;
 using System.Drawing.Imaging;
+using System.Drawing;
 using System.Text;
+using System;
 
 namespace CollisionEditor.model
 {
@@ -27,9 +27,7 @@ namespace CollisionEditor.model
 
         public static Vector2<int> GetCorrectDotPosition(Vector2<double> position, int cellSize)
         {
-            return new Vector2<int>(
-                (int)Math.Floor(position.X) & -cellSize,
-                (int)Math.Floor(position.Y) & -cellSize);
+            return new Vector2<int>((int)position.X / cellSize * cellSize, (int)position.Y / cellSize * cellSize);
         }
 
         public static BitmapSource BitmapConvert(Bitmap bitmap, double dpi = 0.1)
@@ -59,7 +57,7 @@ namespace CollisionEditor.model
 
         public static byte GetByteAngle(string hexAngle)
         {
-         return byte.Parse(hexAngle.Substring(2), NumberStyles.HexNumber);
+            return byte.Parse(hexAngle.Substring(2), NumberStyles.HexNumber);
         }
 
         public static void SupplementElements(AngleMap angleMap, TileSet tileSet)
@@ -82,14 +80,5 @@ namespace CollisionEditor.model
                 }
             }
         }
-
-        public static BitmapSource GetTilePanel(TileSet tileSet, int panelWidth, Size separation)
-        {   
-            int columnCount = (panelWidth - separation.Width) / (tileSet.TileSize.Width + separation.Width);
-            int panelHeight = (tileSet.Tiles.Count & -columnCount) / columnCount * (tileSet.TileSize.Height + separation.Height);
-
-            return BitmapConvert(tileSet.DrawTileMap(columnCount, new Size(panelWidth, panelHeight), separation, separation));
-        }
-
     }
 }
