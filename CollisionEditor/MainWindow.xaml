@@ -107,7 +107,6 @@
     
         <TextBox Grid.Column="12" Grid.Row="9" Grid.RowSpan ="2" TextWrapping="Wrap" Background="#FFD8D8D8" x:Name="SelectTileTextBox"  IsEnabled="False" Text="{Binding Path=ChosenTile,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" PreviewKeyDown="SelectTileTextBox_PreviewKeyDown"/>
         <Button Grid.Column="13" Grid.Row="9"  Grid.RowSpan ="2" Background="#FFD8D8D8" Content="Select Tile" x:Name="SelectTileButton"  IsEnabled="False" Command="{Binding SelectTileCommand}" />
-        <Rectangle x:Name="BorderRectangle" Grid.Column="12" Grid.Row="2" Grid.RowSpan ="6" Grid.ColumnSpan="2" Height="Auto" Stroke="Black" Width="Auto"/>
     </Grid>
 
     <Window.InputBindings>
