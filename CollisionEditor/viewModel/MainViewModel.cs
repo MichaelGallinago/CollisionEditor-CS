@@ -10,6 +10,7 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Drawing;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace CollisionEditor.viewModel
 {
@@ -310,6 +311,8 @@ namespace CollisionEditor.viewModel
             window.SelectTileButton.IsEnabled = false;
             window.TextBoxByteAngle.IsEnabled = false;
             window.TextBoxHexAngle.IsEnabled = false;
+            window.canvasForLine.Children.Clear();
+            window.RectanglesGrid.Children.Clear();
         }
 
         private void AngleIncrement()
