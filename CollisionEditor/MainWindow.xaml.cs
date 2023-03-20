@@ -126,24 +126,39 @@ namespace CollisionEditor
         {
             RectanglesGridUpdate(false);
         }
-        private int GetUniformGridIndex(Point mousePosition, System.Windows.Controls.Primitives.UniformGrid grid)
+        private uint GetUniformGridIndex(Point mousePosition, System.Windows.Controls.Primitives.UniformGrid grid)
         {
-            return (int)mousePosition.X / 36 + ((int)mousePosition.Y / 36)*8;
+            return (uint)mousePosition.X / 36 + ((uint)mousePosition.Y / 36)*8;
         }
+
         private void TileMapGrid_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             if ((this.DataContext as MainViewModel).TileSet.Tiles.Count <= 0)
                 return;
 
+            Image lastTile = GetTile((int)(this.DataContext as MainViewModel).ChosenTile);
+
+            TileMapGrid.Children.RemoveAt((int)(this.DataContext as MainViewModel).ChosenTile);
+            TileMapGrid.Children.Insert((int)(this.DataContext as MainViewModel).ChosenTile, lastTile);
+
             var mousePosition = e.GetPosition(TileMapGrid);
-            int index = GetUniformGridIndex(mousePosition, TileMapGrid);
+            (this.DataContext as MainViewModel).ChosenTile = GetUniformGridIndex(mousePosition, TileMapGrid);
+            
+            Image newTile = GetTile((int)(this.DataContext as MainViewModel).ChosenTile);
             Border border = new Border();
             border.BorderBrush = new SolidColorBrush(Colors.Red);
             border.BorderThickness = new Thickness(2);
-            
             border.Width = 36;
             border.Height = 36;
-            Canvas cnvas = new Canvas();
+            border.Child = lastTile;
+            //border.Child = newTile;
+
+            TileMapGrid.Children.RemoveAt((int)(this.DataContext as MainViewModel).ChosenTile);
+            TileMapGrid.Children.Insert((int)(this.DataContext as MainViewModel).ChosenTile, border);
+        }
+
+        private Image GetTile(int index)
+        {
             System.Drawing.Bitmap tile = (this.DataContext as MainViewModel).TileSet.Tiles[index];
             var image = new System.Windows.Controls.Image()
             {
@@ -151,11 +166,7 @@ namespace CollisionEditor
                 Height = (this.DataContext as MainViewModel).TileSet.TileSize.Height * 2
             };
             image.Source = ViewModelAssistant.BitmapConvert(tile);
-
-            border.Child = image;
-            TileMapGrid.Children.RemoveAt(index);
-            TileMapGrid.Children.Insert(index,border);
-            
+            return image;
         }
 
         private void WindowSizeChanged(object sender, SizeChangedEventArgs e)
