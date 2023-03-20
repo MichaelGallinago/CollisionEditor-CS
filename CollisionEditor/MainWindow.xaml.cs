@@ -224,7 +224,7 @@ namespace CollisionEditor
             TriangleDownHexAngle.Height = actualHeightTextAndButtons / 2 - 5;
             TriangleDownHexAngle.Width = actualWidthUpAndDownButtons / 2 - 5;
 
-            TileMapGrid.Width = 284 + (((int)(ActualWidth / 587 * 278) - 314) / 32) * 32;
+            TileMapGrid.Width = 288 + (((int)(ActualWidth / 587 * 278) - 314) / 32) * 32;
             TileMapGrid.Columns = ((int)TileMapGrid.Width + 4) / (16 * 2 + 4);
 
             TileMapGrid.Height = Math.Max(0, (int)Math.Ceiling((double)countOfTiles / TileMapGrid.Columns) * (16 * 2 + 4) - 4);
