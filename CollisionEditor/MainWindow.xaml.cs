@@ -9,6 +9,7 @@ using System.Linq;
 using System;
 using System.Threading.Tasks;
 using System.Diagnostics;
+using System.Reflection;
 
 namespace CollisionEditor
 {   
@@ -125,6 +126,37 @@ namespace CollisionEditor
         {
             RectanglesGridUpdate(false);
         }
+        private int GetUniformGridIndex(Point mousePosition, System.Windows.Controls.Primitives.UniformGrid grid)
+        {
+            return (int)mousePosition.X / 36 + ((int)mousePosition.Y / 36)*8;
+        }
+        private void TileMapGrid_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if ((this.DataContext as MainViewModel).TileSet.Tiles.Count <= 0)
+                return;
+
+            var mousePosition = e.GetPosition(TileMapGrid);
+            int index = GetUniformGridIndex(mousePosition, TileMapGrid);
+            Border border = new Border();
+            border.BorderBrush = new SolidColorBrush(Colors.Red);
+            border.BorderThickness = new Thickness(2);
+            
+            border.Width = 36;
+            border.Height = 36;
+            Canvas cnvas = new Canvas();
+            System.Drawing.Bitmap tile = (this.DataContext as MainViewModel).TileSet.Tiles[index];
+            var image = new System.Windows.Controls.Image()
+            {
+                Width = (this.DataContext as MainViewModel).TileSet.TileSize.Width * 2,
+                Height = (this.DataContext as MainViewModel).TileSet.TileSize.Height * 2
+            };
+            image.Source = ViewModelAssistant.BitmapConvert(tile);
+
+            border.Child = image;
+            TileMapGrid.Children.RemoveAt(index);
+            TileMapGrid.Children.Insert(index,border);
+            
+        }
 
         private void WindowSizeChanged(object sender, SizeChangedEventArgs e)
         {
@@ -202,5 +234,7 @@ namespace CollisionEditor
                 UseShellExecute = true,
             });
         }
+
+        
     }
 }
