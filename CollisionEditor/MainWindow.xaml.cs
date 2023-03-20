@@ -128,7 +128,7 @@ namespace CollisionEditor
         }
         private uint GetUniformGridIndex(Point mousePosition, System.Windows.Controls.Primitives.UniformGrid grid)
         {
-            return (uint)mousePosition.X / 36 + ((uint)mousePosition.Y / 36)*8;
+            return (uint)mousePosition.X / 36 + ((uint)mousePosition.Y / 36)* (uint)TileMapGrid.Columns;
         }
 
         private void TileMapGrid_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -142,7 +142,11 @@ namespace CollisionEditor
             TileMapGrid.Children.Insert((int)(this.DataContext as MainViewModel).ChosenTile, lastTile);
 
             var mousePosition = e.GetPosition(TileMapGrid);
+
             (this.DataContext as MainViewModel).ChosenTile = GetUniformGridIndex(mousePosition, TileMapGrid);
+
+            if ((this.DataContext as MainViewModel).ChosenTile > (this.DataContext as MainViewModel).TileSet.Tiles.Count-1)
+                (this.DataContext as MainViewModel).ChosenTile = (uint)(this.DataContext as MainViewModel).TileSet.Tiles.Count - 1;
             
             Image newTile = GetTile((int)(this.DataContext as MainViewModel).ChosenTile);
             Border border = new Border();
@@ -156,6 +160,7 @@ namespace CollisionEditor
 
             (this.DataContext as MainViewModel).SelectTile();
         }
+
 
         private Image GetTile(int index)
         {
