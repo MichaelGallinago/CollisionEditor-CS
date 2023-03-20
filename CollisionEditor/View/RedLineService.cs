@@ -1,6 +1,6 @@
 using System.Windows.Controls;
-using System.Windows.Media;
 using System.Windows.Shapes;
+using System.Windows.Media;
 using System;
 
 namespace CollisionEditor
@@ -11,12 +11,10 @@ namespace CollisionEditor
 
         public static void DrawRedLine(ref Line redLine)
         {
-            string stringAngle = mainWindow.TextBlockFullAngle.Text.TrimEnd('°');
-            float floatAngle = float.Parse(stringAngle);
-            if (floatAngle > 180)
-            {
-                floatAngle = floatAngle - 180;
-            }
+            float floatAngle = float.Parse(mainWindow.TextBlockFullAngle.Text.TrimEnd('°'));
+
+            if (floatAngle > 180f)
+                floatAngle -= 180f;
 
             int size = (int)mainWindow.canvasForLine.Width / 2;
 

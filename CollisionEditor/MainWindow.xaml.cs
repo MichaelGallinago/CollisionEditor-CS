@@ -1,15 +1,14 @@
-using System.Windows;
-using System.Windows.Input;
-using CollisionEditor.model;
-using CollisionEditor.viewModel;
-using System.Windows.Media;
-using System.Windows.Shapes;
+using CollisionEditor.ViewModel;
+using CollisionEditor.Model;
 using System.Windows.Controls;
+using System.Threading.Tasks;
+using System.Windows.Shapes;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Diagnostics;
+using System.Windows;
 using System.Linq;
 using System;
-using System.Threading.Tasks;
-using System.Diagnostics;
-using System.Reflection;
 
 namespace CollisionEditor
 {   
@@ -241,7 +240,5 @@ namespace CollisionEditor
                 UseShellExecute = true,
             });
         }
-
-        
     }
 }

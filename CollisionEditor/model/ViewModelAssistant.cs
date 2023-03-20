@@ -6,7 +6,7 @@ using System.Drawing;
 using System.Text;
 using System;
 
-namespace CollisionEditor.model
+namespace CollisionEditor.Model
 {
     internal static class ViewModelAssistant
     {

@@ -1,4 +1,4 @@
-﻿namespace CollisionEditor.viewModel
+﻿namespace CollisionEditor.ViewModel
 {
     public static class ViewModelTileService
     {

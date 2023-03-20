@@ -1,6 +1,6 @@
-﻿using CollisionEditor.model;
+﻿using CollisionEditor.Model;
 
-namespace CollisionEditor.viewModel
+namespace CollisionEditor.ViewModel
 {
     public static class ViewModelAngleService
     {

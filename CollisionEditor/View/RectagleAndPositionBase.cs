@@ -1,19 +1,19 @@
-﻿using CollisionEditor.model;
-using System.Windows.Media;
+﻿using CollisionEditor.Model;
 using System.Windows.Shapes;
+using System.Windows.Media;
 
 namespace CollisionEditor
 {
     internal class SquareAndPosition
     {
-        public Rectangle Square { get; set; } = new Rectangle();
         public Vector2<int> Position { get; set; } = new Vector2<int>();
+        public Rectangle Square { get; set; } = new Rectangle();
         public Color Color { get; set; }
 
         public SquareAndPosition(Color color)
         {
+            Square.Fill = new SolidColorBrush(color);
             Color = color;
-            Square.Fill = new SolidColorBrush(Color);
         }
     }
 }

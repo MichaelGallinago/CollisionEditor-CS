@@ -3,7 +3,7 @@ using System.Drawing.Imaging;
 using System.Drawing;
 using System.IO;
 
-namespace CollisionEditor.model
+namespace CollisionEditor.Model
 {
     public class TileSet
     {

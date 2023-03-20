@@ -3,11 +3,11 @@ using System.Linq;
 using System.IO;
 using System;
 
-namespace CollisionEditor.model
+namespace CollisionEditor.Model
 {
     public class AngleMap
     {
-        internal List<byte> Values { get; private set; }
+        public List<byte> Values { get; private set; }
 
         public AngleMap(string path)
         {

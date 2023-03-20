@@ -1,4 +1,4 @@
-﻿using CollisionEditor.model;
+﻿using CollisionEditor.Model;
 using System.Windows.Controls;
 
 namespace CollisionEditor

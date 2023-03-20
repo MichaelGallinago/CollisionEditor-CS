@@ -1,4 +1,4 @@
-﻿namespace CollisionEditor.model
+﻿namespace CollisionEditor.Model
 {
     public struct Vector2<T>
     {
