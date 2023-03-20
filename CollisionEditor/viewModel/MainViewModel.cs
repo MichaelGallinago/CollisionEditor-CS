@@ -119,6 +119,7 @@ namespace CollisionEditor.viewModel
             {
                 angleMap = new AngleMap(filePath);
                 tileSet = new TileSet(angleMap.Values.Count);
+                ViewModelAssistant.SupplementElements(angleMap, tileSet);
                 (byte byteAngle, string hexAngle, double fullAngle) angles = ViewModelAssistant.GetAngles(angleMap, _chosenTile);
                 ShowAngles(angles.byteAngle, angles.hexAngle, angles.fullAngle);
                 window.SelectTileTextBox.IsEnabled = true;
@@ -151,6 +152,8 @@ namespace CollisionEditor.viewModel
             {
                 tileSet = new TileSet(filePath);
                 angleMap = new AngleMap(tileSet.Tiles.Count);
+                ViewModelAssistant.SupplementElements(angleMap,tileSet);
+
                 ViewModelAssistant.BitmapConvert(tileSet.Tiles[(int)_chosenTile]);
                 TileGridUpdate(tileSet, (int)ChosenTile, window);
                 RectanglesGridUpdate();
