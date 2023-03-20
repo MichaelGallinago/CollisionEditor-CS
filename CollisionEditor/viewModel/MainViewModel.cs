@@ -10,6 +10,7 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Drawing;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace CollisionEditor.viewModel
 {
@@ -135,19 +136,19 @@ namespace CollisionEditor.viewModel
         }
         public void ShowAngles(byte byteAngle, string hexAngle, double fullAngle)
         {
-            MainWindow mainWindow = (MainWindow)System.Windows.Application.Current.MainWindow;
+            
 
             _byteAngle = byteAngle;
             OnPropertyChanged(nameof(ByteAngle));
-            mainWindow.ByteAngleIncrimentButton.IsEnabled= true;
-            mainWindow.ByteAngleDecrementButton.IsEnabled = true;
+            window.ByteAngleIncrimentButton.IsEnabled= true;
+            window.ByteAngleDecrementButton.IsEnabled = true;
 
             _hexAngle = hexAngle;
             OnPropertyChanged(nameof(HexAngle));
-            mainWindow.HexAngleIncrimentButton.IsEnabled = true;
-            mainWindow.HexAngleDecrementButton.IsEnabled = true;
+            window.HexAngleIncrimentButton.IsEnabled = true;
+            window.HexAngleDecrementButton.IsEnabled = true;
 
-            mainWindow.TextBlockFullAngle.Text = fullAngle.ToString() + "°";
+            window.TextBlockFullAngle.Text = fullAngle.ToString() + "°";
         }
 
         private void MenuOpenTileMap()
@@ -272,18 +273,36 @@ namespace CollisionEditor.viewModel
 
             (byte byteAngle, string hexAngle, double fullAngle) angles = ViewModelAssistant.GetAngles(angleMap, _chosenTile);
             ShowAngles(angles.byteAngle, angles.hexAngle, angles.fullAngle);
-
         }
 
         private void MenuUnloadAngleMap()
         {
             angleMap = new AngleMap(tileSet.Tiles.Count);
+
+            (byte byteAngle, string hexAngle, double fullAngle) angles = ViewModelAssistant.GetAngles(angleMap, _chosenTile);
+            ShowAngles(angles.byteAngle, angles.hexAngle, angles.fullAngle);
         }
 
         private void MenuUnloadAll()
-        {
+        {   
+            window.TileMapGrid.Children.Clear();
             tileSet = new TileSet(0);
             angleMap = new AngleMap(0);
+
+            //window.TileGrid.;
+
+            window.Heights.Text = null;
+            window.Widths.Text = null;
+            ShowAngles(0, "0x00", 0);
+            window.SelectTileTextBox.Text = "0";
+            window.ByteAngleIncrimentButton.IsEnabled = false;
+            window.ByteAngleDecrementButton.IsEnabled = false;
+            window.HexAngleIncrimentButton.IsEnabled = false;
+            window.HexAngleDecrementButton.IsEnabled = false;
+            window.SelectTileTextBox.IsEnabled = false;
+            window.SelectTileButton.IsEnabled = false;
+            window.TextBoxByteAngle.IsEnabled = false;
+            window.TextBoxHexAngle.IsEnabled = false;
         }
 
         private void AngleIncrement()
