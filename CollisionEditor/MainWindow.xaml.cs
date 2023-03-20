@@ -9,6 +9,8 @@ using System.Linq;
 using System;
 using System.Threading.Tasks;
 using System.Diagnostics;
+using System.Windows.Data;
+
 
 namespace CollisionEditor
 {   
@@ -76,6 +78,7 @@ namespace CollisionEditor
 
         internal void DrawRedLine()
         {
+            int countOfAngles = (this.DataContext as MainViewModel).CountOfAngles;
             RedLineService.DrawRedLine(ref RedLine);
         }
 
@@ -121,6 +124,8 @@ namespace CollisionEditor
 
         private void WindowSizeChanged(object sender, SizeChangedEventArgs e)
         {
+            int countOfTiles = (this.DataContext as MainViewModel).CountOfTiles;
+
             double actualHeightTextAndButtons = ActualHeight / 424 * 20;
             double actualWidthUpAndDownButtons = ActualWidth / 587 * 23;
             double actualFontSize = Math.Min((25.4 / 96 * actualHeightTextAndButtons) / 0.35 - 4, (25.4 / 96 * (ActualWidth / 587 * 43)) / 0.35 - 21);
