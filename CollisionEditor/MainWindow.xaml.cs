@@ -64,7 +64,7 @@ namespace CollisionEditor
             
             if (RectanglesGrid.Children.Contains(blueAndGreenSquare.Item1.Square) && RectanglesGrid.Children.Contains(blueAndGreenSquare.Item2.Square))
             {
-                windowMain.AngleUpdator(blueAndGreenSquare.Item1.Position, blueAndGreenSquare.Item2.Position);
+                windowMain.UpdateAngles(blueAndGreenSquare.Item1.Position, blueAndGreenSquare.Item2.Position);
 
                 DrawRedLine();
             }
@@ -82,7 +82,7 @@ namespace CollisionEditor
 
             if (RectanglesGrid.Children.Contains(blueAndGreenSquare.Item1.Square) && RectanglesGrid.Children.Contains(blueAndGreenSquare.Item2.Square))
             {
-                windowMain.AngleUpdator(blueAndGreenSquare.Item1.Position, blueAndGreenSquare.Item2.Position);
+                windowMain.UpdateAngles(blueAndGreenSquare.Item1.Position, blueAndGreenSquare.Item2.Position);
 
                 DrawRedLine();
             }
