@@ -337,10 +337,10 @@ namespace CollisionEditor.ViewModel
                 OnPropertyChanged(nameof(ChosenTile));
             }
 
-            System.Windows.Controls.Image lastTile = GetTile(window.LastChozenTile);
+            System.Windows.Controls.Image lastTile = GetTile(window.LastChosenTile);
 
-            window.TileMapGrid.Children.RemoveAt(window.LastChozenTile);
-            window.TileMapGrid.Children.Insert(window.LastChozenTile, lastTile);
+            window.TileMapGrid.Children.RemoveAt(window.LastChosenTile);
+            window.TileMapGrid.Children.Insert(window.LastChosenTile, lastTile);
 
             System.Windows.Controls.Image newTile = GetTile((int)chosenTile);
 
@@ -354,7 +354,7 @@ namespace CollisionEditor.ViewModel
             window.TileMapGrid.Children.RemoveAt((int)chosenTile);
             window.TileMapGrid.Children.Insert((int)chosenTile, border);
 
-            window.LastChozenTile = (int)chosenTile;
+            window.LastChosenTile = (int)chosenTile;
             TileGridUpdate(TileSet, (int)ChosenTile, window);
             window.Heights.Text = ViewModelAssistant.GetCollisionValues(TileSet.HeightMap[(int)chosenTile]);
             window.Widths.Text  = ViewModelAssistant.GetCollisionValues(TileSet.WidthMap[(int)chosenTile]);
@@ -395,17 +395,17 @@ namespace CollisionEditor.ViewModel
             window.Close();
         }
 
-        public void AngleUpdator(Vector2<int> vectorGreen, Vector2<int> vectorBlue)
+        public void UpdateAngles(Vector2<int> positionGreen, Vector2<int> positionBlue)
         {
             if (AngleMap.Values.Count == 0)
                 return;
 
-            byte byteAngle = AngleMap.SetAngleWithLine((int)chosenTile, vectorGreen, vectorBlue);
+            byte byteAngle = AngleMap.SetAngleWithLine((int)chosenTile, positionGreen, positionBlue);
 
             ShowAngles(ViewModelAngleService.GetAngles(byteAngle));
         }      
 
-        public Vector2<int> GetCordinats(double x, double y)
+        public Vector2<int> GetCoordinates(double x, double y)
         {
             return (ViewModelAssistant.GetCorrectDotPosition(new Vector2<double>(x, y),8));
         }
