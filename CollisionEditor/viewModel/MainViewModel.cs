@@ -1,15 +1,14 @@
 ﻿using CollisionEditor.Model;
+using CollisionEditor.View;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows;
 using System.ComponentModel;
+using System.Collections;
 using System.Drawing;
 using System.IO;
 using System;
-using CollisionEditor.View;
-using System.Collections.Generic;
-using System.Collections;
 
 namespace CollisionEditor.ViewModel
 {
@@ -459,7 +458,7 @@ namespace CollisionEditor.ViewModel
 
         public event EventHandler<DataErrorsChangedEventArgs>? ErrorsChanged;
 
-        private void TextboxValidator_ErrorsChanged(object sender, DataErrorsChangedEventArgs e)
+        private void TextboxValidator_ErrorsChanged(object? sender, DataErrorsChangedEventArgs e)
         {
             ErrorsChanged?.Invoke(this, e);
             OnPropertyChanged(nameof(HexAngle));

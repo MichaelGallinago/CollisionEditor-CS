@@ -30,7 +30,7 @@ namespace CollisionEditor
         {   
             InitializeComponent();
             DataContext = new MainViewModel(this);
-            windowMain = (DataContext as MainViewModel);
+            windowMain = DataContext as MainViewModel;
         }
 
         private Vector2<int> GetGridPosition(Point mousePosition, Grid grid)
@@ -44,9 +44,9 @@ namespace CollisionEditor
                 position.X++;
             }
 
-            foreach (var row in grid.ColumnDefinitions)
+            foreach (var row in grid.RowDefinitions)
             {
-                if (mousePosition.Y > row.Offset && mousePosition.Y < (row.Offset + row.ActualWidth))
+                if (mousePosition.Y > row.Offset && mousePosition.Y < (row.Offset + row.ActualHeight))
                     break;
                 position.Y++;
             }
