@@ -20,9 +20,10 @@ namespace CollisionEditor
             DataContext = new MainViewModel(this);
         }
 
-        (SquareAndPosition, SquareAndPosition) BlueAndGreenSquare = (new SquareAndPosition(Colors.Blue), new SquareAndPosition(Colors.Green));
-        Line RedLine = new Line();
-
+        private (SquareAndPosition, SquareAndPosition) blueAndGreenSquare = (new SquareAndPosition(Colors.Blue), new SquareAndPosition(Colors.Green));
+        private Line redLine = new Line();
+        private bool _mouseInRectanglesGrid = false;
+        public int LastChozenTile { get; set; }
         private Vector2<int> GetGridPosition(Point mousePosition, Grid grid)
         {
             Vector2<int> position = new Vector2<int>();
@@ -52,11 +53,11 @@ namespace CollisionEditor
             var mousePosition = e.GetPosition(RectanglesGrid);
             Vector2<int> position = GetGridPosition(mousePosition, RectanglesGrid);
 
-            SquaresService.MoveSquare(position, BlueAndGreenSquare.Item1, BlueAndGreenSquare.Item2);
+            SquaresService.MoveSquare(position, blueAndGreenSquare.Item1, blueAndGreenSquare.Item2);
             
-            if (RectanglesGrid.Children.Contains(BlueAndGreenSquare.Item1.Square) && RectanglesGrid.Children.Contains(BlueAndGreenSquare.Item2.Square))
+            if (RectanglesGrid.Children.Contains(blueAndGreenSquare.Item1.Square) && RectanglesGrid.Children.Contains(blueAndGreenSquare.Item2.Square))
             {
-                (this.DataContext as MainViewModel).AngleUpdator(BlueAndGreenSquare.Item1.Position, BlueAndGreenSquare.Item2.Position);
+                (this.DataContext as MainViewModel).AngleUpdator(blueAndGreenSquare.Item1.Position, blueAndGreenSquare.Item2.Position);
 
                 DrawRedLine();
             }
@@ -70,11 +71,11 @@ namespace CollisionEditor
             var mousePosition = e.GetPosition(RectanglesGrid);
             Vector2<int> position = GetGridPosition(mousePosition, RectanglesGrid);
 
-            SquaresService.MoveSquare(position, BlueAndGreenSquare.Item2, BlueAndGreenSquare.Item1);
+            SquaresService.MoveSquare(position, blueAndGreenSquare.Item2, blueAndGreenSquare.Item1);
 
-            if (RectanglesGrid.Children.Contains(BlueAndGreenSquare.Item1.Square) && RectanglesGrid.Children.Contains(BlueAndGreenSquare.Item2.Square))
+            if (RectanglesGrid.Children.Contains(blueAndGreenSquare.Item1.Square) && RectanglesGrid.Children.Contains(blueAndGreenSquare.Item2.Square))
             {
-                (this.DataContext as MainViewModel).AngleUpdator(BlueAndGreenSquare.Item1.Position, BlueAndGreenSquare.Item2.Position);
+                (this.DataContext as MainViewModel).AngleUpdator(blueAndGreenSquare.Item1.Position, blueAndGreenSquare.Item2.Position);
 
                 DrawRedLine();
             }
@@ -83,7 +84,7 @@ namespace CollisionEditor
         internal void DrawRedLine()
         {
             if ((this.DataContext as MainViewModel).AngleMap.Values.Count > 0)
-                RedLineService.DrawRedLine(ref RedLine);
+                RedLineService.DrawRedLine(ref redLine);
         }
 
         private void SelectTileTextBox_PreviewKeyDown(object sender, KeyEventArgs e)
@@ -101,14 +102,12 @@ namespace CollisionEditor
                 e.Handled = true;
         }
 
-        private bool _inRectanglesGrid = false;
-
         private async void RectanglesGridUpdate(bool isAppear)
         {
-            _inRectanglesGrid = isAppear;
+            _mouseInRectanglesGrid = isAppear;
             while (isAppear && RectanglesGrid.Opacity < 1d || !isAppear && RectanglesGrid.Opacity > 0d)
             {
-                if (_inRectanglesGrid != isAppear)
+                if (_mouseInRectanglesGrid != isAppear)
                     return;
 
                 await Task.Delay(10);
@@ -130,7 +129,7 @@ namespace CollisionEditor
             return (uint)mousePosition.X / 36 + ((uint)mousePosition.Y / 36)* (uint)TileMapGrid.Columns;
         }
 
-        public int LastChozenTile { get; set; }
+        
         private void TileMapGrid_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             if ((this.DataContext as MainViewModel).TileSet.Tiles.Count <= 0)

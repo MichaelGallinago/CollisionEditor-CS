@@ -78,7 +78,6 @@ namespace CollisionEditor.ViewModel
             }
         }
 
-
         private const string _hexadecimalAlphabet = "0123456789ABCDEF";
 
         private MainWindow _window;
