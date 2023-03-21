@@ -148,7 +148,7 @@ namespace CollisionEditor
 
             windowViewModel.ChosenTile = GetUniformGridIndex(mousePosition, TileMapGrid);
 
-            if (windowViewModel.ChosenTile > windowViewModel.TileSet.Tiles.Count-1)
+            if (windowViewModel.ChosenTile > windowViewModel.TileSet.Tiles.Count - 1)
                 windowViewModel.ChosenTile = (uint)windowViewModel.TileSet.Tiles.Count - 1;
             
             Image newTile = windowViewModel.GetTile((int)windowViewModel.ChosenTile);
@@ -158,9 +158,9 @@ namespace CollisionEditor
             border.BorderThickness = new Thickness(2);
             border.Child = newTile;
 
-            var tileSize = windowMain.TileSet.TileSize;
-            border.Width = 36;
-            border.Height = 36;
+            var tileSize = windowViewModel.TileSet.TileSize;
+            border.Width  = tileSize.Width * tileMapTileScale + tileMapSeparation;
+            border.Height = tileSize.Width * tileMapTileScale + tileMapSeparation;
             border.Child = newTile;
             
             TileMapGrid.Children.RemoveAt((int)windowViewModel.ChosenTile);
