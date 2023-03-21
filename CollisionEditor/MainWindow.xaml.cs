@@ -36,16 +36,18 @@ namespace CollisionEditor
         {
             Vector2<int> position = new Vector2<int>();
 
-            foreach (var column in grid.ColumnDefinitions)
+            var columns = grid.ColumnDefinitions.ToArray();
+            foreach (var column in columns)
             {
                 if (mousePosition.X > column.Offset && mousePosition.X < (column.Offset + column.ActualWidth))
                     break;
                 position.X++;
             }
 
-            foreach (var row in grid.ColumnDefinitions)
+            var rows = grid.RowDefinitions.ToArray();
+            foreach (var row in rows)
             {
-                if (mousePosition.Y > row.Offset && mousePosition.Y < (row.Offset + row.ActualWidth))
+                if (mousePosition.Y > row.Offset && mousePosition.Y < (row.Offset + row.ActualHeight))
                     break;
                 position.Y++;
             }
@@ -53,38 +55,43 @@ namespace CollisionEditor
             return position;
         }
 
+        /*private int CalculateGridPosition<T>(double mousePosition, double offset, double actualSize, T itemDefinitions)
+        {
+            int position = 0;
+
+            foreach (var item in grid.ColumnDefinitions)
+            {
+                if (mousePosition > item.Offset && mousePosition < (offset + actualSize))
+                    break;
+                position++;
+            }
+
+            return position;
+        }*/
+
         private void RectanglesGrid_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            if (dataContextMainViewModel.AngleMap.Values.Count <= 0)
-                return;
-
-            var mousePosition = e.GetPosition(RectanglesGrid);
-            Vector2<int> position = GetGridPosition(mousePosition, RectanglesGrid);
-
-            SquaresService.MoveSquare(position, blueAndGreenSquare.Item1, blueAndGreenSquare.Item2);
-            
-            if (RectanglesGrid.Children.Contains(blueAndGreenSquare.Item1.Square) && RectanglesGrid.Children.Contains(blueAndGreenSquare.Item2.Square))
-            {
-                dataContextMainViewModel.UpdateAngles(blueAndGreenSquare.Item1.Position, blueAndGreenSquare.Item2.Position);
-
-                DrawRedLine();
-            }
+            RectanglesGridUpdate(e, blueAndGreenSquare.Item1, blueAndGreenSquare.Item2);
         }
 
         private void RectanglesGrid_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
+            RectanglesGridUpdate(e, blueAndGreenSquare.Item2, blueAndGreenSquare.Item1);
+        }
+
+        private void RectanglesGridUpdate(MouseButtonEventArgs e, SquareAndPosition firstSquare, SquareAndPosition secondSquare) 
+        {
             if (dataContextMainViewModel.AngleMap.Values.Count <= 0)
                 return;
 
             var mousePosition = e.GetPosition(RectanglesGrid);
             Vector2<int> position = GetGridPosition(mousePosition, RectanglesGrid);
 
-            SquaresService.MoveSquare(position, blueAndGreenSquare.Item2, blueAndGreenSquare.Item1);
+            SquaresService.MoveSquare(position, firstSquare, secondSquare);
 
-            if (RectanglesGrid.Children.Contains(blueAndGreenSquare.Item1.Square) && RectanglesGrid.Children.Contains(blueAndGreenSquare.Item2.Square))
+            if (RectanglesGrid.Children.Contains(firstSquare.Square) && RectanglesGrid.Children.Contains(secondSquare.Square))
             {
                 dataContextMainViewModel.UpdateAngles(blueAndGreenSquare.Item1.Position, blueAndGreenSquare.Item2.Position);
-
                 DrawRedLine();
             }
         }
