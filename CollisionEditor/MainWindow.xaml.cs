@@ -179,17 +179,21 @@ namespace CollisionEditor
             windowViewModel.SelectTileFromTileMap();
             LastChosenTile = (int)windowViewModel.ChosenTile;
         }
-
+        private const int menyHeight = 20;
+        private const int countHeightParts = 404;
+        private const int countWidthParts = 587;
+        private const int baseTileMapGridWidth = 288;
+        
         private void WindowSizeChanged(object sender, SizeChangedEventArgs e)
         {
             int countOfTiles = windowViewModel.TileSet.Tiles.Count;
             var tileSize     = windowViewModel.TileSet.TileSize;
 
-            double actualHeightTextAndButtons = (ActualHeight - 20) / 404 * 20;
-            double actualWidthUpAndDownButtons = ActualWidth / 587 * 23;
-            double actualFontSize = Math.Min((25.4 / 96 * actualHeightTextAndButtons) / 0.35 - 4, (25.4 / 96 * (ActualWidth / 587 * 43)) / 0.35 - 21);
+            double actualHeightTextAndButtons = (ActualHeight - menyHeight) / countHeightParts * 20;
+            double actualWidthUpAndDownButtons = ActualWidth / countWidthParts * 23;
+            double actualFontSize = Math.Min((25.4 / 96 * actualHeightTextAndButtons) / 0.35 - 4, (25.4 / 96 * (ActualWidth / countHeightParts * 43)) / 0.35 - 21);
 
-            double actualHeightGrid = ActualHeight / 424 * 128;
+            double actualHeightGrid = (ActualHeight - menyHeight) / countHeightParts * 128;
 
             TileGrid.Width = actualHeightGrid;
             TileGrid.Height = actualHeightGrid;
@@ -239,7 +243,7 @@ namespace CollisionEditor
             int tileWidth  = tileSize.Width  * tileMapTileSize;
             int tileHeight = tileSize.Height * tileMapTileSize;
 
-            TileMapGrid.Width = 288 + (((int)(ActualWidth / 587 * 278) - 314) / tileWidth) * tileWidth;
+            TileMapGrid.Width = baseTileMapGridWidth + (((int)(ActualWidth / countWidthParts * 278) - 314) / tileWidth) * tileWidth;
             TileMapGrid.Columns = ((int)TileMapGrid.Width + tileMapSeparation) / (tileWidth + tileMapSeparation);
 
             TileMapGrid.Height = (int)Math.Ceiling((double)countOfTiles / TileMapGrid.Columns) * (tileHeight + tileMapSeparation);

@@ -40,7 +40,7 @@
             <ColumnDefinition Width="139*" />
             <ColumnDefinition Width="10*" />
         </Grid.ColumnDefinitions>
-        <Button x:Name="button1"/>
+
         <Menu VerticalAlignment="Center" Grid.Column="0"  Grid.ColumnSpan="15" Foreground="Black" Height="20">
             <MenuItem Header="File">
                 <MenuItem Header="Load" >
