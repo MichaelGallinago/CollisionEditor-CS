@@ -405,12 +405,7 @@ namespace CollisionEditor.ViewModel
             ShowAngles(ViewModelAngleService.GetAngles(byteAngle));
         }      
 
-        public Vector2<int> GetCoordinates(double x, double y)
-        {
-            return (ViewModelAssistant.GetCorrectDotPosition(new Vector2<double>(x, y),8));
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler? PropertyChanged;
         public event EventHandler<DataErrorsChangedEventArgs>? ErrorsChanged;
 
         protected virtual void OnPropertyChanged(string propertyName)

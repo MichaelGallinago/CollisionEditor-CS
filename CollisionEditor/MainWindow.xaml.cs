@@ -1,11 +1,11 @@
 using CollisionEditor.ViewModel;
 using CollisionEditor.Model;
+using CollisionEditor.View;
 using System.Windows.Controls;
 using System.Threading.Tasks;
 using System.Windows.Shapes;
 using System.Windows.Input;
 using System.Windows.Media;
-using CollisionEditor.View;
 using System.Diagnostics;
 using System.Windows;
 using System.Linq;
@@ -27,7 +27,7 @@ namespace CollisionEditor
         private MainViewModel windowMain;
 
         public MainWindow()
-        {
+        {   
             InitializeComponent();
             DataContext = new MainViewModel(this);
             windowMain = (DataContext as MainViewModel);
