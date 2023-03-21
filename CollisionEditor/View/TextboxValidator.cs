@@ -11,10 +11,13 @@ namespace CollisionEditor.View
         public event EventHandler<DataErrorsChangedEventArgs>? ErrorsChanged;
         public bool HasErrors => propertyErrors.Any();
 
-        private readonly Dictionary<string, List<string>> propertyErrors = new Dictionary<string, List<string>>();
+        private readonly Dictionary<string, List<string>?> propertyErrors = new();
 
         public IEnumerable GetErrors(string? propertyName)
         {
+            if (propertyName is null)
+                return new Dictionary<string, List<string>?>();
+
             return propertyErrors.GetValueOrDefault(propertyName, null);
         }
 
@@ -23,8 +26,11 @@ namespace CollisionEditor.View
             if (!propertyErrors.ContainsKey(propertyName))
                 propertyErrors.Add(propertyName, new List<string>());
 
-            propertyErrors[propertyName].Add(errorMessage);
-            OnErrorsChanged(propertyName);
+            if (propertyErrors[propertyName]!=null)
+            {
+                propertyErrors[propertyName].Add(errorMessage);
+                OnErrorsChanged(propertyName);
+            }
         }
 
         private void OnErrorsChanged(string propertyName)
