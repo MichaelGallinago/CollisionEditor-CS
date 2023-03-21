@@ -22,7 +22,7 @@ namespace CollisionEditor
 
         private (SquareAndPosition, SquareAndPosition) blueAndGreenSquare = (new SquareAndPosition(Colors.Blue), new SquareAndPosition(Colors.Green));
         private Line redLine = new Line();
-        private bool _mouseInRectanglesGrid = false;
+        private bool mouseInRectanglesGrid = false;
         public int LastChozenTile { get; set; }
         private Vector2<int> GetGridPosition(Point mousePosition, Grid grid)
         {
@@ -104,10 +104,10 @@ namespace CollisionEditor
 
         private async void RectanglesGridUpdate(bool isAppear)
         {
-            _mouseInRectanglesGrid = isAppear;
+            mouseInRectanglesGrid = isAppear;
             while (isAppear && RectanglesGrid.Opacity < 1d || !isAppear && RectanglesGrid.Opacity > 0d)
             {
-                if (_mouseInRectanglesGrid != isAppear)
+                if (mouseInRectanglesGrid != isAppear)
                     return;
 
                 await Task.Delay(10);
