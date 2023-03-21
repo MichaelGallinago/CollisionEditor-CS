@@ -24,13 +24,12 @@ namespace CollisionEditor
         private bool mouseInRectanglesGrid = false;
         private (SquareAndPosition, SquareAndPosition) blueAndGreenSquare = (new SquareAndPosition(Colors.Blue), new SquareAndPosition(Colors.Green));
         private Line redLine = new Line();
-        private MainViewModel windowMain;
-
+        private MainViewModel dataContextMainViewModel { get; set; }
         public MainWindow()
         {   
             InitializeComponent();
-            DataContext = new MainViewModel(this);
-            windowMain = DataContext as MainViewModel;
+            
+            dataContextMainViewModel = new MainViewModel(this);
         }
 
         private Vector2<int> GetGridPosition(Point mousePosition, Grid grid)
@@ -44,9 +43,9 @@ namespace CollisionEditor
                 position.X++;
             }
 
-            foreach (var row in grid.RowDefinitions)
+            foreach (var row in grid.ColumnDefinitions)
             {
-                if (mousePosition.Y > row.Offset && mousePosition.Y < (row.Offset + row.ActualHeight))
+                if (mousePosition.Y > row.Offset && mousePosition.Y < (row.Offset + row.ActualWidth))
                     break;
                 position.Y++;
             }
@@ -56,7 +55,7 @@ namespace CollisionEditor
 
         private void RectanglesGrid_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            if (windowMain.AngleMap.Values.Count <= 0)
+            if (dataContextMainViewModel.AngleMap.Values.Count <= 0)
                 return;
 
             var mousePosition = e.GetPosition(RectanglesGrid);
@@ -66,7 +65,7 @@ namespace CollisionEditor
             
             if (RectanglesGrid.Children.Contains(blueAndGreenSquare.Item1.Square) && RectanglesGrid.Children.Contains(blueAndGreenSquare.Item2.Square))
             {
-                windowMain.UpdateAngles(blueAndGreenSquare.Item1.Position, blueAndGreenSquare.Item2.Position);
+                dataContextMainViewModel.UpdateAngles(blueAndGreenSquare.Item1.Position, blueAndGreenSquare.Item2.Position);
 
                 DrawRedLine();
             }
@@ -74,7 +73,7 @@ namespace CollisionEditor
 
         private void RectanglesGrid_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
-            if (windowMain.AngleMap.Values.Count <= 0)
+            if (dataContextMainViewModel.AngleMap.Values.Count <= 0)
                 return;
 
             var mousePosition = e.GetPosition(RectanglesGrid);
@@ -84,7 +83,7 @@ namespace CollisionEditor
 
             if (RectanglesGrid.Children.Contains(blueAndGreenSquare.Item1.Square) && RectanglesGrid.Children.Contains(blueAndGreenSquare.Item2.Square))
             {
-                windowMain.UpdateAngles(blueAndGreenSquare.Item1.Position, blueAndGreenSquare.Item2.Position);
+                dataContextMainViewModel.UpdateAngles(blueAndGreenSquare.Item1.Position, blueAndGreenSquare.Item2.Position);
 
                 DrawRedLine();
             }
@@ -92,14 +91,14 @@ namespace CollisionEditor
 
         internal void DrawRedLine()
         {
-            if (windowMain.AngleMap.Values.Count > 0)
+            if (dataContextMainViewModel.AngleMap.Values.Count > 0)
                 RedLineService.DrawRedLine(ref redLine);
         }
 
         private void SelectTileTextBox_PreviewKeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter)
-                windowMain.SelectTile();
+                dataContextMainViewModel.SelectTile();
         }
 
         private void TextBoxHexAngle_PreviewKeyDown(object sender, KeyEventArgs e)
@@ -141,22 +140,22 @@ namespace CollisionEditor
         
         private void TileMapGrid_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            if (windowMain.TileSet.Tiles.Count <= 0)
+            if (dataContextMainViewModel.TileSet.Tiles.Count <= 0)
                 return;
 
-            Image lastTile = windowMain.GetTile((int)windowMain.ChosenTile);
+            Image lastTile = dataContextMainViewModel.GetTile((int)dataContextMainViewModel.ChosenTile);
 
-            TileMapGrid.Children.RemoveAt((int)windowMain.ChosenTile);
-            TileMapGrid.Children.Insert((int)windowMain.ChosenTile, lastTile);
+            TileMapGrid.Children.RemoveAt((int)dataContextMainViewModel.ChosenTile);
+            TileMapGrid.Children.Insert((int)dataContextMainViewModel.ChosenTile, lastTile);
 
             var mousePosition = e.GetPosition(TileMapGrid);
 
-            windowMain.ChosenTile = GetUniformGridIndex(mousePosition, TileMapGrid);
+            dataContextMainViewModel.ChosenTile = GetUniformGridIndex(mousePosition, TileMapGrid);
 
-            if (windowMain.ChosenTile > windowMain.TileSet.Tiles.Count-1)
-                windowMain.ChosenTile = (uint)windowMain.TileSet.Tiles.Count - 1;
+            if (dataContextMainViewModel.ChosenTile > dataContextMainViewModel.TileSet.Tiles.Count-1)
+                dataContextMainViewModel.ChosenTile = (uint)dataContextMainViewModel.TileSet.Tiles.Count - 1;
             
-            Image newTile = windowMain.GetTile((int)windowMain.ChosenTile);
+            Image newTile = dataContextMainViewModel.GetTile((int)dataContextMainViewModel.ChosenTile);
 
             Border border = new Border();
             border.BorderBrush = new SolidColorBrush(Colors.Red);
@@ -165,17 +164,17 @@ namespace CollisionEditor
             border.Height = 36;
             border.Child = newTile;
             
-            TileMapGrid.Children.RemoveAt((int)windowMain.ChosenTile);
-            TileMapGrid.Children.Insert((int)windowMain.ChosenTile, border);
+            TileMapGrid.Children.RemoveAt((int)dataContextMainViewModel.ChosenTile);
+            TileMapGrid.Children.Insert((int)dataContextMainViewModel.ChosenTile, border);
 
-            windowMain.SelectTileFromTileMap();
-            LastChosenTile = (int)windowMain.ChosenTile;
+            dataContextMainViewModel.SelectTileFromTileMap();
+            LastChosenTile = (int)dataContextMainViewModel.ChosenTile;
         }
 
         private void WindowSizeChanged(object sender, SizeChangedEventArgs e)
         {
-            int countOfTiles = windowMain.TileSet.Tiles.Count;
-            var tileSize     = windowMain.TileSet.TileSize;
+            int countOfTiles = dataContextMainViewModel.TileSet.Tiles.Count;
+            var tileSize     = dataContextMainViewModel.TileSet.TileSize;
 
             double actualHeightTextAndButtons = (ActualHeight - 20) / 404 * 20;
             double actualWidthUpAndDownButtons = ActualWidth / 587 * 23;
