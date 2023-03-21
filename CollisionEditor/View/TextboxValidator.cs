@@ -28,7 +28,7 @@ namespace CollisionEditor.View
 
             if (propertyErrors[propertyName]!=null)
             {
-                propertyErrors[propertyName].Add(errorMessage);
+                propertyErrors[propertyName]?.Add(errorMessage);
                 OnErrorsChanged(propertyName);
             }
         }
