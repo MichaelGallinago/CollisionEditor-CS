@@ -175,7 +175,7 @@ namespace CollisionEditor
             int countOfTiles = windowMain.TileSet.Tiles.Count;
             var tileSize     = windowMain.TileSet.TileSize;
 
-            double actualHeightTextAndButtons = ActualHeight / 424 * 20;
+            double actualHeightTextAndButtons = (ActualHeight - 20) / 404 * 20;
             double actualWidthUpAndDownButtons = ActualWidth / 587 * 23;
             double actualFontSize = Math.Min((25.4 / 96 * actualHeightTextAndButtons) / 0.35 - 4, (25.4 / 96 * (ActualWidth / 587 * 43)) / 0.35 - 21);
 

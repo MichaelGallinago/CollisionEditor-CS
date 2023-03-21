@@ -53,7 +53,7 @@ namespace CollisionEditor.ViewModel
                 hexAngle = value;
 
                 if (hexAngle.Length != 4 || hexAngle[0] != '0' || hexAngle[1] != 'x'
-                    || !_hexadecimalAlphabet.Contains(hexAngle[2]) || !_hexadecimalAlphabet.Contains(hexAngle[3]))
+                    || !hexadecimalAlphabet.Contains(hexAngle[2]) || !hexadecimalAlphabet.Contains(hexAngle[3]))
                 {
                     AddError(nameof(HexAngle), "Error! Wrong hexadecimal number");
                     return;
@@ -77,7 +77,7 @@ namespace CollisionEditor.ViewModel
             }
         }
 
-        private const string _hexadecimalAlphabet = "0123456789ABCDEF";
+        private const string hexadecimalAlphabet = "0123456789ABCDEF";
 
         private MainWindow window;
         private byte byteAngle;
