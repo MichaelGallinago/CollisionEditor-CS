@@ -5,10 +5,12 @@ using System.Threading.Tasks;
 using System.Windows.Shapes;
 using System.Windows.Input;
 using System.Windows.Media;
+using CollisionEditor.View;
 using System.Diagnostics;
 using System.Windows;
 using System.Linq;
 using System;
+
 
 namespace CollisionEditor
 {   

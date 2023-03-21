@@ -1,7 +1,7 @@
 ﻿using CollisionEditor.Model;
 using System.Windows.Controls;
 
-namespace CollisionEditor
+namespace CollisionEditor.View
 {
     internal static class SquaresService
     {

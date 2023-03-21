@@ -3,7 +3,7 @@ using System.Windows.Shapes;
 using System.Windows.Media;
 using System;
 
-namespace CollisionEditor
+namespace CollisionEditor.View
 {
     internal static class RedLineService
     {

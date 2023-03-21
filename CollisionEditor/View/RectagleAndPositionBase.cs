@@ -2,7 +2,7 @@
 using System.Windows.Shapes;
 using System.Windows.Media;
 
-namespace CollisionEditor
+namespace CollisionEditor.View
 {
     internal class SquareAndPosition
     {
