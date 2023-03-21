@@ -18,7 +18,8 @@ namespace CollisionEditor.View
             if (propertyName is null)
                 return new Dictionary<string, List<string>?>();
 
-            return propertyErrors.GetValueOrDefault(propertyName, null);
+            List<string>? errors = propertyErrors.GetValueOrDefault(propertyName, null);
+            return errors is null ? new List<string>() : errors;
         }
 
         public void AddError(string propertyName, string errorMessage)
@@ -26,11 +27,8 @@ namespace CollisionEditor.View
             if (!propertyErrors.ContainsKey(propertyName))
                 propertyErrors.Add(propertyName, new List<string>());
 
-            if (propertyErrors[propertyName]!=null)
-            {
-                propertyErrors[propertyName]?.Add(errorMessage);
-                OnErrorsChanged(propertyName);
-            }
+            propertyErrors[propertyName]?.Add(errorMessage);
+            OnErrorsChanged(propertyName);
         }
 
         private void OnErrorsChanged(string propertyName)
