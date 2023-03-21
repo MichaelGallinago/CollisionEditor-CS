@@ -27,7 +27,7 @@ namespace CollisionEditor
         private MainViewModel windowMain;
 
         public MainWindow()
-        {
+        {   
             InitializeComponent();
             DataContext = new MainViewModel(this);
             windowMain = (DataContext as MainViewModel);
