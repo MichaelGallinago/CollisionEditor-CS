@@ -25,11 +25,6 @@ namespace CollisionEditor.Model
             return string.Join(" ", builder.ToString().ToCharArray());
         }
 
-        public static Vector2<int> GetCorrectDotPosition(Vector2<double> position, int cellSize)
-        {
-            return new Vector2<int>((int)position.X / cellSize * cellSize, (int)position.Y / cellSize * cellSize);
-        }
-
         public static BitmapSource BitmapConvert(Bitmap bitmap, double dpi = 0.1)
         {
             var bitmapData = bitmap.LockBits(

@@ -1,15 +1,15 @@
 ﻿using CollisionEditor.Model;
-using System.Collections.Generic;
-using System.Collections;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows;
 using System.ComponentModel;
 using System.Drawing;
-using System.Linq;
 using System.IO;
 using System;
+using CollisionEditor.View;
+using System.Collections.Generic;
+using System.Collections;
 
 namespace CollisionEditor.ViewModel
 {
@@ -55,11 +55,11 @@ namespace CollisionEditor.ViewModel
                 if (hexAngle.Length != 4 || hexAngle[0] != '0' || hexAngle[1] != 'x'
                     || !hexadecimalAlphabet.Contains(hexAngle[2]) || !hexadecimalAlphabet.Contains(hexAngle[3]))
                 {
-                    AddError(nameof(HexAngle), "Error! Wrong hexadecimal number");
+                    textboxValidator.AddError(nameof(HexAngle), "Error! Wrong hexadecimal number");
                     return;
                 }
 
-                ClearErrors(nameof(HexAngle));
+                textboxValidator.ClearErrors(nameof(HexAngle));
 
                 (byte byteAngle, string hexAngle, double fullAngle) angles = ViewModelAngleService.GetAngles(hexAngle);
                 ByteAngle = angles.byteAngle;
@@ -83,9 +83,12 @@ namespace CollisionEditor.ViewModel
         private byte byteAngle;
         private string hexAngle;
         private uint chosenTile;
+        private TextboxValidator textboxValidator;
 
         public MainViewModel(MainWindow window)
         {
+            textboxValidator = new TextboxValidator();
+            textboxValidator.ErrorsChanged += TextboxValidator_ErrorsChanged;
             AngleMap = new AngleMap(0);
             TileSet  = new TileSet(0);
             chosenTile = 0;
@@ -403,48 +406,13 @@ namespace CollisionEditor.ViewModel
             byte byteAngle = AngleMap.SetAngleWithLine((int)chosenTile, positionGreen, positionBlue);
 
             ShowAngles(ViewModelAngleService.GetAngles(byteAngle));
-        }      
-
-        public Vector2<int> GetCoordinates(double x, double y)
-        {
-            return (ViewModelAssistant.GetCorrectDotPosition(new Vector2<double>(x, y),8));
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-        public event EventHandler<DataErrorsChangedEventArgs>? ErrorsChanged;
+        public event PropertyChangedEventHandler? PropertyChanged;
 
         protected virtual void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-        public bool HasErrors => _propertyErrors.Any();
-
-        private readonly Dictionary<string, List<string>> _propertyErrors = new Dictionary<string, List<string>>();
-
-        public IEnumerable GetErrors(string? propertyName)
-        {
-            return _propertyErrors.GetValueOrDefault(propertyName, null);
-        }
-
-        public void AddError(string propertyName, string errorMessage)
-        {
-            if (!_propertyErrors.ContainsKey(propertyName))
-                _propertyErrors.Add(propertyName, new List<string>());
-
-            _propertyErrors[propertyName].Add(errorMessage);
-            OnErrorsChanged(propertyName);
-        }
-
-        private void OnErrorsChanged(string propertyName)
-        {
-            ErrorsChanged?.Invoke(this, new DataErrorsChangedEventArgs(propertyName));
-        }
-
-        public void ClearErrors(string propertyName)
-        {
-            if (_propertyErrors.Remove(propertyName))
-                OnErrorsChanged(propertyName);
         }
 
         private void RectanglesGridUpdate()
@@ -488,5 +456,20 @@ namespace CollisionEditor.ViewModel
                 }
             }
         }
+
+        public event EventHandler<DataErrorsChangedEventArgs>? ErrorsChanged;
+
+        private void TextboxValidator_ErrorsChanged(object sender, DataErrorsChangedEventArgs e)
+        {
+            ErrorsChanged?.Invoke(this, e);
+            OnPropertyChanged(nameof(HexAngle));
+        }
+
+        public IEnumerable GetErrors(string? propertyName)
+        {
+            return textboxValidator.GetErrors(propertyName);
+        }
+
+        public bool HasErrors => textboxValidator.HasErrors;
     }
 }
