@@ -19,7 +19,7 @@ namespace CollisionEditor
         public int LastChosenTile { get; set; }
 
         private const int tileMapSeparation = 4;
-        private const int tileMapTileSize   = 2;
+        private const int tileMapTileScale  = 2;
 
         private bool mouseInRectanglesGrid = false;
         private (SquareAndPosition, SquareAndPosition) blueAndGreenSquare = (new SquareAndPosition(Colors.Blue), new SquareAndPosition(Colors.Green));
@@ -38,16 +38,14 @@ namespace CollisionEditor
         {
             Vector2<int> position = new Vector2<int>();
 
-            var columns = grid.ColumnDefinitions.ToArray();
-            foreach (var column in columns)
+            foreach (var column in grid.ColumnDefinitions)
             {
                 if (mousePosition.X > column.Offset && mousePosition.X < (column.Offset + column.ActualWidth))
                     break;
                 position.X++;
             }
 
-            var rows = grid.RowDefinitions.ToArray();
-            foreach (var row in rows)
+            foreach (var row in grid.RowDefinitions)
             {
                 if (mousePosition.Y > row.Offset && mousePosition.Y < (row.Offset + row.ActualHeight))
                     break;
@@ -56,20 +54,6 @@ namespace CollisionEditor
 
             return position;
         }
-
-        /*private int CalculateGridPosition<T>(double mousePosition, double offset, double actualSize, T itemDefinitions)
-        {
-            int position = 0;
-
-            foreach (var item in grid.ColumnDefinitions)
-            {
-                if (mousePosition > item.Offset && mousePosition < (offset + actualSize))
-                    break;
-                position++;
-            }
-
-            return position;
-        }*/
 
         private void RectanglesGrid_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
@@ -112,11 +96,14 @@ namespace CollisionEditor
 
         private void TextBoxHexAngle_PreviewKeyDown(object sender, KeyEventArgs e)
         {
-            bool isCtrl = (Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl));
+            bool isCtrlKeyDown = Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl);
             Key[] exceptions = new Key[] { Key.Back, Key.Delete, Key.Left, Key.Right };
-            if (TextBoxHexAngle.Text.Length >= 4 && !exceptions.Contains(e.Key) && !isCtrl 
-                || TextBoxHexAngle.Text.Length > 0 && e.Key == Key.C && isCtrl)
+
+            if (TextBoxHexAngle.Text.Length >= 4 && !exceptions.Contains(e.Key) && !isCtrlKeyDown
+                || TextBoxHexAngle.Text.Length > 0 && e.Key == Key.C && isCtrlKeyDown)
+            {
                 e.Handled = true;
+            }
         }
 
         private async void RectanglesGridUpdate(bool isAppear)
@@ -169,6 +156,9 @@ namespace CollisionEditor
             Border border = new Border();
             border.BorderBrush = new SolidColorBrush(Colors.Red);
             border.BorderThickness = new Thickness(2);
+            border.Child = newTile;
+
+            var tileSize = windowMain.TileSet.TileSize;
             border.Width = 36;
             border.Height = 36;
             border.Child = newTile;
@@ -240,8 +230,8 @@ namespace CollisionEditor
             TriangleDownHexAngle.Height = actualHeightTextAndButtons / 2 - 5;
             TriangleDownHexAngle.Width = actualWidthUpAndDownButtons / 2 - 5;
 
-            int tileWidth  = tileSize.Width  * tileMapTileSize;
-            int tileHeight = tileSize.Height * tileMapTileSize;
+            int tileWidth  = tileSize.Width  * tileMapTileScale;
+            int tileHeight = tileSize.Height * tileMapTileScale;
 
             TileMapGrid.Width = baseTileMapGridWidth + (((int)(ActualWidth / countWidthParts * 278) - 314) / tileWidth) * tileWidth;
             TileMapGrid.Columns = ((int)TileMapGrid.Width + tileMapSeparation) / (tileWidth + tileMapSeparation);
