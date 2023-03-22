@@ -165,15 +165,16 @@ namespace CollisionEditor
             
             Image newTile = windowMain.GetTile((int)windowMain.ChosenTile);
 
-            Border border = new Border();
-            border.BorderBrush = new SolidColorBrush(Colors.Red);
-            border.BorderThickness = new Thickness(2);
-
             var tileSize = windowMain.TileSet.TileSize;
-            border.Width  = tileSize.Width * tileMapTileScale + tileMapSeparation;
-            border.Height = tileSize.Width * tileMapTileScale + tileMapSeparation;
-            border.Child = newTile;
-            
+            Border border = new Border()
+            {
+                Width  = tileSize.Width  * tileMapTileScale + tileMapSeparation,
+                Height = tileSize.Height * tileMapTileScale + tileMapSeparation,
+                BorderBrush = new SolidColorBrush(Colors.Red),
+                BorderThickness = new Thickness(2),
+                Child = newTile
+            };
+
             TileMapGrid.Children.RemoveAt((int)windowMain.ChosenTile);
             TileMapGrid.Children.Insert((int)windowMain.ChosenTile, border);
 
