@@ -203,7 +203,7 @@ namespace CollisionEditor.ViewModel
 
         public void TileMapGridUpdate(int tileCount)
         {
-            window.TileMapGrid.Height = (int)Math.Ceiling((double)tileCount / window.TileMapGrid.Columns) * (16 * 2 + 4);
+            window.TileMapGrid.Height = (int)Math.Ceiling((double)tileCount / window.TileMapGrid.Columns) * (TileSet.TileSize.Height * tileMapTileScale + tileMapSeparation);
         }
 
         private void MenuSaveTileMap()
@@ -348,14 +348,14 @@ namespace CollisionEditor.ViewModel
 
             System.Windows.Controls.Image newTile = GetTile((int)chosenTile);
 
-            Border border = new Border();
-            border.BorderBrush = new SolidColorBrush(Colors.Red);
-            border.BorderThickness = new Thickness(2);
-            int tileWidth = TileSet.TileSize.Width * tileMapTileScale;
-            int tileHeight = TileSet.TileSize.Height * tileMapTileScale;
-            border.Width = tileWidth + tileMapSeparation;
-            border.Height = tileHeight + tileMapSeparation;
-            border.Child = newTile;
+            Border border = new Border()
+            {
+                Width = TileSet.TileSize.Width * tileMapTileScale + tileMapSeparation,
+                Height = TileSet.TileSize.Height * tileMapTileScale + tileMapSeparation,
+                BorderBrush = new SolidColorBrush(Colors.Red),
+                BorderThickness = new Thickness(2),
+                Child = newTile
+            };
 
             window.TileMapGrid.Children.RemoveAt((int)chosenTile);
             window.TileMapGrid.Children.Insert((int)chosenTile, border);
