@@ -20,6 +20,15 @@ namespace CollisionEditor
 
         private const int tileMapSeparation = 4;
         private const int tileMapTileScale  = 2;
+        private const int menuHeight = 20;
+        private const int textAndButtonsHeight = 20;
+        private const int upAndDownButtonsWidth = 23;
+        private const int gridHeight = 128;
+        private const int tileMapGridWidth = 278;
+        private const int countHeightParts = 404;
+        private const int countWidthParts = 587;
+        private const int baseTileMapGridWidth = 288;
+        private const int startTileMapGridWidth = 314;
 
         private bool mouseInRectanglesGrid = false;
         private (SquareAndPosition, SquareAndPosition) blueAndGreenSquare = (new SquareAndPosition(Colors.Blue), new SquareAndPosition(Colors.Green));
@@ -130,7 +139,10 @@ namespace CollisionEditor
         }
         private uint GetUniformGridIndex(Point mousePosition, System.Windows.Controls.Primitives.UniformGrid grid)
         {
-            return (uint)mousePosition.X / 36 + ((uint)mousePosition.Y / 36)* (uint)TileMapGrid.Columns;
+            var tileSize = windowMain.TileSet.TileSize;
+            uint tileWidth = (uint)tileSize.Width * tileMapTileScale;
+            uint tileHeight = (uint)tileSize.Height * tileMapTileScale;
+            return (uint)mousePosition.X / (tileWidth + tileMapSeparation) + ((uint)mousePosition.Y / (tileHeight + tileMapSeparation)) * (uint)TileMapGrid.Columns;
         }
 
         
@@ -156,7 +168,6 @@ namespace CollisionEditor
             Border border = new Border();
             border.BorderBrush = new SolidColorBrush(Colors.Red);
             border.BorderThickness = new Thickness(2);
-            border.Child = newTile;
 
             var tileSize = windowMain.TileSet.TileSize;
             border.Width  = tileSize.Width * tileMapTileScale + tileMapSeparation;
@@ -169,21 +180,18 @@ namespace CollisionEditor
             windowMain.SelectTileFromTileMap();
             LastChosenTile = (int)windowMain.ChosenTile;
         }
-        private const int menyHeight = 20;
-        private const int countHeightParts = 404;
-        private const int countWidthParts = 587;
-        private const int baseTileMapGridWidth = 288;
         
+
         private void WindowSizeChanged(object sender, SizeChangedEventArgs e)
         {
             int countOfTiles = windowMain.TileSet.Tiles.Count;
             var tileSize     = windowMain.TileSet.TileSize;
 
-            double actualHeightTextAndButtons = (ActualHeight - menyHeight) / countHeightParts * 20;
-            double actualWidthUpAndDownButtons = ActualWidth / countWidthParts * 23;
+            double actualHeightTextAndButtons = (ActualHeight - menuHeight) / countHeightParts * textAndButtonsHeight;
+            double actualWidthUpAndDownButtons = ActualWidth / countWidthParts * upAndDownButtonsWidth;
             double actualFontSize = Math.Min((25.4 / 96 * actualHeightTextAndButtons) / 0.35 - 4, (25.4 / 96 * (ActualWidth / countHeightParts * 43)) / 0.35 - 21);
 
-            double actualHeightGrid = (ActualHeight - menyHeight) / countHeightParts * 128;
+            double actualHeightGrid = (ActualHeight - menuHeight) / countHeightParts * gridHeight;
 
             TileGrid.Width = actualHeightGrid;
             TileGrid.Height = actualHeightGrid;
@@ -233,7 +241,7 @@ namespace CollisionEditor
             int tileWidth  = tileSize.Width  * tileMapTileScale;
             int tileHeight = tileSize.Height * tileMapTileScale;
 
-            TileMapGrid.Width = baseTileMapGridWidth + (((int)(ActualWidth / countWidthParts * 278) - 314) / tileWidth) * tileWidth;
+            TileMapGrid.Width = baseTileMapGridWidth + (((int)(ActualWidth / countWidthParts * tileMapGridWidth) - startTileMapGridWidth) / tileWidth) * tileWidth;
             TileMapGrid.Columns = ((int)TileMapGrid.Width + tileMapSeparation) / (tileWidth + tileMapSeparation);
 
             TileMapGrid.Height = (int)Math.Ceiling((double)countOfTiles / TileMapGrid.Columns) * (tileHeight + tileMapSeparation);

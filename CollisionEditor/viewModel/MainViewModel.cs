@@ -13,7 +13,7 @@ using System;
 namespace CollisionEditor.ViewModel
 {
     public class MainViewModel : INotifyPropertyChanged, INotifyDataErrorInfo
-    {
+    {   
         public AngleMap AngleMap { get; private set; }
         public TileSet TileSet { get; private set; }
         
@@ -77,6 +77,8 @@ namespace CollisionEditor.ViewModel
         }
 
         private const string hexadecimalAlphabet = "0123456789ABCDEF";
+        private const int tileMapSeparation = 4;
+        private const int tileMapTileScale = 2;
 
         private MainWindow window;
         private byte byteAngle;
@@ -349,8 +351,10 @@ namespace CollisionEditor.ViewModel
             Border border = new Border();
             border.BorderBrush = new SolidColorBrush(Colors.Red);
             border.BorderThickness = new Thickness(2);
-            border.Width = 36;
-            border.Height = 36;
+            int tileWidth = TileSet.TileSize.Width * tileMapTileScale;
+            int tileHeight = TileSet.TileSize.Height * tileMapTileScale;
+            border.Width = tileWidth + tileMapSeparation;
+            border.Height = tileHeight + tileMapSeparation;
             border.Child = newTile;
 
             window.TileMapGrid.Children.RemoveAt((int)chosenTile);
