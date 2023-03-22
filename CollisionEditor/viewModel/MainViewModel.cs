@@ -96,20 +96,23 @@ namespace CollisionEditor.ViewModel
             byteAngle = 0;
             hexAngle = "0x00";
             this.window = window;
+
             MenuOpenAngleMapCommand = new RelayCommand(MenuOpenAngleMap);
-            MenuOpenTileMapCommand = new RelayCommand(MenuOpenTileMap);
-            MenuSaveTileMapCommand = new RelayCommand(MenuSaveTileMap);
-            MenuSaveWidthMapCommand = new RelayCommand(MenuSaveWidthMap);
+            MenuOpenTileMapCommand  = new RelayCommand(MenuOpenTileMap);
+
+            MenuSaveTileMapCommand   = new RelayCommand(MenuSaveTileMap);
+            MenuSaveWidthMapCommand  = new RelayCommand(MenuSaveWidthMap);
             MenuSaveHeightMapCommand = new RelayCommand(MenuSaveHeightMap);
-            MenuSaveAngleMapCommand = new RelayCommand(MenuSaveAngleMap);
-            MenuSaveAllCommand = new RelayCommand(MenuSaveAll);
-            MenuUnloadTileMapCommand = new RelayCommand(MenuUnloadTileMap);
+            MenuSaveAngleMapCommand  = new RelayCommand(MenuSaveAngleMap);
+            MenuSaveAllCommand       = new RelayCommand(MenuSaveAll);
+
+            MenuUnloadTileMapCommand  = new RelayCommand(MenuUnloadTileMap);
             MenuUnloadAngleMapCommand = new RelayCommand(MenuUnloadAngleMap);
-            MenuUnloadAllCommand = new RelayCommand(MenuUnloadAll);
+            MenuUnloadAllCommand      = new RelayCommand(MenuUnloadAll);
 
             AngleIncrementCommand = new RelayCommand(AngleIncrement);
             AngleDecrementCommand = new RelayCommand(AngleDecrement);
-            SelectTileCommand = new RelayCommand(SelectTile);
+            SelectTileCommand     = new RelayCommand(SelectTile);
 
             ExitAppCommand = new RelayCommand(ExitApp);
 
@@ -132,9 +135,9 @@ namespace CollisionEditor.ViewModel
 
                 ShowAngles(ViewModelAssistant.GetAngles(AngleMap, chosenTile));
                 window.SelectTileTextBox.IsEnabled = true;
-                window.SelectTileButton.IsEnabled = true;
-                window.TextBoxByteAngle.IsEnabled = true;
-                window.TextBoxHexAngle.IsEnabled = true;
+                window.SelectTileButton.IsEnabled  = true;
+                window.TextBoxByteAngle.IsEnabled  = true;
+                window.TextBoxHexAngle.IsEnabled   = true;
 
                 TileMapGridUpdate(TileSet.Tiles.Count);
                 window.DrawRedLine();
@@ -174,11 +177,11 @@ namespace CollisionEditor.ViewModel
                 TileGridUpdate(TileSet, (int)ChosenTile, window);
                 RectanglesGridUpdate();
                 window.Heights.Text = ViewModelAssistant.GetCollisionValues(TileSet.HeightMap[(int)chosenTile]);
-                window.Widths.Text = ViewModelAssistant.GetCollisionValues(TileSet.WidthMap[(int)chosenTile]);
+                window.Widths.Text  = ViewModelAssistant.GetCollisionValues(TileSet.WidthMap[(int)chosenTile]);
 
                 ShowAngles(ViewModelAssistant.GetAngles(AngleMap, chosenTile));
                 window.TextBoxByteAngle.IsEnabled = true;
-                window.TextBoxHexAngle.IsEnabled = true;
+                window.TextBoxHexAngle.IsEnabled  = true;
 
                 window.TileMapGrid.Children.Clear();
 
@@ -186,7 +189,7 @@ namespace CollisionEditor.ViewModel
                 {
                     var image = new System.Windows.Controls.Image()
                     {
-                        Width = TileSet.TileSize.Width * 2,
+                        Width  = TileSet.TileSize.Width  * 2,
                         Height = TileSet.TileSize.Height * 2
                     };
                     image.Source = ViewModelAssistant.BitmapConvert(tile);
@@ -289,7 +292,6 @@ namespace CollisionEditor.ViewModel
         private void MenuUnloadAngleMap()
         {
             AngleMap = new AngleMap(TileSet.Tiles.Count);
-
             ShowAngles(ViewModelAssistant.GetAngles(AngleMap, chosenTile));
         }
 
